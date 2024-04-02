@@ -1,12 +1,30 @@
 {
   "name": "hub",
   "version": "0.1.0",
+  "description": "Axone Hub",
+  "homepage": "https://axone.xyz",
+  "license": "BSD-3-Clause",
+  "author": {
+      "name": "Axone",
+      "web": "https://axone.xyz"
+  },
+  "repository": {
+      "type": "git",
+      "url": "https://github.com/axone-protocol/hub"
+  },
+  "bugs": {
+      "url": "https://github.com/axone-protocol/hub/issues"
+  },
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
+  },
+  "engines": {
+    "node": "^18.20.0",
+    "yarn": "~1.22.19"
   },
   "dependencies": {
     "react": "^18",
