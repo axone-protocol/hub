@@ -2,32 +2,43 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+.sidebar-item-active {
+  position: relative;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+.sidebar-item-active:after,
+.sidebar-item-active:before {
+  content: '';
+  width: 240px;
+  height: 46px;
+  position: absolute;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.sidebar-item-active:after {
+  border-top: 1px solid rgba(255, 255, 255, 0.06); /* inner border */
+  border-right: 1px solid rgba(255, 255, 255, 0.02);
+  box-shadow: 0 -14px 0 0 #071622; /* outer border */
+  border-radius: 0 1.25rem 0 0;
+  right: -1px;
+  top: 56px;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.sidebar-item-active:before {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06); /* inner border */
+  border-right: 1px solid rgba(255, 255, 255, 0.02);
+  box-shadow: 0 14px 0 0 #071622; /* outer border */
+  border-radius: 0 0 1.25rem 0;
+  right: -2px;
+  top: -47px;
+}
+
+/* Styles for active state of first item in sidebar (e.g Dashboard, removing outer rounding at the top */
+.sidebar-item-active.sidebar-item-active-first:before {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: none;
+  border-right: none;
+  box-shadow: none;
+  border-radius: 0;
+  right: -1px;
+  top: -1px;
 }
