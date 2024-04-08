@@ -1,3 +1,4 @@
+'use client';
 import { ChevronDown, ChevronUp, Wallet } from 'lucide-react';
 import { useState } from 'react';
 import { Select, SelectContent, SelectGroup, SelectIcon, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
