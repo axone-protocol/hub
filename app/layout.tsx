@@ -1,8 +1,13 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Courier_Prime } from 'next/font/google';
 import './globals.css';
+import Header from '@/components/ui/header';
+import Sidebar from '@/components/ui/sidebar';
 
-const inter = Inter({ subsets: ['latin'] });
+const font = Courier_Prime({
+  subsets: ['latin'],
+  weight: '400'
+});
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -16,7 +21,15 @@ export default function RootLayout ({
 }>) {
   return (
     <html lang='en'>
-      <body className={inter.className}>{children}</body>
+      <body className={`${font.className} bg-axone-bg-dark`}>
+        <main className='flex w-full h-screen'>
+          <Sidebar />
+          <div className='w-full h-screen overflow-y-auto'>
+            <Header />
+            {children}
+          </div>
+        </main>
+      </body>
     </html>
   );
 }
