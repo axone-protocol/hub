@@ -9,9 +9,11 @@ import SidebarWelcomeAxoneBox from './sidebar-welcome-box';
 import { Switch } from './switch';
 import Text from '../typography/text';
 
+
 const WIDTH = 'w-64';
 
 const Sidebar = () => {
+
   return (
     <Column className={cn('justify-between pt-5 bg-axone-dark-blue min-h-screen border-r border-r-axone-box-border', WIDTH)}>
       <Column>
@@ -20,11 +22,11 @@ const Sidebar = () => {
           <LogoDark className='mb-5' />
         </div>
         {/* Navigation items */}
-        <SidebarNavItem title='Dashboard' firstItem isActive />
-        <SidebarNavItem title='Wallet'  />
-        <SidebarNavItem title='Bridge' />
-        <SidebarNavItem title='Staking' isActive  />
-        <SidebarNavItem title='Governance' />
+        <SidebarNavItem title='Dashboard' firstItem />
+        <SidebarNavItem title='Wallet' href='wallet' />
+        <SidebarNavItem title='Bridge' href='bridge' />
+        <SidebarNavItem title='Staking' href='staking'  />
+        <SidebarNavItem title='Governance' href='governance'  />
         <SidebarNavItem title='FAQ' href='faq'  />
 
         {/* Welcome block */}
