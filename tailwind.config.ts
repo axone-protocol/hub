@@ -18,6 +18,7 @@ const config = {
     },
     borderRadius: {
       md: '0.375rem',
+      innerBox: '0.625rem',
       lg: '1.25rem',
       full: '9999rem'
     },
@@ -41,6 +42,7 @@ const config = {
         'axone-dark-blue': '#00213A',
         'axone-dark-blue-2': '#0062AC',
         'axone-orange': '#FB9501',
+        'axone-red': '#DC4E4E',
         'axone-grey': '#CCD3D6',
         'axone-khaki': '#66777E',
         'axone-box-border': 'rgba(255, 255, 255, 0.06)',
