@@ -23,11 +23,11 @@ const Sidebar = () => {
         </div>
         {/* Navigation items */}
         <SidebarNavItem title='Dashboard' firstItem />
-        <SidebarNavItem title='Wallet' href='wallet' />
-        <SidebarNavItem title='Bridge' href='bridge' />
-        <SidebarNavItem title='Staking' href='staking'  />
-        <SidebarNavItem title='Governance' href='governance'  />
-        <SidebarNavItem title='FAQ' href='faq'  />
+        <SidebarNavItem title='Wallet' href='/wallet' />
+        <SidebarNavItem title='Bridge' href='/bridge' />
+        <SidebarNavItem title='Staking' href='/staking'  />
+        <SidebarNavItem title='Governance' href='/governance'  />
+        <SidebarNavItem title='FAQ' href='/faq'  />
 
         {/* Welcome block */}
         <SidebarWelcomeAxoneBox />
