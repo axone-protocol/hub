@@ -10,8 +10,9 @@
 .sidebar-item-active:before {
   content: '';
   width: 240px;
-  height: 46px;
+  height: 28px;
   position: absolute;
+  z-index: 10;
 }
 
 .sidebar-item-active:after {
@@ -29,7 +30,7 @@
   box-shadow: 0 14px 0 0 #071622; /* outer border */
   border-radius: 0 0 1.25rem 0;
   right: -2px;
-  top: -47px;
+  top: -27px;
 }
 
 /* Styles for active state of first item in sidebar (e.g Dashboard, removing outer rounding at the top */
