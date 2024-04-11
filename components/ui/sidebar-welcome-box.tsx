@@ -1,7 +1,7 @@
 import { memo } from 'react';
+import { Title } from '@/components/typography';
 import { ButtonWithIcon } from './button-with-icon';
 import Column from './column';
-import Title from '../typography/title';
 
 const WIDTH = 206;
 const HEIGHT = 140;

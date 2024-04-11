@@ -1,7 +1,6 @@
 'use client';
 import Link from 'next/link';
-import Text from '@/components/typography/text';
-import Title from '@/components/typography/title';
+import { Text, Title } from '@/components/typography';
 import AxoneAreaChart from '@/components/ui/axone-area-chart';
 import Box from '@/components/ui/box';
 import BoxInner from '@/components/ui/box-inner';

@@ -1,8 +1,7 @@
 'use client';
 import { Info } from 'lucide-react';
 import { useState } from 'react';
-import Text from '@/components/typography/text';
-import Title from '@/components/typography/title';
+import { Text, Title } from '@/components/typography';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import Box from '@/components/ui/box';
 import { Button } from '@/components/ui/button';
