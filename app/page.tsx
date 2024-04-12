@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import { Text, Title } from '@/components/typography';
 import AxoneAreaChart from '@/components/ui/axone-area-chart';
 import Box from '@/components/ui/box';
@@ -8,10 +9,23 @@ import { Button } from '@/components/ui/button';
 import Column from '@/components/ui/column';
 import PageContainer from '@/components/ui/page-container';
 import Row from '@/components/ui/row';
-import { mockChartData } from './mock-chart-data';
-
+import { ChartData } from './mock-chart-data';
 
 export default function Dashboard () {
+  const [chartData, setChartData] = useState<ChartData[]>([]);
+  useEffect(() => {
+    fetch(
+      'http://localhost:3000/api/historical-price?symbol=eth&range=43800'
+    ).then(res => {
+      return res.json();
+    })
+      .then(data => {
+        setChartData(data);
+      })
+      .catch(e => {
+        console.log('Error ' + e);
+      });
+  }, []);
   return (
     <PageContainer>
       <Row className='p-6'>
@@ -29,7 +43,7 @@ export default function Dashboard () {
           </Row>
 
           <BoxInner className='h-[384px] py-5'>
-            <AxoneAreaChart data={mockChartData} />
+            <AxoneAreaChart data={chartData} />
           </BoxInner>
 
           <Row className='mt-10'>
