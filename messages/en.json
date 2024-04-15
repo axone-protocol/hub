@@ -1,0 +1,52 @@
+{
+  "Index": {
+    "Overview": "Overview",
+    "Dashboard": "Dashboard",
+    "Wallet": "Wallet",
+    "Staking": "Staking",
+    "Bridge": "Bridge",
+    "Governance": "Governance",
+    "FAQ": "FAQ",
+    "FAQ_FULL": "Frequently Asked Questions",
+    "Light": "Light",
+    "Dark": "Dark",
+    "Connect": "Connect",
+    "JoinThe": "Join The",
+    "Axone": "Axone",
+    "Ecosystem": "Ecosystem",
+    "GetStarted": "Get Started",
+    "Explore": "Explore"
+  },
+  "Dashboard": {
+    "Title": "Dashboard",
+    "Price": "Price",
+    "MarketCap": "Market Cap",
+    "APR": "APR",
+    "Volume": "Volume",
+    "Chart": {
+      "Overview": "Overview",
+      "Filter": {
+        "All": "All",
+        "Day": "Day",
+        "Week": "Week",
+        "Month": "Month",
+        "Year": "Year"
+      }
+    }
+  },
+  "FAQ": {
+    "Title": "Frequently Asked Questions",
+    "SearchQuestions": "Search Questions",
+    "Category": {
+      "All": "All",
+      "General": "General",
+      "Walkthrough": "Walkthrough",
+      "Bridge": "Bridge",
+      "Validator": "Validator",
+      "Staking": "Staking",
+      "Governance": "Governance",
+      "Proposal": "Proposal",
+      "Insurance": "Insurance"
+    }
+  }
+}

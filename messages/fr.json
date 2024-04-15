@@ -1,0 +1,52 @@
+{
+  "Index": {
+    "Overview": "Aperçu",
+    "Dashboard": "Tableau de bord",
+    "Wallet": "Portefeuille",
+    "Staking": "Mise en jeu",
+    "Bridge": "Pont",
+    "Governance": "Gouvernance",
+    "FAQ": "FAQ",
+    "FAQ_FULL": "Questions Fréquemment Posées",
+    "Light": "Léger",
+    "Dark": "Sombre",
+    "Connect": "Connecter",
+    "JoinThe": "Rejoindre",
+    "Axone": "Axone",
+    "Ecosystem": "Écosystème",
+    "GetStarted": "Commencer",
+    "Explore": "Explorer"
+  },
+  "Dashboard": {
+    "Title": "Tableau de bord",
+    "Price": "Prix",
+    "MarketCap": "Capitalisation boursière",
+    "APR": "APR",
+    "Volume": "Volume",
+    "Chart": {
+      "Overview": "Aperçu",
+      "Filter": {
+        "All": "Tout",
+        "Day": "Jour",
+        "Week": "Semaine",
+        "Month": "Mois",
+        "Year": "Année"
+      }
+    }
+  },
+  "FAQ": {
+    "Title": "Questions Fréquemment Posées",
+    "SearchQuestions": "Rechercher des questions",
+    "Category": {
+      "All": "Tout",
+      "General": "Général",
+      "Walkthrough": "Guide",
+      "Bridge": "Pont",
+      "Validator": "Valideur",
+      "Staking": "Mise en jeu",
+      "Governance": "Gouvernance",
+      "Proposal": "Proposition",
+      "Insurance": "Assurance"
+    }
+  }
+}

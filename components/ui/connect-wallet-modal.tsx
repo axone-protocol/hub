@@ -1,13 +1,15 @@
 'use client';
+import { useTranslations } from 'next-intl';
 import { Button } from './button';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from './dialog';
 
 const ConnectWalletModal = () => {
+  const t  = useTranslations('Index');
   return (
     <Dialog>
       <DialogTrigger asChild>
         <Button variant={'rounded'} className='px-10'>
-          Connect
+          {t('Connect')}
         </Button>
       </DialogTrigger>
       <DialogContent className='text-white'>

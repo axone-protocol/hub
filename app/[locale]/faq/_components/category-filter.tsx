@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl';
 import { memo } from 'react';
 import Row from '@/components/ui/row';
 import CategoryFilterItem from './category-filter-item';
@@ -20,12 +21,13 @@ enum CategoriesEnum {
 };
 
 const CategoryFilter = ({ category, selectCategory }: CategoryFilterProps) => {
+  const t = useTranslations('FAQ');
   return (
     <Row className='mt-10 justify-center'>
       {Object.values(CategoriesEnum).map((item: CategoriesEnum): JSX.Element => (
         <CategoryFilterItem
           key={item}
-          item={item}
+          item={t(`Category.${item}`)}
           selected={category === item}
           onSelect={selectCategory}
         />
