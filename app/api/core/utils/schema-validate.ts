@@ -12,7 +12,7 @@ export function schemaValidate (schema: ZodSchema, value: unknown) {
   throw new BadRequestException(errorView(res));
 }
 
-function errorView (value: SafeParseError<unknown>): string {
+function errorView<T> (value: SafeParseError<T>): string {
   const flattenErrors = value.error.flatten();
   let message = 'Passed fields didn\'t match current schema:';
 

@@ -28,7 +28,7 @@ export namespace OsmosisService {
       return errorHandleWrapper(
         HttpRequester.get.bind(
           null,
-          constructUrl(endpoint, createUrlParams({ tf: payload.range }))
+          constructUrl(endpoint, createUrlParams({ tf: payload.range.toString() }))
         )
       );
     }

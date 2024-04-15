@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server';
 import { HttpErrorMessage } from '@core/enums/http-error-message.enum';
 import { HttpStatus } from '@core/enums/http-status.enum';
 
-export async function exceptionFilter (fn: any) {
+export async function exceptionFilter<T> (fn: () => T) {
   try {
     return await fn(); // just to catch all error at this step
   } catch (e: any) {
