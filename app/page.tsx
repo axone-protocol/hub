@@ -1,10 +1,12 @@
 'use client';
+import Image from 'next/image';
 import Link from 'next/link';
 import { Text, Title } from '@/components/typography';
 import AxoneAreaChart from '@/components/ui/axone-area-chart';
 import Box from '@/components/ui/box';
 import BoxInner from '@/components/ui/box-inner';
 import { Button } from '@/components/ui/button';
+import { ButtonWithIcon } from '@/components/ui/button-with-icon';
 import Column from '@/components/ui/column';
 import PageContainer from '@/components/ui/page-container';
 import Row from '@/components/ui/row';
@@ -14,7 +16,36 @@ import { mockChartData } from './mock-chart-data';
 export default function Dashboard () {
   return (
     <PageContainer>
-      <Row className='p-6'>
+      <Row className=''>
+        <Box className='w-1/2 mr-0 flex flex-row justify-between'>
+          <Column className='w-2/3'>
+            <Title className='mb-5'>Staking Rewards</Title>
+            <Text className='mb-5'>By staking your AXONE, you earn rewards and help keep the Axone network secure.</Text>
+            <Row>
+              <Button variant={'rounded'} className='mt-5 mr-2 text-base font-bold'>Delegate Now</Button>
+              <ButtonWithIcon variant={'link'} className='mt-5 text-axone-orange text-base font-bold'>Calculate Rewards</ButtonWithIcon>
+            </Row>
+          </Column>
+          <div className='relative flex items-center justify-center'>
+            <Image src={'/staking.svg'} alt='Staking Rewards' width={166} height={166} />
+            <div className='absolute flex flex-col justify-center items-center'>
+              <Text className='text-xl mb-0 text-axone-grey'>APS</Text>
+              <Text className='text-xl mb-0 text-white font-bold'>15.68%</Text>
+            </div>
+          </div>
+        </Box>
+
+        <Box className='w-1/2 flex flex-row justify-between'>
+          <Column className='w-2/3'>
+            <Title className='mb-5'>Governance</Title>
+            <Text className='mb-5'>Discover and participate in the governance of our AXONE protocol.</Text>
+            <Button variant={'rounded'} className='mt-5 mr-2 text-base font-bold w-64'>Open Governance</Button>
+          </Column>
+          <Image src={'/governance.svg'} alt='Governance' width={200} height={200} />
+        </Box>
+      </Row>
+
+      <Row className='p-6 pt-0'>
         <Box className='w-2/3 m-0 mr-6 h-[50%]'>
           <Row className='mb-10 items-center'>
             <Title className='mr-40'>Overview</Title>
