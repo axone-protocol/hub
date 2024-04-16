@@ -150,3 +150,13 @@ jobs:
           fi
         env:
           CONTENT_FOLDER: ./public/images
+
+  lint-dockerfile:
+    runs-on: ubuntu-22.04
+    if: github.actor != 'dependabot[bot]'
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Lint dockerfile (hadolint)
+        uses: hadolint/hadolint-action@v3.1.0
