@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import { Courier_Prime } from 'next/font/google';
 import './globals.css';
 import { NextIntlClientProvider, useMessages } from 'next-intl';
+import { Suspense } from 'react';
 import Header from '@/components/ui/header';
 import Sidebar from '@/components/ui/sidebar';
-import { Suspense } from 'react';
 import Loading from './loading';
 
 const font = Courier_Prime({
