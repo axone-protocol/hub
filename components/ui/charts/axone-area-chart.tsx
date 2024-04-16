@@ -1,11 +1,11 @@
 import { memo, useEffect, useState } from 'react';
 import { Area, AreaChart, Brush, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { ChartData } from '@/app/mock-chart-data';
+import { formatChartDate } from '@/lib/utils';
 import ChartTooltip from './chart-tooltip';
 import ChartTraveler from './chart-traveller';
 import Column from '../column';
 import Spinner from '../spinner';
-import { formatChartDate } from '@/lib/utils';
 
 // Override console.error
 // This is a hack to suppress the warning about missing defaultProps in recharts library as of version 2.12
@@ -71,10 +71,10 @@ const AxoneAreaChart = ({ data }: AxoneAreaChartProps) => {
                 />
                 <YAxis axisLine={false} className='select-none' tick={{ fontSize: 14 }} tickMargin={5} />
                 <Tooltip
-                content={({ active, payload }) => {
-                  const formattedDate = formatChartDate(payload?.[0]?.payload.time, true);
-                  return <ChartTooltip active={active} payload={payload} formattedDate={formattedDate} />;
-                }}
+                  content={({ active, payload }) => {
+                    const formattedDate = formatChartDate(payload?.[0]?.payload.time);
+                    return <ChartTooltip active={active} payload={payload} formattedDate={formattedDate} />;
+                  }}
                 />
                 <Area type='linear' dot={<circle r={4} fill={CHART_COLOR} stroke='none' fillOpacity={1} />} dataKey='price' stroke={CHART_COLOR} fill='url(#colorUv)' />
                 <Brush dataKey='name' stroke='transparent' traveller={ChartTraveler} height={36} fill='transparent' >
