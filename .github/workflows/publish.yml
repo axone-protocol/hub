@@ -2,9 +2,9 @@ name: Publish
 
 on:
   push:
-    branches: 
+    branches:
       - main
-    tags: 
+    tags:
       - 'v*'
 
   workflow_dispatch:
