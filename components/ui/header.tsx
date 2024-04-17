@@ -1,4 +1,4 @@
-import ConnectWalletModal from './connect-wallet-modal';
+import { ConnectWalletModal } from '@/components/ui/modals';
 import CurrencySelect from './select-currency';
 import LanguageSelect from './select-language';
 

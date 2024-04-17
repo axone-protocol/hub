@@ -5,6 +5,7 @@ import { Suspense, useCallback, useState } from 'react';
 import { Text, Title } from '@/components/typography';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import Box from '@/components/ui/box';
+import Column from '@/components/ui/column';
 import { Input } from '@/components/ui/input';
 import PageContainer from '@/components/ui/page-container';
 import Row from '@/components/ui/row';
@@ -34,7 +35,10 @@ export default function FAQ () {
     return itemsToRender.map((item) => {
       return (
         <AccordionItem key={item.id} value={`item-${item.id}`}>
-          <AccordionTrigger>{item.question}</AccordionTrigger>
+          <Column className='py-2'>
+            <div className={`flex uppercase max-w-20 justify-center items-center rounded-md pt-1 text-xs ${item.categoryColor}`}>{item.category}</div>
+            <AccordionTrigger className='w-full pt-2 pb-5'>{item.question}</AccordionTrigger>
+          </Column>
           <AccordionContent>
             <Text className='ml-5'>{item.answer}</Text>
           </AccordionContent>

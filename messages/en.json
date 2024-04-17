@@ -23,6 +23,16 @@
     "MarketCap": "Market Cap",
     "APR": "APR",
     "Volume": "Volume",
+    "SupplyChange": "Supply Change",
+    "CurrentSupply": "Current Supply",
+    "Governance": "Governance",
+    "GovernanceDesc": "Discover and participate in the governance of our AXONE protocol.",
+    "Staking": "Staking",
+    "StakingRewards": "Staking Rewards",
+    "StakingRewardsDesc": "By staking your AXONE, you earn rewards and help keep the Axone network secure.",
+    "DelegateNow": "Delegate Now",
+    "CalculateRewards": "Calculate Rewards",
+    "OpenGovernance": "Open Governance",
     "Chart": {
       "Overview": "Overview",
       "Filter": {

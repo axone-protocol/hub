@@ -1,5 +1,6 @@
 'use client';
-import { ChevronDown, ChevronUp, Languages } from 'lucide-react';
+import { Languages } from 'lucide-react';
+import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { useLocale } from 'next-intl';
 import { useCallback, useState } from 'react';
@@ -23,7 +24,7 @@ const LanguageSelect = () => {
       <SelectTrigger className={cn('mr-16', { 'bg-axone-bg-dark': open })}>
         <Languages className='w-5 h-5 text-axone-khaki' /> <SelectValue placeholder='EN' />
         <SelectIcon asChild>
-          {!open ? <ChevronDown className='h-4 w-4 text-axone-khaki' /> : <ChevronUp className='h-4 w-4 text-axone-khaki' />}
+          <Image className={cn({ 'rotate-180': open })} src={'/icons/arrow-down.svg'}  width={20} height={20} alt={'arrow-down'} />
         </SelectIcon>
       </SelectTrigger>
       <SelectContent className='shadow-lg'>

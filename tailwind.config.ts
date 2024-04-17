@@ -23,6 +23,9 @@ const config = {
       full: '9999rem'
     },
     extend: {
+      fontSize: {
+        '40': '40px',
+      },
       keyframes: {
         'accordion-down': {
           from: { height: '0' },
