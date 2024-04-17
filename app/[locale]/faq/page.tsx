@@ -1,6 +1,7 @@
 'use client';
 import { Search as SearchIcon } from 'lucide-react';
-import { useCallback, useState } from 'react';
+import { useTranslations } from 'next-intl';
+import { Suspense, useCallback, useState } from 'react';
 import { Text, Title } from '@/components/typography';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import Box from '@/components/ui/box';
@@ -10,10 +11,12 @@ import Row from '@/components/ui/row';
 import CategoryFilter from './_components/category-filter';
 
 import { data } from './_mock/data';
+import Loading from '../loading';
 
 const SEARCH_ICON_SIZE: number = 20;
 
 export default function FAQ () {
+  const t = useTranslations('FAQ');
   const [faqData, setFaqData] = useState(data);
   const [category, selectCategory] = useState<string>('All');
 
@@ -45,22 +48,24 @@ export default function FAQ () {
   }, []);
 
   return (
-    <PageContainer>
-      <Box>
-        <Row className='items-center'>
-          <Title className='whitespace-nowrap mr-8'>Frequently Asked Questions</Title>
-          <Row className='relative'>
-            <SearchIcon  size={SEARCH_ICON_SIZE} className='absolute top-2 left-2 text-axone-khaki' />
-            <Input onChange={searchQuestion} type='search' id='faq' className='pl-10' placeholder='Search Questions' />
+    <Suspense fallback={<Loading />}>
+      <PageContainer>
+        <Box>
+          <Row className='items-center'>
+            <Title className='whitespace-nowrap mr-8'>{t('Title')}</Title>
+            <Row className='relative'>
+              <SearchIcon  size={SEARCH_ICON_SIZE} className='absolute top-2 left-2 text-axone-khaki' />
+              <Input onChange={searchQuestion} type='search' id='faq' className='pl-10' placeholder={t('SearchQuestions')} />
+            </Row>
           </Row>
-        </Row>
 
-        <CategoryFilter category={category} selectCategory={onCategorySelect} />
+          <CategoryFilter category={category} selectCategory={onCategorySelect} />
 
-        <Accordion type='single' collapsible className='mt-5'>
-          {renderAccordionItems()}
-        </Accordion>
-      </Box>
-    </PageContainer>
+          <Accordion type='single' collapsible className='mt-5'>
+            {renderAccordionItems()}
+          </Accordion>
+        </Box>
+      </PageContainer>
+    </Suspense>
   );
 }

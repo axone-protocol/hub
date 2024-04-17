@@ -1,20 +1,24 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { Text, Title } from '@/components/typography';
-import AxoneAreaChart from '@/components/ui/axone-area-chart';
 import Box from '@/components/ui/box';
 import BoxInner from '@/components/ui/box-inner';
 import { Button } from '@/components/ui/button';
 import { ButtonWithIcon } from '@/components/ui/button-with-icon';
+import AxoneAreaChart from '@/components/ui/charts/axone-area-chart';
 import Column from '@/components/ui/column';
 import PageContainer from '@/components/ui/page-container';
 import Row from '@/components/ui/row';
-import { ChartData } from './mock-chart-data';
+import { ChartData } from '../mock-chart-data';
+
 
 export default function Dashboard () {
+  const t  = useTranslations('Dashboard');
   const [chartData, setChartData] = useState<ChartData[]>([]);
+
   useEffect(() => {
     fetch(
       'http://localhost:3000/api/historical-price?symbol=eth&range=43800'
@@ -28,6 +32,7 @@ export default function Dashboard () {
         console.log('Error ' + e);
       });
   }, []);
+
   return (
     <PageContainer>
       <Row className=''>
@@ -62,14 +67,14 @@ export default function Dashboard () {
       <Row className='p-6 pt-0'>
         <Box className='w-2/3 m-0 mr-6 h-[50%]'>
           <Row className='mb-10 items-center'>
-            <Title className='mr-40'>Overview</Title>
+            <Title className='mr-40'>{t('Chart.Overview')}</Title>
             <Row className='w-2/4 justify-around '>
-              <Text className='cursor-pointer  hover:text-white mb-0 mx-2 text-axone-khaki'>All</Text>
-              <Text className='cursor-pointer  hover:text-white mb-0 mx-2 text-axone-khaki'>Day</Text>
-              <Text className='cursor-pointer  hover:text-white mb-0 mx-2 text-axone-khaki'>Week</Text>
-              <Text className='cursor-pointer  hover:text-white mb-0 mx-2 text-axone-orange font-bold'>Month</Text>
-              <Text className='cursor-pointer  hover:text-white mb-0 mx-2 text-axone-khaki'>3 Month</Text>
-              <Text className='cursor-pointer  hover:text-white mb-0 mx-2 text-axone-khaki'>Year</Text>
+              <Text className='cursor-pointer  hover:text-white mb-0 mx-2 text-axone-khaki'>{t('Chart.Filter.All')}</Text>
+              <Text className='cursor-pointer  hover:text-white mb-0 mx-2 text-axone-khaki'>{t('Chart.Filter.Day')}</Text>
+              <Text className='cursor-pointer  hover:text-white mb-0 mx-2 text-axone-khaki'>{t('Chart.Filter.Week')}</Text>
+              <Text className='cursor-pointer  hover:text-white mb-0 mx-2 text-axone-orange font-bold'>{t('Chart.Filter.Month')}</Text>
+              <Text className='cursor-pointer  hover:text-white mb-0 mx-2 text-axone-khaki'>3 {t('Chart.Filter.Month')}</Text>
+              <Text className='cursor-pointer  hover:text-white mb-0 mx-2 text-axone-khaki'>{t('Chart.Filter.Year')}</Text>
             </Row>
           </Row>
 
@@ -84,7 +89,7 @@ export default function Dashboard () {
               -2.34%
               </Text>
               <Text className='uppercase text-axone-khaki'>
-              Price
+                {t('Price')}
               </Text>
             </BoxInner>
             <BoxInner className='pt-5 pb-3 w-1/4 mr-10 h-36 flex-col justify-between items-center'>
@@ -92,15 +97,15 @@ export default function Dashboard () {
               <Text className='uppercase text-axone-red'>
               -2.34%
               </Text>
-              <Text className='uppercase text-axone-khaki'>
-              Market Cap
+              <Text className='uppercase text-axone-khaki text-center'>
+                {t('MarketCap')}
               </Text>
             </BoxInner>
             <BoxInner className='pt-5 pb-3 w-1/4 mr-10 h-36 flex-col justify-between items-center'>
               <Title className='mt-2 mb-0'>$531.4M</Title>
               <Row className='justify-center items-center'>
                 <Text className='uppercase text-axone-khaki mr-3'>
-              Volume
+                  {t('Volume')}
                 </Text>
                 <Text className='bg-axone-dark-blue px-[2px] text-axone-khaki'>24H</Text>
               </Row>
@@ -108,7 +113,7 @@ export default function Dashboard () {
             <BoxInner className='pt-5 pb-3 w-1/4 h-36 flex-col justify-between items-center'>
               <Title className='mt-2 mb-0'>15.71%</Title>
               <Text className='uppercase text-axone-khaki'>
-              APR
+                { t('APR')}
               </Text>
             </BoxInner>
           </Row>
