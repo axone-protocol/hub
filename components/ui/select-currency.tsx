@@ -1,5 +1,6 @@
 'use client';
-import { ChevronDown, ChevronUp, Wallet } from 'lucide-react';
+import { Wallet } from 'lucide-react';
+import Image from 'next/image';
 import { useState } from 'react';
 import { Select, SelectContent, SelectGroup, SelectIcon, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { cn } from '@/lib/utils';
@@ -11,7 +12,7 @@ const CurrencySelect = () => {
       <SelectTrigger className={cn({ 'bg-axone-bg-dark': open })}>
         <Wallet className='w-5 h-4 mb-0.5 text-axone-khaki' /> <SelectValue placeholder='USD' />
         <SelectIcon asChild>
-          {!open ? <ChevronDown className='h-4 w-4 text-axone-khaki' /> : <ChevronUp className='h-4 w-4 text-axone-khaki' />}
+          <Image className={cn({ 'rotate-180': open })} src={'/icons/arrow-down.svg'}  width={20} height={20} alt={'arrow-down'} />
         </SelectIcon>
       </SelectTrigger>
       <SelectContent className='shadow-lg'>

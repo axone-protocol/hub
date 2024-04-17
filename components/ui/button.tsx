@@ -9,10 +9,10 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-axone-dark-blue border border-axone-orange text-[700] text-axone-orange hover:bg-axone-orange hover:text-axone-dark-blue',
-        rounded: 'rounded-lg bg-axone-dark-blue border border-axone-orange text-bold text-axone-orange hover:bg-axone-orange hover:text-axone-dark-blue',
-        noBorder: 'bg-axone-dark-blue text-[700] text-axone-orange hover:bg-axone-orange hover:text-axone-dark-blue',
-        link: ' hover:text-underlined hover:underline',
+        default: 'tracking-tight bg-axone-dark-blue border border-axone-orange text-[700] text-axone-orange hover:bg-axone-orange hover:text-axone-dark-blue',
+        rounded: 'tracking-tight rounded-lg bg-axone-dark-blue border border-axone-orange text-bold text-axone-orange hover:bg-axone-orange hover:text-axone-dark-blue',
+        noBorder: 'tracking-tight bg-axone-dark-blue text-[700] text-axone-orange hover:bg-axone-orange hover:text-axone-dark-blue',
+        link: 'tracking-tight hover:text-underlined hover:underline',
       },
       size: {
         default: 'h-10 px-4 pb-2 pt-2.5',

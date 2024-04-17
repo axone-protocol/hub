@@ -23,6 +23,16 @@
     "MarketCap": "Capitalisation boursière",
     "APR": "APR",
     "Volume": "Volume",
+    "SupplyChange": "Changement de l'offre",
+    "CurrentSupply": "Offre actuelle",
+    "Governance": "Gouvernance",
+    "GovernanceDesc": "Découvrez et participez à la gouvernance de notre protocole AXONE.",
+    "Staking": "Mise en jeu",
+    "StakingRewards": "Récompenses de mise en jeu",
+    "StakingRewardsDesc": "En mettant en jeu vos AXONE, vous gagnez des récompenses et aidez à sécuriser le réseau Axone.",
+    "DelegateNow": "Déléguer maintenant",
+    "CalculateRewards": "Calculer les récompenses",
+    "OpenGovernance": "Ouvrir la gouvernance",
     "Chart": {
       "Overview": "Aperçu",
       "Filter": {

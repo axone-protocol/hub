@@ -28,6 +28,7 @@ const CategoryFilter = ({ category, selectCategory }: CategoryFilterProps) => {
         <CategoryFilterItem
           key={item}
           item={t(`Category.${item}`)}
+          itemValue={item}
           selected={category === item}
           onSelect={selectCategory}
         />

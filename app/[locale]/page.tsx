@@ -7,9 +7,9 @@ import { Text, Title } from '@/components/typography';
 import Box from '@/components/ui/box';
 import BoxInner from '@/components/ui/box-inner';
 import { Button } from '@/components/ui/button';
-import { ButtonWithIcon } from '@/components/ui/button-with-icon';
 import AxoneAreaChart from '@/components/ui/charts/axone-area-chart';
 import Column from '@/components/ui/column';
+import { RewardsCalculatorModal } from '@/components/ui/modals';
 import PageContainer from '@/components/ui/page-container';
 import Row from '@/components/ui/row';
 import { ChartData } from '../mock-chart-data';
@@ -21,7 +21,7 @@ export default function Dashboard () {
 
   useEffect(() => {
     fetch(
-      'http://localhost:3000/api/historical-price?symbol=eth&range=43800'
+      '/api/historical-price?symbol=eth&range=43800'
     ).then(res => {
       return res.json();
     })
@@ -38,15 +38,15 @@ export default function Dashboard () {
       <Row className=''>
         <Box className='w-1/2 mr-0 flex flex-row justify-between'>
           <Column className='w-2/3'>
-            <Title className='mb-5'>Staking Rewards</Title>
-            <Text className='mb-5'>By staking your AXONE, you earn rewards and help keep the Axone network secure.</Text>
+            <Title className='mb-5'>{t('StakingRewards')}</Title>
+            <Text className='mb-5'>{t('StakingRewardsDesc')}</Text>
             <Row>
-              <Button variant={'rounded'} className='mt-5 mr-2 text-base font-bold'>Delegate Now</Button>
-              <ButtonWithIcon variant={'link'} className='mt-5 text-axone-orange text-base font-bold'>Calculate Rewards</ButtonWithIcon>
+              <Button variant={'rounded'} className='mt-5 mr-2 text-base font-bold'>{t('DelegateNow')}</Button>
+              <RewardsCalculatorModal />
             </Row>
           </Column>
           <div className='relative flex items-center justify-center'>
-            <Image src={'/staking.svg'} alt='Staking Rewards' width={166} height={166} />
+            <Image src={'/images/staking.svg'} alt='Staking Rewards' width={166} height={166} />
             <div className='absolute flex flex-col justify-center items-center'>
               <Text className='text-xl mb-0 text-axone-grey'>APS</Text>
               <Text className='text-xl mb-0 text-white font-bold'>15.68%</Text>
@@ -56,11 +56,11 @@ export default function Dashboard () {
 
         <Box className='w-1/2 flex flex-row justify-between'>
           <Column className='w-2/3'>
-            <Title className='mb-5'>Governance</Title>
-            <Text className='mb-5'>Discover and participate in the governance of our AXONE protocol.</Text>
-            <Button variant={'rounded'} className='mt-5 mr-2 text-base font-bold w-64'>Open Governance</Button>
+            <Title className='mb-5'>{t('Governance')}</Title>
+            <Text className='mb-5'>{t('GovernanceDesc')}</Text>
+            <Button variant={'rounded'} className='mt-5 mr-2 text-base font-bold w-64'>{t('OpenGovernance')}</Button>
           </Column>
-          <Image src={'/governance.svg'} alt='Governance' width={200} height={200} />
+          <Image src={'/images/governance.svg'} alt='Governance' width={200} height={200} />
         </Box>
       </Row>
 
@@ -118,18 +118,45 @@ export default function Dashboard () {
             </BoxInner>
           </Row>
         </Box>
+
         <Column className='w-1/3'>
           {/* Temporary block with navigation to UI-Kit - content will be replaced later*/}
-          <Box className='h-1/2 m-0 mb-6'>
-            <Text className='mb-10 uppercase'>UI-KIT</Text>
-            <Text className='mb-6'>Here you can navigate to UI-kit</Text>
-            <Link href='/ui-kit'>
-              <Button variant={'rounded'} className='w-full mb-4'>Show</Button>
-            </Link>
+          <Box className='h-1/2 m-0 flex flex-col justify-between mb-6'>
+            <Text className='mb-10 uppercase'>{t('SupplyChange')}</Text>
+            <Row className='justify-between'>
+              <p className='text-4xl tracking-tighter text-axone-orange mb-0'>-2,847,432.80</p>
+              <p className='text-4xl tracking-tighter text-axone-khaki mb-0'>AXONE</p>
+            </Row>
+            <Row className='justify-between mt-10'>
+              <Column className='justify-end'>
+                <Text className='text-axone-grey tracking-tight uppercase mb-0'>Updated 34 seconds ago</Text>
+              </Column>
+              <Column>
+                <Row className='justify-between items-center mb-3'>
+                  <Image src={'/icons/fire.svg'} alt='Refresh' width={20} height={20} />
+                  <Text className='text-axone-grey mb-0'>19.547.04</Text>
+                  <Text className='text-axone-khaki mb-0'>AXONE</Text>
+                  <Text className='text-axone-grey mb-0'>Burned</Text>
+                </Row>
+                <Row className='justify-between items-center'>
+                  <Image src={'/icons/water-drop.svg'} alt='Refresh' width={20} height={20} />
+                  <Text className='text-axone-grey mb-0'>19.547.04</Text>
+                  <Text className='text-axone-khaki mb-0'>AXONE</Text>
+                  <Text className='text-axone-grey mb-0'>Burned</Text>
+                </Row>
+              </Column>
+            </Row>
           </Box>
           {/* Temporary empty block - content will be replaced later */}
-          <Box className='h-1/2 m-0'>
-            <Text className='mb-10 uppercase'>EMPTY BLOCK</Text>
+          <Box className='h-1/2 m-0 flex flex-col justify-between'>
+            <Text className='mb-10 uppercase m-0'>{t('CurrentSupply')}</Text>
+            <Row className='justify-between'>
+              <p className='text-4xl tracking-tighter text-axone-white mb-0'>2,847,432.80</p>
+              <p className='text-4xl tracking-tighter text-axone-khaki mb-0'>AXONE</p>
+            </Row>
+            <Column className='justify-end'>
+              <Text className='text-axone-grey tracking-tight uppercase mb-0'>Updated 34 seconds ago</Text>
+            </Column>
           </Box>
         </Column>
       </Row>
