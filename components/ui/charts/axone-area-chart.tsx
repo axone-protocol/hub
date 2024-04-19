@@ -28,6 +28,7 @@ const CHART_MARGIN = {
   left: 0,
   bottom: 0,
 };
+const MS_FACTOR = 1000;
 
 const AxoneAreaChart = ({ data }: AxoneAreaChartProps) => {
   const format = useFormatter();
@@ -39,8 +40,8 @@ const AxoneAreaChart = ({ data }: AxoneAreaChartProps) => {
     }
   }, [data]);
 
-  const formatChartDate = (unixTime: number) => {
-    const dateTime = new Date(unixTime * 1000);
+  const formatChartDate = (unixTime: number): string => {
+    const dateTime = new Date(unixTime * MS_FACTOR);
     return format.dateTime(dateTime, {
       year: 'numeric',
       month: 'short',
