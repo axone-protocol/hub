@@ -16,6 +16,9 @@ const config = {
         '2xl': '1400px',
       },
     },
+    screens: {
+      'desktop': '1280px',
+    },
     borderRadius: {
       md: '0.375rem',
       innerBox: '0.625rem',
@@ -53,7 +56,10 @@ const config = {
       }
     },
   },
-  plugins: [require('tailwindcss-animate')],
+  plugins: [
+    require('tailwindcss-animate'),
+    require('tailwind-scrollbar')
+  ],
 } satisfies Config;
 
 export default config;

@@ -24,7 +24,7 @@ const Sidebar = () => {
           <LogoDark className='mb-5' />
         </div>
         {/* Navigation items */}
-        <SidebarNavItem title={t('Dashboard')} href={`/${locale}`} firstItem />
+        <SidebarNavItem title={t('Dashboard')} href={`/${locale}/dashboard`} firstItem />
         <SidebarNavItem title={t('Wallet')} href={`/${locale}/wallet`} />
         <SidebarNavItem title={t('Bridge')} href={`/${locale}/bridge`} />
         <SidebarNavItem title={t('Staking')} href={`/${locale}/staking`}  />
@@ -42,7 +42,7 @@ const Sidebar = () => {
           <Switch className='w-16 h-8' checked={true} onCheckedChange={() => null} id='airplane-mode' />
           <Text className='text-base text-axone-khaki mb-0 ml-3 uppercase'>{t('Dark')}</Text>
         </Row>
-        <Button className='w-full' variant={'rounded'}>
+        <Button className='w-full font-bold' variant={'rounded'}>
           {t('Explore')}
         </Button>
       </div>

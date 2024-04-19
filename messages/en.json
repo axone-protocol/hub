@@ -32,6 +32,11 @@
     "StakingRewardsDesc": "By staking your AXONE, you earn rewards and help keep the Axone network secure.",
     "DelegateNow": "Delegate Now",
     "CalculateRewards": "Calculate Rewards",
+    "StakingRewardsCalculator": "Staking Rewards Calculator",
+    "DailyReturns": "Daily Returns",
+    "MonthlyReturns": "Monthly Returns",
+    "YearlyReturns": "Yearly Returns",
+    "YourAxoneStake": "Your AXONE Stake",
     "OpenGovernance": "Open Governance",
     "Chart": {
       "Overview": "Overview",
