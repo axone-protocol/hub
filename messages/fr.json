@@ -32,6 +32,11 @@
     "StakingRewardsDesc": "En mettant en jeu vos AXONE, vous gagnez des récompenses et aidez à sécuriser le réseau Axone.",
     "DelegateNow": "Déléguer maintenant",
     "CalculateRewards": "Calculer les récompenses",
+    "StakingRewardsCalculator": "Calculateur de récompenses de mise en jeu",
+    "DailyReturns": "Rendements quotidiens",
+    "MonthlyReturns": "Rendements mensuels",
+    "YearlyReturns": "Rendements annuels",
+    "YourAxoneStake": "Votre mise en jeu AXONE",
     "OpenGovernance": "Ouvrir la gouvernance",
     "Chart": {
       "Overview": "Aperçu",

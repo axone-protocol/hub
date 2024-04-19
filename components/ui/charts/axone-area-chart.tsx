@@ -1,7 +1,7 @@
+import { useFormatter } from 'next-intl';
 import { memo, useEffect, useState } from 'react';
 import { Area, AreaChart, Brush, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { ChartData } from '@/app/mock-chart-data';
-import { formatChartDate } from '@/lib/utils';
 import ChartTooltip from './chart-tooltip';
 import ChartTraveler from './chart-traveller';
 import Column from '../column';
@@ -30,6 +30,7 @@ const CHART_MARGIN = {
 };
 
 const AxoneAreaChart = ({ data }: AxoneAreaChartProps) => {
+  const format = useFormatter();
   const [isLoading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -37,6 +38,15 @@ const AxoneAreaChart = ({ data }: AxoneAreaChartProps) => {
       setLoading(false);
     }
   }, [data]);
+
+  const formatChartDate = (unixTime: number) => {
+    const dateTime = new Date(unixTime * 1000);
+    return format.dateTime(dateTime, {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
+    });
+  };
 
   return (
     <Column>

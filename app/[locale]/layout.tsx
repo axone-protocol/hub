@@ -31,7 +31,7 @@ export default function RootLayout ({
         <NextIntlClientProvider messages={messages}>
           <main className='flex w-full h-screen'>
             <Sidebar />
-            <div className='w-full h-screen overflow-y-auto'>
+            <div className='w-full flex justify-center h-screen overflow-y-auto scrollbar scrollbar-thin scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-thumb-axone-dark-blue scrollbar-track-axone-bg-dark scroll-my-6'>
               <Header />
               <Suspense fallback={<Loading />}>
                 {children}

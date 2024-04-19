@@ -29,7 +29,7 @@ const ConnectWalletModal = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant={'rounded'} className='px-10'>
+        <Button variant={'rounded'} className='px-10 font-bold'>
           {t('Connect')}
         </Button>
       </DialogTrigger>
@@ -37,7 +37,7 @@ const ConnectWalletModal = () => {
         <DialogHeader>
           <DialogTitle>Connect to Wallet</DialogTitle>
         </DialogHeader>
-        <DialogDescription className='overflow-y-auto h-full'>
+        <DialogDescription className='overflow-y-auto scrollbar-none h-full'>
           <BoxInner>
             <Column>
               <ConnectWalletRow wallet='keplr' />
