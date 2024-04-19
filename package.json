@@ -45,7 +45,7 @@
     "recharts": "^2.12.5",
     "tailwind-merge": "^2.2.2",
     "tailwindcss-animate": "^1.0.7",
-    "zod": "^3.22.4"
+    "zod": "^3.22.5"
   },
   "devDependencies": {
     "@stylistic/eslint-plugin": "^1.7.2",
