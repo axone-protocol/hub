@@ -1,5 +1,5 @@
 import { ArrowUpRight } from 'lucide-react';
-
+import { forwardRef } from 'react';
 import { Button, ButtonProps } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
@@ -8,10 +8,14 @@ type ButtonWithIconProps = {
   iconClassName?: string;
 } & ButtonProps
 
-export function ButtonWithIcon ({ children, className, iconClassName, ...props }: ButtonWithIconProps) {
+const ButtonWithIcon = forwardRef<HTMLButtonElement, ButtonWithIconProps>(({ children, className, iconClassName, ...props }, ref) => {
   return (
-    <Button className={className} {...props}>
+    <Button ref={ref} className={className} {...props}>
       {children} <ArrowUpRight className={cn('ml-2 h-4 w-4 mb-0.5', iconClassName)} />
     </Button>
   );
-}
+});
+
+ButtonWithIcon.displayName = 'ButtonWithIcon';
+
+export { ButtonWithIcon };

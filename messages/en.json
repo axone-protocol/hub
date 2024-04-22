@@ -33,6 +33,8 @@
     "DelegateNow": "Delegate Now",
     "CalculateRewards": "Calculate Rewards",
     "StakingRewardsCalculator": "Staking Rewards Calculator",
+    "StakingRewardsCalculatorEnterAmount": "enter amount → min 5 - max 200,000",
+    "Apply": "Apply",
     "DailyReturns": "Daily Returns",
     "MonthlyReturns": "Monthly Returns",
     "YearlyReturns": "Yearly Returns",
