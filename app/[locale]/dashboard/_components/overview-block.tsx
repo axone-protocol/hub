@@ -1,30 +1,15 @@
 'use client';
 import { useTranslations } from 'next-intl';
-import { useEffect, useState } from 'react';
-import { ChartData } from '@/app/mock-chart-data';
 import { Text, Title } from '@/components/typography';
 import Box  from '@/components/ui/box';
 import BoxInner from '@/components/ui/box-inner';
 import AxoneAreaChart from '@/components/ui/charts/axone-area-chart';
 import Row from '@/components/ui/row';
+import { useOverviewChart } from '@/hooks/use-overview-chart';
 
 export default function OverviewBlock () {
   const t  = useTranslations('Dashboard');
-  const [chartData, setChartData] = useState<ChartData[]>([]);
-
-  useEffect(() => {
-    fetch(
-      '/api/historical-price?symbol=eth&range=43800'
-    ).then(res => {
-      return res.json();
-    })
-      .then(data => {
-        setChartData(data);
-      })
-      .catch(e => {
-        console.log('Error ' + e);
-      });
-  }, []);
+  const { data: chartData } = useOverviewChart();
 
   return (
     <Box className='w-2/3 m-0 mr-6 h-[50%]'>

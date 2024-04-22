@@ -33,6 +33,8 @@
     "DelegateNow": "Déléguer maintenant",
     "CalculateRewards": "Calculer les récompenses",
     "StakingRewardsCalculator": "Calculateur de récompenses de mise en jeu",
+    "StakingRewardsCalculatorEnterAmount": "entrez le montant → min 5 - max 200,000",
+    "Apply": "Appliquer",
     "DailyReturns": "Rendements quotidiens",
     "MonthlyReturns": "Rendements mensuels",
     "YearlyReturns": "Rendements annuels",
