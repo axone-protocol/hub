@@ -27,6 +27,7 @@ const config = {
     },
     extend: {
       fontSize: {
+        '20': '20px',
         '40': '40px',
       },
       keyframes: {
