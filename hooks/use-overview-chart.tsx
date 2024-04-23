@@ -16,6 +16,7 @@ export const useDashboardChartQueryKey = ['overview-chart'];
 
 export const useOverviewChart = () => {
   const query = useQuery({
+    refetchOnMount: true,
     queryKey: useDashboardChartQueryKey,
     queryFn: getOverviewChartDataFn,
     initialData: [] as ChartData[],
