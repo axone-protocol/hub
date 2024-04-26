@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { Text } from '@/components/typography';
-import Box  from '@/components/ui/box';
+import { Box } from '@/components/ui/boxes';
 import Column from '@/components/ui/column';
 import Row from '@/components/ui/row';
 import TimeframeSelect from '@/components/ui/select-timeframe';
