@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { Text, Title } from '@/components/typography';
-import Box  from '@/components/ui/box';
+import { Box } from '@/components/ui/boxes';
 import { Button } from '@/components/ui/button';
 import Column from '@/components/ui/column';
 import { RewardsCalculatorModal } from '@/components/ui/modals';

@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 import { Suspense, useCallback, useState } from 'react';
 import { Text, Title } from '@/components/typography';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import Box from '@/components/ui/box';
+import { Box } from '@/components/ui/boxes';
 import Column from '@/components/ui/column';
 import { Input } from '@/components/ui/input';
 import PageContainer from '@/components/ui/page-container';

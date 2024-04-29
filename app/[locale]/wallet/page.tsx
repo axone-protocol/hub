@@ -1,4 +1,4 @@
-import Box from '@/components/ui/box';
+import { Box } from '@/components/ui/boxes';
 import PageContainer from '@/components/ui/page-container';
 
 export default function Wallet () {

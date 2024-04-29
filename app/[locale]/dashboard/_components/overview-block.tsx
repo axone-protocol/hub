@@ -1,8 +1,7 @@
 'use client';
 import { useTranslations } from 'next-intl';
 import { Text, Title } from '@/components/typography';
-import Box  from '@/components/ui/box';
-import BoxInner from '@/components/ui/box-inner';
+import { Box, BoxInner } from '@/components/ui/boxes';
 import AxoneAreaChart from '@/components/ui/charts/axone-area-chart';
 import Row from '@/components/ui/row';
 import { useOverviewChart } from '@/hooks/use-overview-chart';

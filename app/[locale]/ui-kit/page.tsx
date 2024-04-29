@@ -3,7 +3,7 @@ import { Info } from 'lucide-react';
 import { useState } from 'react';
 import { Text, Title } from '@/components/typography';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import Box from '@/components/ui/box';
+import { Box } from '@/components/ui/boxes';
 import { Button } from '@/components/ui/button';
 import { ButtonWithIcon } from '@/components/ui/button-with-icon';
 import Column from '@/components/ui/column';
