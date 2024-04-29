@@ -1,9 +1,11 @@
 'use client';
 import { WalletRepo } from '@cosmos-kit/core';
+import { ChainWalletBase } from '@cosmos-kit/core';
 import { useChain } from '@cosmos-kit/react';
 import { FC, useEffect } from 'react';
 import { Text } from '@/components/typography';
 import { WalletRow } from './wallet-row';
+import { getWalletLogo } from '../../header/connect-wallet';
 import Row from '../../row';
 
 type WalletsListProps = {
@@ -16,9 +18,16 @@ const WalletsList: FC<WalletsListProps> = ({ wallets }) => {
   );
 
   useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
     if (isWalletConnected) {
-      setTimeout(closeView, 1800);
+      timeoutId = setTimeout(closeView, 1800);
     }
+
+    return () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
   }, [closeView, isWalletConnected]);
 
   if (isWalletError) {
@@ -29,17 +38,17 @@ const WalletsList: FC<WalletsListProps> = ({ wallets }) => {
     );
   }
 
-  return wallets?.wallets.map(({
-    walletName,
-    walletPrettyName,
-    walletInfo,
-    connect,
-    downloadInfo,
-    isWalletNotExist,
-    isWalletConnected,
-    isWalletConnecting
-  }) => {
-    const logo: string = typeof walletInfo?.logo === 'string' ? walletInfo?.logo : typeof walletInfo?.logo === 'object' ? walletInfo?.logo.major : '';
+  return wallets?.wallets.map((wallet: ChainWalletBase) => {
+    const {
+      walletName,
+      walletPrettyName,
+      connect,
+      downloadInfo,
+      isWalletNotExist,
+      isWalletConnected,
+      isWalletConnecting
+    } = wallet;
+    const logo: string = getWalletLogo(wallet);
     return (
       <WalletRow
         link={downloadInfo?.link}

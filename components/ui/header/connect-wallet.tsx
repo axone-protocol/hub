@@ -1,4 +1,5 @@
 'use client';
+import { ChainWalletBase, MainWalletBase } from '@cosmos-kit/core';
 import { useChain, useWallet } from '@cosmos-kit/react';
 import { CircleCheckBig, Copy, LogOut } from 'lucide-react';
 import Image from 'next/image';
@@ -9,6 +10,16 @@ import { useToast } from '@/hooks/use-toast';
 import { Button } from '../button';
 import Row from '../row';
 
+const getWalletLogo = (wallet: MainWalletBase | ChainWalletBase | undefined): string => {
+  let logo = '';
+  if (typeof wallet?.walletInfo?.logo === 'string') {
+    logo = wallet?.walletInfo?.logo;
+  } else if (typeof wallet?.walletInfo?.logo === 'object') {
+    logo = wallet?.walletInfo?.logo.major;
+  }
+  return logo;
+};
+
 const ConnectWallet = () => {
   const t  = useTranslations('Index');
   const { address, openView, disconnect, isWalletConnected, isWalletConnecting, isWalletError, isWalletDisconnected, wallet } = useChain(
@@ -18,19 +29,26 @@ const ConnectWallet = () => {
   const { mainWallet } = useWallet();
   const shortenedAddress = `${address?.slice(0, 8)}...${address?.slice(-4)}`;
 
-  const logo = typeof mainWallet?.walletInfo?.logo === 'string' ? mainWallet?.walletInfo?.logo : typeof mainWallet?.walletInfo?.logo === 'object' ? mainWallet?.walletInfo?.logo.major : '';
+  const logo: string = getWalletLogo(mainWallet);
 
   useEffect(() => {
-    const fn = async () => {
+    const autoConnectWallet = async () => {
       await mainWallet?.connect();
     };
-    fn();
+    autoConnectWallet();
   }, [mainWallet]);
 
   useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
     if (isWalletError) {
-      setTimeout(disconnect, 2500);
+      timeoutId = setTimeout(disconnect, 2500);
     }
+
+    return () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
   }, [disconnect, isWalletError]);
 
   const copyToClipboard = useCallback((address: string | undefined) => () => {
@@ -84,6 +102,8 @@ const ConnectWallet = () => {
         />
       </Row>
     );
-  }};
+  }
+  return null;
+};
 
-export { ConnectWallet };
+export { ConnectWallet, getWalletLogo };

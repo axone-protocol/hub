@@ -2,7 +2,6 @@ import { capitalize } from 'lodash';
 import { ArrowUpRight } from 'lucide-react';
 import { Download } from 'lucide-react';
 import Image from 'next/image';
-// import { useTranslations } from 'next-intl';
 import { FC } from 'react';
 import { Text, Title } from '@/components/typography';
 import Row from '../../row';
