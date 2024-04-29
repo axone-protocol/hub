@@ -4,10 +4,11 @@ import { useChain, useWallet } from '@cosmos-kit/react';
 import { CircleCheckBig, CircleX, Copy, LogOut } from 'lucide-react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Text } from '@/components/typography';
 import { useToast } from '@/hooks/use-toast';
 import { Button } from '../button';
+import TermsModal from '../modals/terms/terms-modal';
 import Row from '../row';
 
 const getWalletLogo = (wallet: MainWalletBase | ChainWalletBase | undefined): string => {
@@ -28,6 +29,7 @@ const ConnectWallet = () => {
   const { toast } = useToast();
   const { mainWallet } = useWallet();
   const shortenedAddress = `${address?.slice(0, 8)}...${address?.slice(-4)}`;
+  const [openTerms, setOpenTerms] = useState(false);
 
   const logo: string = getWalletLogo(mainWallet);
 
@@ -37,6 +39,15 @@ const ConnectWallet = () => {
     };
     autoConnectWallet();
   }, [mainWallet]);
+
+  const onConnect = useCallback(async () => {
+    const termsAccepted = localStorage.getItem('termsAccepted');
+    if (termsAccepted) {
+      openView();
+    } else {
+      setOpenTerms(true);
+    }
+  }, [openView]);
 
   useEffect(() => {
     let timeoutId: number;
@@ -82,9 +93,12 @@ const ConnectWallet = () => {
   }
   if (isWalletDisconnected) {
     return (
-      <Button onClick={openView} variant='rounded' className='px-10 font-bold'>
-        {t('Connect')}
-      </Button>
+      <>
+        <Button onClick={onConnect} variant='rounded' className='px-10 font-bold'>
+          {t('Connect')}
+        </Button>
+        <TermsModal open={openTerms} setOpen={setOpenTerms} openWalletModal={openView} />
+      </>
     );
   }
   if (isWalletConnected) {
