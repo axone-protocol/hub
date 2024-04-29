@@ -18,14 +18,14 @@ const WalletsList: FC<WalletsListProps> = ({ wallets }) => {
   );
 
   useEffect(() => {
-    let timeoutId: NodeJS.Timeout;
+    let timeoutId: number;
     if (isWalletConnected) {
-      timeoutId = setTimeout(closeView, 1800);
+      timeoutId = window.setTimeout(closeView, 1800);
     }
 
     return () => {
       if (timeoutId) {
-        clearTimeout(timeoutId);
+        window.clearTimeout(timeoutId);
       }
     };
   }, [closeView, isWalletConnected]);

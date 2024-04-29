@@ -1,7 +1,7 @@
 'use client';
 import { ChainWalletBase, MainWalletBase } from '@cosmos-kit/core';
 import { useChain, useWallet } from '@cosmos-kit/react';
-import { CircleCheckBig, Copy, LogOut } from 'lucide-react';
+import { CircleCheckBig, CircleX, Copy, LogOut } from 'lucide-react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useCallback, useEffect } from 'react';
@@ -39,19 +39,29 @@ const ConnectWallet = () => {
   }, [mainWallet]);
 
   useEffect(() => {
-    let timeoutId: NodeJS.Timeout;
+    let timeoutId: number;
     if (isWalletError) {
-      timeoutId = setTimeout(disconnect, 2500);
+      timeoutId = window.setTimeout(disconnect, 2500);
     }
 
     return () => {
       if (timeoutId) {
-        clearTimeout(timeoutId);
+        window.clearTimeout(timeoutId);
       }
     };
   }, [disconnect, isWalletError]);
 
   const copyToClipboard = useCallback((address: string | undefined) => () => {
+    if (!address) {
+      return toast({
+        action: (
+          <Row className='items-center -ml-2'>
+            <CircleX className='mr-3 text-axone-red' />
+            {'Something went wrong, please try again later.'}
+          </Row>
+        )
+      });
+    };
     navigator.clipboard.writeText(`${address}`);
     toast({
       action: (
