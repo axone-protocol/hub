@@ -14,28 +14,33 @@ export default function SupplyChangeBlock () {
         <Text className='mb-5 uppercase'>{t('SupplyChange')}</Text>
         <TimeframeSelect />
       </Row>
-      <Row className='justify-between'>
+      <div className='flex flex-col items-end md:flex-row md:justify-between'>
         <p className='text-4xl tracking-tighter text-axone-orange mb-0'>-2,847,432.80</p>
         <p className='text-4xl tracking-tighter text-axone-khaki mb-0'>AXONE</p>
-      </Row>
+      </div>
       <Row className='justify-between mt-10'>
-        <Column className='justify-end'>
+        <Column className='justify-end w-auto'>
           <Text className='text-axone-grey tracking-tighter uppercase mb-0'>Updated 34 seconds ago</Text>
         </Column>
-        <Column>
-          <Row className='justify-between items-center mb-3'>
-            <Image src={'/icons/fire.svg'} alt='Refresh' width={20} height={20} />
-            <Text className='text-axone-grey mb-0'>19.547.04</Text>
-            <Text className='text-axone-khaki mb-0'>AXONE</Text>
-            <Text className='text-axone-grey mb-0'>Burned</Text>
+
+        <Column className='w-auto'>
+          <Row className='justify-between items-start mb-3'>
+            <Image className='mr-2' src={'/icons/fire.svg'} alt='Refresh' width={20} height={20} />
+            <div className='flex flex-col md:flex-row'>
+              <Text className='text-axone-grey mb-0'>19.547.04</Text>
+              <Text className='text-axone-grey mb-0  md:flex md:justify-between'><Text className='text-axone-khaki mb-0 md:px-1'>AXONE</Text> Burned</Text>
+            </div>
           </Row>
-          <Row className='justify-between items-center'>
-            <Image src={'/icons/water-drop.svg'} alt='Refresh' width={20} height={20} />
-            <Text className='text-axone-grey mb-0'>19.547.04</Text>
-            <Text className='text-axone-khaki mb-0'>AXONE</Text>
-            <Text className='text-axone-grey mb-0'>Burned</Text>
+
+          <Row className='justify-between items-start'>
+            <Image className='mr-2' src={'/icons/water-drop.svg'} alt='Refresh' width={20} height={20} />
+            <div className='flex flex-col md:flex-row'>
+              <Text className='text-axone-grey mb-0'>19.547.04</Text>
+              <Text className='text-axone-grey mb-0 md:flex md:justify-between'><Text className='text-axone-khaki mb-0 md:px-1'>AXONE</Text> Issued</Text>
+            </div>
           </Row>
         </Column>
+
       </Row>
     </Box>
   );

@@ -6,7 +6,7 @@ type RowProps = {
 } & HTMLAttributes<HTMLDivElement>; // Add your own props here if needed
 
 const Row: React.FC<RowProps> = ({ children, className, ...props }) => {
-  const _className = cn('flex flex-row w-full', className);
+  const _className = cn('flex md:flex-row md:w-full', className);
   return (
     <div className={_className} {...props}>{children}</div>
   );

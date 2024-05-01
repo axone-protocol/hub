@@ -6,7 +6,7 @@ type PageContainerProps = {
 
 const PageContainer = ({ children, ...props }: PageContainerProps) => {
   return(
-    <div className='pt-20 w-full desktop:w-[1280px]' {...props}>
+    <div className='pt-20 w-full desktop:w-[1200px] mobile:w-full' {...props}>
       {children}
     </div>
   );

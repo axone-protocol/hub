@@ -15,7 +15,14 @@
     "Axone": "Axone",
     "Ecosystem": "Écosystème",
     "GetStarted": "Commencer",
-    "Explore": "Explorer"
+    "Explore": "Explorer",
+    "Languages": "Langues",
+    "Pages": "Pages",
+    "Funds": "Fonds",
+    "Modes": "Modes",
+    "Copy": "Copier",
+    "MakeACopy": "Faire une copie",
+    "Logout": "Déconnexion"
   },
   "Dashboard": {
     "Title": "Tableau de bord",

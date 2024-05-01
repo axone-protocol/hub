@@ -17,7 +17,7 @@ const Sidebar = () => {
   const locale = useLocale();
 
   return (
-    <Column className={cn('justify-between pt-5 bg-axone-dark-blue min-h-screen border-r border-r-axone-box-border', WIDTH)}>
+    <Column className={cn('md:flex mobile:hidden justify-between pt-5 bg-axone-dark-blue min-h-screen border-r border-r-axone-box-border', WIDTH)}>
       <Column>
         {/* Logo */}
         <div className='px-10'>

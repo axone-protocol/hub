@@ -11,15 +11,15 @@ import SupplyChangeBlock from './_components/supply-change-block';
 export default function Dashboard () {
   return (
     <PageContainer>
-      <Row>
+      <Row className='mobile:flex-col mobile:p-6 p-0'>
         <StakingRewardsBlock />
         <GovernanceBlock />
       </Row>
 
-      <Row className='p-6 pt-0'>
+      <Row className='mobile:flex-col p-6 pt-0 '>
         <OverviewBlock />
 
-        <Column className='w-1/3 desktop:w-[500px] '>
+        <Column className='w-full md:w-1/3 desktop:w-[500px] mt-6 md:mt-0'>
           <SupplyChangeBlock />
           <CurrentSupplyBlock />
         </Column>
