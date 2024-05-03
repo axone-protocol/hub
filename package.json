@@ -54,7 +54,7 @@
     "tailwind-merge": "^2.3.0",
     "tailwind-scrollbar": "^3.1.0",
     "tailwindcss-animate": "^1.0.7",
-    "zod": "^3.23.5"
+    "zod": "^3.23.6"
   },
   "devDependencies": {
     "@stylistic/eslint-plugin": "^1.8.0",
