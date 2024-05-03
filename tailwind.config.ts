@@ -16,9 +16,6 @@ const config = {
         '2xl': '1400px',
       },
     },
-    screens: {
-      'desktop': '1280px',
-    },
     borderRadius: {
       md: '0.375rem',
       innerBox: '0.625rem',
@@ -26,7 +23,13 @@ const config = {
       full: '9999rem'
     },
     extend: {
+      screens: {
+        'desktop': '1280px',
+        'mobile': '320px',
+      },
       fontSize: {
+        '10': '10px',
+        '18': '18px',
         '20': '20px',
         '40': '40px',
       },

@@ -50,21 +50,21 @@ const RewardsCalculatorModal = () => {
     <Dialog>
 
       <DialogTrigger asChild>
-        <ButtonWithIcon variant={'link'} className='mt-5 text-axone-orange text-base font-bold z-10'>
+        <ButtonWithIcon variant={'link'} className='mt-5 text-axone-orange text-base font-bold z-8'>
           {t('CalculateRewards')}
         </ButtonWithIcon>
       </DialogTrigger>
 
-      <DialogContent className='text-white p-10'>
+      <DialogContent className='text-white p-6 pb-0 md:p-10 w-[85vw] md:w-[50vw]'>
         <DialogHeader>
           <DialogTitle className='text-left text-20'>{t('StakingRewardsCalculator')}</DialogTitle>
         </DialogHeader>
 
         <Column>
-          <Row className='justify-between mb-6'>
+          <div className='flex flex-col md:flex-row justify-between md:mb-6'>
 
-            <Column className='w-2/3 mr-5'>
-              <Title className='font-normal text-white mb-5'>{t('YourAxoneStake')}</Title>
+            <Column className='w-full md:w-2/3 md:mr-5'>
+              <Title className='font-normal text-white md:mb-5'>{t('YourAxoneStake')}</Title>
               <Row className='relative'>
                 <Input
                   type='number'
@@ -74,7 +74,7 @@ const RewardsCalculatorModal = () => {
                   isRequired
                   onChange={handleInputChange}
                   value={isFocused ? stake : ''}
-                  className='pl-2 pr-20 placeholder:tracking-tighter placeholder:text-[14px]'
+                  className='pl-2 pr-20 placeholder:tracking-tighter placeholder:text-[14px] mb-4 md:mb-0'
                   placeholder={t('StakingRewardsCalculatorEnterAmount')}
                 />
                 <Button
@@ -86,14 +86,14 @@ const RewardsCalculatorModal = () => {
               </Row>
             </Column>
 
-            <Column className='w-1/3'>
-              <Title className='font-normal text-white mb-5'>APR</Title>
+            <Column className='w-full md:w-1/3'>
+              <Title className='font-normal text-white md:mb-5'>APR</Title>
               <p className='text-40 text-white font-bold tracking-tighter -mt-2'>+{APR_MOCK}%</p>
             </Column>
 
-          </Row>
+          </div>
 
-          <Row className='justify-between items-center border-b border-axone-box-border py-4'>
+          <Row className='justify-between items-center border-b border-axone-box-border py-3 md:py-4'>
             <Title className='font-normal text-white'>{t('DailyReturns')}</Title>
             <div className='text-right'>
               <Text className='font-normal text-axone-khaki mb-1'>{daily.toFixed(10)} Axone</Text>
@@ -101,7 +101,7 @@ const RewardsCalculatorModal = () => {
             </div>
           </Row>
 
-          <Row className='justify-between items-center border-b border-axone-box-border py-4'>
+          <Row className='justify-between items-center border-b border-axone-box-border py-3 md:py-4'>
             <Title className='font-normal text-white'>{t('MonthlyReturns')}</Title>
             <div className='text-right'>
               <Text className='font-normal text-axone-khaki mb-1'>{monthly.toFixed(10)} Axone</Text>
@@ -109,7 +109,7 @@ const RewardsCalculatorModal = () => {
             </div>
           </Row>
 
-          <Row className='justify-between items-center py-4'>
+          <Row className='justify-between items-center py-3 md:py-4'>
             <Title className='font-normal text-white'>{t('YearlyReturns')}</Title>
             <div className='text-right'>
               <Text className='font-normal text-axone-khaki mb-1'>{yearly.toFixed(10)} Axone</Text>
