@@ -47,7 +47,7 @@ export default function FAQ () {
         <AccordionItem key={item.id} value={`item-${item.id}`}>
           <Column className='py-2'>
             <Label item={item} />
-            <AccordionTrigger className='w-full pt-2 pb-5'>{item.question}</AccordionTrigger>
+            <AccordionTrigger className='w-full pt-2 pb-5 text-left'>{item.question}</AccordionTrigger>
           </Column>
           <AccordionContent>
             <Text className='ml-5'>{item.answer}</Text>
@@ -65,13 +65,13 @@ export default function FAQ () {
     <Suspense fallback={<Loading />}>
       <PageContainer>
         <Box>
-          <Row className='items-center'>
+          <div className='flex flex-col w-full md:flex-row items-center'>
             <Title className='whitespace-nowrap mr-8'>{t('Title')}</Title>
-            <Row className='relative'>
+            <div className='flex flex-col w-full md:flex-row relative mt-6 md:mt-0'>
               <SearchIcon  size={SEARCH_ICON_SIZE} className='absolute top-2 left-2 text-axone-khaki' />
               <Input onChange={searchQuestion} type='search' id='faq' className='pl-10' placeholder={t('SearchQuestions')} />
-            </Row>
-          </Row>
+            </div>
+          </div>
 
           <CategoryFilter category={category} selectCategory={onCategorySelect} />
 

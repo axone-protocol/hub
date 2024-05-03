@@ -6,6 +6,8 @@ import GovernanceBlock from './_components/governance-block';
 import OverviewBlock from './_components/overview-block';
 import StakingRewardsBlock from './_components/staking-rewards';
 import SupplyChangeBlock from './_components/supply-change-block';
+import SupplyRateBlock from './_components/supply-rate-block';
+import { ThreeBarsBlock } from './_components/three-bars-block';
 
 
 export default function Dashboard () {
@@ -23,6 +25,13 @@ export default function Dashboard () {
           <SupplyChangeBlock />
           <CurrentSupplyBlock />
         </Column>
+      </Row>
+
+      <Row className='mobile:flex-col p-6 pt-0 '>
+        <SupplyRateBlock />
+      </Row>
+      <Row className='mobile:flex-col p-6 pt-0 '>
+        <ThreeBarsBlock />
       </Row>
     </PageContainer>
   );

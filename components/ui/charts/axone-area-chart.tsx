@@ -74,7 +74,7 @@ const AxoneAreaChart = ({ data }: AxoneAreaChartProps) => {
                 </defs>
                 <XAxis
                   dataKey='time'
-                  axisLine={false}
+                  axisLine={true}
                   tick={{ fontSize: 14 }}
                   className='select-none'
                   tickMargin={2}

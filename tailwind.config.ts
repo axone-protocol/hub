@@ -23,6 +23,9 @@ const config = {
       full: '9999rem'
     },
     extend: {
+      backgroundImage: () => ({
+        'gradient-to-b': 'linear-gradient(to bottom, var(--tw-gradient-stops))',
+      }),
       screens: {
         'desktop': '1280px',
         'mobile': '320px',
@@ -49,6 +52,7 @@ const config = {
       },
       colors: {
         'axone-bg-dark': '#071622',
+        'axone-blue': '#41AEED',
         'axone-dark-blue': '#00213A',
         'axone-dark-blue-2': '#0062AC',
         'axone-orange': '#FB9501',

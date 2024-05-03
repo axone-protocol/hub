@@ -1,5 +1,7 @@
+'use client';
 import Image from 'next/image';
-import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
+import { useLocale, useTranslations } from 'next-intl';
 import { Text, Title } from '@/components/typography';
 import { Box } from '@/components/ui/boxes';
 import { Button } from '@/components/ui/button';
@@ -7,6 +9,12 @@ import { RewardsCalculatorModal } from '@/components/ui/modals';
 
 export default function StakingRewardsBlock () {
   const t  = useTranslations('Dashboard');
+  const locale = useLocale();
+  const router = useRouter();
+
+  const navigateToStaking = () => {
+    router.push(`/${locale}/staking`);
+  };
   return (
     <Box className='flex flex-col justify-between w-full m-0 mb-6 md:w-1/2 md:mr-3 md:mb-0'>
 
@@ -30,6 +38,7 @@ export default function StakingRewardsBlock () {
         <Button
           variant={'rounded'}
           className='mt-5 mr-2 text-base font-bold'
+          onClick={navigateToStaking}
         >
           {t('DelegateNow')}
         </Button>
