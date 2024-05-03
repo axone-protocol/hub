@@ -1,6 +1,6 @@
 'use client';
 import { memo } from 'react';
-import { Text, Title } from '@/components/typography';
+import { Text } from '@/components/typography';
 import { Box, BoxInner } from '@/components/ui/boxes';
 import SupplyRateChart from '@/components/ui/charts/supply-rate-chart';
 import Row from '@/components/ui/row';

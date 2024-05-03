@@ -8,7 +8,6 @@ import { Box } from '@/components/ui/boxes';
 import Column from '@/components/ui/column';
 import { Input } from '@/components/ui/input';
 import PageContainer from '@/components/ui/page-container';
-import Row from '@/components/ui/row';
 import CategoryFilter from './_components/category-filter';
 
 import { data, FAQDataType } from './_mock/data';
