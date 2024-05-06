@@ -1,13 +1,9 @@
 import { useFormatter } from 'next-intl';
-import { memo, useEffect, useState } from 'react';
-import { Area, AreaChart, Brush, CartesianGrid, Cell, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
-import { ChartData } from '@/app/mock-chart-data';
-import { useOverviewChart } from '@/hooks/use-overview-chart';
+import { memo } from 'react';
+import { Area, AreaChart, Brush, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import ChartTooltip from './chart-tooltip';
 import ChartTraveler from './chart-traveller';
-import { Box } from '../boxes';
 import Column from '../column';
-import Spinner from '../spinner';
 
 // Override console.error
 // This is a hack to suppress the warning about missing defaultProps in recharts library as of version 2.12
@@ -17,10 +13,6 @@ const error = console.error;
 console.error = (...args: any) => {
   if (/defaultProps/.test(args[0]) || /FORMATTING_ERROR/.test(args[0])) return;
   error(...args);
-};
-
-type AxoneAreaChartProps = {
-  data: ChartData[];
 };
 
 const CHART_COLOR = '#FB9501';
@@ -93,15 +85,8 @@ const gradientOffset = () => {
 
 const off = gradientOffset();
 
-const SupplyAreaChart = ({ data }: AxoneAreaChartProps) => {
+const SupplyAreaChart = () => {
   const format = useFormatter();
-  const [isLoading, setLoading] = useState<boolean>(false);
-
-  // useEffect(() => {
-  //   if (data && data.length > 0) {
-  //     setLoading(false);
-  //   }
-  // }, [data]);
 
   const formatChartDate = (unixTime: number): string => {
     const dateTime = new Date(unixTime * MS_FACTOR);
@@ -111,73 +96,64 @@ const SupplyAreaChart = ({ data }: AxoneAreaChartProps) => {
       day: 'numeric'
     });
   };
-  // const { data: chartData } = useOverviewChart();
 
   return (
     <Column>
       <ResponsiveContainer width='100%' height='100%'>
-        {
-          isLoading
-            ? (<div className='w-full h-full flex flex-col justify-center items-center '>
-              <Spinner />
-            </div>)
-            : (
-              <AreaChart
-                data={data2}
-                margin={CHART_MARGIN}
-              >
-                <XAxis
-                  dataKey='name'
-                  axisLine={true}
-                  tick={{ fontSize: 14 }}
-                  className='select-none'
-                  tickMargin={2}
-                  // tickFormatter={formatChartDate}
-                />
-                <YAxis
-                  axisLine={false}
-                  className='select-none'
-                  tick={{ fontSize: 14 }}
-                  tickMargin={5}
-                  tickFormatter={(tick) => `${tick}%`}
-                />
-                <Tooltip
-                  content={({ active, payload }) => {
-                    const formattedDate = formatChartDate(payload?.[0]?.payload.time);
-                    return <ChartTooltip active={active} payload={payload} formattedDate={formattedDate} />;
-                  }}
-                />
-                <defs>
-                  <linearGradient id='splitColor' x1='0' y1='0' x2='0' y2='1'>
-                    <stop offset={off} stopColor={CHART_COLOR} stopOpacity={1} />
-                    <stop offset={off} stopColor='#DC4E4E' stopOpacity={1} />
-                  </linearGradient>
-                </defs>
-                <Area
-                  type='monotone'
-                  stroke='url(#splitColor)'
-                  dataKey='uv' 
-                  fill='transparent'
-                  isAnimationActive={true}
-                />
+        <AreaChart
+          data={data2}
+          margin={CHART_MARGIN}
+        >
+          <XAxis
+            dataKey='name'
+            axisLine={true}
+            tick={{ fontSize: 14 }}
+            className='select-none'
+            tickMargin={2}
+            // tickFormatter={formatChartDate}
+          />
+          <YAxis
+            axisLine={false}
+            className='select-none'
+            tick={{ fontSize: 14 }}
+            tickMargin={5}
+            tickFormatter={(tick) => `${tick}%`}
+          />
+          <Tooltip
+            content={({ active, payload }) => {
+              const formattedDate = formatChartDate(payload?.[0]?.payload.time);
+              return <ChartTooltip active={active} payload={payload} formattedDate={formattedDate} />;
+            }}
+          />
+          <defs>
+            <linearGradient id='splitColor' x1='0' y1='0' x2='0' y2='1'>
+              <stop offset={off} stopColor={CHART_COLOR} stopOpacity={1} />
+              <stop offset={off} stopColor='#DC4E4E' stopOpacity={1} />
+            </linearGradient>
+          </defs>
+          <Area
+            type='monotone'
+            stroke='url(#splitColor)'
+            dataKey='uv'
+            fill='transparent'
+            isAnimationActive={true}
+          />
 
-                <ReferenceLine y={0} stroke='#CCD3D6' strokeDasharray='3 3' />
-                <Brush dataKey='name' stroke='transparent' traveller={ChartTraveler} height={36} fill='transparent' >
-                  <AreaChart
-                    data={data2}
-                  >
-                    <Area
-                      type='monotone'
-                      stroke='url(#splitColor)'
-                      dataKey='uv' 
-                      fill='transparent'
-                      isAnimationActive={true}
-                    />
-                  </AreaChart>
-                </Brush>
-              </AreaChart>
-            )
-        }
+          <ReferenceLine y={0} stroke='#CCD3D6' strokeDasharray='3 3' />
+          <Brush dataKey='name' stroke='transparent' traveller={ChartTraveler} height={36} fill='transparent' >
+            <AreaChart
+              data={data2}
+            >
+              <Area
+                type='monotone'
+                stroke='url(#splitColor)'
+                dataKey='uv'
+                fill='transparent'
+                isAnimationActive={true}
+              />
+            </AreaChart>
+          </Brush>
+        </AreaChart>
       </ResponsiveContainer>
     </Column>
   );

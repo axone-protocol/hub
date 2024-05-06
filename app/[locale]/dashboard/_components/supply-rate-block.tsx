@@ -5,10 +5,8 @@ import { Box, BoxInner } from '@/components/ui/boxes';
 import SupplyRateChart from '@/components/ui/charts/supply-rate-chart';
 import Row from '@/components/ui/row';
 import TimeframeSelect from '@/components/ui/select-timeframe';
-import { useOverviewChart } from '@/hooks/use-overview-chart';
 
 const SupplyRateBlock = () => {
-  const { data: chartData } = useOverviewChart();
 
   return (
     <Box className='w-full m-0 h-[50%] mobile:w-full'>
@@ -19,7 +17,7 @@ const SupplyRateBlock = () => {
 
       {/* Chart is here */}
       <BoxInner className='h-[384px] py-5'>
-        <SupplyRateChart data={chartData} />
+        <SupplyRateChart />
       </BoxInner>
 
       <Row className='justify-between w-full mt-6'>
