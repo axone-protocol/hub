@@ -23,7 +23,7 @@ const DesktopMenuAuthorized: FC<DesktopMenuAuthorizedProps> = ({
   prettyName
 }) => {
   return(
-    <Row className='hidden md:flex items-center'>
+    <Row className='hidden lg:flex items-center'>
       <Row className='items-center border-r-2 border-axone-box-border'>
         <Image src={logo} alt={`${prettyName}`} width={20} height={20} />
         <Text className='mb-0 mx-2 select-none'>{`${shortenedAddress}`}</Text>

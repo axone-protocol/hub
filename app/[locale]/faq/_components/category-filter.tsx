@@ -23,7 +23,7 @@ enum CategoriesEnum {
 const CategoryFilter = ({ category, selectCategory }: CategoryFilterProps) => {
   const t = useTranslations('FAQ');
   return (
-    <Row className='mt-10 justify-start md:justify-center overflow-x-auto'>
+    <Row className='mt-10 justify-start lg:justify-center overflow-x-auto'>
       {Object.values(CategoriesEnum).map((item: CategoriesEnum): JSX.Element => (
         <CategoryFilterItem
           key={item}

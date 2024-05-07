@@ -40,7 +40,9 @@ const AxoneAreaChart = ({ data }: AxoneAreaChartProps) => {
     }
   }, [data]);
 
-  const formatChartDate = (unixTime: number): string => {
+  const formatChartDate = (date: string): string => {
+    const raw = new Date(date);
+    const unixTime = Math.floor(raw.getTime() / 1000);
     const dateTime = new Date(unixTime * MS_FACTOR);
     return format.dateTime(dateTime, {
       year: 'numeric',

@@ -27,7 +27,7 @@ const config = {
         'gradient-to-b': 'linear-gradient(to bottom, var(--tw-gradient-stops))',
       }),
       screens: {
-        'desktop': '1280px',
+        'desktop': '1440px',
         'mobile': '320px',
       },
       fontSize: {
