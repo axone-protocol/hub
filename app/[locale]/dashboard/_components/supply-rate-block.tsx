@@ -57,7 +57,7 @@ const SupplyRateBlock = () => {
 
       {/* Chart is here */}
       <BoxInner className='h-[384px] py-5'>
-        <SupplyRateChart data={query.data} />
+        <SupplyRateChart data={query.data || []} />
       </BoxInner>
 
       <Row className='justify-between w-full mt-6'>
