@@ -15,7 +15,6 @@ export default function CurrentSupplyBlock () {
   const formattedNum = useMemo(() => parseFloat(data?.supply || '0').toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }), [data?.supply]);
   const updatedDate = useMemo(() => new Date(data?.time ? data?.time : Date.now()), [data?.time]);
   const timeAgo = useMemo(() => formatDistanceToNow(updatedDate), [updatedDate]);
-  console.log('isLoading', isLoading);
 
   if (isLoading) {
     return (
