@@ -27,7 +27,7 @@
     "yarn": "~1.22.19"
   },
   "dependencies": {
-    "@cosmos-kit/keplr": "^2.7.0",
+    "@cosmos-kit/keplr": "^2.8.0",
     "@cosmos-kit/react": "^2.11.3",
     "@interchain-ui/react": "^1.23.11",
     "@radix-ui/react-accordion": "^1.1.2",
