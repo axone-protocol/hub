@@ -19,7 +19,7 @@ export type SupplyChartData = {
 }
 
 const getSupplyRateChartDataFn = async (range: SupplyRateChartFilterRangeEnum = SupplyRateChartFilterRangeEnum.DAY) => {
-  const { data } = await api.get<SupplyChartData[]>(`/supply/historical?range=${range}`);
+  const { data } = await api.get<SupplyChartData[]>('/supply/historical', { params: { range } });
 
   return data;
 };

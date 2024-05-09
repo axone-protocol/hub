@@ -15,7 +15,7 @@ export enum ChangeSupplyRangeEnum {
  */
 
 const getSupplyChangeDataFn = async (range: ChangeSupplyRangeEnum = ChangeSupplyRangeEnum.DAY) => {
-  const { data } = await api.get<string>(`/supply/change?range=${range}`);
+  const { data } = await api.get<string>('/supply/change', { params: { range } });
 
   return data;
 };
