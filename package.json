@@ -45,6 +45,7 @@
     "chain-registry": "^1.47.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "date-fns": "^3.6.0",
     "lucide-react": "^0.378.0",
     "next": "14.2.3",
     "next-intl": "^3.13.0",

@@ -16,7 +16,7 @@ const MobileHeader = (): JSX.Element => {
   }, []);
 
   return (
-    <div className={'flex md:hidden fixed top-0 left-0 right-0 z-10 items-center justify-between p-6 flex-1 h-20 bg-axone-dark-blue border border-axone-box-border border-t-0 border-r-0 border-l-0'}>
+    <div className={'flex lg:hidden fixed top-0 left-0 right-0 z-10 items-center justify-between p-6 flex-1 h-20 bg-axone-dark-blue border border-axone-box-border border-t-0 border-r-0 border-l-0'}>
       <div className='flex'>
         <LogoDarkMobile />
       </div>

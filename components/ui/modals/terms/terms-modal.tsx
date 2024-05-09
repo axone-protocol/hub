@@ -27,7 +27,7 @@ const TermsModal: FC<TermsModalProps> = ({ open, setOpen, openWalletModal }) => 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
 
-      <DialogContent className='text-white p-6 md:p-8 w-[85vw] md:w-[50vw] h-[75vh]'>
+      <DialogContent className='text-white p-6 lg:p-8 w-[85vw] lg:w-[50vw] h-[75vh]'>
         <DialogHeader>
           <DialogTitle className='text-left text-20'>{t('TermsAndConditions')}</DialogTitle>
         </DialogHeader>
@@ -95,7 +95,7 @@ const TermsModal: FC<TermsModalProps> = ({ open, setOpen, openWalletModal }) => 
           <Text>You agree that the laws of Switzerland, without regard to principles of conflict of laws, govern this Agreement and any Dispute between you and us.</Text>
         </Column>
         <DialogFooter className='relative pt-4'>
-          <svg className='absolute -top-20 -md:top-24 left-0 right-0 w-full h-28' viewBox='0 0 798 68' fill='none' xmlns='http://www.w3.org/2000/svg'>
+          <svg className='absolute -top-20 -lg:top-24 left-0 right-0 w-full h-28' viewBox='0 0 798 68' fill='none' xmlns='http://www.w3.org/2000/svg'>
             <rect width='798' height='68' fill='url(#paint0_linear_968_6695)'/>
             <defs>
               <linearGradient id='paint0_linear_968_6695' x1='399' y1='0' x2='399' y2='68' gradientUnits='userSpaceOnUse'>
@@ -105,7 +105,7 @@ const TermsModal: FC<TermsModalProps> = ({ open, setOpen, openWalletModal }) => 
             </defs>
           </svg>
 
-          <Row className='gap-4 md:gap-8'>
+          <Row className='gap-4 lg:gap-8'>
             <Button onClick={acceptTerms} className='w-full' variant={'rounded'}>Confirm</Button>
             <Button onClick={cancel} className='w-full' variant={'rounded'}>Cancel</Button>
           </Row>

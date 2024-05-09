@@ -32,16 +32,16 @@ const ThreeBarsBlock = (): JSX.Element => {
         <TimeframeSelect />
       </Row>
 
-      <Row className='md:hidden justify-around w-full mt-6 gap-4'>
+      <Row className='lg:hidden justify-around w-full mt-6 gap-4'>
         <Text className='text-axone-grey tracking-tighter uppercase mb-0 cursor-pointer'>Currency</Text>
         <Text className='text-axone-orange tracking-tighter uppercase mb-0 cursor-pointer'>Axone</Text>
         <Text className='text-axone-grey tracking-tighter uppercase mb-0 cursor-pointer'>USD</Text>
       </Row>
 
       {/* Charts are here */}
-      <div className='flex flex-col md:flex-row justify-center items-center md:justify-around md:items-start'>
+      <div className='flex flex-col lg:flex-row justify-center items-center lg:justify-around lg:items-start'>
 
-        <div className='my-6 md:my-0 flex flex-col items-center'>
+        <div className='my-6 lg:my-0 flex flex-col items-center'>
           <Text className='text-axone-grey tracking-tighter uppercase mb-6'>Issuance</Text>
           <OneBarChart data={issuanceMock} />
           <span className='text-white text-40 tracking-tighter uppercase mt-6'>{issuanceMock.current}K</span>
@@ -49,7 +49,7 @@ const ThreeBarsBlock = (): JSX.Element => {
           <Image className='mt-3' src={'/icons/water-drop.svg'} alt='Refresh' width={20} height={20} />
         </div>
 
-        <div className='my-6 md:my-0 flex flex-col items-center'>
+        <div className='my-6 lg:my-0 flex flex-col items-center'>
           <Text className='text-axone-grey tracking-tighter uppercase mb-6'>Supply Burn</Text>
           <OneBarChart data={burnMock} />
           <span className='text-white text-40 tracking-tighter uppercase mt-6'>{burnMock.current}K</span>
@@ -57,7 +57,7 @@ const ThreeBarsBlock = (): JSX.Element => {
           <Image className='mt-3' src={'/icons/fire.svg'} alt='Refresh' width={20} height={20} />
         </div>
 
-        <div className='my-6 md:my-0 flex flex-col items-center'>
+        <div className='my-6 lg:my-0 flex flex-col items-center'>
           <Text className='text-axone-grey tracking-tighter uppercase mb-6'>Supply Growth</Text>
           <OneBarChart data={growMock} />
           <span className='text-white text-40 tracking-tighter uppercase mt-6'>{growMock.current}%</span>
@@ -66,7 +66,7 @@ const ThreeBarsBlock = (): JSX.Element => {
 
       </div>
 
-      <Row className='hidden md:flex justify-end w-full mt-6 gap-4'>
+      <Row className='hidden lg:flex justify-end w-full mt-6 gap-4'>
         <Text className='text-axone-grey tracking-tighter uppercase mb-0 cursor-pointer'>Currency</Text>
         <Text className='text-axone-orange tracking-tighter uppercase mb-0 cursor-pointer'>Axone</Text>
         <Text className='text-axone-grey tracking-tighter uppercase mb-0 cursor-pointer'>USD</Text>

@@ -64,9 +64,9 @@ export default function FAQ () {
     <Suspense fallback={<Loading />}>
       <PageContainer>
         <Box>
-          <div className='flex flex-col w-full md:flex-row items-center'>
+          <div className='flex flex-col w-full lg:flex-row items-center'>
             <Title className='whitespace-nowrap mr-8'>{t('Title')}</Title>
-            <div className='flex flex-col w-full md:flex-row relative mt-6 md:mt-0'>
+            <div className='flex flex-col w-full lg:flex-row relative mt-6 lg:mt-0'>
               <SearchIcon  size={SEARCH_ICON_SIZE} className='absolute top-2 left-2 text-axone-khaki' />
               <Input onChange={searchQuestion} type='search' id='faq' className='pl-10' placeholder={t('SearchQuestions')} />
             </div>

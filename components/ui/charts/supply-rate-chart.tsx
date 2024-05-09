@@ -1,6 +1,7 @@
 import { useFormatter } from 'next-intl';
-import { memo } from 'react';
+import { FC, memo } from 'react';
 import { Area, AreaChart, Brush, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import { SupplyChartData } from '@/hooks/use-supply-rate-chart';
 import ChartTooltip from './chart-tooltip';
 import ChartTraveler from './chart-traveller';
 import Column from '../column';
@@ -24,54 +25,9 @@ const CHART_MARGIN = {
 };
 const MS_FACTOR = 1000;
 
-const data2 = [
-  {
-    name: 'Jan',
-    uv: 40,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: 'Feb',
-    uv: 30,
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: 'Mar',
-    uv: -90,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: 'Apr',
-    uv: 50,
-    pv: 3908,
-    amt: 2000,
-  },
-  {
-    name: 'May',
-    uv: -20,
-    pv: 4800,
-    amt: 2181,
-  },
-  {
-    name: 'Jun',
-    uv: -25,
-    pv: 3800,
-    amt: 2500,
-  },
-  {
-    name: 'Jul',
-    uv: 34,
-    pv: 4300,
-    amt: 2100,
-  },
-];
-
-const gradientOffset = () => {
-  const dataMax = Math.max(...data2.map((i) => i.uv));
-  const dataMin = Math.min(...data2.map((i) => i.uv));
+const gradientOffset = (data: SupplyChartData[]) => {
+  const dataMax = Math.max(...data.map((i) => i.change));
+  const dataMin = Math.min(...data.map((i) => i.change));
 
   if (dataMax <= 0) {
     return 0;
@@ -83,12 +39,18 @@ const gradientOffset = () => {
   return dataMax / (dataMax - dataMin);
 };
 
-const off = gradientOffset();
+type SupplyAreaChartProps = {
+  data: SupplyChartData[];
+};
 
-const SupplyAreaChart = () => {
+const SupplyAreaChart: FC<SupplyAreaChartProps> = ({ data }) => {
   const format = useFormatter();
 
-  const formatChartDate = (unixTime: number): string => {
+  const off = gradientOffset(data || []);
+
+  const formatChartDate = (date: string): string => {
+    const raw = new Date(date);
+    const unixTime = Math.floor(raw.getTime() / 1000);
     const dateTime = new Date(unixTime * MS_FACTOR);
     return format.dateTime(dateTime, {
       year: 'numeric',
@@ -101,19 +63,20 @@ const SupplyAreaChart = () => {
     <Column>
       <ResponsiveContainer width='100%' height='100%'>
         <AreaChart
-          data={data2}
+          data={data}
           margin={CHART_MARGIN}
         >
           <XAxis
-            dataKey='name'
+            dataKey='time'
             axisLine={true}
             tick={{ fontSize: 14 }}
             className='select-none'
             tickMargin={2}
-            // tickFormatter={formatChartDate}
+            tickFormatter={formatChartDate}
           />
           <YAxis
-            axisLine={false}
+            axisLine={true}
+            dataKey={'change'}
             className='select-none'
             tick={{ fontSize: 14 }}
             tickMargin={5}
@@ -134,20 +97,20 @@ const SupplyAreaChart = () => {
           <Area
             type='monotone'
             stroke='url(#splitColor)'
-            dataKey='uv'
+            dataKey='change'
             fill='transparent'
             isAnimationActive={true}
           />
 
           <ReferenceLine y={0} stroke='#CCD3D6' strokeDasharray='3 3' />
-          <Brush dataKey='name' stroke='transparent' traveller={ChartTraveler} height={36} fill='transparent' >
+          <Brush dataKey='change' stroke='transparent' traveller={ChartTraveler} height={36} fill='transparent' >
             <AreaChart
-              data={data2}
+              data={data}
             >
               <Area
                 type='monotone'
                 stroke='url(#splitColor)'
-                dataKey='uv'
+                dataKey='change'
                 fill='transparent'
                 isAnimationActive={true}
               />

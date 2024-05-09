@@ -46,7 +46,7 @@ const MobileMenuAuthorized: FC<MobileMenuAuthorizedProps> = ({
 
   return(
     <>
-      <div className='md:hidden flex'>
+      <div className='lg:hidden flex'>
         <div className='cursor-pointer mr-6' onClick={openAuthModal}>
           <Image src={logo} alt={`${prettyName}`} width={20} height={20} />
         </div>

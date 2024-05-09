@@ -1,4 +1,3 @@
-import Column from '@/components/ui/column';
 import PageContainer from '@/components/ui/page-container';
 import Row from '@/components/ui/row';
 import CurrentSupplyBlock from './_components/current-sypply-block';
@@ -18,14 +17,14 @@ export default function Dashboard () {
         <GovernanceBlock />
       </Row>
 
-      <Row className='mobile:flex-col p-6 pt-0 '>
+      <div className='flex flex-col xl:flex-row p-6 pt-0 '>
         <OverviewBlock />
 
-        <Column className='w-full md:w-1/3 desktop:w-[500px] mt-6 md:mt-0'>
+        <div className='flex flex-col w-full lg:flex-row lg:gap-6 lg:items-stretch xl:flex-col xl:w-1/3 desktop:w-[500px] mt-6 xl:mt-0'>
           <SupplyChangeBlock />
           <CurrentSupplyBlock />
-        </Column>
-      </Row>
+        </div>
+      </div>
 
       <Row className='mobile:flex-col p-6 pt-0 '>
         <SupplyRateBlock />

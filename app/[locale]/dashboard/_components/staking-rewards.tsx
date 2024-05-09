@@ -16,16 +16,16 @@ export default function StakingRewardsBlock () {
     router.push(`/${locale}/staking`);
   };
   return (
-    <Box className='flex flex-col justify-between w-full m-0 mb-6 md:w-1/2 md:mr-3 md:mb-0'>
+    <Box className='flex flex-col justify-between w-full m-0 mb-6 lg:w-1/2 lg:mr-3 lg:mb-0'>
 
-      <div className='flex flex-col md:flex-row w-full'>
-        <div className='flex flex-col w-full md:w-2/3'>
+      <div className='flex flex-col lg:flex-row w-full'>
+        <div className='flex flex-col w-full lg:w-2/3'>
           <Title className='mb-5'>{t('StakingRewards')}</Title>
           <Text className='mb-5'>{t('StakingRewardsDesc')}</Text>
         </div>
 
         <div className='relative flex items-center justify-center'>
-          <Image src={'/images/blueBg.svg'} className='hidden md:visible absolute -top-8 -right-8 rounded-lg' alt='bg' width={160} height={160} />
+          <Image src={'/images/blueBg.svg'} className='hidden lg:visible absolute -top-8 -right-8 rounded-lg' alt='bg' width={160} height={160} />
           <Image src={'/images/staking.svg'} alt='Staking Rewards' width={166} height={166} />
           <div className='absolute flex flex-col justify-center items-center'>
             <Text className='text-xl mb-0 text-axone-grey'>APS</Text>
@@ -34,7 +34,7 @@ export default function StakingRewardsBlock () {
         </div>
       </div>
 
-      <div className='flex flex-col md:flex-row md:w-full'>
+      <div className='flex flex-col lg:flex-row lg:w-full'>
         <Button
           variant={'rounded'}
           className='mt-5 mr-2 text-base font-bold'

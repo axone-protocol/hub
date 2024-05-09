@@ -130,7 +130,7 @@ const MobileMenuModal: FC<MobileMenuModalProps> = ({ isOpen,close }) => {
           </div>
           <div className='flex flex-col pl-10 mt-3'>
             <MobileMenuItem className={'text-white'}  close={closeAfterNav}>{t('Dark')}</MobileMenuItem>
-            <MobileMenuItem  close={closeAfterNav}>{t('White')}</MobileMenuItem>
+            <MobileMenuItem  close={closeAfterNav}>{t('Light')}</MobileMenuItem>
           </div>
         </div>
       </div>

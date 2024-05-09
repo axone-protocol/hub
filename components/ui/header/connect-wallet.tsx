@@ -93,7 +93,7 @@ const ConnectWallet: FC<ConnectWalletProps> = ({ openMobileMenu = () => null }) 
   if (isWalletConnecting) {
     return(
       <>
-        <Button variant={'rounded'} className='hidden md:flex px-10 font-bold'>
+        <Button variant={'rounded'} className='hidden lg:flex px-10 font-bold'>
           {`Connecting to ... ${wallet?.prettyName}`}
         </Button>
         <div className='flex items-center justify-end'>
@@ -109,10 +109,10 @@ const ConnectWallet: FC<ConnectWalletProps> = ({ openMobileMenu = () => null }) 
   if (isWalletDisconnected) {
     return (
       <>
-        <Button onClick={onConnect} variant='rounded' className='hidden md:flex px-10 font-bold'>
+        <Button onClick={onConnect} variant='rounded' className='hidden lg:flex px-10 font-bold'>
           {t('Connect')}
         </Button>
-        <div className='md:hidden flex'>
+        <div className='lg:hidden flex'>
           <div className='cursor-pointer mr-6' onClick={onConnect}>
             <UserRoundX className='text-axone-red' />
           </div>
