@@ -210,17 +210,17 @@
   resolved "https://registry.yarnpkg.com/@cosmjs/utils/-/utils-0.32.3.tgz#5dcaee6dd7cc846cdc073e9a7a7f63242f5f7e31"
   integrity sha512-WCZK4yksj2hBDz4w7xFZQTRZQ/RJhBX26uFHmmQFIcNUUVAihrLO+RerqJgk0dZqC42wstM9pEUQGtPmLcIYvg==
 
-"@cosmos-kit/core@^2.9.0":
-  version "2.9.0"
-  resolved "https://registry.yarnpkg.com/@cosmos-kit/core/-/core-2.9.0.tgz#eac08ae66f5c29a3970371c4f5c3141fea26a696"
-  integrity sha512-s08DuvNTKvWl8bGfWQjknPNRAQbm4rowB6qFcQFmAf0WIKqBh2VzNFE03yhtrchNYOMXKtFLCD5CrO+QGg+XfQ==
+"@cosmos-kit/core@^2.10.0", "@cosmos-kit/core@^2.9.0", "@cosmos-kit/core@^2.9.3":
+  version "2.10.0"
+  resolved "https://registry.yarnpkg.com/@cosmos-kit/core/-/core-2.10.0.tgz#258befd2615e9afb5858825663d287b441231517"
+  integrity sha512-9gSmTCHh2xpG6rfcsVjxDUq1mvAKaS7Nre47ddEzLLrRni685I5ppokPwURsUZpm4lsNpDKKum0nV0P1WtYJhQ==
   dependencies:
     "@chain-registry/client" "^1.18.0"
-    "@chain-registry/types" "0.17.0"
     "@cosmjs/amino" "^0.32.3"
     "@cosmjs/cosmwasm-stargate" "^0.32.3"
     "@cosmjs/proto-signing" "^0.32.3"
     "@cosmjs/stargate" "^0.32.3"
+    "@dao-dao/cosmiframe" "^0.1.0"
     "@walletconnect/types" "2.11.0"
     bowser "2.11.0"
     cosmjs-types "^0.9.0"
@@ -253,22 +253,22 @@
     "@cosmos-kit/keplr-extension" "^2.8.0"
     "@cosmos-kit/keplr-mobile" "^2.7.0"
 
-"@cosmos-kit/react-lite@^2.7.0":
-  version "2.7.0"
-  resolved "https://registry.yarnpkg.com/@cosmos-kit/react-lite/-/react-lite-2.7.0.tgz#3bec8180222b9bf01b349973eb3f93fbe75b0ec2"
-  integrity sha512-J9Wx1vOexAOcv7kUYfreEZfsL2WY9VhFSiHq9i6qRXPTQwRacv9bT9UDPwlU0079FEHCL5Xm/qQQ15hPh+ZS5A==
+"@cosmos-kit/react-lite@^2.7.3":
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/@cosmos-kit/react-lite/-/react-lite-2.8.0.tgz#ed1bc83e2fb9cfcf60dc7f5ad0f4466178d3104e"
+  integrity sha512-FSmnmpvVZ2It9Bjop+XX9c/U5emtDSn1VtA3+L+K0Ym5kxrO5udN6tLgCGpyHH+9VNkgO89EFhTuwfhNeKqhug==
   dependencies:
-    "@chain-registry/types" "0.17.0"
-    "@cosmos-kit/core" "^2.9.0"
+    "@cosmos-kit/core" "^2.10.0"
+    "@dao-dao/cosmiframe" "^0.1.0"
 
-"@cosmos-kit/react@^2.11.0":
-  version "2.11.0"
-  resolved "https://registry.yarnpkg.com/@cosmos-kit/react/-/react-2.11.0.tgz#784287eec2f7eb788a034bf4cb065920aab773bf"
-  integrity sha512-6W2kb7PzU+olSYNEdGzFLui065ARcGAxNYFDtt93kE/fN87XAxs/D/cWDtXClmyQLBc+ZdhodJE7spJNlk20Dw==
+"@cosmos-kit/react@^2.11.3":
+  version "2.11.3"
+  resolved "https://registry.yarnpkg.com/@cosmos-kit/react/-/react-2.11.3.tgz#15be430f89aaf9a387332cbd37ea3c8493fa30a6"
+  integrity sha512-g+6l11olvfPC8abj0CJYXHS3w/mIemW2NZJin2lXwx9+YwcPLP02+w2/m+ilf63bYYH74n8hnXlsz6KNngw2BA==
   dependencies:
     "@chain-registry/types" "0.17.0"
-    "@cosmos-kit/core" "^2.9.0"
-    "@cosmos-kit/react-lite" "^2.7.0"
+    "@cosmos-kit/core" "^2.9.3"
+    "@cosmos-kit/react-lite" "^2.7.3"
     "@react-icons/all-files" "^4.1.0"
 
 "@cosmos-kit/walletconnect@^2.6.0":
@@ -281,6 +281,13 @@
     "@walletconnect/sign-client" "^2.9.0"
     "@walletconnect/utils" "^2.9.0"
     events "3.3.0"
+
+"@dao-dao/cosmiframe@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@dao-dao/cosmiframe/-/cosmiframe-0.1.0.tgz#5ba241d0c14a45d62df60cff7d48ba26844ebeac"
+  integrity sha512-NW4pGt1ctqDfhn/A6RU2vwnFEu3O4aBNnBMrGnw31n+L35drYNEsA9ZB7KZsHmRRlkNx+jSuJSv2Fv0BFBDDJQ==
+  dependencies:
+    uuid "^9.0.1"
 
 "@emotion/hash@^0.9.0":
   version "0.9.1"
