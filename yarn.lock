@@ -3473,10 +3473,10 @@ caniuse-lite@^1.0.30001579, caniuse-lite@^1.0.30001587, caniuse-lite@^1.0.300015
   resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001605.tgz"
   integrity sha512-nXwGlFWo34uliI9z3n6Qc0wZaf7zaZWA1CPZ169La5mV3I/gem7bst0vr5XQH5TJXZIMfDeZyOrZnSlVzKxxHQ==
 
-chain-registry@^1.47.0:
-  version "1.47.0"
-  resolved "https://registry.yarnpkg.com/chain-registry/-/chain-registry-1.47.0.tgz#5f93ed4e05d51b1e59336592b008595e849b430f"
-  integrity sha512-UpWR092+O/yZlJ7Tu4ZilIpvg9ODxYH9BaaCfOVTHeaNkAlD6Zq5+qx/2Y/UjaDnFqBDHWmawN0iIDafIpzeMQ==
+chain-registry@^1.47.2:
+  version "1.47.2"
+  resolved "https://registry.yarnpkg.com/chain-registry/-/chain-registry-1.47.2.tgz#6d4615946eb0a6f2dd52ec2fb0e50d48933618e7"
+  integrity sha512-/7UXWuoSg02PSysmEt+1pVr1Ot7HuB6Z2eRn9fnC7Z4XX6mEH8Dwhy2nOjjgQ7BIv78G+ltzlgLYagF1bPne8A==
   dependencies:
     "@chain-registry/types" "^0.28.13"
 
