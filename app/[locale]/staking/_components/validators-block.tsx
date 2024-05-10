@@ -3,7 +3,7 @@ import { SearchIcon } from 'lucide-react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useLocale } from 'next-intl';
-import { FC, useCallback, useState } from 'react';
+import { FC, MouseEventHandler, useCallback, useState } from 'react';
 import { Text, Title } from '@/components/typography';
 import { AxoneTooltip } from '@/components/ui/axone-tooltip';
 import { Box, BoxInner } from '@/components/ui/boxes';
@@ -40,7 +40,12 @@ const FilterButton: FC<FilterButtonProps> = ({ onClick, text, width = 'w-1/6', t
   );
 };
 
-const ValidatorItem = ({ isOdd = false, openDelegateModal = () => null }) => {
+type ValidatorItemProps = {
+  isOdd?: boolean;
+  openDelegateModal?: MouseEventHandler<HTMLButtonElement> | undefined;
+};
+
+const ValidatorItem: FC<ValidatorItemProps> = ({ isOdd = false, openDelegateModal }) => {
   const router = useRouter();
   const locale = useLocale();
 

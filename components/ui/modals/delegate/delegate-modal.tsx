@@ -10,7 +10,7 @@ import Row from '@/components/ui/row';
 
 type DelegateModalProps = {
   isOpen: boolean;
-  setOpen: () => void;
+  setOpen: (open: boolean) => void;
 };
 
 const DelegateModal = ({ isOpen, setOpen }: DelegateModalProps) => {
