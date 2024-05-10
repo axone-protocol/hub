@@ -5,6 +5,7 @@ import { BarChart2, CircleCheckBig, CircleX, UserRoundX } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { FC, useCallback, useEffect, useState } from 'react';
 import { Text } from '@/components/typography';
+import { chainName } from '@/core/config';
 import { useToast } from '@/hooks/use-toast';
 import { DesktopMenuAuthorized } from './desktop-menu-authorized';
 import { MobileMenuAuthorized } from './mobile-menu/mobile-menu-authorized';
@@ -30,7 +31,7 @@ type ConnectWalletProps = {
 const ConnectWallet: FC<ConnectWalletProps> = ({ openMobileMenu = () => null }) => {
   const t  = useTranslations('Index');
   const { address, openView, disconnect, isWalletConnected, isWalletConnecting, isWalletError, isWalletDisconnected, wallet } = useChain(
-    'cosmoshub'
+    chainName
   );
   const { toast } = useToast();
   const { mainWallet } = useWallet();

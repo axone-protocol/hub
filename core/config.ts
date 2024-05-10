@@ -3,3 +3,5 @@ export const config = {
   isProduction: process.env.NODE_ENV === 'production',
   walletConnectID: process.env.NEXT_PUBLIC_WALLECONNECT_PROJECT_ID,
 };
+
+export const chainName = 'injective';
