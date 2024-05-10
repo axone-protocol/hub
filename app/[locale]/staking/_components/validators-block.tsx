@@ -9,9 +9,9 @@ import { AxoneTooltip } from '@/components/ui/axone-tooltip';
 import { Box, BoxInner } from '@/components/ui/boxes';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { DelegateModal } from '@/components/ui/modals/delegate/delegate-modal';
 import Row from '@/components/ui/row';
 import { cn } from '@/lib/utils';
-import { DelegateModal } from '@/components/ui/modals/delegate/delegate-modal';
 
 type FilterButtonProps = {
   onClick?: () => void;
