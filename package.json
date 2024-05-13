@@ -42,7 +42,7 @@
     "@tanstack/react-query": "^5.35.1",
     "@tanstack/react-query-devtools": "^5.35.1",
     "axios": "^1.6.8",
-    "chain-registry": "^1.47.2",
+    "chain-registry": "^1.47.5",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
