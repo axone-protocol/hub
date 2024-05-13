@@ -5,11 +5,14 @@ import { Box, BoxInner } from '@/components/ui/boxes';
 import AxoneAreaChart from '@/components/ui/charts/axone-area-chart';
 import Row from '@/components/ui/row';
 import { useOverviewChart } from '@/hooks/use-overview-chart';
+import { useTokenInfo } from '@/hooks/use-token-info';
+import { formatNumber } from '@/lib/utils';
 import { FilterByRange } from './filter-by-range';
 
 export default function OverviewBlock () {
   const t  = useTranslations('Dashboard');
   const { query, range, selectRange } = useOverviewChart();
+  const { data: tokenInfo } = useTokenInfo();
 
   return (
     <Box className='w-2/3 m-0 mr-6 h-[50%] mobile:w-full'>
@@ -24,28 +27,28 @@ export default function OverviewBlock () {
 
       <div className='gap-4 columns-2 lg:columns-4 lg:flex-row lg:w-full mt-10 desktop:mt-8'>
 
-        <BoxInner className='pt-5 pb-3 w-full mb-4 lg:mr-10 h-32 lg:h-32 flex-col justify-between items-center'>
-          <Title className='mt-2 mb-0'>$44.05</Title>
+        <BoxInner className='pt-5 pb-3 w-full mb-4 h-32 lg:h-32 flex-col justify-between items-center'>
+          <Title className='mt-2 mb-0'>${tokenInfo?.price?.value.toFixed(2)}</Title>
           <Text className='uppercase text-axone-red'>
-              -2.34%
+            {tokenInfo?.price?.change.toFixed(2)}%
           </Text>
           <Text className='uppercase text-axone-khaki'>
             {t('Price')}
           </Text>
         </BoxInner>
 
-        <BoxInner className='pt-5 pb-3 w-full mb-4 lg:mr-10 h-32 lg:h-32 flex-col justify-between items-center'>
-          <Title className='mt-2 mb-0'>$3.894.05M</Title>
+        <BoxInner className='pt-5 pb-3 w-full mb-4 h-32 lg:h-32 flex-col justify-between items-center'>
+          <Title className='mt-2 mb-0'>${formatNumber(tokenInfo?.marketCap?.value)}</Title>
           <Text className='uppercase text-axone-red'>
-              -2.34%
+            {tokenInfo?.marketCap?.change.toFixed(3)}%
           </Text>
           <Text className='uppercase text-axone-khaki text-center'>
             {t('MarketCap')}
           </Text>
         </BoxInner>
 
-        <BoxInner className='pt-5 pb-3 w-full mb-4 lg:mr-10 h-32 lg:h-32 flex-col justify-between items-center'>
-          <Title className='mt-2 mb-0'>$531.4M</Title>
+        <BoxInner className='pt-5 pb-3 w-full mb-4 h-32 lg:h-32 flex-col justify-between items-center'>
+          <Title className='mt-2 mb-0'>${formatNumber(tokenInfo?.volume)}</Title>
           <Row className='justify-center items-center'>
             <Text className='uppercase text-axone-khaki mr-3'>
               {t('Volume')}

@@ -1,12 +1,14 @@
-import { Box } from '@/components/ui/boxes';
 import PageContainer from '@/components/ui/page-container';
+import { StakingBlock } from './_components/staking-block';
+import { StakingOverviewBlock } from './_components/staking-overview-block';
+import { ValidatorsBlock } from './_components/validators-block';
 
 export default function Staking () {
   return (
     <PageContainer>
-      <Box >
-        <h1 className='text-center text-white mb-5 text-3xl'>STAKING PAGE</h1>
-      </Box>
+      <StakingOverviewBlock />
+      <StakingBlock />
+      <ValidatorsBlock />
     </PageContainer>
   );
 }

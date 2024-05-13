@@ -17,7 +17,7 @@ export enum OverviewChartFilterRangeEnum {
 }
 
 const getOverviewChartDataFn = async (range: OverviewChartFilterRangeEnum = OverviewChartFilterRangeEnum.DAY) => {
-  const { data } = await api.get<ChartData[]>('/price/historical', { params: { range } });
+  const { data } = await api.get<ChartData[]>('/token/historical', { params: { range } });
 
   return data;
 };

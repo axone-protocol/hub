@@ -55,6 +55,7 @@ const config = {
         'axone-blue': '#41AEED',
         'axone-dark-blue': '#00213A',
         'axone-dark-blue-2': '#0062AC',
+        'axone-dark-blue-3': '#071A28',
         'axone-orange': '#FB9501',
         'axone-red': '#DC4E4E',
         'axone-grey': '#CCD3D6',
