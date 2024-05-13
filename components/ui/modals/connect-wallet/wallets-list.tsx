@@ -4,7 +4,7 @@ import { ChainWalletBase } from '@cosmos-kit/core';
 import { useChain } from '@cosmos-kit/react';
 import { FC, useEffect } from 'react';
 import { Text } from '@/components/typography';
-import { chainName } from '@/core/config';
+import { chainName } from '@/core/chain';
 import { WalletRow } from './wallet-row';
 import { getWalletLogo } from '../../header/connect-wallet';
 import Row from '../../row';

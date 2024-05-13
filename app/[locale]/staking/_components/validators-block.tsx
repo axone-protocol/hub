@@ -32,7 +32,7 @@ const FilterButton: FC<FilterButtonProps> = ({ onClick, text, width = 'w-1/6', t
   }, [onClick]);
 
   return (
-    <div className={`flex flex-row items-center gap-2 pl-4 cursor-pointer ${width}`} onClick={handleClick}>
+    <div className={cn('flex flex-row items-center gap-2 pl-4 cursor-pointer', width)} onClick={handleClick}>
       <Text className='mb-0'>{text}</Text>
       {tooltip ? <AxoneTooltip iconColor='text-axone-khaki' content={tooltipText} /> : null}
       <Image className={cn('relative bottom-[0px]', { 'rotate-180': active })} src='/icons/arrow-down-long.svg' width={10} height={10} alt='validator' />

@@ -1,26 +1,29 @@
-import { Asset, AssetList } from '@chain-registry/types';
+'use client';
+import { Asset } from '@chain-registry/types';
 import { ExtendedHttpEndpoint } from '@cosmos-kit/core';
 import { useChain } from '@cosmos-kit/react';
 import BigNumber from 'bignumber.js';
-import { assets } from 'chain-registry';
 import { cosmos } from 'juno-network';
 import { useCallback, useEffect, useState } from 'react';
-import { chainName } from '@/core/config';
+import { assetList, chainName, chainRPC } from '@/core/chain';
 
-const chainAssets: AssetList = assets.find(
-  (chain) => chain.chain_name === chainName
-) as AssetList;
+const chainDenom = 'uknow';
 
-const coin: Asset = chainAssets.assets.find(
-  (asset) => asset.base === 'inj'
+// TODO: will be needed later
+// const chainAssets: AssetList = assets.find(
+//   (chain) => chain.chain_name === chainName
+// ) as AssetList;
+
+const coin: Asset = assetList?.assets.find(
+  (asset) => asset.base === chainDenom
 ) as Asset;
 
 export const useBallance = () => {
-  const { address, getRpcEndpoint } =
+  const { address } =
     useChain(chainName);
 
   const [balance, setBalance] = useState(new BigNumber(0));
-  const [balanceDenom, setBalanceDenom] = useState<string>('inj');
+  const [balanceDenom, setBalanceDenom] = useState<string>('uknow');
   const [isFetchingBalance, setFetchingBalance] = useState(false);
 
   const getBalance = useCallback(async () => {
@@ -31,39 +34,35 @@ export const useBallance = () => {
       return;
     }
 
-    let rpcEndpoint = await getRpcEndpoint();
+    // let rpcEndpoint = await getRpcEndpoint(); // prod from useChain()
+    let rpcEndpoint = chainRPC; // dev okp4 testnet rpc
 
     if (!rpcEndpoint) {
       console.info('no rpc endpoint — using a fallback');
-      rpcEndpoint = `https://rpc.cosmos.directory/${chainName}`;
+      rpcEndpoint = `https://rpc.cosmos.directory/${chainName}`; // production endpoint
     }
 
-    // get RPC client
     const client = await cosmos.ClientFactory.createRPCQueryClient({
       rpcEndpoint:
         typeof rpcEndpoint === 'string'
           ? rpcEndpoint
           : (rpcEndpoint as ExtendedHttpEndpoint).url,
     });
-
-    // fetch balance
     const balance = await client.cosmos.bank.v1beta1.balance({
       address,
-      denom: chainAssets?.assets[0].base as string,
+      denom: assetList?.assets[0].base as string,
     });
 
-    // Get the display exponent
-    // we can get the exponent from chain registry asset denom_units
-    const exp = coin.denom_units.find((unit) => unit.denom === coin.display)
+    const exp = coin.denom_units.find((unit) => unit.denom === 'uknow')
       ?.exponent as number;
-    // show balance in display values by exponentiating it
-    const a = new BigNumber(balance.balance?.amount || 0);
+
+    const a = new BigNumber(0);
     const amount = a.multipliedBy(10 ** -exp);
 
     setBalance(amount);
     setBalanceDenom(balance.balance?.denom || 'inj');
     setFetchingBalance(false);
-  }, [address, getRpcEndpoint]);
+  }, [address]);
 
   useEffect(() => {
     getBalance();

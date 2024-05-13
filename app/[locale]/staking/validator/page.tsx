@@ -1,7 +1,7 @@
 'use client';
 import { X } from 'lucide-react';
 import Image from 'next/image';
-import { useState } from 'react';
+import { FC, useState } from 'react';
 import { Text, Title } from '@/components/typography';
 import { Box, BoxInner } from '@/components/ui/boxes';
 import { Button } from '@/components/ui/button';
@@ -10,7 +10,12 @@ import PageContainer from '@/components/ui/page-container';
 import Row from '@/components/ui/row';
 import { cn } from '@/lib/utils';
 
-const UptimeBlockItem = ({ size = 'large', type = 'signed' }) => {
+type UptimeBlockItemProps = {
+  size?: 'large' | 'small';
+  type?: 'signed' | 'proposed' | 'missed';
+};
+
+const UptimeBlockItem: FC<UptimeBlockItemProps> = ({ size = 'large', type = 'signed' }) => {
   return(
     <div className={cn('rounded-md flex justify-center items-center',
       {
@@ -20,7 +25,7 @@ const UptimeBlockItem = ({ size = 'large', type = 'signed' }) => {
         'bg-axone-orange': type === 'proposed',
         'bg-axone-bg-dark border border-axone-khaki': type === 'missed',
       })}>
-      <X className={cn('text-axone-khaki hidden', { 'flex': type === 'missed', ' w-5 h-5': size === 'small', 'w-7 h-7': size === 'large' })} />
+      <X className={cn('text-axone-khaki hidden', { 'flex': type === 'missed', 'w-5 h-5': size === 'small', 'w-7 h-7': size === 'large' })} />
     </div>
   );
 };

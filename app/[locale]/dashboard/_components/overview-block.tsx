@@ -6,27 +6,8 @@ import AxoneAreaChart from '@/components/ui/charts/axone-area-chart';
 import Row from '@/components/ui/row';
 import { useOverviewChart } from '@/hooks/use-overview-chart';
 import { useTokenInfo } from '@/hooks/use-token-info';
+import { formatNumber } from '@/lib/utils';
 import { FilterByRange } from './filter-by-range';
-
-function formatNumber (num: number | undefined): string {
-  if (num === undefined) {
-    return '0';
-  }
-  let value = num;
-  let suffix = '';
-
-  if (num >= 1e6) {
-    value = num / 1e6;
-    suffix = 'M';
-  } else if (num >= 1e3) {
-    value = num / 1e3;
-    suffix = 'K';
-  }
-
-  const integerPart: number = Math.floor(value);
-  const decimalPart: string = (value - integerPart).toFixed(2).slice(2);
-  return `${integerPart.toLocaleString('de-DE')}.${decimalPart}${suffix}`;
-}
 
 export default function OverviewBlock () {
   const t  = useTranslations('Dashboard');
@@ -47,9 +28,9 @@ export default function OverviewBlock () {
       <div className='gap-4 columns-2 lg:columns-4 lg:flex-row lg:w-full mt-10 desktop:mt-8'>
 
         <BoxInner className='pt-5 pb-3 w-full mb-4 h-32 lg:h-32 flex-col justify-between items-center'>
-          <Title className='mt-2 mb-0'>${tokenInfo?.price.value.toFixed(2)}</Title>
+          <Title className='mt-2 mb-0'>${tokenInfo?.price?.value.toFixed(2)}</Title>
           <Text className='uppercase text-axone-red'>
-            {tokenInfo?.price.change.toFixed(2)}%
+            {tokenInfo?.price?.change.toFixed(2)}%
           </Text>
           <Text className='uppercase text-axone-khaki'>
             {t('Price')}
@@ -57,9 +38,9 @@ export default function OverviewBlock () {
         </BoxInner>
 
         <BoxInner className='pt-5 pb-3 w-full mb-4 h-32 lg:h-32 flex-col justify-between items-center'>
-          <Title className='mt-2 mb-0'>${formatNumber(tokenInfo?.marketCap.value)}</Title>
+          <Title className='mt-2 mb-0'>${formatNumber(tokenInfo?.marketCap?.value)}</Title>
           <Text className='uppercase text-axone-red'>
-            {tokenInfo?.marketCap.change}%
+            {tokenInfo?.marketCap?.change.toFixed(3)}%
           </Text>
           <Text className='uppercase text-axone-khaki text-center'>
             {t('MarketCap')}

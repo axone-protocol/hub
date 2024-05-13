@@ -2,7 +2,7 @@
 import { useChain } from '@cosmos-kit/react-lite';
 import { useLocale, useTranslations } from 'next-intl';
 import { useCallback, useState } from 'react';
-import { chainName } from '@/core/config';
+import { chainName } from '@/core/chain';
 import { cn } from '@/lib/utils';
 import { Button } from './button';
 import Column from './column';

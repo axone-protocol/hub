@@ -13,7 +13,7 @@ const OverviewBlock = () => {
       </Row>
       <div className='flex flex-col lg:flex-row gap-4 lg:gap-6'>
         <BoxInner className='pt-5 pb-3 w-full lg:w-1/4 h-32 flex-col justify-between items-center'>
-          <Title className='mt-2 mb-0 uppercase'>{isFetchingBalance ? '0.00' : balance.toNumber()} {balanceDenom || 'Axone'}</Title>
+          <Title className='mt-2 mb-0 uppercase'>{isFetchingBalance ? '0.00' : balance.toNumber().toFixed(2)} {balanceDenom || 'Axone'}</Title>
           <Text className='uppercase text-axone-orange'>
               $0.00
           </Text>

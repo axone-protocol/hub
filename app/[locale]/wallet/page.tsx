@@ -3,7 +3,7 @@ import { useChain } from '@cosmos-kit/react-lite';
 import { redirect } from 'next/navigation';
 import { useLocale } from 'next-intl';
 import PageContainer from '@/components/ui/page-container';
-import { chainName } from '@/core/config';
+import { chainName } from '@/core/chain';
 import { BalancesBlock } from './_components/balances-block';
 import { OverviewBlock } from './_components/overview-block';
 import { TransferBlock } from './_components/transfer-block';

@@ -4,4 +4,3 @@ export const config = {
   walletConnectID: process.env.NEXT_PUBLIC_WALLECONNECT_PROJECT_ID,
 };
 
-export const chainName = 'injective';

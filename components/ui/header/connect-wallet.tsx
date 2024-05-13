@@ -5,7 +5,7 @@ import { BarChart2, CircleCheckBig, CircleX, UserRoundX } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { FC, useCallback, useEffect, useState } from 'react';
 import { Text } from '@/components/typography';
-import { chainName } from '@/core/config';
+import { chainName } from '@/core/chain';
 import { useToast } from '@/hooks/use-toast';
 import { DesktopMenuAuthorized } from './desktop-menu-authorized';
 import { MobileMenuAuthorized } from './mobile-menu/mobile-menu-authorized';

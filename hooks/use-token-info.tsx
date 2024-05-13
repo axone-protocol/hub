@@ -1,10 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { api } from '@/core/api';
 
-/**
- * Getting data for the current supply
- */
-
 type TokenInfoData = {
   price: {
     value: number;

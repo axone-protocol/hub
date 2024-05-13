@@ -1,6 +1,7 @@
 import { Info } from 'lucide-react';
 import { FC } from 'react';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { cn } from '@/lib/utils';
 
 type AxoneTooltipProps = {
   content: string;
@@ -13,7 +14,7 @@ const AxoneTooltip: FC<AxoneTooltipProps> = ({ content, iconColor = 'text-axone-
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>
-          <Info className={`cursor-pointer ${iconColor}`} size={18} />
+          <Info className={cn('cursor-pointer', iconColor)} size={18} />
         </TooltipTrigger>
         <TooltipContent className='bg-axone-dark-blue text-axone-grey border-axone-box-border'>
           <p>{content}</p>
