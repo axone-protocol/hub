@@ -2,7 +2,7 @@ import React, { HTMLAttributes, ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 
 type BoxInnerProps = {
-  children: ReactNode;
+  children?: ReactNode;
 } & HTMLAttributes<HTMLDivElement>;
 
 export const BoxInner = ({ children, className, ...props }: BoxInnerProps) => (

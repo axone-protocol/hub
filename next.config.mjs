@@ -7,8 +7,11 @@ const nextConfig = {
   output: 'standalone',
   webpack: config => {
     config.externals.push('pino-pretty', 'lokijs', 'encoding')
-    return config
-  }
+    return config;
+  },
+  images: {
+    domains: ['s3.amazonaws.com'],
+  },
 };
 
 export default withNextIntl(nextConfig);
