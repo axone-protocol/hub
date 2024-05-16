@@ -1,63 +1,67 @@
 import { AssetList, Chain } from '@chain-registry/types';
+import { GasPrice } from '@cosmjs/stargate';
+import { SignerOptions } from '@cosmos-kit/core';
+import { getSigningCosmosClientOptions } from 'osmojs';
 
 const chainName = 'okp4';
 
 const okp4Chain = {
-  'chainId': 'okp4-drunemeton-1',
-  'chainName': 'OKP4',
-  'rpc': 'https://api.drunemeton.okp4.network:443/rpc',
-  'rest': 'https://api.drunemeton.okp4.network',
-  'bip44': {
-    'coinType': 118
+  chainId: 'okp4-drunemeton-1',
+  chainName: 'okp4',
+  rpc: 'https://api.drunemeton.okp4.network:443/rpc',
+  rest: 'https://api.drunemeton.okp4.network',
+  bip44: {
+    coinType: 118
   },
-  'coinType': 118,
-  'bech32Config': {
-    'bech32PrefixAccAddr': 'okp4',
-    'bech32PrefixAccPub': 'okp4pub',
-    'bech32PrefixValAddr': 'okp4valoper',
-    'bech32PrefixValPub': 'okp4valoperpub',
-    'bech32PrefixConsAddr': 'okp4valcons',
-    'bech32PrefixConsPub': 'okp4valconspub'
+  coinType: 118,
+  bech32Config: {
+    bech32PrefixAccAddr: 'okp4',
+    bech32PrefixAccPub: 'okp4pub',
+    bech32PrefixValAddr: 'okp4valoper',
+    bech32PrefixValPub: 'okp4valoperpub',
+    bech32PrefixConsAddr: 'okp4valcons',
+    bech32PrefixConsPub: 'okp4valconspub'
   },
-  'currencies': [
+  currencies: [
     {
-      'coinDenom': 'KNOW',
-      'coinMinimalDenom': 'uknow',
-      'coinDecimals': 6,
-      'coinGeckoId': 'unknown'
+      coinDenom: 'KNOW',
+      coinMinimalDenom: 'uknow',
+      coinDecimals: 6,
+      coinGeckoId: 'unknown'
     }
   ],
-  'feeCurrencies': [
+  feeCurrencies: [
     {
-      'coinDenom': 'KNOW',
-      'coinMinimalDenom': 'uknow',
-      'coinDecimals': 6,
-      'coinGeckoId': 'unknown',
-      'gasPriceStep': {
-        'low': 0.01,
-        'average': 0.025,
-        'high': 0.03
+      coinDenom: 'KNOW',
+      coinMinimalDenom: 'uknow',
+      coinDecimals: 6,
+      coinGeckoId: 'unknown',
+      gasPriceStep: {
+        low: 0.01,
+        average: 0.025,
+        high: 0.03
       }
     }
   ],
-  'gasPriceStep': {
-    'low': 0.01,
-    'average': 0.025,
-    'high': 0.03
+  gasPriceStep: {
+    low: 0.01,
+    average: 0.025,
+    high: 0.03
   },
-  'stakeCurrency': {
-    'coinDenom': 'KNOW',
-    'coinMinimalDenom': 'uknow',
-    'coinDecimals': 6,
-    'coinGeckoId': 'unknown'
+  stakeCurrency: {
+    coinDenom: 'KNOW',
+    coinMinimalDenom: 'uknow',
+    coinDecimals: 6,
+    coinGeckoId: 'unknown'
   },
-  'features': []
+  features: []
 };
 
 const chainRPC = okp4Chain.rpc;
+const chanREST = okp4Chain.rest;
 
 const assetList: AssetList = {
-  chain_name: 'okp4',
+  chain_name: chainName,
   assets: [
     {
       base: 'uknow',
@@ -76,17 +80,17 @@ const assetList: AssetList = {
 };
 
 const chain: Chain = {
-  chain_name: 'okp4',
+  chain_name: chainName,
   status: 'live',
   network_type: 'mainnet',
   pretty_name: 'OKP4 Network',
   chain_id: okp4Chain.chainId,
-  bech32_prefix: 'okp4',
+  bech32_prefix: 'okp4pub',
   slip44: 118,
   fees: {
     fee_tokens: [
       {
-        denom: 'okp4',
+        denom: 'KNOW',
         fixed_min_gas_price: 0.01,
         low_gas_price: 0.01,
         average_gas_price: 0.02,
@@ -97,7 +101,7 @@ const chain: Chain = {
   staking: {
     staking_tokens: [
       {
-        denom: 'okp4',
+        denom: 'KNOW',
       },
     ],
   },
@@ -115,4 +119,18 @@ const chain: Chain = {
   },
 };
 
-export { chain, chainName, chainRPC, assetList };
+const signerOptions: SignerOptions = {
+  signingStargate: (_chain: Chain) => {
+    return getSigningCosmosClientOptions();
+  },
+  signingCosmwasm: (chain: Chain) => {
+    switch (chain.chain_name) {
+    case 'okp4':
+      return {
+        gasPrice: GasPrice.fromString('0.0025uknow')
+      };
+    }
+  }
+};
+
+export { chain, chainName, chainRPC, chanREST, assetList, signerOptions };
