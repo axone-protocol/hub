@@ -11,6 +11,7 @@ type TokenInfoData = {
     change: number;
   },
   volume: number;
+  apr: number | string;
 }
 
 const getTokenInfoFn = async () => {
