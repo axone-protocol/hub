@@ -8,6 +8,7 @@ import Column from '@/components/ui/column';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import Row from '@/components/ui/row';
+import { useTokenInfo } from '@/hooks/use-token-info';
 
 const RewardsCalculatorModal = () => {
   const t  = useTranslations('Dashboard');
@@ -16,13 +17,13 @@ const RewardsCalculatorModal = () => {
   const [yearly, setYearly] = useState<number>(0);
   const [monthly, setMonthly] = useState<number>(0);
   const [daily, setDaily] = useState<number>(0);
+  const { data: tokenInfo } = useTokenInfo();
 
   // Mock values - will be replaced with real values later
-  const APR_MOCK = 15.66;
   const AXONE_FIAT_PRICE_MOCK = 1.23;
 
   const handleApplyClick = () => {
-    const yearlyCalc = stake * (APR_MOCK/100);
+    const yearlyCalc = stake * (Number(tokenInfo?.apr || 0)/100);
     setYearly(yearlyCalc);
     setMonthly(yearlyCalc / 12);
     setDaily(yearlyCalc / 365);
@@ -88,7 +89,7 @@ const RewardsCalculatorModal = () => {
 
             <Column className='w-full lg:w-1/3'>
               <Title className='font-normal text-white lg:mb-5'>APR</Title>
-              <p className='text-40 text-white font-bold tracking-tighter -mt-2'>+{APR_MOCK}%</p>
+              <p className='text-40 text-white font-bold tracking-tighter -mt-2'>+{Number(tokenInfo?.apr).toFixed(2)}%</p>
             </Column>
 
           </div>
