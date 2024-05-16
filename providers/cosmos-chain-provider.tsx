@@ -4,7 +4,7 @@ import { ChainProvider } from '@cosmos-kit/react';
 import { assets, chains } from 'chain-registry';
 import { PropsWithChildren } from 'react';
 import { ConnectWalletModal } from '@/components/ui/modals';
-import { assetList, chain, signerOptions } from '@/core/chain';
+import { assetList, chain } from '@/core/chain';
 import { config } from '@/core/config';
 
 export function CosmosChainProvider ({ children }: PropsWithChildren) {
@@ -23,7 +23,6 @@ export function CosmosChainProvider ({ children }: PropsWithChildren) {
           }
         }
       }}
-      signerOptions={signerOptions}
       walletConnectOptions={{
         signClient: {
           // TODO: Replace project ID from (https://cloud.walletconnect.org/)

@@ -119,18 +119,4 @@ const chain: Chain = {
   },
 };
 
-const signerOptions: SignerOptions = {
-  signingStargate: (_chain: Chain) => {
-    return getSigningCosmosClientOptions();
-  },
-  signingCosmwasm: (chain: Chain) => {
-    switch (chain.chain_name) {
-    case 'okp4':
-      return {
-        gasPrice: GasPrice.fromString('0.0025uknow')
-      };
-    }
-  }
-};
-
-export { chain, chainName, chainRPC, chanREST, assetList, signerOptions };
+export { chain, chainName, chainRPC, chanREST, assetList };
