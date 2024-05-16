@@ -1,5 +1,6 @@
 'use client';
 import { useChain } from '@cosmos-kit/react';
+import Image from 'next/image';
 import { Text, Title } from '@/components/typography';
 import { Box, BoxInner } from '@/components/ui/boxes';
 import { Button } from '@/components/ui/button';
@@ -8,7 +9,6 @@ import Row from '@/components/ui/row';
 import { chainName } from '@/core/chain';
 import { useMyStakingOverview } from '@/hooks/use-my-staking-overview';
 import { StakingLoadingSkeleton } from './staking-loading-skeleton';
-import Image from 'next/image';
 
 const StakingOverviewBlock = () => {
   const { data, isLoading, isFetching, isPending, isRefetching } = useMyStakingOverview();

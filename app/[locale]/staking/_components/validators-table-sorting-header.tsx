@@ -50,7 +50,7 @@ const FilterButton: FC<FilterButtonProps> = ({
 
 type ValidatorsTableSortingHeaderProps = {
   sortByParam: (param: ValidatorSortBy) => () => void;
-  activeFilter: ValidatorSortBy;
+  activeFilter: ValidatorSortBy | null;
 };
 
 const ValidatorsTableSortingHeader: FC<ValidatorsTableSortingHeaderProps> = ({ sortByParam, activeFilter }) => {
