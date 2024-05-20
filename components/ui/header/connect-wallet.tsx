@@ -30,7 +30,17 @@ type ConnectWalletProps = {
 
 const ConnectWallet: FC<ConnectWalletProps> = ({ openMobileMenu = () => null }) => {
   const t  = useTranslations('Index');
-  const { address, openView, disconnect, isWalletConnected, isWalletConnecting, isWalletError, isWalletDisconnected, wallet } = useChain(
+  const {
+    address,
+    openView,
+    disconnect,
+    isWalletConnected,
+    isWalletConnecting,
+    isWalletRejected,
+    isWalletError,
+    isWalletDisconnected,
+    wallet
+  } = useChain(
     chainName
   );
   const { toast } = useToast();
@@ -39,14 +49,6 @@ const ConnectWallet: FC<ConnectWalletProps> = ({ openMobileMenu = () => null }) 
   const [openTerms, setOpenTerms] = useState(false);
 
   const logo: string = getWalletLogo(mainWallet);
-
-  useEffect(() => {
-    const autoConnectWallet = async () => {
-      await mainWallet?.connect();
-    };
-    autoConnectWallet();
-  }, [mainWallet]);
-
   const onConnect = useCallback(async () => {
     const termsAccepted = localStorage.getItem('termsAccepted');
     if (termsAccepted) {
@@ -94,20 +96,17 @@ const ConnectWallet: FC<ConnectWalletProps> = ({ openMobileMenu = () => null }) 
   if (isWalletConnecting) {
     return(
       <>
-        <Button variant={'rounded'} className='hidden lg:flex px-10 font-bold'>
-          {`Connecting to ... ${wallet?.prettyName}`}
-        </Button>
-        <div className='flex items-center justify-end'>
+        <div className='flex items-center justify-end gap-2'>
           <Spinner size={20} />
-          <Text>Connecting to {wallet?.prettyName}</Text>
-          <div onClick={openMobileMenu} className='cursor-pointer'>
+          <Text className='mb-0' onClick={() => disconnect()}>Connecting to {wallet?.prettyName}</Text>
+          <div onClick={openMobileMenu} className='cursor-pointer lg:hidden'>
             <BarChart2 className='text-axone-grey rotate-90' />
           </div>
         </div>
       </>
     );
   }
-  if (isWalletDisconnected) {
+  if (isWalletDisconnected || isWalletRejected) {
     return (
       <>
         <Button onClick={onConnect} variant='rounded' className='hidden lg:flex px-10 font-bold'>

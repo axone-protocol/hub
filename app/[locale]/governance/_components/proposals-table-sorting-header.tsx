@@ -1,3 +1,5 @@
+'use client';
+
 import { FC, useCallback, useState } from 'react';
 import { Text } from '@/components/typography';
 import { ArrowDownLong } from '@/components/ui/arrow-down-long';
@@ -13,6 +15,7 @@ type FilterButtonProps = {
   tooltip?: boolean;
   tooltipText?: string;
   selected?: boolean;
+  className?: string;
 };
 
 const FilterButton: FC<FilterButtonProps> = ({
@@ -21,7 +24,8 @@ const FilterButton: FC<FilterButtonProps> = ({
   width = 'w-1/6',
   tooltip = false,
   tooltipText = '',
-  selected = false
+  selected = false,
+  className
 }) => {
   const [active, setActive] = useState<boolean>(false);
 
@@ -37,7 +41,7 @@ const FilterButton: FC<FilterButtonProps> = ({
   }, [active, onClick, selected]);
 
   return (
-    <div className={cn('flex flex-row items-center gap-2 pl-4 cursor-pointer', width)} onClick={handleClick}>
+    <div className={cn('flex flex-row items-center gap-2 cursor-pointer', width, className)} onClick={handleClick}>
       <Text className='mb-0'>{text}</Text>
       {tooltip ? <AxoneTooltip iconColor='text-axone-khaki' content={tooltipText} /> : null}
       <ArrowDownLong
@@ -48,45 +52,34 @@ const FilterButton: FC<FilterButtonProps> = ({
   );
 };
 
-type ValidatorsTableSortingHeaderProps = {
-  sortByParam: (param: ValidatorSortBy) => () => void;
+type ProposalsTableSortingHeaderProps = {
+  sortByParam?: () => void;
   activeFilter: ValidatorSortBy | null;
 };
 
-const ValidatorsTableSortingHeader: FC<ValidatorsTableSortingHeaderProps> = ({ sortByParam, activeFilter }) => {
+const ProposalsTableSortingHeader: FC<ProposalsTableSortingHeaderProps> = ({ activeFilter }) => {
   return (
-    <Row className='w-[900px] lg:w-full justify-between px-4 mb-2'>
+    <Row className='w-[900px] lg:w-full justify-between mt-10 mb-2'>
       <FilterButton
         selected={activeFilter === ValidatorSortBy.NAME}
-        onClick={sortByParam(ValidatorSortBy.NAME)}
-        width='w-1/4'
-        text='Validator'
+        width='w-[100px]'
+        text='ID'
       />
-      <FilterButton
-        selected={activeFilter === ValidatorSortBy.STAKED_AMOUNT}
-        onClick={sortByParam(ValidatorSortBy.STAKED_AMOUNT)}
-        text='Staked Amount'
-      />
-      <FilterButton
-        selected={activeFilter === ValidatorSortBy.COMMISSION}
-        onClick={sortByParam(ValidatorSortBy.COMMISSION)}
-        text='Commission'
-      />
+      <Text className='mb-0 w-[300px]'>Proposals</Text>
+      <Text className='mb-0 w-[100px]'>Turnout</Text>
+      <Text className='mb-0 w-1/6'>Type</Text>
       <FilterButton
         selected={activeFilter === ValidatorSortBy.VOTING_POWER}
-        onClick={sortByParam(ValidatorSortBy.VOTING_POWER)}
-        text='Voting Power'
+        text='Voting Ends'
+        className='mr-4'
       />
       <FilterButton
         selected={activeFilter === ValidatorSortBy.UPTIME}
-        onClick={sortByParam(ValidatorSortBy.UPTIME)}
-        text='Uptime'
-        tooltip
-        tooltipText='Uptime percentage based on the latest 10K blocks'
+        text='Date'
+        className='mr-4'
       />
-      <Text className='w-[155px] opacity-0'>.</Text>
     </Row>
   );
 };
 
-export { ValidatorsTableSortingHeader };
+export { ProposalsTableSortingHeader };

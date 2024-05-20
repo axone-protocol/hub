@@ -38,7 +38,10 @@ const SingleValidatorItem: FC<SingleValidatorItemProps> = ({ data, openDelegateM
       <Text className='w-1/6 mb-0 pl-4 uppercase'>{Number(data.commission.rate).toFixed(2)}%</Text>
       <Text className='w-1/6 mb-0 pl-4 uppercase'>8,41%</Text>
       <Text className='w-1/6 mb-0 pl-4 uppercase'>96,46%</Text>
-      <Button onClick={openDelegateModal} variant={'link'} className='mb-0 text-axone-orange'>Delegate Now</Button>
+      <Button onClick={openDelegateModal} variant={'link'} className='mb-0 text-axone-orange'>
+        Delegate Now
+        <Image className='ml-2' src='/icons/arrow-right-long.svg' width={16} height={16} alt='AXONE' />
+      </Button>
     </Row>
   );
 };
