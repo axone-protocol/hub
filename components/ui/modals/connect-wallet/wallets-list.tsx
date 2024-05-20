@@ -39,7 +39,16 @@ const WalletsList: FC<WalletsListProps> = ({ wallets }) => {
     );
   }
 
-  return wallets?.wallets.map((wallet: ChainWalletBase) => {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment, @typescript-eslint/no-explicit-any
+  let walletsList: any = [];
+
+  if (wallets?.env.device === 'mobile') {
+    walletsList = wallets?.wallets.filter((wallet: ChainWalletBase) => wallet.walletName.includes('mobile'));
+  } else {
+    walletsList = wallets?.wallets.filter((wallet: ChainWalletBase) => !wallet.walletName.includes('mobile'));
+  }
+
+  return walletsList.map((wallet: ChainWalletBase) => {
     const {
       walletName,
       walletPrettyName,

@@ -1,3 +1,4 @@
+'use client';
 import { WalletModalProps } from '@cosmos-kit/core';
 import { BoxInner } from '@/components/ui/boxes';
 import Column from '@/components/ui/column';

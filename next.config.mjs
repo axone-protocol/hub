@@ -12,6 +12,9 @@ const nextConfig = {
   images: {
     domains: ['s3.amazonaws.com'],
   },
+  experimental: {
+    esmExternals: 'loose',
+  },
 };
 
 export default withNextIntl(nextConfig);

@@ -56,6 +56,7 @@
     "osmojs": "^16.14.0",
     "react": "^18",
     "react-dom": "^18",
+    "react-gauge-component": "^1.2.2",
     "recharts": "^2.12.7",
     "tailwind-merge": "^2.3.0",
     "tailwind-scrollbar": "^3.1.0",

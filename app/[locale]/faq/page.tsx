@@ -5,25 +5,16 @@ import { Suspense, useCallback, useState } from 'react';
 import { Text, Title } from '@/components/typography';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Box } from '@/components/ui/boxes';
+import { ColorBadge } from '@/components/ui/color-badge';
 import Column from '@/components/ui/column';
 import { Input } from '@/components/ui/input';
 import PageContainer from '@/components/ui/page-container';
 import CategoryFilter from './_components/category-filter';
 
-import { data, FAQDataType } from './_mock/data';
+import { data } from './_mock/data';
 import Loading from '../loading';
 
 const SEARCH_ICON_SIZE: number = 20;
-
-const Label = ({ item }: { item: FAQDataType }) => {
-  return (
-    <div
-      className={`flex uppercase max-w-20 justify-center items-center rounded-md pt-1 text-xs bg-${item.categoryBgColor} text-${item.categoryTextColor}`}
-    >
-      {item.category}
-    </div>
-  );
-};
 
 export default function FAQ () {
   const t = useTranslations('FAQ');
@@ -45,7 +36,7 @@ export default function FAQ () {
       return (
         <AccordionItem key={item.id} value={`item-${item.id}`}>
           <Column className='py-2'>
-            <Label item={item} />
+            <ColorBadge backgroundColor={item.categoryBgColor} textColor={item.categoryTextColor} text={item.category} />
             <AccordionTrigger className='w-full pt-2 pb-5 text-left'>{item.question}</AccordionTrigger>
           </Column>
           <AccordionContent>

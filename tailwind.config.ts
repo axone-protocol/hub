@@ -59,9 +59,11 @@ const config = {
         'axone-orange': '#FB9501',
         'axone-red': '#DC4E4E',
         'axone-grey': '#CCD3D6',
+        'axone-grey-2': '#292929',
         'axone-khaki': '#66777E',
         'axone-box-border': 'rgba(255, 255, 255, 0.06)',
         'axone-light-blue': '#D8FAFF',
+        'axone-light-blue-2': '#35BCC3',
       }
     },
   },
