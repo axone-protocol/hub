@@ -3,14 +3,14 @@ import { ChainWalletBase, MainWalletBase } from '@cosmos-kit/core';
 import { useChain, useWallet } from '@cosmos-kit/react';
 import { BarChart2, CircleCheckBig, CircleX, UserRoundX } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import { FC, useCallback, useEffect, useState } from 'react';
+import { FC, useCallback, useContext, useEffect } from 'react';
 import { Text } from '@/components/typography';
+import { ModalContext } from '@/context';
 import { chainName } from '@/core/chain';
 import { useToast } from '@/hooks/use-toast';
 import { DesktopMenuAuthorized } from './desktop-menu-authorized';
 import { MobileMenuAuthorized } from './mobile-menu/mobile-menu-authorized';
 import { Button } from '../button';
-import TermsModal from '../modals/terms/terms-modal';
 import Row from '../row';
 import Spinner from '../spinner';
 
@@ -32,7 +32,6 @@ const ConnectWallet: FC<ConnectWalletProps> = ({ openMobileMenu = () => null }) 
   const t  = useTranslations('Index');
   const {
     address,
-    openView,
     disconnect,
     isWalletConnected,
     isWalletConnecting,
@@ -46,17 +45,9 @@ const ConnectWallet: FC<ConnectWalletProps> = ({ openMobileMenu = () => null }) 
   const { toast } = useToast();
   const { mainWallet } = useWallet();
   const shortenedAddress = `${address?.slice(0, 8)}...${address?.slice(-4)}`;
-  const [openTerms, setOpenTerms] = useState(false);
+  const { openConnectWalletModal } = useContext(ModalContext);
 
   const logo: string = getWalletLogo(mainWallet);
-  const onConnect = useCallback(async () => {
-    const termsAccepted = localStorage.getItem('termsAccepted');
-    if (termsAccepted) {
-      openView();
-    } else {
-      setOpenTerms(true);
-    }
-  }, [openView]);
 
   useEffect(() => {
     let timeoutId: number;
@@ -109,18 +100,17 @@ const ConnectWallet: FC<ConnectWalletProps> = ({ openMobileMenu = () => null }) 
   if (isWalletDisconnected || isWalletRejected) {
     return (
       <>
-        <Button onClick={onConnect} variant='rounded' className='hidden lg:flex px-10 font-bold'>
+        <Button onClick={openConnectWalletModal} variant='rounded' className='hidden lg:flex px-10 font-bold'>
           {t('Connect')}
         </Button>
         <div className='lg:hidden flex'>
-          <div className='cursor-pointer mr-6' onClick={onConnect}>
+          <div className='cursor-pointer mr-6' onClick={openConnectWalletModal}>
             <UserRoundX className='text-axone-red' />
           </div>
           <div onClick={openMobileMenu} className='cursor-pointer'>
             <BarChart2 className='text-axone-grey rotate-90' />
           </div>
         </div>
-        <TermsModal open={openTerms} setOpen={setOpenTerms} openWalletModal={openView} />
       </>
     );
   }

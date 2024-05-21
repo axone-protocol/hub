@@ -99,7 +99,7 @@ const TermsModal: FC<TermsModalProps> = ({ open, setOpen, openWalletModal }) => 
             <rect width='798' height='68' fill='url(#paint0_linear_968_6695)'/>
             <defs>
               <linearGradient id='paint0_linear_968_6695' x1='399' y1='0' x2='399' y2='68' gradientUnits='userSpaceOnUse'>
-                <stop stop-color='#00213A' stopOpacity='0'/>
+                <stop stopColor='#00213A' stopOpacity='0'/>
                 <stop offset='0.889326' stopColor='#00213A'/>
               </linearGradient>
             </defs>
@@ -115,4 +115,4 @@ const TermsModal: FC<TermsModalProps> = ({ open, setOpen, openWalletModal }) => 
     </Dialog>
   );};
 
-export default TermsModal;
+export { TermsModal };

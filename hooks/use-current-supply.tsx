@@ -14,7 +14,12 @@ type CurrentSupplyData = {
 const getCurrentSupplyFn = async () => {
   const { data } = await api.get<CurrentSupplyData>('/supply');
 
-  return data;
+  const formattedData = {
+    ...data,
+    supply: parseFloat(data.supply) / 1000000,
+  };
+
+  return formattedData;
 };
 
 export const useCurrentSupplyQueryKey = ['current-supply'];

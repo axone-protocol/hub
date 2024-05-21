@@ -14,7 +14,7 @@ const getStakingOverviewDataFn = async () => {
   const convertedData = {
     totalValidators: Number(data.totalValidators),
     apr: Number(data.apr).toFixed(3),
-    totalStaked: Number(data.totalStaked).toFixed(3),
+    totalStaked: (parseFloat(data.totalStaked) / 1000000).toFixed(2),
     bondedTokens: Number(data.bondedTokens).toFixed(4),
   };
 

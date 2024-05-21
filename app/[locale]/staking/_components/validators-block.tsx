@@ -1,10 +1,10 @@
 'use client';
 import { SearchIcon } from 'lucide-react';
-import { useCallback, useState } from 'react';
+import { useCallback, useContext, useState } from 'react';
 import { Text, Title } from '@/components/typography';
 import { Box, BoxInner } from '@/components/ui/boxes';
 import { Input } from '@/components/ui/input';
-import { DelegateModal } from '@/components/ui/modals/delegate/delegate-modal';
+import { ModalContext } from '@/context';
 import { useValidatorsList, ValidatorSortBy, ValidatorStatus } from '@/hooks/use-validators-list';
 import { cn } from '@/lib/utils';
 import { SingleValidatorItem } from './single-validator-item';
@@ -12,7 +12,6 @@ import { ValidatorsTableSortingHeader } from './validators-table-sorting-header'
 
 
 const ValidatorsBlock = () => {
-  const [isDelegateOpen, setDelegateOpen] = useState<boolean>(false);
   const [activeFilter, setActiveFilter] = useState<ValidatorSortBy | null>(null);
   const {
     filteredData: validators,
@@ -46,6 +45,8 @@ const ValidatorsBlock = () => {
     setOrder(newOrder);
     setActiveFilter(param);
   }, [sortBy, order, setSortBy, setOrder]);
+
+  const { openDelegateModal } = useContext(ModalContext);
 
   return (
     <Box className='mb-0 lg:mx-0'>
@@ -85,11 +86,10 @@ const ValidatorsBlock = () => {
 
         <BoxInner className='w-[900px] lg:w-full flex-col pb-4 mb-4'>
           {validators?.map((item, index) => (
-            <SingleValidatorItem key={index} data={item} openDelegateModal={() => setDelegateOpen(true)} />
+            <SingleValidatorItem key={index} data={item} openDelegateModal={openDelegateModal} />
           ))}
         </BoxInner>
       </div>
-      <DelegateModal isOpen={isDelegateOpen} setOpen={setDelegateOpen} />
     </Box>
   );
 };
