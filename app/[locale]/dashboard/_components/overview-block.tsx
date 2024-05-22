@@ -28,9 +28,11 @@ export default function OverviewBlock () {
       <div className='gap-4 columns-2 lg:columns-4 lg:flex-row lg:w-full mt-10 desktop:mt-8'>
 
         <BoxInner className='pt-5 pb-3 w-full mb-4 h-32 lg:h-32 flex-col justify-between items-center'>
-          <Title className='mt-2 mb-0'>${tokenInfo?.price?.value.toFixed(2)}</Title>
+          <Title className='mt-2 mb-0'>
+            ${tokenInfo?.price?.value.toFixed(2) || 0}
+          </Title>
           <Text className='uppercase text-axone-red'>
-            {tokenInfo?.price?.change.toFixed(2)}%
+            {tokenInfo?.price?.change.toFixed(2) || 0}%
           </Text>
           <Text className='uppercase text-axone-khaki'>
             {t('Price')}
@@ -38,9 +40,11 @@ export default function OverviewBlock () {
         </BoxInner>
 
         <BoxInner className='pt-5 pb-3 w-full mb-4 h-32 lg:h-32 flex-col justify-between items-center'>
-          <Title className='mt-2 mb-0'>${formatNumber(tokenInfo?.marketCap?.value)}</Title>
+          <Title className='mt-2 mb-0'>
+            ${formatNumber(tokenInfo?.marketCap?.value) || 0}
+          </Title>
           <Text className='uppercase text-axone-red'>
-            {tokenInfo?.marketCap?.change.toFixed(3)}%
+            {tokenInfo?.marketCap?.change.toFixed(3) ||  0}%
           </Text>
           <Text className='uppercase text-axone-khaki text-center'>
             {t('MarketCap')}
@@ -48,7 +52,9 @@ export default function OverviewBlock () {
         </BoxInner>
 
         <BoxInner className='pt-5 pb-3 w-full mb-4 h-32 lg:h-32 flex-col justify-between items-center'>
-          <Title className='mt-2 mb-0'>${formatNumber(tokenInfo?.volume)}</Title>
+          <Title className='mt-2 mb-0'>
+            ${formatNumber(tokenInfo?.volume || 0)}
+          </Title>
           <Row className='justify-center items-center'>
             <Text className='uppercase text-axone-khaki mr-3'>
               {t('Volume')}
@@ -58,7 +64,9 @@ export default function OverviewBlock () {
         </BoxInner>
 
         <BoxInner className='pt-5 pb-3 w-full mb-4 h-32 lg:h-32 flex-col justify-between items-center'>
-          <Title className='mt-2 mb-0'>{Number(tokenInfo?.apr).toFixed(2)}%</Title>
+          <Title className='mt-2 mb-0'>
+            {Number(tokenInfo?.apr || 0).toFixed(2)}%
+          </Title>
           <Text className='uppercase text-axone-khaki'>
             { t('APR')}
           </Text>

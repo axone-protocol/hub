@@ -1,6 +1,7 @@
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { NextIntlClientProvider, useMessages } from 'next-intl';
 import { CosmosChainProvider, ReactQueryProvider } from '@/providers';
+import { ModalProvider } from './modals-context-provider';
 
 export function RootProvider ({
   children,
@@ -12,7 +13,9 @@ export function RootProvider ({
     <ReactQueryProvider>
       <CosmosChainProvider>
         <NextIntlClientProvider messages={messages}>
-          {children}
+          <ModalProvider>
+            {children}
+          </ModalProvider>
           <ReactQueryDevtools initialIsOpen={false} />
         </NextIntlClientProvider>
       </CosmosChainProvider>

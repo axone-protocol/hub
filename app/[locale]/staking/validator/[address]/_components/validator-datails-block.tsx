@@ -1,22 +1,22 @@
 'use client';
 import { CircleCheckBig, CircleX, Copy } from 'lucide-react';
 import Image from 'next/image';
-import { FC, useCallback } from 'react';
+import { useParams } from 'next/navigation';
+import { useCallback } from 'react';
 import { Text, Title } from '@/components/typography';
 import { Box, BoxInner } from '@/components/ui/boxes';
 import { Button } from '@/components/ui/button';
 import Row from '@/components/ui/row';
+import { useModal } from '@/context';
 import { useSingleValidatorInfo } from '@/hooks/use-single-validator-info';
 import { toast } from '@/hooks/use-toast';
 import { ValidatorStatus } from '@/hooks/use-validators-list';
 
-type ValidatorDetailsBlockProps = {
-  openDelegateModal: () => void;
-  address: string | string[];
-};
 
-const ValidatorDetailsBlock: FC<ValidatorDetailsBlockProps> = ({ openDelegateModal, address = '' }) => {
+const ValidatorDetailsBlock = () => {
+  const { address } = useParams();
   const { data: validatorData } = useSingleValidatorInfo(address);
+  const { openDelegateModal } = useModal();
 
   const copyToClipboard = useCallback((address: string | string[]) => () => {
     if (!address) {

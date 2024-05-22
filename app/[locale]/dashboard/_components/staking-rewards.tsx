@@ -5,7 +5,8 @@ import { useLocale, useTranslations } from 'next-intl';
 import { Text, Title } from '@/components/typography';
 import { Box } from '@/components/ui/boxes';
 import { Button } from '@/components/ui/button';
-import { RewardsCalculatorModal } from '@/components/ui/modals';
+import { ButtonWithIcon } from '@/components/ui/button-with-icon';
+import { useModal } from '@/context';
 import { useTokenInfo } from '@/hooks/use-token-info';
 
 export default function StakingRewardsBlock () {
@@ -13,7 +14,7 @@ export default function StakingRewardsBlock () {
   const locale = useLocale();
   const router = useRouter();
   const { data: tokenInfo } = useTokenInfo();
-
+  const { openRewardsCalculatorModal } = useModal();
 
   const navigateToStaking = () => {
     router.push(`/${locale}/staking`);
@@ -32,7 +33,9 @@ export default function StakingRewardsBlock () {
           <Image src={'/images/staking.svg'} alt='Staking Rewards' width={166} height={166} />
           <div className='absolute flex flex-col justify-center items-center'>
             <Text className='text-xl mb-0 text-axone-grey'>APR</Text>
-            <Text className='text-xl mb-0 text-white font-bold'>{Number(tokenInfo?.apr).toFixed(2)}%</Text>
+            <Text className='text-xl mb-0 text-white font-bold'>
+              {Number(tokenInfo?.apr || 0).toFixed(2)}%
+            </Text>
           </div>
         </div>
       </div>
@@ -45,7 +48,9 @@ export default function StakingRewardsBlock () {
         >
           {t('DelegateNow')}
         </Button>
-        <RewardsCalculatorModal />
+        <ButtonWithIcon onClick={openRewardsCalculatorModal} variant={'link'} className='mt-5 text-axone-orange text-base font-bold z-8'>
+          {t('CalculateRewards')}
+        </ButtonWithIcon>
       </div>
     </Box>
   );

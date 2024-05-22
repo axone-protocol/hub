@@ -1,16 +1,20 @@
 'use client';
 import { useTranslations } from 'next-intl';
-import { useState } from 'react';
+import { FC, useState } from 'react';
 import { Text, Title } from '@/components/typography';
 import { Button } from '@/components/ui/button';
-import { ButtonWithIcon } from '@/components/ui/button-with-icon';
 import Column from '@/components/ui/column';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import Row from '@/components/ui/row';
 import { useTokenInfo } from '@/hooks/use-token-info';
 
-const RewardsCalculatorModal = () => {
+type RewardsCalculatorModalProps = {
+  isOpen: boolean;
+  setOpen: (open: boolean) => void;
+};
+
+const RewardsCalculatorModal: FC<RewardsCalculatorModalProps> = ({ isOpen, setOpen }) => {
   const t  = useTranslations('Dashboard');
   const [stake, setStake] = useState<number>(5);
   const [isFocused, setIsFocused] = useState<boolean>(false);
@@ -48,22 +52,13 @@ const RewardsCalculatorModal = () => {
   };
 
   return (
-    <Dialog>
-
-      <DialogTrigger asChild>
-        <ButtonWithIcon variant={'link'} className='mt-5 text-axone-orange text-base font-bold z-8'>
-          {t('CalculateRewards')}
-        </ButtonWithIcon>
-      </DialogTrigger>
-
+    <Dialog open={isOpen} onOpenChange={setOpen}>
       <DialogContent className='text-white p-6 pb-0 lg:p-10 w-[85vw] lg:w-[50vw]'>
         <DialogHeader>
           <DialogTitle className='text-left text-20'>{t('StakingRewardsCalculator')}</DialogTitle>
         </DialogHeader>
-
         <Column>
           <div className='flex flex-col lg:flex-row justify-between lg:mb-6'>
-
             <Column className='w-full lg:w-2/3 lg:mr-5'>
               <Title className='font-normal text-white lg:mb-5'>{t('YourAxoneStake')}</Title>
               <Row className='relative'>
@@ -89,7 +84,9 @@ const RewardsCalculatorModal = () => {
 
             <Column className='w-full lg:w-1/3'>
               <Title className='font-normal text-white lg:mb-5'>APR</Title>
-              <p className='text-40 text-white font-bold tracking-tighter -mt-2'>+{Number(tokenInfo?.apr).toFixed(2)}%</p>
+              <p className='text-40 text-white font-bold tracking-tighter -mt-2'>
+                +{Number(tokenInfo?.apr || 0).toFixed(2)}%
+              </p>
             </Column>
 
           </div>
@@ -121,6 +118,7 @@ const RewardsCalculatorModal = () => {
         </Column>
       </DialogContent>
     </Dialog>
-  );};
+  );
+};
 
-export default RewardsCalculatorModal;
+export { RewardsCalculatorModal };

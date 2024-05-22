@@ -6,6 +6,7 @@ import { Box, BoxInner } from '@/components/ui/boxes';
 import { Button } from '@/components/ui/button';
 import LogoDarkMobile from '@/components/ui/logo-dark-mobile';
 import Row from '@/components/ui/row';
+import { useModal } from '@/context';
 import { chainName } from '@/core/chain';
 import { useMyStakingOverview } from '@/hooks/use-my-staking-overview';
 import { StakingLoadingSkeleton } from './staking-loading-skeleton';
@@ -13,6 +14,7 @@ import { StakingLoadingSkeleton } from './staking-loading-skeleton';
 const StakingOverviewBlock = () => {
   const { data, isLoading, isFetching, isPending, isRefetching } = useMyStakingOverview();
   const { isWalletConnected } = useChain(chainName);
+  const { openConnectWalletModal } = useModal();
 
   if (!isWalletConnected) {
     return (
@@ -28,7 +30,7 @@ const StakingOverviewBlock = () => {
             </div>
             <Text className='mb-0 pl-4'>View and manage your staking by connecting your wallet.</Text>
           </div>
-          <Button variant='rounded' className='mt-4'>Connect Wallet</Button>
+          <Button onClick={openConnectWalletModal} variant='rounded' className='mt-4'>Connect Wallet</Button>
         </div>
         <div className='hidden lg:flex absolute right-0 top-0 w-[500px] h-full'>
           <Image src='/images/stBg.svg' fill={true}  alt='Staking Overview' />

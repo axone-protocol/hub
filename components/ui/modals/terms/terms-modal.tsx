@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import Column from '@/components/ui/column';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import Row from '@/components/ui/row';
+import { TERMS_ACCEPTED_KEY } from '@/providers/modals-context-provider';
 
 type TermsModalProps = {
   open: boolean;
@@ -17,7 +18,7 @@ const TermsModal: FC<TermsModalProps> = ({ open, setOpen, openWalletModal }) => 
   const t  = useTranslations('Dashboard');
 
   const acceptTerms = async () => {
-    localStorage.setItem('termsAccepted', 'true');
+    localStorage.setItem(TERMS_ACCEPTED_KEY, 'true');
     await cancel();
     openWalletModal();
   };
@@ -99,7 +100,7 @@ const TermsModal: FC<TermsModalProps> = ({ open, setOpen, openWalletModal }) => 
             <rect width='798' height='68' fill='url(#paint0_linear_968_6695)'/>
             <defs>
               <linearGradient id='paint0_linear_968_6695' x1='399' y1='0' x2='399' y2='68' gradientUnits='userSpaceOnUse'>
-                <stop stop-color='#00213A' stopOpacity='0'/>
+                <stop stopColor='#00213A' stopOpacity='0'/>
                 <stop offset='0.889326' stopColor='#00213A'/>
               </linearGradient>
             </defs>
@@ -115,4 +116,4 @@ const TermsModal: FC<TermsModalProps> = ({ open, setOpen, openWalletModal }) => 
     </Dialog>
   );};
 
-export default TermsModal;
+export { TermsModal };
