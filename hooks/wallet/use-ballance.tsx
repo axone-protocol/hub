@@ -56,8 +56,24 @@ export const useBallance = () => {
     const exp = coin.denom_units.find((unit) => unit.denom === 'uknow')
       ?.exponent as number;
 
-    const a = new BigNumber(0);
+    const a = new BigNumber(balance.balance?.amount || 0);
     const amount = a.multipliedBy(10 ** -exp);
+
+    const allBalances = await client.cosmos.bank.v1beta1.allBalances({
+      address,
+    });
+  
+    allBalances.balances.forEach((balance) => {
+      const exp = coin.denom_units.find((unit) => unit.denom === balance.denom)
+        ?.exponent as number;
+  
+      const a = new BigNumber(balance.amount);
+      const amount = a.multipliedBy(10 ** -exp);
+  
+      console.log(`Balance of ${balance.denom}: ${amount}`);
+    });
+
+    console.log('all balances:', allBalances.balances, client)
 
     setBalance(amount);
     setBalanceDenom(balance.balance?.denom || 'inj');

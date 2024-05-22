@@ -6,6 +6,7 @@ import { Box } from '@/components/ui/boxes';
 import { Button } from '@/components/ui/button';
 import { ButtonWithIcon } from '@/components/ui/button-with-icon';
 import PageContainer from '@/components/ui/page-container';
+import { useModal } from '@/context';
 import { ProposalParamsTable } from './_components/proposal-params-table';
 import { VoteBlock } from './_components/vote-block';
 import { VoteOverviewBlock } from './_components/vote-overview-block';
@@ -13,6 +14,7 @@ import { VotersBlock } from './_components/voters-block';
 
 export default function ValidatorDetails () {
   const { id } = useParams();
+  const { openVoteProposalModal } = useModal();
 
   return (
     <PageContainer>
@@ -78,7 +80,13 @@ export default function ValidatorDetails () {
         <ProposalParamsTable />
 
         <div className='flex flex-col lg:flex-row gap-6'>
-          <Button variant='rounded' className='w-full lg:w-auto px-12'>Vote</Button>
+          <Button
+            variant='rounded'
+            className='w-full lg:w-auto px-12'
+            onClick={openVoteProposalModal}
+          >
+            Vote
+          </Button>
           <ButtonWithIcon variant='noBorder' className='w-full lg:w-auto'>View JSON</ButtonWithIcon>
         </div>
       </Box>
