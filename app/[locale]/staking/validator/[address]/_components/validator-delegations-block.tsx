@@ -1,5 +1,5 @@
 'use client';
-import { FC } from 'react';
+import { useParams } from 'next/navigation';
 import { Text, Title } from '@/components/typography';
 import { AxoneTooltip } from '@/components/ui/axone-tooltip';
 import { Box } from '@/components/ui/boxes';
@@ -8,11 +8,8 @@ import { Button } from '@/components/ui/button';
 import Row from '@/components/ui/row';
 import { useValidatorDelegations, ValidatorDelegation } from '@/hooks/use-validator-delegations';
 
-type ValidatorDelegationsBlockProps = {
-  address: string | string[];
-};
-
-const ValidatorDelegationsBlock: FC<ValidatorDelegationsBlockProps> = ({ address = '' }) => {
+const ValidatorDelegationsBlock = () => {
+  const { address } = useParams();
   const { data } = useValidatorDelegations(address);
 
   const shortenedAddress = (address = ''): string => `${address?.slice(0, 8)}...${address?.slice(-4)}`;

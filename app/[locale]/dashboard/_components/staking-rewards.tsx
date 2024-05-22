@@ -2,12 +2,11 @@
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
-import { useContext } from 'react';
 import { Text, Title } from '@/components/typography';
 import { Box } from '@/components/ui/boxes';
 import { Button } from '@/components/ui/button';
 import { ButtonWithIcon } from '@/components/ui/button-with-icon';
-import { ModalContext } from '@/context';
+import { useModal } from '@/context';
 import { useTokenInfo } from '@/hooks/use-token-info';
 
 export default function StakingRewardsBlock () {
@@ -15,7 +14,7 @@ export default function StakingRewardsBlock () {
   const locale = useLocale();
   const router = useRouter();
   const { data: tokenInfo } = useTokenInfo();
-  const { openRewardsCalculatorModal } = useContext(ModalContext);
+  const { openRewardsCalculatorModal } = useModal();
 
   const navigateToStaking = () => {
     router.push(`/${locale}/staking`);

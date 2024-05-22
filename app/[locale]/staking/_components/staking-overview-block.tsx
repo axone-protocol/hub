@@ -1,13 +1,12 @@
 'use client';
 import { useChain } from '@cosmos-kit/react';
 import Image from 'next/image';
-import { useContext } from 'react';
 import { Text, Title } from '@/components/typography';
 import { Box, BoxInner } from '@/components/ui/boxes';
 import { Button } from '@/components/ui/button';
 import LogoDarkMobile from '@/components/ui/logo-dark-mobile';
 import Row from '@/components/ui/row';
-import { ModalContext } from '@/context';
+import { useModal } from '@/context';
 import { chainName } from '@/core/chain';
 import { useMyStakingOverview } from '@/hooks/use-my-staking-overview';
 import { StakingLoadingSkeleton } from './staking-loading-skeleton';
@@ -15,7 +14,7 @@ import { StakingLoadingSkeleton } from './staking-loading-skeleton';
 const StakingOverviewBlock = () => {
   const { data, isLoading, isFetching, isPending, isRefetching } = useMyStakingOverview();
   const { isWalletConnected } = useChain(chainName);
-  const { openConnectWalletModal } = useContext(ModalContext);
+  const { openConnectWalletModal } = useModal();
 
   if (!isWalletConnected) {
     return (

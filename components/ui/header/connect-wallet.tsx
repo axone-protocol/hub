@@ -3,9 +3,9 @@ import { ChainWalletBase, MainWalletBase } from '@cosmos-kit/core';
 import { useChain, useWallet } from '@cosmos-kit/react';
 import { BarChart2, CircleCheckBig, CircleX, UserRoundX } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import { FC, useCallback, useContext, useEffect } from 'react';
+import { FC, useCallback, useEffect } from 'react';
 import { Text } from '@/components/typography';
-import { ModalContext } from '@/context';
+import { useModal } from '@/context';
 import { chainName } from '@/core/chain';
 import { useToast } from '@/hooks/use-toast';
 import { DesktopMenuAuthorized } from './desktop-menu-authorized';
@@ -45,7 +45,7 @@ const ConnectWallet: FC<ConnectWalletProps> = ({ openMobileMenu = () => null }) 
   const { toast } = useToast();
   const { mainWallet } = useWallet();
   const shortenedAddress = `${address?.slice(0, 8)}...${address?.slice(-4)}`;
-  const { openConnectWalletModal } = useContext(ModalContext);
+  const { openConnectWalletModal } = useModal();
 
   const logo: string = getWalletLogo(mainWallet);
 

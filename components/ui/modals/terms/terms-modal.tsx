@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import Column from '@/components/ui/column';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import Row from '@/components/ui/row';
+import { TERMS_ACCEPTED_KEY } from '@/providers/modals-context-provider';
 
 type TermsModalProps = {
   open: boolean;
@@ -17,7 +18,7 @@ const TermsModal: FC<TermsModalProps> = ({ open, setOpen, openWalletModal }) => 
   const t  = useTranslations('Dashboard');
 
   const acceptTerms = async () => {
-    localStorage.setItem('termsAccepted', 'true');
+    localStorage.setItem(TERMS_ACCEPTED_KEY, 'true');
     await cancel();
     openWalletModal();
   };

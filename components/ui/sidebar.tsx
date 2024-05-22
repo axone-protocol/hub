@@ -1,8 +1,7 @@
 'use client';
 import { useChain } from '@cosmos-kit/react-lite';
 import { useLocale, useTranslations } from 'next-intl';
-import { useContext } from 'react';
-import { ModalContext } from '@/context';
+import { useModal } from '@/context';
 import { chainName } from '@/core/chain';
 import { cn } from '@/lib/utils';
 import { Button } from './button';
@@ -20,7 +19,7 @@ const Sidebar = () => {
   const t  = useTranslations('Index');
   const locale = useLocale();
   const { isWalletConnected } = useChain(chainName);
-  const { openConnectWalletModal } = useContext(ModalContext);
+  const { openConnectWalletModal } = useModal();
 
   return (
     <Column className={cn('lg:flex mobile:hidden justify-between pt-5 bg-axone-dark-blue min-h-screen border-r border-r-axone-box-border', WIDTH)}>

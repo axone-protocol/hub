@@ -1,6 +1,5 @@
-import { createContext } from 'react';
+import { createContext, useContext } from 'react';
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 type ModalContextProps = {
   openConnectWalletModal: () => void;
   openDelegateModal: () => void;
@@ -12,7 +11,14 @@ const defaultModalContext: ModalContextProps = {
   openDelegateModal: () => {},
   openRewardsCalculatorModal: () => {}
 };
+const useModal = () => {
+  const context = useContext(ModalContext);
+  if (context === undefined) {
+    throw new Error('useModal must be used within a ModalProvider');
+  }
+  return context;
+};
 
 const ModalContext = createContext<ModalContextProps>(defaultModalContext);
 
-export { ModalContext };
+export { ModalContext, useModal };

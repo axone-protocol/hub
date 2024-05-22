@@ -28,7 +28,7 @@ export default function CurrentSupplyBlock () {
     <Box className='m-0 flex flex-col justify-between lg:w-1/2 xl:w-full xl:h-1/2'>
       <Text className='mb-5 uppercase m-0'>{t('CurrentSupply')}</Text>
       <div className='flex flex-col items-end lg:flex-col lg:justify-between py-8 lg:py-0'>
-        <p className='text-3xl tracking-tighter text-axone-white mb-0'>{formattedNum}</p>
+        <p className='text-3xl tracking-tighter text-axone-white mb-0'>{formattedNum || 0}</p>
         <p className='text-4xl tracking-tighter text-axone-khaki mb-0'>AXONE</p>
       </div>
       <Column className='justify-end'>

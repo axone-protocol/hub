@@ -1,10 +1,10 @@
 'use client';
 import { SearchIcon } from 'lucide-react';
-import { useCallback, useContext, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Text, Title } from '@/components/typography';
 import { Box, BoxInner } from '@/components/ui/boxes';
 import { Input } from '@/components/ui/input';
-import { ModalContext } from '@/context';
+import { useModal } from '@/context';
 import { useValidatorsList, ValidatorSortBy, ValidatorStatus } from '@/hooks/use-validators-list';
 import { cn } from '@/lib/utils';
 import { SingleValidatorItem } from './single-validator-item';
@@ -46,7 +46,7 @@ const ValidatorsBlock = () => {
     setActiveFilter(param);
   }, [sortBy, order, setSortBy, setOrder]);
 
-  const { openDelegateModal } = useContext(ModalContext);
+  const { openDelegateModal } = useModal();
 
   return (
     <Box className='mb-0 lg:mx-0'>

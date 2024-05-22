@@ -53,7 +53,7 @@ export default function OverviewBlock () {
 
         <BoxInner className='pt-5 pb-3 w-full mb-4 h-32 lg:h-32 flex-col justify-between items-center'>
           <Title className='mt-2 mb-0'>
-            ${formatNumber(tokenInfo?.volume)}
+            ${formatNumber(tokenInfo?.volume || 0)}
           </Title>
           <Row className='justify-center items-center'>
             <Text className='uppercase text-axone-khaki mr-3'>

@@ -6,6 +6,8 @@ import { DelegateModal, RewardsCalculatorModal, TermsModal } from '@/components/
 import { ModalContext } from '@/context';
 import { chainName } from '@/core/chain';
 
+const TERMS_ACCEPTED_KEY = 'termsAccepted';
+
 const ModalProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [openTerms, setOpenTerms] = useState<boolean>(false);
   const [isDelegateOpen, setDelegateOpen] = useState<boolean>(false);
@@ -13,7 +15,7 @@ const ModalProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const { openView } = useChain(chainName);
 
   const openConnectWalletModal = useCallback(async () => {
-    const termsAccepted = localStorage.getItem('termsAccepted');
+    const termsAccepted = localStorage.getItem(TERMS_ACCEPTED_KEY);
     if (termsAccepted) {
       openView();
     } else {
@@ -39,4 +41,4 @@ const ModalProvider: React.FC<PropsWithChildren> = ({ children }) => {
   );
 };
 
-export { ModalContext, ModalProvider };
+export { ModalContext, ModalProvider, TERMS_ACCEPTED_KEY };
