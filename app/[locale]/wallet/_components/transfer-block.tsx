@@ -10,10 +10,13 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import Row from '@/components/ui/row';
 import { Select, SelectContent, SelectGroup, SelectIcon, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { useBallance } from '@/hooks/wallet/use-ballance';
 import { cn } from '@/lib/utils';
 
 const TransferBlock = () => {
   const [open, setOpen] = useState<boolean>(false);
+  const { balance, isFetchingBalance, balanceDenom } = useBallance();
+
   return (
     <Box className='w-full lg:w-1/3 my-0 mx-0 mt-0 lg:mt-6'>
       <div className='flex flex-col lg:flex-row justify-between mb-10 lg:items-center'>
@@ -24,7 +27,7 @@ const TransferBlock = () => {
           <Text className='uppercase mb-0'>Available to transfer</Text>
           <AxoneTooltip content='Your available amount to transfer to a different address on Axone' />
         </Row>
-        <Text className='uppercase'>0.00</Text>
+        <Text className='uppercase'>{isFetchingBalance ? '0.00' : balance.toNumber().toFixed(2)} {balanceDenom || 'Axone'}</Text>
       </Column>
       <Column className='gap-6'>
 
