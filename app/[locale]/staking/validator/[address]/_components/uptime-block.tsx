@@ -1,9 +1,11 @@
 'use client';
 import { X } from 'lucide-react';
+import { useParams } from 'next/navigation';
 import { FC } from 'react';
 import { Text, Title } from '@/components/typography';
 import { Box } from '@/components/ui/boxes';
 import Row from '@/components/ui/row';
+import { useSingleValidatorUptime } from '@/hooks/use-single-validator-uptime';
 import { cn } from '@/lib/utils';
 
 type UptimeBlockItemProps = {
@@ -27,6 +29,9 @@ const UptimeBlockItem: FC<UptimeBlockItemProps> = ({ size = 'large', type = 'sig
 };
 
 const UptimeBlock = () => {
+  const { address } = useParams();
+  const { data } = useSingleValidatorUptime(address);
+
   return (
     <Box className='flex-col p-6 mb-4'>
       <Row className='justify-between items-center mb-4'>
@@ -35,8 +40,8 @@ const UptimeBlock = () => {
       </Row>
       <div className='flex flex-row flex-wrap gap-2 mb-6'>
         {
-          Array.from({ length: 60 }).map((_, index) => {
-            return <UptimeBlockItem type={index === 5 || index === 38 ? 'proposed' : index === 40 ? 'missed' : 'signed'} key={index} />;
+          data?.blocks.map((block, index) => {
+            return <UptimeBlockItem type={index === 5 || index === 38 ? 'proposed' : index === 40 ? 'missed' : 'signed'} key={block.signature} />;
           })
         }
       </div>
@@ -46,7 +51,7 @@ const UptimeBlock = () => {
           <Row className='items-center gap-2'><UptimeBlockItem size='small' type='signed' /><Text className='mb-0'>Signed: 59</Text></Row>
           <Row className='items-center gap-2'><UptimeBlockItem size='small' type='missed' /><Text className='mb-0'>Missed: 0</Text></Row>
         </div>
-        <Text className='mt-1 lg:mt-0'>Current: 66,283,377</Text>
+        <Text className='mt-1 lg:mt-0'>Current: {data?.current || 0}</Text>
       </Row>
     </Box>
   );
