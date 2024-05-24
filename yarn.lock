@@ -14,13 +14,13 @@
   dependencies:
     regenerator-runtime "^0.14.0"
 
-"@chain-registry/client@^1.18.0":
-  version "1.44.1"
-  resolved "https://registry.yarnpkg.com/@chain-registry/client/-/client-1.44.1.tgz#0b93f3241704dc0820500a143c0bd6659cc6d6bf"
-  integrity sha512-GmmRE//ZK+zm1RZ0cVYY9KyGRRcsvWgNCczbTC9JWjf0fcV3AdLHqu1coIRymlnR88IrEY70Av3Z4dbF9CqVGw==
+"@chain-registry/client@^1.44.3":
+  version "1.46.1"
+  resolved "https://registry.yarnpkg.com/@chain-registry/client/-/client-1.46.1.tgz#a8208ccceb5be0854574559de2c8adc237fd64c0"
+  integrity sha512-3qfcy/Egz4zIlNdq869LOBPtXc2WN9sCV+Cv+CQ0OX4xcIVYoCKobOeS1E1a7rS1BmQZr5HuRC3qiHYIpeSo1Q==
   dependencies:
-    "@chain-registry/types" "^0.41.1"
-    "@chain-registry/utils" "^1.42.1"
+    "@chain-registry/types" "^0.43.1"
+    "@chain-registry/utils" "^1.44.1"
     bfs-path "^1.0.2"
     cross-fetch "^3.1.5"
 
@@ -42,7 +42,7 @@
   dependencies:
     "@babel/runtime" "^7.21.0"
 
-"@chain-registry/types@^0.41.1":
+"@chain-registry/types@^0.41.3":
   version "0.41.4"
   resolved "https://registry.yarnpkg.com/@chain-registry/types/-/types-0.41.4.tgz#c0a83b6bf3572fac4024faada6caf600887c96a6"
   integrity sha512-LeW2nXd0dmnI+TC4L2xC3RNooUthUfou1yFcdsinSW6EP9qEwo2BwwnWWAcMG+dsPvXfM4AfmisVBrxbX2OKqw==
@@ -52,12 +52,12 @@
   resolved "https://registry.yarnpkg.com/@chain-registry/types/-/types-0.43.1.tgz#7b714962761bd2f9b4583e846e30da1c27e2d823"
   integrity sha512-0iaVOl8Yt5kCJ1ogDykFEkjygTkyE11gu7AZEVXUaOEvrd8XZoWoxdt9kfytESLYNZ0ACzuq9Ziy0YLQ8TIChg==
 
-"@chain-registry/utils@^1.42.1":
-  version "1.42.1"
-  resolved "https://registry.yarnpkg.com/@chain-registry/utils/-/utils-1.42.1.tgz#64380e83a36ab167862b903066a233cec6fe5a3b"
-  integrity sha512-g4Zl6RMxsckr866NXfATLhmugHLJ62eNi0nOx/4K2XvJRSVJl6m8Gzhj7xwzhMDbc6/R4VGb6yrsw1hKYkByCQ==
+"@chain-registry/utils@^1.44.1":
+  version "1.44.1"
+  resolved "https://registry.yarnpkg.com/@chain-registry/utils/-/utils-1.44.1.tgz#06d0f9df782d28c61391e868181a95f689349eaf"
+  integrity sha512-TFOJE+BffucU6aUUYCFTdxDlJQ3OS/Y5ILoWDYe11HY+KZb/VA+46DwTB6a6trGW0cciX0I+lxWOYNvECjmpUg==
   dependencies:
-    "@chain-registry/types" "^0.41.1"
+    "@chain-registry/types" "^0.43.1"
     bignumber.js "9.1.2"
     sha.js "^2.4.11"
 
@@ -324,12 +324,13 @@
   dependencies:
     axios "1.6.0"
 
-"@cosmos-kit/core@^2.10.0":
-  version "2.10.0"
-  resolved "https://registry.yarnpkg.com/@cosmos-kit/core/-/core-2.10.0.tgz#258befd2615e9afb5858825663d287b441231517"
-  integrity sha512-9gSmTCHh2xpG6rfcsVjxDUq1mvAKaS7Nre47ddEzLLrRni685I5ppokPwURsUZpm4lsNpDKKum0nV0P1WtYJhQ==
+"@cosmos-kit/core@^2.10.0", "@cosmos-kit/core@^2.11.0":
+  version "2.11.0"
+  resolved "https://registry.yarnpkg.com/@cosmos-kit/core/-/core-2.11.0.tgz#50e228041d81a77a26df370643d675dc26190ee9"
+  integrity sha512-jYvy/0h5hveJqzD6emVDODEY3bVI2ZUfawZx1TrMJRjZ6gqn/GDwNB4JdsIuZx/pO/XB6FBjk1tf9WptyE9Y/A==
   dependencies:
-    "@chain-registry/client" "^1.18.0"
+    "@chain-registry/client" "^1.44.3"
+    "@chain-registry/types" "^0.41.3"
     "@cosmjs/amino" "^0.32.3"
     "@cosmjs/cosmwasm-stargate" "^0.32.3"
     "@cosmjs/proto-signing" "^0.32.3"
@@ -339,6 +340,7 @@
     bowser "2.11.0"
     cosmjs-types "^0.9.0"
     events "3.3.0"
+    nock "13.5.4"
     uuid "^9.0.1"
 
 "@cosmos-kit/keplr-extension@^2.9.0":
@@ -367,21 +369,23 @@
     "@cosmos-kit/keplr-extension" "^2.9.0"
     "@cosmos-kit/keplr-mobile" "^2.8.0"
 
-"@cosmos-kit/react-lite@^2.8.0":
-  version "2.8.0"
-  resolved "https://registry.yarnpkg.com/@cosmos-kit/react-lite/-/react-lite-2.8.0.tgz#ed1bc83e2fb9cfcf60dc7f5ad0f4466178d3104e"
-  integrity sha512-FSmnmpvVZ2It9Bjop+XX9c/U5emtDSn1VtA3+L+K0Ym5kxrO5udN6tLgCGpyHH+9VNkgO89EFhTuwfhNeKqhug==
+"@cosmos-kit/react-lite@^2.9.0":
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/@cosmos-kit/react-lite/-/react-lite-2.9.0.tgz#890fc99cba6aac2c570f5703ab502a061d1c4014"
+  integrity sha512-sjExfQRXrWtp74g2yIHCzqsaYGTb/CuDMonmX1bwrmfnetXjX+Yf4LAB2kR7lsU3/V6v8f/mA/izsy/mxmQaSw==
   dependencies:
-    "@cosmos-kit/core" "^2.10.0"
+    "@chain-registry/types" "^0.41.3"
+    "@cosmos-kit/core" "^2.11.0"
     "@dao-dao/cosmiframe" "^0.1.0"
 
-"@cosmos-kit/react@^2.11.3":
-  version "2.12.0"
-  resolved "https://registry.yarnpkg.com/@cosmos-kit/react/-/react-2.12.0.tgz#4dc6018b0f4e541f35c5bd4423b4237f6b643446"
-  integrity sha512-hgB8U5ABdiomD3/Sx0f18IhgZVhso0vR3ZEhdYkDpLR2b4LEs9x/mruZF7WOoSWZYKq+GAIhlCofiB2uKCf6vA==
+"@cosmos-kit/react@^2.13.0":
+  version "2.13.0"
+  resolved "https://registry.yarnpkg.com/@cosmos-kit/react/-/react-2.13.0.tgz#150c96883c52c1261a5e85ae4006bfa552b92ede"
+  integrity sha512-MIjA4LoBWoJGtcIgieLZV9D2GvTKLdsIim70+FTur5nH4AqsQzsy0aRAcoHxq7o5oJC3uzy76+FTaoVlO4mnDg==
   dependencies:
-    "@cosmos-kit/core" "^2.10.0"
-    "@cosmos-kit/react-lite" "^2.8.0"
+    "@chain-registry/types" "^0.41.3"
+    "@cosmos-kit/core" "^2.11.0"
+    "@cosmos-kit/react-lite" "^2.9.0"
     "@react-icons/all-files" "^4.1.0"
 
 "@cosmos-kit/types@^0.11.0":
@@ -4419,7 +4423,7 @@ debug@^3.2.7:
   dependencies:
     ms "^2.1.1"
 
-debug@^4.3.1, debug@^4.3.2, debug@^4.3.4:
+debug@^4.1.0, debug@^4.3.1, debug@^4.3.2, debug@^4.3.4:
   version "4.3.4"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.4.tgz#1319f6579357f2338d3337d2cdd4914bb5dcc865"
   integrity sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==
@@ -5760,6 +5764,11 @@ json-stable-stringify-without-jsonify@^1.0.1:
   resolved "https://registry.yarnpkg.com/json-stable-stringify-without-jsonify/-/json-stable-stringify-without-jsonify-1.0.1.tgz#9db7b59496ad3f3cfef30a75142d2d930ad72651"
   integrity sha512-Bdboy+l7tA3OGW6FjyFHWkP5LuByj1Tk33Ljyq0axyzdk9//JSi2u3fP1QSmd1KNwq6VOKYGlAu87CisVir6Pw==
 
+json-stringify-safe@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/json-stringify-safe/-/json-stringify-safe-5.0.1.tgz#1296a2d58fd45f19a0f6ce01d65701e2c735b6eb"
+  integrity sha512-ZClg6AaYvamvYEE82d3Iyd3vSSIjQ+odgjaTzRuO3s7toCdFKczob2i0zCh7JE8kWn17yvAWhUVxvqGwUalsRA==
+
 json5@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/json5/-/json5-1.0.2.tgz#63d98d60f21b313b77c4d6da18bfa69d80e1d593"
@@ -6139,6 +6148,15 @@ next@14.2.3:
     "@next/swc-win32-arm64-msvc" "14.2.3"
     "@next/swc-win32-ia32-msvc" "14.2.3"
     "@next/swc-win32-x64-msvc" "14.2.3"
+
+nock@13.5.4:
+  version "13.5.4"
+  resolved "https://registry.yarnpkg.com/nock/-/nock-13.5.4.tgz#8918f0addc70a63736170fef7106a9721e0dc479"
+  integrity sha512-yAyTfdeNJGGBFxWdzSKCBYxs5FxLbCg5X5Q4ets974hcQzG1+qCxvIyOo4j2Ry6MUlhWVMX4OoYDefAIIwupjw==
+  dependencies:
+    debug "^4.1.0"
+    json-stringify-safe "^5.0.1"
+    propagate "^2.0.0"
 
 node-addon-api@^7.0.0:
   version "7.1.0"
@@ -6534,6 +6552,11 @@ prop-types@^15.6.2, prop-types@^15.8.1:
     loose-envify "^1.4.0"
     object-assign "^4.1.1"
     react-is "^16.13.1"
+
+propagate@^2.0.0:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/propagate/-/propagate-2.0.1.tgz#40cdedab18085c792334e64f0ac17256d38f9a45"
+  integrity sha512-vGrhOavPSTz4QVNuBNdcNXePNdNMaO1xj9yBeH1ScQPjk/rhg9sSlCXPhMkFuaNNW/syTvYqsnbIJxMBfRbbag==
 
 protobufjs@^6.11.2, protobufjs@^6.8.8, protobufjs@~6.11.2:
   version "6.11.4"
