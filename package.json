@@ -27,8 +27,8 @@
     "yarn": "~1.22.19"
   },
   "dependencies": {
-    "@cosmos-kit/keplr": "^2.8.0",
-    "@cosmos-kit/react": "^2.11.3",
+    "@cosmos-kit/keplr": "^2.9.0",
+    "@cosmos-kit/react": "^2.13.0",
     "@cosmos-kit/types": "^0.11.0",
     "@interchain-ui/react": "^1.23.13",
     "@radix-ui/react-accordion": "^1.1.2",
@@ -40,11 +40,11 @@
     "@radix-ui/react-switch": "^1.0.3",
     "@radix-ui/react-toast": "^1.1.5",
     "@radix-ui/react-tooltip": "^1.0.7",
-    "@tanstack/react-query": "^5.37.1",
+    "@tanstack/react-query": "^5.39.0",
     "@tanstack/react-query-devtools": "^5.37.1",
     "axios": "^1.7.2",
     "bignumber.js": "^9.1.2",
-    "chain-registry": "^1.59.5",
+    "chain-registry": "^1.61.4"
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
