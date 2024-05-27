@@ -3,6 +3,7 @@
 import { useChain } from '@cosmos-kit/react';
 import React, { PropsWithChildren, useCallback, useState } from 'react';
 import { DelegateModal, RewardsCalculatorModal, TermsModal } from '@/components/ui/modals';
+import { ConfirmTransactionModal } from '@/components/ui/modals/confirm-transaction/confirm-transaction-modal';
 import { VoteProposalModal } from '@/components/ui/modals/vote-proposal/vote-proposal-modal';
 import { ModalContext } from '@/context';
 import { chainName } from '@/core/chain';
@@ -14,6 +15,7 @@ const ModalProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [isDelegateOpen, setDelegateOpen] = useState<boolean>(false);
   const [isRewardsCalculatorOpen, setRewardsCalculatorOpen] = useState<boolean>(false);
   const [isVoteProposalOpen, setVoteProposalOpen] = useState<boolean>(false);
+  const [isConfirmTransactionOpen, setConfirmTransactionOpen] = useState<boolean>(false);
 
   const { openView } = useChain(chainName);
 
@@ -38,18 +40,24 @@ const ModalProvider: React.FC<PropsWithChildren> = ({ children }) => {
     setVoteProposalOpen(true);
   }, []);
 
+  const openConfirmTransactionModal = useCallback(() => {
+    setConfirmTransactionOpen(true);
+  }, []);
+
   return (
     <ModalContext.Provider value={{
       openConnectWalletModal,
       openDelegateModal,
       openRewardsCalculatorModal,
-      openVoteProposalModal
+      openVoteProposalModal,
+      openConfirmTransactionModal
     }}>
       {children}
       <TermsModal open={openTerms} setOpen={setOpenTerms} openWalletModal={openView} />
       <DelegateModal isOpen={isDelegateOpen} setOpen={setDelegateOpen} />
       <RewardsCalculatorModal isOpen={isRewardsCalculatorOpen} setOpen={setRewardsCalculatorOpen} />
       <VoteProposalModal isOpen={isVoteProposalOpen} setOpen={setVoteProposalOpen} />
+      <ConfirmTransactionModal isOpen={isConfirmTransactionOpen} setOpen={setConfirmTransactionOpen} />
     </ModalContext.Provider>
   );
 };

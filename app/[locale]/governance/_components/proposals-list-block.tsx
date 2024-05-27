@@ -57,7 +57,7 @@ const ProposalsListBlock = () => {
       <div className='flex flex-col w-full overflow-auto'>
         <ProposalsTableSortingHeader activeFilter={null} />
         <BoxInner className='w-[900px] lg:w-full flex-col pb-4 mb-4'>
-          <Row onClick={goToDetails} className='h-[140px] p-4 items-center relative justify-between even:bg-axone-dark-blue-3'>
+          <Row onClick={goToDetails} className='h-[140px] cursor-pointer group p-4 items-center relative justify-between even:bg-axone-dark-blue-3'>
             <Text className='mb-0 w-[80px]'>379</Text>
             <div className='flex flex-col items-start w-[300px]'>
               <div className='flex flex-row items-center gap-4 mb-4'>
@@ -74,7 +74,7 @@ const ProposalsListBlock = () => {
               <ArrowUpRight className='h-12 w-12 text-axone-khaki group-hover:text-axone-orange' />
             </div>
           </Row>
-          <Row className='h-[140px] p-4 items-center relative justify-between even:bg-axone-dark-blue-3'>
+          <Row className='h-[140px] cursor-pointer group p-4 items-center relative justify-between even:bg-axone-dark-blue-3'>
             <Text className='mb-0 w-[80px]'>379</Text>
             <div className='flex flex-col items-start w-[300px]'>
               <div className='flex flex-row items-center gap-4 mb-4'>

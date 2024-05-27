@@ -5,7 +5,7 @@ import { Text } from '@/components/typography';
 import { Box } from '@/components/ui/boxes';
 import { MockDataType, OneBarChart } from '@/components/ui/charts/one-bar-chart';
 import Row from '@/components/ui/row';
-import TimeframeSelect from '@/components/ui/select-timeframe';
+import { TimeframeSelect } from '@/components/ui/selects';
 
 const issuanceMock: MockDataType = {
   min: 600,

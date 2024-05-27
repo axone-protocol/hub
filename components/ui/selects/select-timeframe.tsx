@@ -1,9 +1,9 @@
 'use client';
 import Image from 'next/image';
 import { useState } from 'react';
+import { Text } from '@/components/typography';
 import { Select, SelectContent, SelectGroup, SelectIcon, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { cn } from '@/lib/utils';
-import { Text } from '../typography';
 
 const TimeframeSelect = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -26,4 +26,4 @@ const TimeframeSelect = () => {
     </Select>
   );};
 
-export default TimeframeSelect;
+export { TimeframeSelect };
