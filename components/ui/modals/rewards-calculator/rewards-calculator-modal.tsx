@@ -15,6 +15,11 @@ type RewardsCalculatorModalProps = {
   setOpen: (open: boolean) => void;
 };
 
+const MIN_STAKE = 5;
+const MAX_STAKE = 200000;
+// Mock values - will be replaced with real values later
+const AXONE_FIAT_PRICE_MOCK = 1.23;
+
 const RewardsCalculatorModal: FC<RewardsCalculatorModalProps> = ({ isOpen, setOpen }) => {
   const t  = useTranslations('Dashboard');
   const [stake, setStake] = useState<number>(5);
@@ -24,15 +29,12 @@ const RewardsCalculatorModal: FC<RewardsCalculatorModalProps> = ({ isOpen, setOp
   const [daily, setDaily] = useState<number>(0);
   const { data: tokenInfo } = useTokenInfo();
 
-  // Mock values - will be replaced with real values later
-  const AXONE_FIAT_PRICE_MOCK = 1.23;
-
   const handleApplyClick = () => {
-    if (stake  < 5) {
-      setStake(5);
+    if (stake  < MIN_STAKE) {
+      setStake(MIN_STAKE);
     }
-    if (stake > 200000) {
-      setStake(200000);
+    if (stake > MAX_STAKE) {
+      setStake(MAX_STAKE);
     }
     const yearlyCalc = stake * (Number(tokenInfo?.apr || 0)/100);
     setYearly(yearlyCalc);

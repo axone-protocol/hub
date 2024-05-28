@@ -6,7 +6,7 @@ type TooltipProps = {
   payload?: Payload<ValueType, NameType>[] | undefined ;
   label?: string;
   formattedDate?: string;
-  type?: string;
+  type?: 'overview' | 'supply';
 }
 
 /**
