@@ -6,6 +6,7 @@ import PageContainer from '@/components/ui/page-container';
 import { chainName } from '@/core/chain';
 import { BalancesBlock } from './_components/balances-block';
 import { OverviewBlock } from './_components/overview-block';
+import { RewardsHistoryBlock } from './_components/rewards-history-block';
 import { TransferBlock } from './_components/transfer-block';
 
 export default function Wallet () {
@@ -22,6 +23,7 @@ export default function Wallet () {
         <BalancesBlock />
         <TransferBlock />
       </div>
+      <RewardsHistoryBlock />
     </PageContainer>
   );
 }

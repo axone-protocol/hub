@@ -85,7 +85,7 @@ const SupplyAreaChart: FC<SupplyAreaChartProps> = ({ data }) => {
           <Tooltip
             content={({ active, payload }) => {
               const formattedDate = formatChartDate(payload?.[0]?.payload.time);
-              return <ChartTooltip active={active} payload={payload} formattedDate={formattedDate} />;
+              return <ChartTooltip type='supply' active={active} payload={payload} formattedDate={formattedDate} />;
             }}
           />
           <defs>

@@ -5,6 +5,7 @@ type ModalContextProps = {
   openDelegateModal: () => void;
   openRewardsCalculatorModal: () => void;
   openVoteProposalModal: () => void;
+  openConfirmTransactionModal: () => void;
 }
 
 const defaultModalContext: ModalContextProps = {
@@ -12,6 +13,7 @@ const defaultModalContext: ModalContextProps = {
   openDelegateModal: () => {},
   openRewardsCalculatorModal: () => {},
   openVoteProposalModal: () => {},
+  openConfirmTransactionModal: () => {},
 };
 const useModal = () => {
   const context = useContext(ModalContext);

@@ -1,4 +1,5 @@
 'use client';
+import { Info } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { FC, useState } from 'react';
 import { Text, Title } from '@/components/typography';
@@ -14,6 +15,11 @@ type RewardsCalculatorModalProps = {
   setOpen: (open: boolean) => void;
 };
 
+const MIN_STAKE = 5;
+const MAX_STAKE = 200000;
+// Mock values - will be replaced with real values later
+const AXONE_FIAT_PRICE_MOCK = 1.23;
+
 const RewardsCalculatorModal: FC<RewardsCalculatorModalProps> = ({ isOpen, setOpen }) => {
   const t  = useTranslations('Dashboard');
   const [stake, setStake] = useState<number>(5);
@@ -23,10 +29,13 @@ const RewardsCalculatorModal: FC<RewardsCalculatorModalProps> = ({ isOpen, setOp
   const [daily, setDaily] = useState<number>(0);
   const { data: tokenInfo } = useTokenInfo();
 
-  // Mock values - will be replaced with real values later
-  const AXONE_FIAT_PRICE_MOCK = 1.23;
-
   const handleApplyClick = () => {
+    if (stake  < MIN_STAKE) {
+      setStake(MIN_STAKE);
+    }
+    if (stake > MAX_STAKE) {
+      setStake(MAX_STAKE);
+    }
     const yearlyCalc = stake * (Number(tokenInfo?.apr || 0)/100);
     setYearly(yearlyCalc);
     setMonthly(yearlyCalc / 12);
@@ -41,13 +50,7 @@ const RewardsCalculatorModal: FC<RewardsCalculatorModalProps> = ({ isOpen, setOp
     setIsFocused(true);
     const value = Number(e.target.value);
     if (!Number.isNaN(value)) {
-      if (value < 5) {
-        setStake(5);
-      } else if (value > 200000) {
-        setStake(200000);
-      } else {
-        setStake(value);
-      }
+      setStake(value);
     }
   };
 
@@ -64,14 +67,12 @@ const RewardsCalculatorModal: FC<RewardsCalculatorModalProps> = ({ isOpen, setOp
               <Row className='relative'>
                 <Input
                   type='number'
-                  min='5'
-                  max='200000'
                   autoFocus={false}
                   isRequired
                   onChange={handleInputChange}
                   value={isFocused ? stake : ''}
                   className='pl-2 pr-20 placeholder:tracking-tighter placeholder:text-[14px] mb-4 lg:mb-0'
-                  placeholder={t('StakingRewardsCalculatorEnterAmount')}
+                  placeholder={'Enter Amount'}
                 />
                 <Button
                   onClick={handleApplyClick}
@@ -79,6 +80,10 @@ const RewardsCalculatorModal: FC<RewardsCalculatorModalProps> = ({ isOpen, setOp
                 >
                   {t('Apply')}
                 </Button>
+              </Row>
+              <Row className='gap-4 items-end mt-6'>
+                <Info className='text-axone-khaki' size={18} />
+                <Text className='text-axone-khaki mb-0 relative top-[2px]'>Min 5 - Max 200,000,000</Text>
               </Row>
             </Column>
 

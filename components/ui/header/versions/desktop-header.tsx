@@ -1,5 +1,4 @@
-import LanguageSelect from '@/components/ui//select-language';
-import CurrencySelect from '@/components/ui/select-currency';
+import { CurrencySelect, LanguageSelect } from '@/components/ui/selects';
 import { ConnectWallet } from './../connect-wallet';
 
 const DesktopHeader = (): JSX.Element => {

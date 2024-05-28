@@ -24,4 +24,4 @@ const CurrencySelect = () => {
     </Select>
   );};
 
-export default CurrencySelect;
+export { CurrencySelect };
