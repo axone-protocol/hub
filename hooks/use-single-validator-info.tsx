@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import { api } from '@/core/api';
+import axios from 'axios';
+import { useEnvironment } from '@/context/environment-context';
 
 type SingleValidatorData = {
   address: string;
@@ -24,8 +25,8 @@ type SingleValidatorData = {
   votingPower: number;
 }
 
-const getSingleValidatorDataFn = async (address: string | string[]) => {
-  const { data } = await api.get<SingleValidatorData>(`/staking/validators/${address}`);
+const getSingleValidatorDataFn = async (address: string | string[], baseUrl: string | undefined) => {
+  const { data } = await axios.get<SingleValidatorData>(`${baseUrl}/staking/validators/${address}`);
 
   return data;
 };
@@ -33,11 +34,11 @@ const getSingleValidatorDataFn = async (address: string | string[]) => {
 export const useSingleValidatorQueryKey = ['single-validator-details'];
 
 export const useSingleValidatorInfo = (address: string | string[]) => {
-
+  const { baseUrl } = useEnvironment();
   const query = useQuery({
     enabled: true,
     queryKey: [...useSingleValidatorQueryKey, address],
-    queryFn: () => getSingleValidatorDataFn(address),
+    queryFn: () => getSingleValidatorDataFn(address, baseUrl),
   });
 
   return query;

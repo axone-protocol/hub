@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import { api } from '@/core/api';
+import axios from 'axios';
+import { useEnvironment } from '@/context/environment-context';
 
 export type ValidatorDelegation = {
   delegator: string;
@@ -16,8 +17,8 @@ type ValidatorDelegationsData = {
   }
 }
 
-const getValidatorDelegationsDataFn = async (address: string | string[]) => {
-  const { data } = await api.get<ValidatorDelegationsData>('/staking/validator-delegations', { params: { address } });
+const getValidatorDelegationsDataFn = async (address: string | string[], baseUrl: string | undefined) => {
+  const { data } = await axios.get<ValidatorDelegationsData>(baseUrl + '/staking/validator-delegations', { params: { address } });
 
   return data;
 };
@@ -25,11 +26,11 @@ const getValidatorDelegationsDataFn = async (address: string | string[]) => {
 export const useValidatorDelegationsQueryKey = ['validator-delegations-list'];
 
 export const useValidatorDelegations = (address: string | string[]) => {
-
+  const { baseUrl } = useEnvironment();
   const query = useQuery({
     enabled: true,
     queryKey: [...useValidatorDelegationsQueryKey, address],
-    queryFn: () => getValidatorDelegationsDataFn(address),
+    queryFn: () => getValidatorDelegationsDataFn(address, baseUrl),
   });
 
   return query;

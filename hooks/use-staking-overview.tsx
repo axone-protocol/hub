@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import { api } from '@/core/api';
+import axios from 'axios';
+import { useEnvironment } from '@/context/environment-context';
 
 type StakingOverviewData = {
   totalValidators: string;
@@ -8,8 +9,8 @@ type StakingOverviewData = {
   bondedTokens: string;
 };
 
-const getStakingOverviewDataFn = async () => {
-  const { data } = await api.get<StakingOverviewData>('/staking/overview');
+const getStakingOverviewDataFn = async (baseUrl: string | undefined) => {
+  const { data } = await axios.get<StakingOverviewData>(baseUrl + '/staking/overview');
 
   const convertedData = {
     totalValidators: Number(data.totalValidators),
@@ -24,11 +25,11 @@ const getStakingOverviewDataFn = async () => {
 export const useStakingOverviewQueryKey = ['staking-overview'];
 
 export const useStakingOverview = () => {
-
+  const { baseUrl } = useEnvironment();
   const query = useQuery({
     enabled: true,
     queryKey: useStakingOverviewQueryKey,
-    queryFn: () => getStakingOverviewDataFn(),
+    queryFn: () => getStakingOverviewDataFn(baseUrl),
     staleTime: 1000 * 60 * 2
   });
 

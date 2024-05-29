@@ -4,10 +4,11 @@ import { ChainProvider } from '@cosmos-kit/react';
 import { assets, chains } from 'chain-registry';
 import { PropsWithChildren } from 'react';
 import { ConnectWalletModal } from '@/components/ui/modals';
+import { useEnvironment } from '@/context/environment-context';
 import { assetList, chain } from '@/core/chain';
-import { config } from '@/core/config';
 
 export function CosmosChainProvider ({ children }: PropsWithChildren) {
+  const { walletConnectID } = useEnvironment();
   return (
     <ChainProvider
       chains={[...chains, chain]}
@@ -27,7 +28,7 @@ export function CosmosChainProvider ({ children }: PropsWithChildren) {
         signClient: {
           // TODO: Replace project ID from (https://cloud.walletconnect.org/)
           // It's needed for WalletConnect to work on mobile
-          projectId: config.walletConnectID || '',
+          projectId: walletConnectID || '',
         }
       }}
       walletModal={ConnectWalletModal}
