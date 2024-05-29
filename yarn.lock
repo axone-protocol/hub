@@ -34,15 +34,25 @@
     "@keplr-wallet/crypto" "0.12.28"
     semver "^7.5.0"
 
+"@chain-registry/keplr@^1.64.2":
+  version "1.66.6"
+  resolved "https://registry.yarnpkg.com/@chain-registry/keplr/-/keplr-1.66.6.tgz#1a61c2650aa13b7d4cc4e2bc8dde975559da9de1"
+  integrity sha512-WBjbVYmDtuwP+HTPOiwoxf7SnoAkh8iKlQU0cER0oPbtE4HOGA17akD0ZVv0zsNtGZI95uarCZOIyIH5hv7zdw==
+  dependencies:
+    "@chain-registry/types" "^0.43.6"
+    "@keplr-wallet/cosmos" "0.12.28"
+    "@keplr-wallet/crypto" "0.12.28"
+    semver "^7.5.0"
+
 "@chain-registry/types@^0.41.3":
   version "0.41.4"
   resolved "https://registry.yarnpkg.com/@chain-registry/types/-/types-0.41.4.tgz#c0a83b6bf3572fac4024faada6caf600887c96a6"
   integrity sha512-LeW2nXd0dmnI+TC4L2xC3RNooUthUfou1yFcdsinSW6EP9qEwo2BwwnWWAcMG+dsPvXfM4AfmisVBrxbX2OKqw==
 
-"@chain-registry/types@^0.43.4", "@chain-registry/types@^0.43.5":
-  version "0.43.5"
-  resolved "https://registry.yarnpkg.com/@chain-registry/types/-/types-0.43.5.tgz#b5be9eb3f36d4eb1543d826fd41d9809dfdb24c2"
-  integrity sha512-hFgkOD35ztxQfHnXEsNGLM0bQ775b6YS1Oioohj3HeJvt+ncrxxnGN/Pvacxoq5hBGA3wcGZD0GxUsPY5pSXHQ==
+"@chain-registry/types@^0.43.4", "@chain-registry/types@^0.43.5", "@chain-registry/types@^0.43.6":
+  version "0.43.6"
+  resolved "https://registry.yarnpkg.com/@chain-registry/types/-/types-0.43.6.tgz#cbf6cb55cd1287357bdaf4a4f7cc9a7cfb51a81c"
+  integrity sha512-3te6JCM4P6eS8dNpaw8Ao2Y8naSbZH9kcwmolOVtU11zaFNxSLkJX4zIoD3SKRuZUShP8veF0MrSj42s72XCjQ==
 
 "@chain-registry/utils@^1.44.4":
   version "1.44.4"
@@ -316,12 +326,13 @@
   dependencies:
     axios "1.6.0"
 
-"@cosmos-kit/core@^2.11.0":
-  version "2.11.0"
-  resolved "https://registry.yarnpkg.com/@cosmos-kit/core/-/core-2.11.0.tgz#50e228041d81a77a26df370643d675dc26190ee9"
-  integrity sha512-jYvy/0h5hveJqzD6emVDODEY3bVI2ZUfawZx1TrMJRjZ6gqn/GDwNB4JdsIuZx/pO/XB6FBjk1tf9WptyE9Y/A==
+"@cosmos-kit/core@^2.11.0", "@cosmos-kit/core@^2.12.0":
+  version "2.12.0"
+  resolved "https://registry.yarnpkg.com/@cosmos-kit/core/-/core-2.12.0.tgz#d0a10faee8359d58e6e350900746caeeca244f94"
+  integrity sha512-zgTu9COvyJ43RDwQlTwaW2W6/pzCNZLMPEAaNv3Z6kMQx4z/EcudpfDBme0939nKlZQDeX0OF4isWVkcz5NWog==
   dependencies:
     "@chain-registry/client" "^1.44.3"
+    "@chain-registry/keplr" "^1.64.2"
     "@chain-registry/types" "^0.41.3"
     "@cosmjs/amino" "^0.32.3"
     "@cosmjs/cosmwasm-stargate" "^0.32.3"
@@ -363,23 +374,23 @@
     "@cosmos-kit/keplr-extension" "^2.10.0"
     "@cosmos-kit/keplr-mobile" "^2.9.0"
 
-"@cosmos-kit/react-lite@^2.9.0":
-  version "2.9.0"
-  resolved "https://registry.yarnpkg.com/@cosmos-kit/react-lite/-/react-lite-2.9.0.tgz#890fc99cba6aac2c570f5703ab502a061d1c4014"
-  integrity sha512-sjExfQRXrWtp74g2yIHCzqsaYGTb/CuDMonmX1bwrmfnetXjX+Yf4LAB2kR7lsU3/V6v8f/mA/izsy/mxmQaSw==
+"@cosmos-kit/react-lite@^2.10.0":
+  version "2.10.0"
+  resolved "https://registry.yarnpkg.com/@cosmos-kit/react-lite/-/react-lite-2.10.0.tgz#7b1ed7d629d5357f11929af54592d72866bd159a"
+  integrity sha512-6BAICiYA4WIrmtdlSso+2xr1QfTE2uFNRghI7yMjwMLHERhyxSVn0BGqwZS7XvKxXmPQrreRxAM4TzvbJVwQhw==
   dependencies:
     "@chain-registry/types" "^0.41.3"
-    "@cosmos-kit/core" "^2.11.0"
+    "@cosmos-kit/core" "^2.12.0"
     "@dao-dao/cosmiframe" "^0.1.0"
 
-"@cosmos-kit/react@^2.13.0":
-  version "2.13.0"
-  resolved "https://registry.yarnpkg.com/@cosmos-kit/react/-/react-2.13.0.tgz#150c96883c52c1261a5e85ae4006bfa552b92ede"
-  integrity sha512-MIjA4LoBWoJGtcIgieLZV9D2GvTKLdsIim70+FTur5nH4AqsQzsy0aRAcoHxq7o5oJC3uzy76+FTaoVlO4mnDg==
+"@cosmos-kit/react@^2.14.0":
+  version "2.14.0"
+  resolved "https://registry.yarnpkg.com/@cosmos-kit/react/-/react-2.14.0.tgz#333b4aa15cd1d126887b48a33b5b712c4c56f2be"
+  integrity sha512-4vJpOhRNIX/E/Go0sWquM3Fo71BbBO1bdQKu7Hcbnx1DYr5nDH/3pKMT/jp+gFjs50SHNrp1xaX4JS6nUHpm6g==
   dependencies:
     "@chain-registry/types" "^0.41.3"
-    "@cosmos-kit/core" "^2.11.0"
-    "@cosmos-kit/react-lite" "^2.9.0"
+    "@cosmos-kit/core" "^2.12.0"
+    "@cosmos-kit/react-lite" "^2.10.0"
     "@react-icons/all-files" "^4.1.0"
 
 "@cosmos-kit/types@^0.11.0":
