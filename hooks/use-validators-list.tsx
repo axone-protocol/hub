@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 import { useState } from 'react';
-import { api } from '@/core/api';
+import { useEnvironment } from '@/context/environment-context';
 
 export type ValidatorsListData = {
   logo: string | null;
@@ -39,8 +40,8 @@ export enum ValidatorSortBy {
 
 type CountType = number | undefined;
 
-const getValidatorsListFn = async () => {
-  const { data } = await api.get<ValidatorsListData[]>('/staking/validators');
+const getValidatorsListFn = async (baseUrl: string | undefined) => {
+  const { data } = await axios.get<ValidatorsListData[]>(baseUrl + '/staking/validators');
   return data;
 };
 
@@ -51,11 +52,11 @@ export const useValidatorsList = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState<ValidatorSortBy | null>(null);
   const [order, setOrder] = useState<'asc' | 'desc'>('asc');
-
+  const { baseUrl } = useEnvironment();
   const query = useQuery({
     refetchOnMount: true,
     queryKey: useValidatorsListQueryKey,
-    queryFn: getValidatorsListFn,
+    queryFn: () => getValidatorsListFn(baseUrl),
   });
 
   const activeCount: CountType = query.data?.filter(validator => validator.status === ValidatorStatus.BONDED).length;

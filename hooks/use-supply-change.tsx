@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 import { useState } from 'react';
-import { api } from '@/core/api';
+import { useEnvironment } from '@/context/environment-context';
 
 export enum ChangeSupplyRangeEnum {
   FIVE_MIN = 'fiveMin',
@@ -14,8 +15,8 @@ export enum ChangeSupplyRangeEnum {
  * Getting data for the supply change
  */
 
-const getSupplyChangeDataFn = async (range: ChangeSupplyRangeEnum = ChangeSupplyRangeEnum.DAY) => {
-  const { data } = await api.get<string>('/supply/change', { params: { range } });
+const getSupplyChangeDataFn = async (range: ChangeSupplyRangeEnum = ChangeSupplyRangeEnum.DAY, baseUrl: string | undefined) => {
+  const { data } = await axios.get<string>(baseUrl + '/supply/change', { params: { range } });
 
   return data;
 };
@@ -24,11 +25,11 @@ export const useSupplyChangeQueryKey = ['supply-change'];
 
 export const useSupplyChange = () => {
   const [range, selectRange] = useState<ChangeSupplyRangeEnum>(ChangeSupplyRangeEnum.DAY);
-
+  const { baseUrl } = useEnvironment();
   const query = useQuery({
     enabled: true,
     queryKey: [...useSupplyChangeQueryKey, range],
-    queryFn: () => getSupplyChangeDataFn(range),
+    queryFn: () => getSupplyChangeDataFn(range, baseUrl),
     staleTime: 1000 * 60 * 2,
   });
 

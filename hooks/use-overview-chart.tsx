@@ -1,7 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 import { useState } from 'react';
 import { ChartData } from '@/app/mock-chart-data';
-import { api } from '@/core/api';
+import { useEnvironment } from '@/context/environment-context';
 
 /**
  * Getting data for the overview chart on the dashboard
@@ -16,8 +17,8 @@ export enum OverviewChartFilterRangeEnum {
   YEAR = 'year',
 }
 
-const getOverviewChartDataFn = async (range: OverviewChartFilterRangeEnum = OverviewChartFilterRangeEnum.DAY) => {
-  const { data } = await api.get<ChartData[]>('/token/historical', { params: { range } });
+const getOverviewChartDataFn = async (range: OverviewChartFilterRangeEnum = OverviewChartFilterRangeEnum.DAY, baseUrl: string | undefined) => {
+  const { data } = await axios.get<ChartData[]>(baseUrl + '/token/historical', { params: { range } });
 
   return data;
 };
@@ -26,11 +27,11 @@ export const useDashboardChartQueryKey = ['overview-chart'];
 
 export const useOverviewChart = () => {
   const [range, selectRange] = useState<OverviewChartFilterRangeEnum>(OverviewChartFilterRangeEnum.DAY);
-
+  const { baseUrl } = useEnvironment();
   const query = useQuery({
     refetchOnMount: true,
     queryKey: [...useDashboardChartQueryKey, range],
-    queryFn: () => getOverviewChartDataFn(range),
+    queryFn: () => getOverviewChartDataFn(range, baseUrl),
     initialData: [] as ChartData[],
   });
 
