@@ -8,7 +8,7 @@ type PropsWithChildren =  {
   children?: React.ReactNode;
 }
 
-const EnvironmentProvider: React.FC<PropsWithChildren> = async ({ children, env }) => {
+const EnvironmentProvider: React.FC<PropsWithChildren> = ({ children, env }) => {
   const { baseUrl, walletConnectID } = env;
   return (
     <EnvironmentContext.Provider value={{
