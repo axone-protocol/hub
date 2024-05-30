@@ -31,33 +31,30 @@ const TransferBlock = () => {
   const [open, setOpen] = useState<boolean>(false);
   const { balance, isFetchingBalance, balanceDenom, makeTransaction, isTransactionPending } = useAxonePayments();
 
-  const { register, formState: { errors }, watch, trigger, reset } = useForm({
+  const { register, formState: { errors, isValid }, handleSubmit, reset } = useForm({
     resolver: zodResolver(formSchema),
   });
 
-  const formValues = watch();
 
-  const onConfirm = async () => {
-    const isValid = await trigger();
-
+  const onConfirm = handleSubmit(async (values) => {
     if (!isValid) {
       return;
     }
 
-    if (formValues.amount > balance.toNumber()) {
+    if (values.amount > balance.toNumber()) {
       alert('Insufficient funds');
       return;
     }
 
     const data = {
-      amount: formValues.amount,
-      destination: formValues.destination,
-      memo: formValues.memo
+      amount: values.amount,
+      destination: values.destination,
+      memo: values.memo
     };
     await  makeTransaction(data);
 
     reset({ amount: '', destination: '', memo: '' });
-  };
+  });
 
   return (
     <Box className='w-full lg:w-1/3 my-0 mx-0 mt-0 lg:mt-6 relative'>
