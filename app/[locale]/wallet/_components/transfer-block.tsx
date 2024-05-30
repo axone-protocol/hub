@@ -31,16 +31,12 @@ const TransferBlock = () => {
   const [open, setOpen] = useState<boolean>(false);
   const { balance, isFetchingBalance, balanceDenom, makeTransaction, isTransactionPending } = useAxonePayments();
 
-  const { register, formState: { errors, isValid }, handleSubmit, reset } = useForm({
+  const { register, formState: { errors }, handleSubmit, reset } = useForm({
     resolver: zodResolver(formSchema),
   });
 
 
   const onConfirm = handleSubmit(async (values) => {
-    if (!isValid) {
-      return;
-    }
-
     if (values.amount > balance.toNumber()) {
       alert('Insufficient funds');
       return;
@@ -73,8 +69,7 @@ const TransferBlock = () => {
         </Row>
         <Text className='uppercase'>{isFetchingBalance ? '0.00' : balance.toNumber().toFixed(2)} {balanceDenom || 'Axone'}</Text>
       </Column>
-      <Column className='gap-6'>
-
+      <form onSubmit={onConfirm} className='flex flex-col gap-6'>
         <div className='flex flex-col'>
           <Label className='text-white mb-2'>Asset</Label>
           <Select value='axone' onOpenChange={() => setOpen(prev => !prev)}>
@@ -128,7 +123,7 @@ const TransferBlock = () => {
           />
         </div>
         <Button onClick={onConfirm} variant={'rounded'} className='w-full mt-6'>Transfer</Button>
-      </Column>
+      </form>
 
     </Box>
   );
