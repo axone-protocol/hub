@@ -1,6 +1,9 @@
 'use client';
+import { zodResolver } from '@hookform/resolvers/zod';
 import Image from 'next/image';
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 import { Text, Title } from '@/components/typography';
 import { AxoneTooltip } from '@/components/ui/axone-tooltip';
 import { Box } from '@/components/ui/boxes';
@@ -14,44 +17,46 @@ import Spinner from '@/components/ui/spinner';
 import { useAxonePayments } from '@/hooks/wallet/use-axone-payments';
 import { cn } from '@/lib/utils';
 
+const formSchema = z.object({
+  amount: z.string()
+    .transform(value => parseFloat(value))
+    .refine(value => !isNaN(value) && value >= 5 && value <= 200000, {
+      message: 'Amount must be a valid number between 5 and 200000',
+    }),
+  destination: z.string().min(40, 'Invalid address').refine(value => value.startsWith('okp4'), 'Invalid address'),
+  memo: z.string().optional(),
+});
+
 const TransferBlock = () => {
   const [open, setOpen] = useState<boolean>(false);
-  const [amount, setAmount] = useState<number>(5);
-  const [destination, setDestination] = useState<string>('');
-  const [memo, setMemo] = useState<string>('');
   const { balance, isFetchingBalance, balanceDenom, makeTransaction, isTransactionPending } = useAxonePayments();
 
+  const { register, formState: { errors }, watch, trigger, reset } = useForm({
+    resolver: zodResolver(formSchema),
+  });
+
+  const formValues = watch();
+
   const onConfirm = async () => {
-    if (!amount || !destination) {
-      alert('Please fill all fields');
+    const isValid = await trigger();
+
+    if (!isValid) {
       return;
     }
-    if (isNaN(amount) || amount < 5 || amount > 200000) {
-      setAmount(5);
-      alert('Amount must be a valid number with min 5 and max 200000');
-      return;
-    }
-    if (amount > balance.toNumber()) {
+
+    if (formValues.amount > balance.toNumber()) {
       alert('Insufficient funds');
       return;
     }
-    if (destination.length < 40 || !destination.startsWith('okp4')) {
-      alert('Invalid address');
-      return;
-    }
+
     const data = {
-      amount,
-      destination,
-      memo
+      amount: formValues.amount,
+      destination: formValues.destination,
+      memo: formValues.memo
     };
     await  makeTransaction(data);
-    setDestination('');
-    setMemo('');
-  };
 
-  const onAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = parseFloat(e.target.value);
-    setAmount(value);
+    reset({ amount: '', destination: '', memo: '' });
   };
 
   return (
@@ -94,12 +99,12 @@ const TransferBlock = () => {
           <Label className='text-white' htmlFor='amount'>Amount</Label>
           <Input
             isRequired={true}
-            type='text'
+            type='number'
             id='amount'
             placeholder='Enter Amount'
-            value={amount}
-            onChange={onAmountChange}
+            {...register('amount')}
           />
+          {errors.amount && <p className='text-[12px] text-axone-red'>{`${errors.amount.message}`}</p>}
         </div>
         <div className='grid w-full max-w-sm items-center gap-1.5'>
           <Row className='items-center gap-4'>
@@ -111,9 +116,9 @@ const TransferBlock = () => {
             type='text'
             id='destination'
             placeholder='axone4f2s...'
-            value={destination}
-            onChange={(e) => setDestination(e.target.value)}
+            {...register('destination')}
           />
+          {errors.destination && <p className='text-[12px] text-axone-red'>{`${errors.destination.message}`}</p>}
         </div>
         <div className='grid w-full max-w-sm items-center gap-1.5'>
           <Label className='text-white' htmlFor='destination'>Memo</Label>
@@ -122,8 +127,7 @@ const TransferBlock = () => {
             type='text'
             id='destination'
             placeholder='Memo'
-            value={memo}
-            onChange={(e) => setMemo(e.target.value)}
+            {...register('memo')}
           />
         </div>
         <Button onClick={onConfirm} variant={'rounded'} className='w-full mt-6'>Transfer</Button>
