@@ -6,9 +6,10 @@ import { useChain } from '@cosmos-kit/react';
 import BigNumber from 'bignumber.js';
 import { cosmos } from 'juno-network';
 import { CircleCheckBig, CircleX } from 'lucide-react';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { create } from 'zustand';
 import Row from '@/components/ui/row';
+import { useEnvironment } from '@/context/environment-context';
 import { assetList, chainName } from '@/core/chain';
 import { useToast } from '../use-toast';
 
@@ -25,71 +26,34 @@ const coin: Asset = assetList?.assets.find(
 
 type AxoneWalletState = {
   balance: BigNumber;
+  setBalance: (balance: BigNumber, isFetchingBalance: boolean) => void;
   balanceDenom: string;
+  setBalanceDenom: (denom: string) => void;
   isFetchingBalance: boolean;
   transactionResponse: string;
   isTransactionPending: boolean;
   setIsTransactionPending: (isPending: boolean) => void;
   setTransactionResponse: (response: string) => void;
-  getBalance: (address: string | undefined) => void;
 };
 
 const useAxoneWalletStore = create<AxoneWalletState>((set) => ({
   balance: new BigNumber(0),
+  setBalance: (balance: BigNumber, isFetchingBalance: boolean) => set({ balance, isFetchingBalance }),
   balanceDenom: 'uknow',
+  setBalanceDenom: (denom: string) => set({ balanceDenom: denom }),
   isFetchingBalance: false,
   transactionResponse: '',
   isTransactionPending: false,
   setIsTransactionPending: (isPending: boolean) => set({ isTransactionPending: isPending }),
   setTransactionResponse: (response: string) => set({ transactionResponse: response }),
-  getBalance: async (address: string | undefined) => {
-    if (!address) {
-      console.info('no address');
-      set({
-        balance: new BigNumber(0),
-        isFetchingBalance: false
-      });
-      return;
-    }
-
-    // let rpcEndpoint = await getRpcEndpoint(); // prod from useChain()
-    let rpcEndpoint = 'https://api.drunemeton.okp4.network:443/rpc'; // dev okp4 testnet rpc
-
-    if (!rpcEndpoint) {
-      console.info('no rpc endpoint — using a fallback');
-      rpcEndpoint = `https://rpc.cosmos.directory/${chainName}`; // production endpoint
-    }
-
-    const client = await cosmos.ClientFactory.createRPCQueryClient({
-      rpcEndpoint:
-        typeof rpcEndpoint === 'string'
-          ? rpcEndpoint
-          : (rpcEndpoint as ExtendedHttpEndpoint).url,
-    });
-    const balance = await client.cosmos.bank.v1beta1.balance({
-      address,
-      denom: assetList?.assets[0].base as string,
-    });
-
-    const exp = coin.denom_units.find((unit) => unit.denom === 'uknow')
-      ?.exponent as number;
-
-    const a = new BigNumber(balance.balance?.amount || 0);
-    const amount = a.multipliedBy(10 ** -exp);
-
-    set({
-      balance: amount,
-      balanceDenom: balance.balance?.denom || 'inj',
-      isFetchingBalance: false
-    });
-  }
 }));
 
 export const useAxonePayments = () => {
-  const { getBalance, setIsTransactionPending } = useAxoneWalletStore();
-  const { address, getSigningStargateClient } =
+  const { setIsTransactionPending, setBalance, setBalanceDenom } = useAxoneWalletStore();
+  const { address, getSigningStargateClient, getRpcEndpoint } =
     useChain(chainName);
   const { toast } = useToast();
+  const { isDev } = useEnvironment();
 
   const makeTransaction = async ({ amount, destination, memo }: { amount: number, destination: string, memo: string}) => {
     setIsTransactionPending(true);
@@ -151,6 +115,42 @@ export const useAxonePayments = () => {
       getBalance(address);
     }
   };
+
+  const getBalance = useCallback(async (address: string | undefined) => {
+    if (!address) {
+      console.info('no address');
+
+      setBalance(new BigNumber(0), false);
+      return;
+    }
+
+    let rpcEndpoint = isDev ? 'https://api.drunemeton.okp4.network:443/rpc' : await getRpcEndpoint();
+
+    if (!rpcEndpoint) {
+      console.info('no rpc endpoint — using a fallback');
+      rpcEndpoint = `https://rpc.cosmos.directory/${chainName}`; // production endpoint
+    }
+
+    const client = await cosmos.ClientFactory.createRPCQueryClient({
+      rpcEndpoint:
+        typeof rpcEndpoint === 'string'
+          ? rpcEndpoint
+          : (rpcEndpoint as ExtendedHttpEndpoint).url,
+    });
+    const balance = await client.cosmos.bank.v1beta1.balance({
+      address,
+      denom: assetList?.assets[0].base as string,
+    });
+
+    const exp = coin.denom_units.find((unit) => unit.denom === 'uknow')
+      ?.exponent as number;
+
+    const a = new BigNumber(balance.balance?.amount || 0);
+    const amount = a.multipliedBy(10 ** -exp);
+
+    setBalanceDenom(balance.balance?.denom || 'know');
+    setBalance(amount, false);
+  }, [setBalance, setBalanceDenom]);
 
   useEffect(() => {
     getBalance(address);
