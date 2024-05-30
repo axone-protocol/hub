@@ -1,11 +1,13 @@
 import { createContext, useContext } from 'react';
 
 type EnvironmentContextProps = {
+  isDev: boolean;
   baseUrl: string | undefined;
   walletConnectID: string | undefined;
 }
 
 const defaultModalContext: EnvironmentContextProps = {
+  isDev: true,
   baseUrl: undefined,
   walletConnectID: undefined,
 };

@@ -9,9 +9,10 @@ type PropsWithChildren =  {
 }
 
 const EnvironmentProvider: React.FC<PropsWithChildren> = ({ children, env }) => {
-  const { baseUrl, walletConnectID } = env;
+  const { baseUrl, walletConnectID, isDev } = env;
   return (
     <EnvironmentContext.Provider value={{
+      isDev,
       baseUrl,
       walletConnectID
     }}>
