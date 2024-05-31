@@ -6,7 +6,8 @@ import { Text, Title } from '@/components/typography';
 import { Box, BoxInner } from '@/components/ui/boxes';
 import Row from '@/components/ui/row';
 import Spinner from '@/components/ui/spinner';
-import { useSingleValidatorProposedBlocks } from '@/hooks/use-single-validator-proposed-blocks';
+import { useEnvironment } from '@/context/environment-context';
+import { SingleProposedBlock, useSingleValidatorProposedBlocks, ValidatorProposedBlocksData } from '@/hooks/use-single-validator-proposed-blocks';
 
 // TODO: Move this to a shared utility file in case if it will be used in other places
 const formatTimestamp = (timestamp: string): string => {
@@ -29,17 +30,38 @@ const shortenHash = (str: string, startLength: number = 6, endLength: number = 6
 
 const RecentlyProposedBlock = () => {
   const { address } = useParams();
-  const { data, isFetching: isFetchingData } = useSingleValidatorProposedBlocks(address);
-  const [isFetching, setIsFetching] = useState<boolean>(true);
+  const { socket } = useEnvironment();
+  const { data, isLoading } = useSingleValidatorProposedBlocks(address);
+  const [blocks, setBlocks] = useState<ValidatorProposedBlocksData>({ recentlyProposedBlocks: [], total: '0' });
 
   useEffect(() => {
-    if (isFetchingData) {
-      setIsFetching(true);
-    } else {
-      const timeoutId = setTimeout(() => setIsFetching(false), 1000);
-      return () => clearTimeout(timeoutId);
+    if (!isLoading && data) {
+      setBlocks(data);
     }
-  }, [isFetchingData]);
+  }, [isLoading, data]);
+
+  useEffect(() => {
+    if (!isLoading && data) {
+      socket.connect();
+      socket.on('connect', () => console.log('connected to', socket.id));
+      socket.on('new_block', (block: SingleProposedBlock) => {
+        setBlocks((prev: ValidatorProposedBlocksData) => {
+          const newData = {
+            ...prev,
+            recentlyProposedBlocks: [block, ...prev.recentlyProposedBlocks]
+          };
+          return newData;
+        });
+      });
+      socket.on('disconnect', () => console.log('disconnected'));
+    }
+
+    return () => {
+      if (socket.connected) {
+        socket.disconnect();
+      }
+    };
+  }, [data, isLoading, socket]);
 
   return (
     <Box className='m-0'>
@@ -54,11 +76,11 @@ const RecentlyProposedBlock = () => {
       </Row>
       <BoxInner className='flex flex-col h-[140px] overflow-y-auto scrollbar scrollbar-thin'>
         {
-          isFetching
+          isLoading
             ? <div className='flex w-full h-full items-center justify-center'><Spinner /></div>
-            : data?.recentlyProposedBlocks.map((block) => {
+            : blocks?.recentlyProposedBlocks.map((block) => {
               return (
-                <Row key={block.blockHash} className='p-6 justify-between'>
+                <Row key={block.blockHash} className='p-6 justify-between even:bg-axone-dark-blue-3'>
                   <Text className='w-1/3 text-axone-orange mb-0 text-left'>{block.height}</Text>
                   <Text className='w-1/3 text-axone-orange mb-0 text-left'>{shortenHash(block.blockHash)}</Text>
                   <Text className='w-1/3 text-axone-khaki mb-0 text-left'>{block.txs}</Text>

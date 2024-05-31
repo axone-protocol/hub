@@ -1,5 +1,6 @@
 'use client';
 import React from 'react';
+import { io } from 'socket.io-client';
 import { Environment } from '@/app/actions';
 import { EnvironmentContext } from '@/context/environment-context';
 
@@ -10,11 +11,16 @@ type PropsWithChildren =  {
 
 const EnvironmentProvider: React.FC<PropsWithChildren> = ({ children, env }) => {
   const { baseUrl, walletConnectID, isDev } = env;
+  const socket = io(`${baseUrl}`, {
+    autoConnect: false,
+    transports: ['websocket'],
+  });
   return (
     <EnvironmentContext.Provider value={{
       isDev,
       baseUrl,
-      walletConnectID
+      walletConnectID,
+      socket
     }}>
       {children}
     </EnvironmentContext.Provider>

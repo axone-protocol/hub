@@ -1,16 +1,18 @@
 'use client';
+import { motion } from 'framer-motion';
 import { X } from 'lucide-react';
 import { useParams } from 'next/navigation';
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Text, Title } from '@/components/typography';
 import { Box } from '@/components/ui/boxes';
 import Row from '@/components/ui/row';
-import { useSingleValidatorUptime } from '@/hooks/use-single-validator-uptime';
+import { useEnvironment } from '@/context/environment-context';
+import { SingleBlockData, useSingleValidatorUptime, ValidatorUptimeData } from '@/hooks/use-single-validator-uptime';
 import { cn } from '@/lib/utils';
 
 type UptimeBlockItemProps = {
   size?: 'large' | 'small';
-  type?: 'signed' | 'proposed' | 'missed';
+  type?: 'signed' | 'proposed' | 'missed' | string;
 };
 
 const UptimeBlockItem: FC<UptimeBlockItemProps> = ({ size = 'large', type = 'signed' }) => {
@@ -30,7 +32,41 @@ const UptimeBlockItem: FC<UptimeBlockItemProps> = ({ size = 'large', type = 'sig
 
 const UptimeBlock = () => {
   const { address } = useParams();
-  const { data } = useSingleValidatorUptime(address);
+  const { socket } = useEnvironment();
+  const { data, isLoading } = useSingleValidatorUptime(address);
+  const [blocks, setBlocks] = useState<ValidatorUptimeData>({ blocks: [], current: '0' });
+
+  useEffect(() => {
+    if (!isLoading && data) {
+      setBlocks(data);
+    }
+  }, [isLoading, data]);
+
+  useEffect(() => {
+    if (!isLoading && data) {
+      socket.connect();
+      socket.on('connect', () => console.log('connected uptime to', socket.id));
+      socket.on(`uptime.${address}`, (block: SingleBlockData[]) => {
+        console.log('uptime', block);
+        setBlocks((prev: ValidatorUptimeData) => {
+          const newData = {
+            ...prev,
+            blocks: prev.blocks.length >= 60
+              ? [...prev.blocks.slice(0, -block.length), ...block]
+              : [...prev.blocks, ...block]
+          };
+          return newData;
+        });
+      });
+      socket.on('disconnect', () => console.log('disconnected'));
+    }
+
+    return () => {
+      if (socket.connected) {
+        socket.disconnect();
+      }
+    };
+  }, [address, data, isLoading, socket]);
 
   return (
     <Box className='flex-col p-6 mb-4'>
@@ -40,8 +76,17 @@ const UptimeBlock = () => {
       </Row>
       <div className='flex flex-row flex-wrap gap-2 mb-6'>
         {
-          data?.blocks.map((block, index) => {
-            return <UptimeBlockItem type={index === 5 || index === 38 ? 'proposed' : index === 40 ? 'missed' : 'signed'} key={block.signature} />;
+          blocks?.blocks.map((block) => {
+            return (
+              <motion.div
+                key={block.signature}
+                initial={{ opacity: 0, scale: 0.8, x: 50 }}
+                animate={{ opacity: 1, scale: 1, x: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                <UptimeBlockItem type={block.status?.toLowerCase() || 'signed'} />
+              </motion.div>
+            );
           })
         }
       </div>

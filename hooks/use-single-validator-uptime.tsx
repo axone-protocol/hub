@@ -2,16 +2,16 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useEnvironment } from '@/context/environment-context';
 
-type SingeBlockData = {
-  blockIdFlag: number,
+export type SingleBlockData = {
   address: string,
   timestamp: string,
   signature: string
+  status: 'signed' | 'proposed' | 'missed'
 }
 
-type ValidatorUptimeData = {
-  blocks: SingeBlockData[],
-  current: string
+export type ValidatorUptimeData = {
+  blocks: SingleBlockData[],
+  current: string | number
 }
 
 const getSingleValidatorUptimeDataFn = async (address: string | string[], baseUrl: string | undefined) => {
@@ -29,11 +29,11 @@ export const useSingleValidatorUptimeQueryKey = ['single-validator-uptime'];
 
 export const useSingleValidatorUptime = (address: string | string[]) => {
   const { baseUrl } = useEnvironment();
+
   const query = useQuery({
     enabled: true,
     queryKey: [...useSingleValidatorUptimeQueryKey, address],
     queryFn: () => getSingleValidatorUptimeDataFn(address, baseUrl),
-    refetchInterval: 10000 // 10 seconds
   });
 
   return query;
