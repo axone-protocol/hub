@@ -68,6 +68,9 @@ const UptimeBlock = () => {
     };
   }, [address, data, isLoading, socket]);
 
+  const missedBlocks = blocks?.blocks.filter((block) => block.status === 'Missed').length;
+  const proposedBlocks = blocks?.blocks.filter((block) => block.status === 'Proposed').length;
+  const signedBlocks = blocks?.blocks.filter((block) => block.status === 'Signed').length;
   return (
     <Box className='flex-col p-6 mb-4'>
       <Row className='justify-between items-center mb-4'>
@@ -92,9 +95,9 @@ const UptimeBlock = () => {
       </div>
       <Row className='justify-between lg:items-center'>
         <div className='flex flex-col lg:flex-row justify-start gap-4 w-2/4'>
-          <Row className='items-center gap-2'><UptimeBlockItem size='small' type='proposed' /><Text className='mb-0'>Proposed: 1</Text></Row>
-          <Row className='items-center gap-2'><UptimeBlockItem size='small' type='signed' /><Text className='mb-0'>Signed: 59</Text></Row>
-          <Row className='items-center gap-2'><UptimeBlockItem size='small' type='missed' /><Text className='mb-0'>Missed: 0</Text></Row>
+          <Row className='items-center gap-2'><UptimeBlockItem size='small' type='proposed' /><Text className='mb-0'>Proposed: {proposedBlocks}</Text></Row>
+          <Row className='items-center gap-2'><UptimeBlockItem size='small' type='signed' /><Text className='mb-0'>Signed: {signedBlocks}</Text></Row>
+          <Row className='items-center gap-2'><UptimeBlockItem size='small' type='missed' /><Text className='mb-0'>Missed: {missedBlocks}</Text></Row>
         </div>
         <Text className='mt-1 lg:mt-0'>Current: {data?.current || 0}</Text>
       </Row>

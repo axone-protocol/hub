@@ -6,7 +6,7 @@ export type SingleBlockData = {
   address: string,
   timestamp: string,
   signature: string
-  status: 'signed' | 'proposed' | 'missed'
+  status: 'Signed' | 'Proposed' | 'Missed'
 }
 
 export type ValidatorUptimeData = {

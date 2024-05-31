@@ -30,13 +30,16 @@ const RewardsCalculatorModal: FC<RewardsCalculatorModalProps> = ({ isOpen, setOp
   const { data: tokenInfo } = useTokenInfo();
 
   const handleApplyClick = () => {
+    let adjustedStake = stake;
     if (stake  < MIN_STAKE) {
+      adjustedStake = MIN_STAKE;
       setStake(MIN_STAKE);
     }
     if (stake > MAX_STAKE) {
+      adjustedStake = MAX_STAKE;
       setStake(MAX_STAKE);
     }
-    const yearlyCalc = stake * (Number(tokenInfo?.apr || 0)/100);
+    const yearlyCalc = adjustedStake * (Number(tokenInfo?.apr || 0)/100);
     setYearly(yearlyCalc);
     setMonthly(yearlyCalc / 12);
     setDaily(yearlyCalc / 365);
