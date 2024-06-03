@@ -49,10 +49,10 @@
   resolved "https://registry.yarnpkg.com/@chain-registry/types/-/types-0.41.4.tgz#c0a83b6bf3572fac4024faada6caf600887c96a6"
   integrity sha512-LeW2nXd0dmnI+TC4L2xC3RNooUthUfou1yFcdsinSW6EP9qEwo2BwwnWWAcMG+dsPvXfM4AfmisVBrxbX2OKqw==
 
-"@chain-registry/types@^0.43.4", "@chain-registry/types@^0.43.6", "@chain-registry/types@^0.43.8":
-  version "0.43.8"
-  resolved "https://registry.yarnpkg.com/@chain-registry/types/-/types-0.43.8.tgz#b302b7e7da2de8f6672add502b3b667471ae2c8e"
-  integrity sha512-AddusdlckYHFIbFUTsxh/bu5hoyvZStHTTpC3PPq6Aum5rrbkKhWBGqW/1D/0iejzWxoU7QJoYsb7k4shT+4sA==
+"@chain-registry/types@^0.43.4", "@chain-registry/types@^0.43.6", "@chain-registry/types@^0.43.9":
+  version "0.43.9"
+  resolved "https://registry.yarnpkg.com/@chain-registry/types/-/types-0.43.9.tgz#c26f5acd3d36e37f7d897f389a062b43e739f972"
+  integrity sha512-6HVsXAC5CPEROBISdVAJBPwZh9y0/9z9X8f71D7uSpTAfqMOuRCBdV2Klt7CsSyty1BHvNv8O/0nzrYcvnl/Mw==
 
 "@chain-registry/utils@^1.44.4":
   version "1.44.4"
@@ -3966,12 +3966,12 @@ caniuse-lite@^1.0.30001579, caniuse-lite@^1.0.30001587, caniuse-lite@^1.0.300015
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001623.tgz#e982099dcb229bb6ab35f5aebe2f8d79ccf6e8a8"
   integrity sha512-X/XhAVKlpIxWPpgRTnlgZssJrF0m6YtRA0QDWgsBNT12uZM6LPRydR7ip405Y3t1LamD8cP2TZFEDZFBf5ApcA==
 
-chain-registry@^1.61.8:
-  version "1.61.8"
-  resolved "https://registry.yarnpkg.com/chain-registry/-/chain-registry-1.61.8.tgz#61d9599812b39b3bc456b2c810bf61efd7397601"
-  integrity sha512-zzzQgSLUl+fKGV9U8w7gO1bebXKHyoh2g0QYjZpFW053EZh3doKKYVD8oeEwG8V20m557ahks5vhJN8vifMJaw==
+chain-registry@^1.61.11:
+  version "1.61.11"
+  resolved "https://registry.yarnpkg.com/chain-registry/-/chain-registry-1.61.11.tgz#f5ab883a82303f58f60044ef1f3fa07a64b0f048"
+  integrity sha512-MFWctT6WMYj2vRzKAxDLisLtAN4o6GkiJ58qFpNU2TQv+iMjyNAP6uk/k1+OKx6MHd3GuDq/SlEifcV9XpBdgA==
   dependencies:
-    "@chain-registry/types" "^0.43.8"
+    "@chain-registry/types" "^0.43.9"
 
 chalk@^4.0.0:
   version "4.1.2"
