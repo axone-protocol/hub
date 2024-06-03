@@ -45,7 +45,7 @@
     "@tanstack/react-query-devtools": "^5.40.0",
     "axios": "^1.7.2",
     "bignumber.js": "^9.1.2",
-    "chain-registry": "^1.61.8",
+    "chain-registry": "^1.61.11",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
