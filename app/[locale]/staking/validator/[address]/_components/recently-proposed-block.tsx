@@ -1,24 +1,14 @@
 'use client';
-import { differenceInSeconds, formatDistanceToNow } from 'date-fns';
 import { useParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Text, Title } from '@/components/typography';
 import { Box, BoxInner } from '@/components/ui/boxes';
 import Row from '@/components/ui/row';
 import Spinner from '@/components/ui/spinner';
 import { useEnvironment } from '@/context/environment-context';
 import { SingleProposedBlock, useSingleValidatorProposedBlocks, ValidatorProposedBlocksData } from '@/hooks/use-single-validator-proposed-blocks';
-
-// TODO: Move this to a shared utility file in case if it will be used in other places
-const formatTimestamp = (timestamp: string): string => {
-  const date = new Date(timestamp);
-  const secondsAgo = differenceInSeconds(new Date(), date);
-
-  if (secondsAgo < 60) {
-    return `${secondsAgo} seconds ago`;
-  }
-  return formatDistanceToNow(date, { addSuffix: true });
-};
+import { useSocket } from '@/hooks/use-socket';
+import { formatTimestamp } from '@/lib/utils';
 
 // TODO: Move this to a shared utility file in case if it will be used in other places
 const shortenHash = (str: string, startLength: number = 6, endLength: number = 6): string => {
@@ -34,34 +24,29 @@ const RecentlyProposedBlock = () => {
   const { data, isLoading } = useSingleValidatorProposedBlocks(address);
   const [blocks, setBlocks] = useState<ValidatorProposedBlocksData>({ recentlyProposedBlocks: [], total: '0' });
 
+  const newBlockHandler = useCallback((block: SingleProposedBlock) => {
+    setBlocks((prev: ValidatorProposedBlocksData) => {
+      const newData = {
+        ...prev,
+        recentlyProposedBlocks: [block, ...prev.recentlyProposedBlocks]
+      };
+      return newData;
+    });
+  }, []);
+
+  useSocket({
+    socket,
+    eventName: 'new_block',
+    eventHandler: newBlockHandler,
+    isLoading
+  });
+
+
   useEffect(() => {
     if (!isLoading && data) {
       setBlocks(data);
     }
   }, [isLoading, data]);
-
-  useEffect(() => {
-    if (!isLoading && data) {
-      socket.connect();
-      socket.on('connect', () => console.log('connected to', socket.id));
-      socket.on('new_block', (block: SingleProposedBlock) => {
-        setBlocks((prev: ValidatorProposedBlocksData) => {
-          const newData = {
-            ...prev,
-            recentlyProposedBlocks: [block, ...prev.recentlyProposedBlocks]
-          };
-          return newData;
-        });
-      });
-      socket.on('disconnect', () => console.log('disconnected'));
-    }
-
-    return () => {
-      if (socket.connected) {
-        socket.disconnect();
-      }
-    };
-  }, [data, isLoading, socket]);
 
   return (
     <Box className='m-0'>
@@ -78,9 +63,9 @@ const RecentlyProposedBlock = () => {
         {
           isLoading
             ? <div className='flex w-full h-full items-center justify-center'><Spinner /></div>
-            : blocks?.recentlyProposedBlocks.map((block) => {
+            : blocks?.recentlyProposedBlocks.map((block, i) => {
               return (
-                <Row key={block.blockHash} className='p-6 justify-between even:bg-axone-dark-blue-3'>
+                <Row key={block.blockHash + i} className='p-6 justify-between even:bg-axone-dark-blue-3'>
                   <Text className='w-1/3 text-axone-orange mb-0 text-left'>{block.height}</Text>
                   <Text className='w-1/3 text-axone-orange mb-0 text-left'>{shortenHash(block.blockHash)}</Text>
                   <Text className='w-1/3 text-axone-khaki mb-0 text-left'>{block.txs}</Text>
