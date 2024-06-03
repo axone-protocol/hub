@@ -51,7 +51,7 @@
     "date-fns": "^3.6.0",
     "interchain": "^1.10.4",
     "juno-network": "^0.18.1",
-    "lucide-react": "^0.381.0",
+    "lucide-react": "^0.383.0",
     "next": "14.2.3",
     "next-intl": "^3.14.1",
     "osmojs": "^16.14.0",
