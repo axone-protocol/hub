@@ -1,11 +1,14 @@
 'use client';
+import { motion } from 'framer-motion';
 import { X } from 'lucide-react';
 import { useParams } from 'next/navigation';
-import { FC } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import { Text, Title } from '@/components/typography';
 import { Box } from '@/components/ui/boxes';
 import Row from '@/components/ui/row';
-import { useSingleValidatorUptime } from '@/hooks/use-single-validator-uptime';
+import { useEnvironment } from '@/context/environment-context';
+import { SingleBlockData, useSingleValidatorUptime, ValidatorUptimeData } from '@/hooks/use-single-validator-uptime';
+import { useSocket } from '@/hooks/use-socket';
 import { cn } from '@/lib/utils';
 
 type UptimeBlockItemProps = {
@@ -13,7 +16,7 @@ type UptimeBlockItemProps = {
   type?: 'signed' | 'proposed' | 'missed';
 };
 
-const UptimeBlockItem: FC<UptimeBlockItemProps> = ({ size = 'large', type = 'signed' }) => {
+const UptimeBlockItem: FC<UptimeBlockItemProps> = ({ size = 'large', type }) => {
   return(
     <div className={cn('rounded-md flex justify-center items-center',
       {
@@ -30,8 +33,38 @@ const UptimeBlockItem: FC<UptimeBlockItemProps> = ({ size = 'large', type = 'sig
 
 const UptimeBlock = () => {
   const { address } = useParams();
-  const { data } = useSingleValidatorUptime(address);
+  const { socket } = useEnvironment();
+  const { data, isLoading } = useSingleValidatorUptime(address);
+  const [blocks, setBlocks] = useState<ValidatorUptimeData>({ blocks: [], current: '0' });
 
+  const newBlockHandler = useCallback((block: SingleBlockData[]) => {
+    setBlocks((prev: ValidatorUptimeData) => {
+      const newData = {
+        ...prev,
+        blocks: prev.blocks.length >= 60
+          ? [...prev.blocks.slice(0, -block.length), ...block]
+          : [...prev.blocks, ...block]
+      };
+      return newData;
+    });
+  }, []);
+
+  useSocket({
+    socket,
+    eventName: `uptime.${address}`,
+    eventHandler: newBlockHandler,
+    isLoading
+  });
+
+  useEffect(() => {
+    if (!isLoading && data) {
+      setBlocks(data);
+    }
+  }, [isLoading, data]);
+
+  const missedBlocks = blocks?.blocks.filter((block) => block.status === 'Missed').length;
+  const proposedBlocks = blocks?.blocks.filter((block) => block.status === 'Proposed').length;
+  const signedBlocks = blocks?.blocks.filter((block) => block.status === 'Signed').length;
   return (
     <Box className='flex-col p-6 mb-4'>
       <Row className='justify-between items-center mb-4'>
@@ -40,16 +73,25 @@ const UptimeBlock = () => {
       </Row>
       <div className='flex flex-row flex-wrap gap-2 mb-6'>
         {
-          data?.blocks.map((block, index) => {
-            return <UptimeBlockItem type={index === 5 || index === 38 ? 'proposed' : index === 40 ? 'missed' : 'signed'} key={block.signature} />;
+          blocks?.blocks.map((block, i) => {
+            return (
+              <motion.div
+                key={block.signature+i}
+                initial={{ opacity: 0, scale: 0.8, x: 50 }}
+                animate={{ opacity: 1, scale: 1, x: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                <UptimeBlockItem type={block.status?.toLowerCase() as 'signed' | 'proposed' | 'missed' || 'signed'} />
+              </motion.div>
+            );
           })
         }
       </div>
       <Row className='justify-between lg:items-center'>
         <div className='flex flex-col lg:flex-row justify-start gap-4 w-2/4'>
-          <Row className='items-center gap-2'><UptimeBlockItem size='small' type='proposed' /><Text className='mb-0'>Proposed: 1</Text></Row>
-          <Row className='items-center gap-2'><UptimeBlockItem size='small' type='signed' /><Text className='mb-0'>Signed: 59</Text></Row>
-          <Row className='items-center gap-2'><UptimeBlockItem size='small' type='missed' /><Text className='mb-0'>Missed: 0</Text></Row>
+          <Row className='items-center gap-2'><UptimeBlockItem size='small' type='proposed' /><Text className='mb-0'>Proposed: {proposedBlocks}</Text></Row>
+          <Row className='items-center gap-2'><UptimeBlockItem size='small' type='signed' /><Text className='mb-0'>Signed: {signedBlocks}</Text></Row>
+          <Row className='items-center gap-2'><UptimeBlockItem size='small' type='missed' /><Text className='mb-0'>Missed: {missedBlocks}</Text></Row>
         </div>
         <Text className='mt-1 lg:mt-0'>Current: {data?.current || 0}</Text>
       </Row>

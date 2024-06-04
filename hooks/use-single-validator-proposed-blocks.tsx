@@ -2,15 +2,15 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useEnvironment } from '@/context/environment-context';
 
-type SingeBlockData = {
+export type SingleProposedBlock = {
   height: string,
   blockHash: string,
   txs: number,
   time: string
 }
 
-type ValidatorProposedBlocksData = {
-  recentlyProposedBlocks: SingeBlockData[],
+export type ValidatorProposedBlocksData = {
+  recentlyProposedBlocks: SingleProposedBlock[],
   total: string
 }
 
@@ -33,7 +33,6 @@ export const useSingleValidatorProposedBlocks = (address: string | string[]) => 
     enabled: true,
     queryKey: [...useSingleValidatorProposedBlocksQueryKey, address],
     queryFn: () => getSingleValidatorProposedBlocksDataFn(address, baseUrl),
-    refetchInterval: 10000 // 10 seconds
   });
 
   return query;
