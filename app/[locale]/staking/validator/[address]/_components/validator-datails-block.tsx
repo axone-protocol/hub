@@ -63,7 +63,7 @@ const ValidatorDetailsBlock = () => {
           </div>
         </div>
 
-        <Button variant={'rounded'} onClick={openDelegateModal}>Delegate Now</Button>
+        <Button variant={'rounded'} onClick={openDelegateModal({})}>Delegate Now</Button>
       </div>
 
       <div className='w-full border-b-2 border-b-axone-box-border mt-6 mb-2 lg:my-0'></div>

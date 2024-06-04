@@ -1,19 +1,26 @@
 import { createContext, useContext } from 'react';
 
+export type DelegateModalOpenProps = {
+  validatorName?: string;
+  validatorAddress?: string;
+};
+
 type ModalContextProps = {
   openConnectWalletModal: () => void;
-  openDelegateModal: () => void;
+  openDelegateModal: (data?: DelegateModalOpenProps) => () => void;
   openRewardsCalculatorModal: () => void;
   openVoteProposalModal: () => void;
   openConfirmTransactionModal: () => void;
+  delegationData?: DelegateModalOpenProps;
 }
 
 const defaultModalContext: ModalContextProps = {
   openConnectWalletModal: () => {},
-  openDelegateModal: () => {},
+  openDelegateModal: () => () => {},
   openRewardsCalculatorModal: () => {},
   openVoteProposalModal: () => {},
   openConfirmTransactionModal: () => {},
+  delegationData: {},
 };
 const useModal = () => {
   const context = useContext(ModalContext);

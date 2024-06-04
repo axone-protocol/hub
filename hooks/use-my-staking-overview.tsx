@@ -17,7 +17,7 @@ const getMyStakingOverviewDataFn = async (address: string = '', baseUrl: string 
   const convertedData = {
     stakedAmount: Number(data.stakedAmount).toFixed(2),
     delegations: Number(data.delegations),
-    claimableReward: Number(data.claimableReward).toFixed(2),
+    claimableReward: Number(data.claimableReward).toFixed(6),
     availableBalance: Number(data.availableBalance).toFixed(2),
   };
 

@@ -5,13 +5,14 @@ import React, { PropsWithChildren, useCallback, useState } from 'react';
 import { DelegateModal, RewardsCalculatorModal, TermsModal } from '@/components/ui/modals';
 import { ConfirmTransactionModal } from '@/components/ui/modals/confirm-transaction/confirm-transaction-modal';
 import { VoteProposalModal } from '@/components/ui/modals/vote-proposal/vote-proposal-modal';
-import { ModalContext } from '@/context';
+import { DelegateModalOpenProps, ModalContext } from '@/context';
 import { chainName } from '@/core/chain';
 
 const TERMS_ACCEPTED_KEY = 'termsAccepted';
 
 const ModalProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [openTerms, setOpenTerms] = useState<boolean>(false);
+  const [delegationData, setDelegationData] = useState<DelegateModalOpenProps>({});
   const [isDelegateOpen, setDelegateOpen] = useState<boolean>(false);
   const [isRewardsCalculatorOpen, setRewardsCalculatorOpen] = useState<boolean>(false);
   const [isVoteProposalOpen, setVoteProposalOpen] = useState<boolean>(false);
@@ -28,8 +29,16 @@ const ModalProvider: React.FC<PropsWithChildren> = ({ children }) => {
     }
   }, [openView]);
 
-  const openDelegateModal = useCallback(() => {
+  const openDelegateModal = useCallback((data: DelegateModalOpenProps | undefined) => () => {
+    if (data && data.validatorName && data.validatorAddress) {
+      setDelegationData({ validatorName: data.validatorName, validatorAddress: data.validatorAddress });
+    }
     setDelegateOpen(true);
+  }, []);
+
+  const onDelegateModalClose = useCallback(() => {
+    setDelegationData({});
+    setDelegateOpen(false);
   }, []);
 
   const openRewardsCalculatorModal = useCallback(() => {
@@ -50,11 +59,12 @@ const ModalProvider: React.FC<PropsWithChildren> = ({ children }) => {
       openDelegateModal,
       openRewardsCalculatorModal,
       openVoteProposalModal,
-      openConfirmTransactionModal
+      openConfirmTransactionModal,
+      delegationData
     }}>
       {children}
       <TermsModal open={openTerms} setOpen={setOpenTerms} openWalletModal={openView} />
-      <DelegateModal isOpen={isDelegateOpen} setOpen={setDelegateOpen} />
+      <DelegateModal delegationData={delegationData} isOpen={isDelegateOpen} setOpen={onDelegateModalClose} />
       <RewardsCalculatorModal isOpen={isRewardsCalculatorOpen} setOpen={setRewardsCalculatorOpen} />
       <VoteProposalModal isOpen={isVoteProposalOpen} setOpen={setVoteProposalOpen} />
       <ConfirmTransactionModal isOpen={isConfirmTransactionOpen} setOpen={setConfirmTransactionOpen} />

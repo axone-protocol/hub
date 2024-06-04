@@ -1,17 +1,19 @@
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useLocale } from 'next-intl';
-import { FC, MouseEventHandler, useCallback } from 'react';
+import { FC, useCallback } from 'react';
 import { Text } from '@/components/typography';
 import { AxoneTooltip } from '@/components/ui/axone-tooltip';
 import { Button } from '@/components/ui/button';
 import Row from '@/components/ui/row';
+import { DelegateModalOpenProps } from '@/context';
 import { ValidatorsListData } from '@/hooks/use-validators-list';
 import { cn } from '@/lib/utils';
 
+
 type SingleValidatorItemProps = {
   data: ValidatorsListData;
-  openDelegateModal?: MouseEventHandler<HTMLButtonElement> | undefined;
+  openDelegateModal(data?: DelegateModalOpenProps): () => void;
 };
 
 const SingleValidatorItem: FC<SingleValidatorItemProps> = ({ data, openDelegateModal }) => {
@@ -23,6 +25,14 @@ const SingleValidatorItem: FC<SingleValidatorItemProps> = ({ data, openDelegateM
   }, [data.address, locale, router]);
 
   const shortenedAddress = `${data.address?.slice(0, 8)}...${data.address?.slice(-4)}`;
+
+  const onDelegate = useCallback(() => {
+    const dataToPass = {
+      validatorName: data.description.moniker,
+      validatorAddress: data.address
+    };
+    openDelegateModal(dataToPass)();
+  }, [data.description.moniker, data.address, openDelegateModal]);
 
   return (
     <Row className={cn('justify-between items-center p-4 group even:bg-axone-dark-blue-3')}>
@@ -36,9 +46,9 @@ const SingleValidatorItem: FC<SingleValidatorItemProps> = ({ data, openDelegateM
       </div>
       <Text className='w-1/6 mb-0 pl-4 uppercase'>{Number(data.stakedAmount).toFixed(2)} <span className='text-axone-khaki'>axone</span></Text>
       <Text className='w-1/6 mb-0 pl-4 uppercase'>{Number(data.commission.rate).toFixed(2)}%</Text>
-      <Text className='w-1/6 mb-0 pl-4 uppercase'>8,41%</Text>
-      <Text className='w-1/6 mb-0 pl-4 uppercase'>96,46%</Text>
-      <Button onClick={openDelegateModal} variant={'link'} className='mb-0 text-axone-orange'>
+      <Text className='w-1/6 mb-0 pl-4 uppercase'>{Number(data.votingPower).toFixed(2)}%</Text>
+      <Text className='w-1/6 mb-0 pl-4 uppercase'>{Number(data.uptime).toFixed(2)}%</Text>
+      <Button onClick={onDelegate} variant={'link'} className='mb-0 text-axone-orange'>
         Delegate Now
         <Image className='ml-2' src='/icons/arrow-right-long.svg' width={16} height={16} alt='AXONE' />
       </Button>
