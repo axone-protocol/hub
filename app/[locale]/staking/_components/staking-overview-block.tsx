@@ -9,12 +9,14 @@ import Row from '@/components/ui/row';
 import { useModal } from '@/context';
 import { chainName } from '@/core/chain';
 import { useMyStakingOverview } from '@/hooks/use-my-staking-overview';
+import { useAxonePayments } from '@/hooks/wallet/use-axone-payments';
 import { StakingLoadingSkeleton } from './staking-loading-skeleton';
 
 const StakingOverviewBlock = () => {
   const { data, isLoading, isFetching, isPending, isRefetching } = useMyStakingOverview();
   const { isWalletConnected } = useChain(chainName);
   const { openConnectWalletModal } = useModal();
+  const { balance, claimAllDelegatorsRewards } = useAxonePayments();
 
   if (!isWalletConnected) {
     return (
@@ -55,7 +57,7 @@ const StakingOverviewBlock = () => {
           <Text className='text-axone-khaki mb-0'>
               Your staked amount
           </Text>
-          <Title className='mb-0'>{data?.stakedAmount} UKNOW</Title>
+          <Title className='mb-0'>{Number(data?.stakedAmount) / 1000000 || '0.00'} KNOW</Title>
           <Text className='text-axone-khaki mb-0'>
               $0.00
           </Text>
@@ -65,12 +67,12 @@ const StakingOverviewBlock = () => {
           <Text className='text-axone-khaki mb-0'>
               Claimable rewards
           </Text>
-          <Title className='mb-0'>{data?.claimableReward} UKNOW</Title>
+          <Title className='mb-0'>{data?.claimableReward} KNOW</Title>
           <Row className='justify-between items-center'>
             <Text className='text-axone-khaki mb-0'>
               $0.00
             </Text>
-            <Button variant={'link'} className='mb-0 p-0 text-axone-orange h-auto'>Claim All</Button>
+            <Button onClick={claimAllDelegatorsRewards} variant={'link'} className='mb-0 p-0 text-axone-orange h-auto'>Claim All</Button>
           </Row>
         </BoxInner>
 
@@ -78,7 +80,7 @@ const StakingOverviewBlock = () => {
           <Text className='text-axone-khaki mb-0'>
               Available AXONE in Wallet
           </Text>
-          <Title className='mb-0'>{data?.availableBalance} UKNOW</Title>
+          <Title className='mb-0'>{balance.toNumber()} KNOW</Title>
           <Text className='text-axone-khaki mb-0'>
               $0.00
           </Text>

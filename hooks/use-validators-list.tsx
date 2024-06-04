@@ -16,12 +16,14 @@ export type ValidatorsListData = {
   status: string;
   jailed: boolean;
   stakedAmount: string;
+  votingPower: string;
   commission: {
     updateTime: string;
     rate: string;
     maxChangeRate: string;
     maxRate: string;
   };
+  uptime: string;
 }
 
 export enum ValidatorStatus {
@@ -85,9 +87,9 @@ export const useValidatorsList = () => {
       } else if (sortBy === ValidatorSortBy.COMMISSION) {
         comparison = Number(a.commission.rate) - Number(b.commission.rate);
       } else if (sortBy === ValidatorSortBy.VOTING_POWER) {
-        // TODO: comparison logic for voting power when will be avaliable in response
+        comparison = Number(b.votingPower) - Number(a.votingPower);
       } else if (sortBy === ValidatorSortBy.UPTIME) {
-        // TODO: add comparison logic for uptime when will be avaliable in response
+        comparison = Number(b.uptime) - Number(a.uptime);
       }
 
       if (order === 'desc') {

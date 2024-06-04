@@ -1,6 +1,6 @@
 'use client';
 import { useChain } from '@cosmos-kit/react';
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { useLocale } from 'next-intl';
 import { Text, Title } from '@/components/typography';
 import { AxoneTooltip } from '@/components/ui/axone-tooltip';
@@ -8,16 +8,27 @@ import { Box } from '@/components/ui/boxes';
 import { Button } from '@/components/ui/button';
 import { ButtonWithIcon } from '@/components/ui/button-with-icon';
 import Row from '@/components/ui/row';
+import { useModal } from '@/context';
 import { chainName } from '@/core/chain';
+import { useMyDelegationsOverview } from '@/hooks/use-my-delegations-overview';
+import { useAxonePayments } from '@/hooks/wallet/use-axone-payments';
 
 const MyDelegationInfoBlock = () => {
+  const { openDelegateModal } = useModal();
+  const { address: validatorAddress } = useParams();
   const { isWalletConnected } = useChain(chainName);
   const locale = useLocale();
   const router = useRouter();
+  const { data } = useMyDelegationsOverview(validatorAddress);
+  const { unbondFromValidator, claimRewards, isTransactionPending } = useAxonePayments();
 
   const navigateToWallet = () => {
     router.push(`/${locale}/wallet`);
   };
+
+  // TODO: change the amount to to be equal whole balance - now it's just for testing purpose set to 1 microknow (need to change displaying to proper format later)
+  const onUnbond = () => unbondFromValidator({ amount: Number(data?.delegation), validatorAddress: `${validatorAddress}`, memo: 'hey' });
+  const onClaimRewards = () => claimRewards(`${validatorAddress}`);
 
   return (
     <Box className='w-full lg:w-[380px] m-0 relative'>
@@ -31,12 +42,18 @@ const MyDelegationInfoBlock = () => {
                 <AxoneTooltip iconColor='text-axone-khaki' content='My Delegation' />
               </Row>
               <Row className='gap-2 mb-4'>
-                <p className='text-40 text-white'>0.00</p>
+                <p className='text-40 text-white'>{data?.delegation || '0.00'}</p>
                 <p className='text-40 text-axone-khaki'>AXONE</p>
               </Row>
               <Row className='gap-4'>
-                <Button className='w-1/2' variant={'rounded'}>Delegate</Button>
-                <Button className='w-1/2 border-axone-khaki text-axone-khaki' variant={'rounded'}>Unbond</Button>
+                <Button onClick={openDelegateModal({})} className='w-1/2' variant={'rounded'}>Delegate</Button>
+                {
+                  !!Number(data?.delegation) ? (
+                    <Button disabled={isTransactionPending} onClick={onUnbond} className='w-1/2 border-axone-khaki text-axone-khaki' variant={'rounded'}>
+                      {isTransactionPending ? 'Unbonding...' : 'Unbond'}
+                    </Button>
+                  ) : null
+                }
               </Row>
 
               <div className='w-full border-b-2 border-b-axone-box-border my-8'></div>
@@ -46,12 +63,21 @@ const MyDelegationInfoBlock = () => {
                 <AxoneTooltip iconColor='text-axone-khaki' content='My Earnings' />
               </Row>
               <Row className='gap-2 mb-4'>
-                <p className='text-40 text-white'>0.00</p>
+                <p className='text-40 text-white'>{data?.earnings || '0.00'}</p>
                 <p className='text-40 text-axone-khaki'>AXONE</p>
               </Row>
-              <Row className='gap-4'>
-                <Button className='w-1/2 border-axone-khaki text-axone-khaki' variant={'rounded'}>Claim</Button>
-              </Row>
+              { !!Number(data?.delegation) ? (
+                <Row className='gap-4'>
+                  <Button
+                    disabled={isTransactionPending}
+                    onClick={onClaimRewards}
+                    className='w-1/2 border-axone-khaki text-axone-khaki'
+                    variant={'rounded'}
+                  >
+                    {isTransactionPending ? 'Claiming...' : 'Claim'}
+                  </Button>
+                </Row>
+              ) : null}
 
               <div className='w-full border-b-2 border-b-axone-box-border mt-8 mb-10'></div>
 

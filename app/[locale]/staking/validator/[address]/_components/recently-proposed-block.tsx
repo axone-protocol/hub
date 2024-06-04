@@ -1,4 +1,5 @@
 'use client';
+import { motion } from 'framer-motion';
 import { useParams } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
 import { Text, Title } from '@/components/typography';
@@ -41,7 +42,6 @@ const RecentlyProposedBlock = () => {
     isLoading
   });
 
-
   useEffect(() => {
     if (!isLoading && data) {
       setBlocks(data);
@@ -65,12 +65,20 @@ const RecentlyProposedBlock = () => {
             ? <div className='flex w-full h-full items-center justify-center'><Spinner /></div>
             : blocks?.recentlyProposedBlocks.map((block, i) => {
               return (
-                <Row key={block.blockHash + i} className='p-6 justify-between even:bg-axone-dark-blue-3'>
-                  <Text className='w-1/3 text-axone-orange mb-0 text-left'>{block.height}</Text>
-                  <Text className='w-1/3 text-axone-orange mb-0 text-left'>{shortenHash(block.blockHash)}</Text>
-                  <Text className='w-1/3 text-axone-khaki mb-0 text-left'>{block.txs}</Text>
-                  <Text className='w-1/3 text-axone-khaki mb-0 text-left'>{formatTimestamp(block.time)}</Text>
-                </Row>
+                <motion.div
+                  className='even:bg-axone-dark-blue-3'
+                  key={block.blockHash + i}
+                  initial={{ opacity: 0, scale: 0.8, y: 50 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <Row className='p-6 justify-between'>
+                    <Text className='w-1/3 text-axone-orange mb-0 text-left'>{block.height || ''}</Text>
+                    <Text className='w-1/3 text-axone-orange mb-0 text-left'>{shortenHash(block.blockHash)}</Text>
+                    <Text className='w-1/3 text-axone-khaki mb-0 text-left'>{block.txs}</Text>
+                    <Text className='w-1/3 text-axone-khaki mb-0 text-left'>{formatTimestamp(block.time)}</Text>
+                  </Row>
+                </motion.div>
               );
             })
         }
