@@ -42,35 +42,12 @@ const RecentlyProposedBlock = () => {
     isLoading
   });
 
-
   useEffect(() => {
     if (!isLoading && data) {
       setBlocks(data);
     }
   }, [isLoading, data]);
 
-  useEffect(() => {
-    if (!isLoading && data) {
-      socket.connect();
-      socket.on('connect', () => console.log('connected to', socket.id));
-      socket.on('new_block', (block: SingleProposedBlock) => {
-        setBlocks((prev: ValidatorProposedBlocksData) => {
-          const newData = {
-            ...prev,
-            recentlyProposedBlocks: [block, ...prev.recentlyProposedBlocks]
-          };
-          return newData;
-        });
-      });
-      socket.on('disconnect', () => console.log('disconnected'));
-    }
-
-    return () => {
-      if (socket.connected) {
-        socket.disconnect();
-      }
-    };
-  }, [data, isLoading, socket]);
   return (
     <Box className='m-0'>
       <Row className='justify-between items-center mb-6'>
@@ -96,7 +73,7 @@ const RecentlyProposedBlock = () => {
                   transition={{ duration: 0.5 }}
                 >
                   <Row className='p-6 justify-between'>
-                    <Text className='w-1/3 text-axone-orange mb-0 text-left'>{block.height}</Text>
+                    <Text className='w-1/3 text-axone-orange mb-0 text-left'>{block.height || ''}</Text>
                     <Text className='w-1/3 text-axone-orange mb-0 text-left'>{shortenHash(block.blockHash)}</Text>
                     <Text className='w-1/3 text-axone-khaki mb-0 text-left'>{block.txs}</Text>
                     <Text className='w-1/3 text-axone-khaki mb-0 text-left'>{formatTimestamp(block.time)}</Text>

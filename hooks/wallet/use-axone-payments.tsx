@@ -5,10 +5,9 @@ import { ExtendedHttpEndpoint } from '@cosmos-kit/core';
 import { useChain } from '@cosmos-kit/react';
 import BigNumber from 'bignumber.js';
 import { cosmos } from 'juno-network';
-import { CircleCheckBig, CircleX } from 'lucide-react';
 import { useCallback, useEffect } from 'react';
 import { create } from 'zustand';
-import Row from '@/components/ui/row';
+import { ErrorToast, SuccessToast } from '@/components/ui/toasts';
 import { useEnvironment } from '@/context/environment-context';
 import { assetList, chainName } from '@/core/chain';
 import { useToast } from '../use-toast';
@@ -56,6 +55,18 @@ export const useAxonePayments = () => {
   const { toast } = useToast();
   const { isDev } = useEnvironment();
 
+  const showSuccessToast = (message: string) => {
+    toast({
+      action: (<SuccessToast message={message} />),
+    });
+  };
+
+  const showErrorToast = (message: string) => {
+    toast({
+      action: (<ErrorToast message={message} />),
+    });
+  };
+
   const makeTransaction = async ({ amount, destination, memo }: { amount: number, destination: string, memo: string}) => {
     setIsTransactionPending(true);
     const stargateClient = await getSigningStargateClient();
@@ -93,24 +104,10 @@ export const useAxonePayments = () => {
         fee,
         memo
       );
-      toast({
-        action: (
-          <Row className='items-center -ml-2'>
-            <CircleCheckBig className='mr-3 text-axone-orange' />
-            {'Payment successful!'}
-          </Row>
-        )
-      });
+      showSuccessToast('Transaction successful!');
       // setTransactionResponse(JSON.stringify(response));
     } catch (error) {
-      toast({
-        action: (
-          <Row className='items-center -ml-2'>
-            <CircleX className='mr-3 text-axone-red' />
-            {`Something went wrong: ${error}`}
-          </Row>
-        )
-      });
+      showErrorToast(`Something went wrong: ${error}`);
     } finally {
       setIsTransactionPending(false);
       getBalance(address);
@@ -189,23 +186,9 @@ export const useAxonePayments = () => {
         fee,
         memo
       );
-      toast({
-        action: (
-          <Row className='items-center -ml-2'>
-            <CircleCheckBig className='mr-3 text-axone-orange' />
-            {'Delegation successful!'}
-          </Row>
-        )
-      });
+      showSuccessToast('Delegation successful!');
     } catch (error) {
-      toast({
-        action: (
-          <Row className='items-center -ml-2'>
-            <CircleX className='mr-3 text-axone-red' />
-            {`Something went wrong: ${error}`}
-          </Row>
-        )
-      });
+      showErrorToast(`Something went wrong: ${error}`);
     } finally {
       setIsTransactionPending(false);
       getBalance(address);
@@ -248,23 +231,9 @@ export const useAxonePayments = () => {
         fee,
         memo
       );
-      toast({
-        action: (
-          <Row className='items-center -ml-2'>
-            <CircleCheckBig className='mr-3 text-axone-orange' />
-            {'Unbonding successful!'}
-          </Row>
-        )
-      });
+      showSuccessToast('Unbonding successful!');
     } catch (error) {
-      toast({
-        action: (
-          <Row className='items-center -ml-2'>
-            <CircleX className='mr-3 text-axone-red' />
-            {`Something went wrong: ${error}`}
-          </Row>
-        )
-      });
+      showErrorToast(`Something went wrong: ${error}`);
     } finally {
       setIsTransactionPending(false);
       getBalance(address);
@@ -302,23 +271,9 @@ export const useAxonePayments = () => {
         [msg],
         fee,
       );
-      toast({
-        action: (
-          <Row className='items-center -ml-2'>
-            <CircleCheckBig className='mr-3 text-axone-orange' />
-            {'Rewards claimed successfully!'}
-          </Row>
-        )
-      });
+      showSuccessToast('Rewards claimed successfully!');
     } catch (error) {
-      toast({
-        action: (
-          <Row className='items-center -ml-2'>
-            <CircleX className='mr-3 text-axone-red' />
-            {`Something went wrong: ${error}`}
-          </Row>
-        )
-      });
+      showErrorToast(`Something went wrong: ${error}`);
     } finally {
       setIsTransactionPending(false);
       getBalance(address);
@@ -354,25 +309,10 @@ export const useAxonePayments = () => {
       };
 
       await stargateClient.signAndBroadcast(address, messages, fee);
-
-      toast({
-        action: (
-          <Row className='items-center -ml-2'>
-            <CircleCheckBig className='mr-3 text-axone-orange' />
-            {'All rewards claimed successfully!'}
-          </Row>
-        ),
-      });
+      showSuccessToast('All rewards claimed successfully!');
 
     } catch (error) {
-      toast({
-        action: (
-          <Row className='items-center -ml-2'>
-            <CircleX className='mr-3 text-axone-red' />
-            {`Something went wrong: ${error}`}
-          </Row>
-        ),
-      });
+      showErrorToast(`Something went wrong: ${error}`);
     } finally {
       setIsTransactionPending(false);
       getBalance(address);
