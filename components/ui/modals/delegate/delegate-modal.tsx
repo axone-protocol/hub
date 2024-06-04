@@ -21,9 +21,8 @@ type DelegateModalProps = {
 };
 
 const formSchema = z.object({
-  amount: z.string()
-    .transform(value => parseFloat(value))
-    .refine(value => !isNaN(value) && value >= 5 && value <= 200000, {
+  amount: z.coerce.number()
+    .refine(value => value >= 5 && value <= 200000, {
       message: 'Amount must be a valid number between 5 and 200000',
     }),
 });

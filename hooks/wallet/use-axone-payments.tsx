@@ -7,10 +7,9 @@ import BigNumber from 'bignumber.js';
 import { cosmos } from 'juno-network';
 import { useCallback, useEffect } from 'react';
 import { create } from 'zustand';
-import { ErrorToast, SuccessToast } from '@/components/ui/toasts';
 import { useEnvironment } from '@/context/environment-context';
 import { assetList, chainName } from '@/core/chain';
-import { useToast } from '../use-toast';
+import { useAxoneToasts } from '../use-axone-toasts';
 
 const chainDenom = 'uknow';
 
@@ -52,20 +51,8 @@ export const useAxonePayments = () => {
   const { setIsTransactionPending, setBalance, setBalanceDenom } = useAxoneWalletStore();
   const { address, getSigningStargateClient, getRpcEndpoint } =
     useChain(chainName);
-  const { toast } = useToast();
+  const { showSuccessToast, showErrorToast } = useAxoneToasts();
   const { isDev } = useEnvironment();
-
-  const showSuccessToast = (message: string) => {
-    toast({
-      action: (<SuccessToast message={message} />),
-    });
-  };
-
-  const showErrorToast = (message: string) => {
-    toast({
-      action: (<ErrorToast message={message} />),
-    });
-  };
 
   const makeTransaction = async ({ amount, destination, memo }: { amount: number, destination: string, memo: string}) => {
     setIsTransactionPending(true);
