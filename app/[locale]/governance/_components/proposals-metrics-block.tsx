@@ -15,7 +15,7 @@ const ProposalsMetricsBlock = () => {
 
       <BoxInner className='py-5 w-full lg:w-1/4 h-30 flex-col justify-center gap-6 items-center px-6'>
         <Title className='mb-0'>
-          {governanceOverview?.totalProposals}
+          {governanceOverview.totalProposals}
         </Title>
         <Text className='text-axone-khaki mb-0 uppercase'>
           Total proposals
@@ -24,7 +24,7 @@ const ProposalsMetricsBlock = () => {
 
       <BoxInner className='py-5 w-full lg:w-1/4 h-30 flex-col justify-center gap-6 items-center px-6'>
         <Title className='mb-0'>
-          {governanceOverview?.currentProposals}
+          {governanceOverview.currentProposals}
         </Title>
         <Text className='text-axone-khaki mb-0 uppercase'>
           Current proposals
@@ -33,7 +33,7 @@ const ProposalsMetricsBlock = () => {
 
       <BoxInner className='py-5 w-full lg:w-1/4 h-30 flex-col justify-center gap-6 items-center px-6'>
         <Title className='mb-0'>
-          {governanceOverview?.votingPeriod} Days
+          {governanceOverview.votingPeriod} Days
         </Title>
         <Text className='text-axone-khaki mb-0 uppercase'>
           Voting period
@@ -42,7 +42,7 @@ const ProposalsMetricsBlock = () => {
 
       <BoxInner className='py-5 w-full lg:w-1/4 h-30 flex-col justify-center gap-6 items-center px-6'>
         <Title className='mb-0'>
-          {governanceOverview?.depositRequired} AXONE
+          {governanceOverview.depositRequired} AXONE
         </Title>
         <Text className='text-axone-khaki mb-0 uppercase'>
           Deposit required

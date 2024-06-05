@@ -13,10 +13,10 @@ const OverviewBlock = () => {
   const { data: stakingOverview } = useMyStakingOverview();
 
   const stakeAmount = useMemo(() => {
-    if (!stakingOverview || isNaN(Number(stakingOverview?.stakedAmount))) {
+    if (!stakingOverview || Object.keys(stakingOverview).length > 0 ||  isNaN(Number(stakingOverview.stakedAmount))) {
       return 0;
     }
-    return Number(stakingOverview?.stakedAmount)/1000000;
+    return Number(stakingOverview.stakedAmount)/1000000;
   }, [stakingOverview]);
 
   const myBallanceInFiat = useMemo(() => {
