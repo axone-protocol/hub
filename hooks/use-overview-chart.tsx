@@ -20,7 +20,7 @@ export enum OverviewChartFilterRangeEnum {
 const getOverviewChartDataFn = async (range: OverviewChartFilterRangeEnum = OverviewChartFilterRangeEnum.DAY, baseUrl: string | undefined) => {
   const { data } = await axios.get<ChartData[]>(baseUrl + '/token/historical', { params: { range } });
 
-  return data;
+  return data.reverse();
 };
 
 export const useDashboardChartQueryKey = ['overview-chart'];

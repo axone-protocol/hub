@@ -56,7 +56,7 @@ const ProposalsListBlock = () => {
       </div>
       <div className='flex flex-col w-full overflow-auto'>
         <ProposalsTableSortingHeader activeFilter={null} />
-        <BoxInner className='w-[900px] lg:w-full flex-col pb-4 mb-4'>
+        <BoxInner className='w-[900px] lg:w-full flex-col mb-4'>
           <Row onClick={goToDetails} className='h-[140px] cursor-pointer group p-4 items-center relative justify-between even:bg-axone-dark-blue-3'>
             <Text className='mb-0 w-[80px]'>379</Text>
             <div className='flex flex-col items-start w-[300px]'>

@@ -22,7 +22,7 @@ export type SupplyChartData = {
 const getSupplyRateChartDataFn = async (range: SupplyRateChartFilterRangeEnum = SupplyRateChartFilterRangeEnum.DAY, baseUrl: string | undefined) => {
   const { data } = await axios.get<SupplyChartData[]>(baseUrl + '/supply/historical', { params: { range } });
 
-  return data;
+  return data.reverse();
 };
 
 export const useSupplyRateChartQueryKey = ['supply-rate-chart'];
