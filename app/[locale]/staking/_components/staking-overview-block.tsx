@@ -1,6 +1,7 @@
 'use client';
 import { useChain } from '@cosmos-kit/react';
 import Image from 'next/image';
+import { useMemo } from 'react';
 import { Text, Title } from '@/components/typography';
 import { Box, BoxInner } from '@/components/ui/boxes';
 import { Button } from '@/components/ui/button';
@@ -9,6 +10,7 @@ import Row from '@/components/ui/row';
 import { useModal } from '@/context';
 import { chainName } from '@/core/chain';
 import { useMyStakingOverview } from '@/hooks/use-my-staking-overview';
+import { useTokenInfo } from '@/hooks/use-token-info';
 import { useAxonePayments } from '@/hooks/wallet/use-axone-payments';
 import { StakingLoadingSkeleton } from './staking-loading-skeleton';
 
@@ -17,6 +19,31 @@ const StakingOverviewBlock = () => {
   const { isWalletConnected } = useChain(chainName);
   const { openConnectWalletModal } = useModal();
   const { balance, claimAllDelegatorsRewards } = useAxonePayments();
+
+  const { data: tokenInfo } = useTokenInfo();
+
+  const stakeAmount = useMemo(() => {
+    if (!data || Object.keys(data).length > 0 ||  isNaN(Number(data.stakedAmount))) {
+      return 0;
+    }
+    return Number(data.stakedAmount)/1000000;
+  }, [data]);
+
+  const myBallanceInFiat = useMemo(() => {
+    if (!tokenInfo) {
+      return 0;
+    }
+
+    return balance.toNumber() * tokenInfo.price.value;
+  }, [balance, tokenInfo]);
+
+  const myStakedAmountInFiat = useMemo(() => {
+    if (!tokenInfo) {
+      return 0;
+    }
+
+    return stakeAmount * tokenInfo.price.value;
+  }, [stakeAmount, tokenInfo]);
 
   if (!isWalletConnected) {
     return (
@@ -57,9 +84,9 @@ const StakingOverviewBlock = () => {
           <Text className='text-axone-khaki mb-0'>
               Your staked amount
           </Text>
-          <Title className='mb-0'>{Number(data?.stakedAmount) / 1000000 || '0.00'} KNOW</Title>
+          <Title className='mb-0'>{stakeAmount.toFixed(6) || '0.00'} KNOW</Title>
           <Text className='text-axone-khaki mb-0'>
-              $0.00
+              ${myStakedAmountInFiat.toFixed(6)}
           </Text>
         </BoxInner>
 
@@ -82,7 +109,7 @@ const StakingOverviewBlock = () => {
           </Text>
           <Title className='mb-0'>{balance.toNumber()} KNOW</Title>
           <Text className='text-axone-khaki mb-0'>
-              $0.00
+              ${myBallanceInFiat.toFixed(2)}
           </Text>
         </BoxInner>
 

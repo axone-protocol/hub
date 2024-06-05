@@ -84,7 +84,7 @@ const ValidatorsBlock = () => {
           activeFilter={activeFilter}
         />
 
-        <BoxInner className='w-[900px] lg:w-full flex-col pb-4 mb-4'>
+        <BoxInner className='w-[900px] lg:w-full flex-col mb-4'>
           {validators?.map((item, index) => (
             <SingleValidatorItem key={index} data={item} openDelegateModal={openDelegateModal} />
           ))}

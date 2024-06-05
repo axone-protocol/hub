@@ -75,7 +75,7 @@ export const useValidatorsList = () => {
   });
 
   if (searchTerm) {
-    filteredData = filteredData?.filter(validator => validator.description.moniker.includes(searchTerm));
+    filteredData = filteredData?.filter(validator => validator.description.moniker.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase().trim()));
   }
   if (sortBy) {
     filteredData = filteredData?.sort((a, b) => {
