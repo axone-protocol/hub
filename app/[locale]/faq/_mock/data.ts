@@ -9,7 +9,7 @@ export type FAQDataType = {
 };
 
 // Function to shuffle the array and randomize the order of the FAQ items
-function shuffleArray(array: FAQDataType[]) {
+function shuffleArray (array: FAQDataType[]) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
