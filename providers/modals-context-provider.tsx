@@ -18,7 +18,7 @@ const ModalProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [isVoteProposalOpen, setVoteProposalOpen] = useState<boolean>(false);
   const [isConfirmTransactionOpen, setConfirmTransactionOpen] = useState<boolean>(false);
 
-  const { openView } = useChain(chainName);
+  const { openView, isWalletConnected } = useChain(chainName);
 
   const openConnectWalletModal = useCallback(async () => {
     const termsAccepted = localStorage.getItem(TERMS_ACCEPTED_KEY);
@@ -30,11 +30,15 @@ const ModalProvider: React.FC<PropsWithChildren> = ({ children }) => {
   }, [openView]);
 
   const openDelegateModal = useCallback((data: DelegateModalOpenProps | undefined) => () => {
-    if (data && data.validatorName && data.validatorAddress) {
-      setDelegationData({ validatorName: data.validatorName, validatorAddress: data.validatorAddress });
+    if (!isWalletConnected) {
+      openConnectWalletModal();
+    } else {
+      if (data && data.validatorName && data.validatorAddress) {
+        setDelegationData({ validatorName: data.validatorName, validatorAddress: data.validatorAddress });
+      }
+      setDelegateOpen(true);
     }
-    setDelegateOpen(true);
-  }, []);
+  }, [isWalletConnected, openConnectWalletModal]);
 
   const onDelegateModalClose = useCallback(() => {
     setDelegationData({});

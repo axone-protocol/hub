@@ -59,122 +59,123 @@ const RewardsHistoryBlock = () => {
         <Title>My Rewards History</Title>
       </div>
 
-      <Row className='justify-between'>
-        <Text className='w-1/6'>Tx hash</Text>
-        <Text className='w-1/6'>Result</Text>
-        <Text className='w-1/6'>Message</Text>
-        <Text className='w-1/6'>Amount</Text>
-        <Text className='w-1/6'>Time</Text>
-      </Row>
-
-      <BoxInner className='flex-col pb-4 mb-4'>
-
-        <Row className='justify-between p-4 items-center even:bg-axone-dark-blue-3'>
-          <div className='flex flex-row gap-4 w-1/6'>
-            <Text className='mb-0'>ex: 45GFD...45G2</Text>
-            <AxoneTooltip iconColor='text-axone-khaki' content='ex: 45GFDCA2DC12C85859104377132074D9AE822211D4C2E0D67C5B1447B0628CDF042EE45G2' />
-          </div>
-          <Text className='w-1/6 mb-0 text-axone-orange'>Success</Text>
-          <Text className='w-1/6 mb-0'>Send</Text>
-          <Text className='w-1/6 mb-0'>1.002.420</Text>
-          <div className='w-1/6 flex flex-col'>
-            <Text className='mb-0'>May 24th,2024</Text>
-            <Text className='mb-0 text-axone-khaki'>12:08:44 (12sec ago)</Text>
-          </div>
-        </Row>
-        <Row className='justify-between p-4 items-center even:bg-axone-dark-blue-3'>
-          <div className='flex flex-row gap-4 w-1/6'>
-            <Text className='mb-0'>ex: 45GFD...45G2</Text>
-            <AxoneTooltip iconColor='text-axone-khaki' content='0x7a3...f3c' />
-          </div>
-          <Text className='w-1/6 mb-0 text-axone-orange'>Success</Text>
-          <Text className='w-1/6 mb-0'>Send</Text>
-          <Text className='w-1/6 mb-0'>1.002.420</Text>
-          <div className='w-1/6 flex flex-col'>
-            <Text className='mb-0'>May 24th,2024</Text>
-            <Text className='mb-0 text-axone-khaki'>12:08:44 (12sec ago)</Text>
-          </div>
-        </Row>
-        <Row className='justify-between p-4 items-center even:bg-axone-dark-blue-3'>
-          <div className='flex flex-row gap-4 w-1/6'>
-            <Text className='mb-0'>ex: 45GFD...45G2</Text>
-            <AxoneTooltip iconColor='text-axone-khaki' content='0x7a3...f3c' />
-          </div>
-          <Text className='w-1/6 mb-0 text-axone-orange'>Success</Text>
-          <Text className='w-1/6 mb-0'>Send</Text>
-          <Text className='w-1/6 mb-0'>1.002.420</Text>
-          <div className='w-1/6 flex flex-col'>
-            <Text className='mb-0'>May 24th,2024</Text>
-            <Text className='mb-0 text-axone-khaki'>12:08:44 (12sec ago)</Text>
-          </div>
-        </Row>
-        <Row className='justify-between p-4 items-center even:bg-axone-dark-blue-3'>
-          <div className='flex flex-row gap-4 w-1/6'>
-            <Text className='mb-0'>ex: 45GFD...45G2</Text>
-            <AxoneTooltip iconColor='text-axone-khaki' content='0x7a3...f3c' />
-          </div>
-          <Text className='w-1/6 mb-0 text-axone-orange'>Success</Text>
-          <Text className='w-1/6 mb-0'>Send</Text>
-          <Text className='w-1/6 mb-0'>1.002.420</Text>
-          <div className='w-1/6 flex flex-col'>
-            <Text className='mb-0'>May 24th,2024</Text>
-            <Text className='mb-0 text-axone-khaki'>12:08:44 (12sec ago)</Text>
-          </div>
-        </Row>
-        <Row className='justify-between p-4 items-center even:bg-axone-dark-blue-3'>
-          <div className='flex flex-row gap-4 w-1/6'>
-            <Text className='mb-0'>ex: 45GFD...45G2</Text>
-            <AxoneTooltip iconColor='text-axone-khaki' content='0x7a3...f3c' />
-          </div>
-          <Text className='w-1/6 mb-0 text-axone-orange'>Success</Text>
-          <Text className='w-1/6 mb-0'>Send</Text>
-          <Text className='w-1/6 mb-0'>1.002.420</Text>
-          <div className='w-1/6 flex flex-col'>
-            <Text className='mb-0'>May 24th,2024</Text>
-            <Text className='mb-0 text-axone-khaki'>12:08:44 (12sec ago)</Text>
-          </div>
-        </Row>
-        <Row className='justify-between p-4 items-center even:bg-axone-dark-blue-3'>
-          <div className='flex flex-row gap-4 w-1/6'>
-            <Text className='mb-0'>ex: 45GFD...45G2</Text>
-            <AxoneTooltip iconColor='text-axone-khaki' content='0x7a3...f3c' />
-          </div>
-          <Text className='w-1/6 mb-0 text-axone-orange'>Success</Text>
-          <Text className='w-1/6 mb-0'>Send</Text>
-          <Text className='w-1/6 mb-0'>1.002.420</Text>
-          <div className='w-1/6 flex flex-col'>
-            <Text className='mb-0'>May 24th,2024</Text>
-            <Text className='mb-0 text-axone-khaki'>12:08:44 (12sec ago)</Text>
-          </div>
-        </Row>
-        <Row className='justify-between p-4 items-center even:bg-axone-dark-blue-3'>
-          <div className='flex flex-row gap-4 w-1/6'>
-            <Text className='mb-0'>ex: 45GFD...45G2</Text>
-            <AxoneTooltip iconColor='text-axone-khaki' content='0x7a3...f3c' />
-          </div>
-          <Text className='w-1/6 mb-0 text-axone-orange'>Success</Text>
-          <Text className='w-1/6 mb-0'>Send</Text>
-          <Text className='w-1/6 mb-0'>1.002.420</Text>
-          <div className='w-1/6 flex flex-col'>
-            <Text className='mb-0'>May 24th,2024</Text>
-            <Text className='mb-0 text-axone-khaki'>12:08:44 (12sec ago)</Text>
-          </div>
-        </Row>
-        <Row className='justify-between p-4 items-center even:bg-axone-dark-blue-3'>
-          <div className='flex flex-row gap-4 w-1/6'>
-            <Text className='mb-0'>ex: 45GFD...45G2</Text>
-            <AxoneTooltip iconColor='text-axone-khaki' content='0x7a3...f3c' />
-          </div>
-          <Text className='w-1/6 mb-0 text-axone-orange'>Success</Text>
-          <Text className='w-1/6 mb-0'>Send</Text>
-          <Text className='w-1/6 mb-0'>1.002.420</Text>
-          <div className='w-1/6 flex flex-col'>
-            <Text className='mb-0'>May 24th,2024</Text>
-            <Text className='mb-0 text-axone-khaki'>12:08:44 (12sec ago)</Text>
-          </div>
+      <div className='flex flex-col w-full overflow-auto'>
+        <Row className='justify-between w-[900px] lg:w-full '>
+          <Text className='w-1/6'>Tx hash</Text>
+          <Text className='w-1/6'>Result</Text>
+          <Text className='w-1/6'>Message</Text>
+          <Text className='w-1/6'>Amount</Text>
+          <Text className='w-1/6'>Time</Text>
         </Row>
 
-      </BoxInner>
+        <BoxInner className='flex-col w-[900px] lg:w-full  pb-4 mb-4'>
+          <Row className='justify-between p-4 items-center even:bg-axone-dark-blue-3'>
+            <div className='flex flex-row gap-4 w-1/6'>
+              <Text className='mb-0'>ex: 45GFD...45G2</Text>
+              <AxoneTooltip iconColor='text-axone-khaki' content='ex: 45GFDCA2DC12C85859104377132074D9AE822211D4C2E0D67C5B1447B0628CDF042EE45G2' />
+            </div>
+            <Text className='w-1/6 mb-0 text-axone-orange'>Success</Text>
+            <Text className='w-1/6 mb-0'>Send</Text>
+            <Text className='w-1/6 mb-0'>1.002.420</Text>
+            <div className='w-1/6 flex flex-col'>
+              <Text className='mb-0'>May 24th,2024</Text>
+              <Text className='mb-0 text-axone-khaki'>12:08:44 (12sec ago)</Text>
+            </div>
+          </Row>
+          <Row className='justify-between p-4 items-center even:bg-axone-dark-blue-3'>
+            <div className='flex flex-row gap-4 w-1/6'>
+              <Text className='mb-0'>ex: 45GFD...45G2</Text>
+              <AxoneTooltip iconColor='text-axone-khaki' content='0x7a3...f3c' />
+            </div>
+            <Text className='w-1/6 mb-0 text-axone-orange'>Success</Text>
+            <Text className='w-1/6 mb-0'>Send</Text>
+            <Text className='w-1/6 mb-0'>1.002.420</Text>
+            <div className='w-1/6 flex flex-col'>
+              <Text className='mb-0'>May 24th,2024</Text>
+              <Text className='mb-0 text-axone-khaki'>12:08:44 (12sec ago)</Text>
+            </div>
+          </Row>
+          <Row className='justify-between p-4 items-center even:bg-axone-dark-blue-3'>
+            <div className='flex flex-row gap-4 w-1/6'>
+              <Text className='mb-0'>ex: 45GFD...45G2</Text>
+              <AxoneTooltip iconColor='text-axone-khaki' content='0x7a3...f3c' />
+            </div>
+            <Text className='w-1/6 mb-0 text-axone-orange'>Success</Text>
+            <Text className='w-1/6 mb-0'>Send</Text>
+            <Text className='w-1/6 mb-0'>1.002.420</Text>
+            <div className='w-1/6 flex flex-col'>
+              <Text className='mb-0'>May 24th,2024</Text>
+              <Text className='mb-0 text-axone-khaki'>12:08:44 (12sec ago)</Text>
+            </div>
+          </Row>
+          <Row className='justify-between p-4 items-center even:bg-axone-dark-blue-3'>
+            <div className='flex flex-row gap-4 w-1/6'>
+              <Text className='mb-0'>ex: 45GFD...45G2</Text>
+              <AxoneTooltip iconColor='text-axone-khaki' content='0x7a3...f3c' />
+            </div>
+            <Text className='w-1/6 mb-0 text-axone-orange'>Success</Text>
+            <Text className='w-1/6 mb-0'>Send</Text>
+            <Text className='w-1/6 mb-0'>1.002.420</Text>
+            <div className='w-1/6 flex flex-col'>
+              <Text className='mb-0'>May 24th,2024</Text>
+              <Text className='mb-0 text-axone-khaki'>12:08:44 (12sec ago)</Text>
+            </div>
+          </Row>
+          <Row className='justify-between p-4 items-center even:bg-axone-dark-blue-3'>
+            <div className='flex flex-row gap-4 w-1/6'>
+              <Text className='mb-0'>ex: 45GFD...45G2</Text>
+              <AxoneTooltip iconColor='text-axone-khaki' content='0x7a3...f3c' />
+            </div>
+            <Text className='w-1/6 mb-0 text-axone-orange'>Success</Text>
+            <Text className='w-1/6 mb-0'>Send</Text>
+            <Text className='w-1/6 mb-0'>1.002.420</Text>
+            <div className='w-1/6 flex flex-col'>
+              <Text className='mb-0'>May 24th,2024</Text>
+              <Text className='mb-0 text-axone-khaki'>12:08:44 (12sec ago)</Text>
+            </div>
+          </Row>
+          <Row className='justify-between p-4 items-center even:bg-axone-dark-blue-3'>
+            <div className='flex flex-row gap-4 w-1/6'>
+              <Text className='mb-0'>ex: 45GFD...45G2</Text>
+              <AxoneTooltip iconColor='text-axone-khaki' content='0x7a3...f3c' />
+            </div>
+            <Text className='w-1/6 mb-0 text-axone-orange'>Success</Text>
+            <Text className='w-1/6 mb-0'>Send</Text>
+            <Text className='w-1/6 mb-0'>1.002.420</Text>
+            <div className='w-1/6 flex flex-col'>
+              <Text className='mb-0'>May 24th,2024</Text>
+              <Text className='mb-0 text-axone-khaki'>12:08:44 (12sec ago)</Text>
+            </div>
+          </Row>
+          <Row className='justify-between p-4 items-center even:bg-axone-dark-blue-3'>
+            <div className='flex flex-row gap-4 w-1/6'>
+              <Text className='mb-0'>ex: 45GFD...45G2</Text>
+              <AxoneTooltip iconColor='text-axone-khaki' content='0x7a3...f3c' />
+            </div>
+            <Text className='w-1/6 mb-0 text-axone-orange'>Success</Text>
+            <Text className='w-1/6 mb-0'>Send</Text>
+            <Text className='w-1/6 mb-0'>1.002.420</Text>
+            <div className='w-1/6 flex flex-col'>
+              <Text className='mb-0'>May 24th,2024</Text>
+              <Text className='mb-0 text-axone-khaki'>12:08:44 (12sec ago)</Text>
+            </div>
+          </Row>
+          <Row className='justify-between p-4 items-center even:bg-axone-dark-blue-3'>
+            <div className='flex flex-row gap-4 w-1/6'>
+              <Text className='mb-0'>ex: 45GFD...45G2</Text>
+              <AxoneTooltip iconColor='text-axone-khaki' content='0x7a3...f3c' />
+            </div>
+            <Text className='w-1/6 mb-0 text-axone-orange'>Success</Text>
+            <Text className='w-1/6 mb-0'>Send</Text>
+            <Text className='w-1/6 mb-0'>1.002.420</Text>
+            <div className='w-1/6 flex flex-col'>
+              <Text className='mb-0'>May 24th,2024</Text>
+              <Text className='mb-0 text-axone-khaki'>12:08:44 (12sec ago)</Text>
+            </div>
+          </Row>
+
+        </BoxInner>
+      </div>
       <Pagination currentPage={1} totalPages={10} onPageChange={() => {}} />
     </Box>
   );

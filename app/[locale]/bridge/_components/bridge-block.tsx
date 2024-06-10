@@ -89,7 +89,7 @@ const BridgeBlock = () => {
           </Row>
         </BoxInner>
       </Column>
-      <Button onClick={openConfirmTransactionModal} className='w-1/4 mt-6' variant={'rounded'}>Transfer Now</Button>
+      <Button onClick={openConfirmTransactionModal} className='w-full lg:w-1/4 mt-6' variant={'rounded'}>Transfer Now</Button>
     </Box>
   );
 };

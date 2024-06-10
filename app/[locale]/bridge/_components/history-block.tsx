@@ -17,26 +17,26 @@ const HistoryBlock = () => {
           <History size={20} className='text-axone-orange' />
         </div>
 
-        <div className='flex flex-row lg:w-[700px] justify-around gap-2'>
+        <div className='flex flex-row w-full flex-grow lg:w-[700px] overflow-x-auto justify-around gap-2'>
           <Text
-            className={cn('mb-0 mr-2 cursor-pointer', { 'text-axone-orange': true })}
+            className={cn('mb-0 mr-2 cursor-pointer whitespace-nowrap', { 'text-axone-orange': true })}
             onClick={() => setIsEmptyHistrory(false)}
           >
               All [0]
           </Text>
           <Text
             onClick={() => setIsEmptyHistrory(true)}
-            className={cn('mb-0 mr-2 cursor-pointer', { 'text-axone-orange': false })}
+            className={cn('mb-0 mr-2 cursor-pointer whitespace-nowrap', { 'text-axone-orange': false })}
           >
               In Progress [0]
           </Text>
           <Text
-            className={cn('mb-0 cursor-pointer', { 'text-axone-orange':false })}
+            className={cn('mb-0 cursor-pointer whitespace-nowrap', { 'text-axone-orange':false })}
           >
               Completed [0]
           </Text>
           <Text
-            className={cn('mb-0 cursor-pointer', { 'text-axone-orange':false })}
+            className={cn('mb-0 cursor-pointer whitespace-nowrap', { 'text-axone-orange':false })}
           >
               Failed/Cancelled [0]
           </Text>

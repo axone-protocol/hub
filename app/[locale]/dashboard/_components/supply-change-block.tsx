@@ -1,7 +1,7 @@
 'use client';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import { FC, useState } from 'react';
+import { FC, useMemo, useState } from 'react';
 import { Text } from '@/components/typography';
 import { Box } from '@/components/ui/boxes';
 import Column from '@/components/ui/column';
@@ -51,6 +51,8 @@ export default function SupplyChangeBlock () {
   const t  = useTranslations('Dashboard');
   const { query: { data, isLoading }, range, selectRange } = useSupplyChange();
 
+  const formattedNum = useMemo(() => data ? (+data/1000000).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : 0, [data]);
+
   if (isLoading) {
     return (
       <Box className='m-0 flex flex-col justify-center items-center lg:w-1/2 xl:w-full xl:h-1/2'>
@@ -66,7 +68,7 @@ export default function SupplyChangeBlock () {
         <TimeFrameSelect selectRange={selectRange} range={range} />
       </Row>
       <div className='flex flex-col items-end lg:flex-col lg:justify-between'>
-        <p className='text-3xl tracking-tighter text-axone-orange mb-0'>{data}</p>
+        <p className='text-3xl tracking-tighter text-axone-orange mb-0'>{formattedNum}</p>
         <p className='text-4xl tracking-tighter text-axone-khaki mb-0'>AXONE</p>
       </div>
       <Row className='justify-between mt-10'>

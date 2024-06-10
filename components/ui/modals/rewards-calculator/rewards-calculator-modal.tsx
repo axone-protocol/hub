@@ -45,7 +45,8 @@ const RewardsCalculatorModal: FC<RewardsCalculatorModalProps> = ({ isOpen, setOp
     setDaily(yearlyCalc / 365);
   };
 
-  const calculateFiatValue = (tokens: number, price = AXONE_FIAT_PRICE_MOCK): string => {
+  const calculateFiatValue = (tokens: number): string => {
+    const price = tokenInfo?.price.value || 1;
     return (tokens * price).toFixed(2);
   };
 

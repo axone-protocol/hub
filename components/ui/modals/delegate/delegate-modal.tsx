@@ -62,7 +62,14 @@ const DelegateModal = ({ isOpen, setOpen, delegationData }: DelegateModalProps) 
           <div className='grid w-full items-center gap-1.5 my-10'>
             <Label className='text-white mb-2' htmlFor='amount'>Amount</Label>
             <div className='relative'>
-              <Input disabled={isTransactionPending} type='number' id='amount' placeholder='Enter your amount to be delegated' {...register('amount')} />
+              <Input
+                className='pr-16'
+                disabled={isTransactionPending}
+                type='number'
+                id='amount'
+                placeholder='Enter your amount to be delegated'
+                {...register('amount')}
+              />
               {errors.amount && <p className='text-[12px] text-axone-red'>{`${errors.amount.message}`}</p>}
               <Text className='uppercase absolute right-2.5 top-2.5 bottom-0'>Axone</Text>
             </div>
