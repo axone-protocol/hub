@@ -51,7 +51,7 @@ export default function SupplyChangeBlock () {
   const t  = useTranslations('Dashboard');
   const { query: { data, isLoading }, range, selectRange } = useSupplyChange();
 
-  const formattedNum = useMemo(() => data ? (+data/1000000).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : 0, [data]);
+  const formattedNum = useMemo(() => data ? (Number(data)/1000000).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : 0, [data]);
 
   if (isLoading) {
     return (

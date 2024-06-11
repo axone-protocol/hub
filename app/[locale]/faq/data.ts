@@ -1,4 +1,3 @@
-/* eslint-disable quotes */
 export type FAQDataType = {
   id: number;
   question: string;
@@ -8,17 +7,8 @@ export type FAQDataType = {
   categoryTextColor: string;
 };
 
-// Function to shuffle the array and randomize the order of the FAQ items
-function shuffleArray (array: FAQDataType[]) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
-}
-
 enum COLORS_ENUM {
-  PURPLE = '#9B1FE8',
+  PURPLE = '#1986CF',
   ORANGE = '#FB9501',
   LIGHT_BLUE = '#D8FAFF',
   LIGHT_BLUE_2 = '#63D1D0',
@@ -34,7 +24,7 @@ enum CATEGORIES_ENUM {
   BRIDGE = 'Bridge',
 }
 
-const data_sorted: FAQDataType[] = [
+export const data: FAQDataType[] = [
   {
     id: 1,
     question: 'What is the Axone Hub?',
@@ -86,7 +76,7 @@ const data_sorted: FAQDataType[] = [
   {
     id: 7,
     question: 'What is token staking, and how do I stake Axone tokens?',
-    answer: "Token staking involves delegating and locking up your Axone tokens to one or a set of validators. This enables them to maintain the network and validate transactions. To stake Axone tokens, navigate to the 'Staking' section, choose a validator you trust, and allocate the amount of Axone tokens you wish to stake. Ideally, don’t delegate your tokens to validators with the most tokens staked to increase decentralization.",
+    answer: 'Token staking involves delegating and locking up your Axone tokens to one or a set of validators. This enables them to maintain the network and validate transactions. To stake Axone tokens, navigate to the \'Staking\' section, choose a validator you trust, and allocate the amount of Axone tokens you wish to stake. Ideally, don’t delegate your tokens to validators with the most tokens staked to increase decentralization.',
     category: CATEGORIES_ENUM.STAKING,
     categoryBgColor: COLORS_ENUM.PURPLE,
     categoryTextColor: COLORS_ENUM.WHITE
@@ -94,7 +84,7 @@ const data_sorted: FAQDataType[] = [
   {
     id: 8,
     question: 'How do I claim rewards from staking?',
-    answer: "Rewards can be claimed through the 'Staking' section. Select the option to view your staked tokens and see the 'Claim Rewards' button. Click on it and confirm the transaction to add your rewards to your wallet.",
+    answer: 'Rewards can be claimed through the \'Staking\' section. Select the option to view your staked tokens and see the \'Claim Rewards\' button. Click on it and confirm the transaction to add your rewards to your wallet.',
     category: CATEGORIES_ENUM.STAKING,
     categoryBgColor: COLORS_ENUM.ORANGE,
     categoryTextColor: COLORS_ENUM.DARK_BLUE
@@ -102,7 +92,7 @@ const data_sorted: FAQDataType[] = [
   {
     id: 9,
     question: 'What does it mean to unbond tokens, and how is it done?',
-    answer: "To unbond tokens refers to the process of withdrawing your staked tokens from a validator. This can be done by going to the 'Staking' section, selecting the validator from whom you want to unbond tokens, and choosing the amount to unbond. Note that there may be a locking period before the tokens become fully available in your wallet.",
+    answer: 'To unbond tokens refers to the process of withdrawing your staked tokens from a validator. This can be done by going to the \'Staking\' section, selecting the validator from whom you want to unbond tokens, and choosing the amount to unbond. Note that there may be a locking period before the tokens become fully available in your wallet.',
     category: CATEGORIES_ENUM.STAKING,
     categoryBgColor: COLORS_ENUM.ORANGE,
     categoryTextColor: COLORS_ENUM.DARK_BLUE
@@ -110,7 +100,7 @@ const data_sorted: FAQDataType[] = [
   {
     id: 10,
     question: 'Is there a fee for staking Axone tokens?',
-    answer: "Yes, there are network fees associated with staking Axone tokens. These fees vary based on network congestion and transaction complexity. Always check the current fees displayed in the app before confirming any transactions.",
+    answer: 'Yes, there are network fees associated with staking Axone tokens. These fees vary based on network congestion and transaction complexity. Always check the current fees displayed in the app before confirming any transactions.',
     category: CATEGORIES_ENUM.STAKING,
     categoryBgColor: COLORS_ENUM.ORANGE,
     categoryTextColor: COLORS_ENUM.DARK_BLUE
@@ -118,7 +108,7 @@ const data_sorted: FAQDataType[] = [
   {
     id: 11,
     question: 'How can I ensure my transactions and wallet are secure?',
-    answer: "Always keep your Private keys secure, and never share them with anyone.",
+    answer: 'Always keep your Private keys secure, and never share them with anyone.',
     category: CATEGORIES_ENUM.STAKING,
     categoryBgColor: COLORS_ENUM.ORANGE,
     categoryTextColor: COLORS_ENUM.DARK_BLUE
@@ -126,7 +116,7 @@ const data_sorted: FAQDataType[] = [
   {
     id: 12,
     question: 'How are staking rewards calculated and distributed?',
-    answer: "Staking rewards are calculated based on the number of tokens you stake, the duration of your staking period, and the overall staking pool's performance. Rewards are distributed at each block. You can track your staking rewards in the 'Rewards' section of the Axone Hub.",
+    answer: 'Staking rewards are calculated based on the number of tokens you stake, the duration of your staking period, and the overall staking pool\'s performance. Rewards are distributed at each block. You can track your staking rewards in the \'Rewards\' section of the Axone Hub.',
     category: CATEGORIES_ENUM.STAKING,
     categoryBgColor: COLORS_ENUM.ORANGE,
     categoryTextColor: COLORS_ENUM.DARK_BLUE
@@ -134,7 +124,7 @@ const data_sorted: FAQDataType[] = [
   {
     id: 13,
     question: 'Can I unstake my Axone tokens at any time?',
-    answer: "While you can initiate the unstaking process at any time, there is usually a mandatory waiting period (known as the 'unstaking period') before your tokens are released and become available for withdrawal. The length of the unstaking period can vary, so please refer to the Axone Hub for specific details.",
+    answer: 'While you can initiate the unstaking process at any time, there is usually a mandatory waiting period (known as the \'unstaking period\') before your tokens are released and become available for withdrawal. The length of the unstaking period can vary, so please refer to the Axone Hub for specific details.',
     category: CATEGORIES_ENUM.STAKING,
     categoryBgColor: COLORS_ENUM.ORANGE,
     categoryTextColor: COLORS_ENUM.DARK_BLUE
@@ -142,7 +132,7 @@ const data_sorted: FAQDataType[] = [
   {
     id: 14,
     question: 'What is the unbonding process, and how long does it take?',
-    answer: "A7: The unbonding process involves the transition period after you initiate the unstaking of your Axone tokens. During this period, your tokens are locked and not eligible for rewards or transactions. The unbonding period can vary in length, so please check the Axone Hub for specific details on the duration.",
+    answer: 'A7: The unbonding process involves the transition period after you initiate the unstaking of your Axone tokens. During this period, your tokens are locked and not eligible for rewards or transactions. The unbonding period can vary in length, so please check the Axone Hub for specific details on the duration.',
     category: CATEGORIES_ENUM.STAKING,
     categoryBgColor: COLORS_ENUM.ORANGE,
     categoryTextColor: COLORS_ENUM.DARK_BLUE
@@ -150,7 +140,7 @@ const data_sorted: FAQDataType[] = [
   {
     id: 15,
     question: 'What is slashing?',
-    answer: "Slashing is a penalty mechanism designed to enforce network security and integrity. It involves reducing or forfeiting a staker's tokens if they engage in malicious behavior or by double signing a block. This mechanism helps ensure that all participants act in the best interest of the blockchain network.",
+    answer: 'Slashing is a penalty mechanism designed to enforce network security and integrity. It involves reducing or forfeiting a staker\'s tokens if they engage in malicious behavior or by double signing a block. This mechanism helps ensure that all participants act in the best interest of the blockchain network.',
     category: CATEGORIES_ENUM.STAKING,
     categoryBgColor: COLORS_ENUM.ORANGE,
     categoryTextColor: COLORS_ENUM.DARK_BLUE
@@ -158,7 +148,7 @@ const data_sorted: FAQDataType[] = [
   {
     id: 16,
     question: 'What happens if the validators to whom I delegated my tokens are slashed?',
-    answer: "If the validators to whom you delegated your tokens are slashed, you, as a delegator, will also be affected. A validator is jailed when slashed, and 5% of his stake is burned. So, you may lose 5% of the amount you staked on this validator.",
+    answer: 'If the validators to whom you delegated your tokens are slashed, you, as a delegator, will also be affected. A validator is jailed when slashed, and 5% of his stake is burned. So, you may lose 5% of the amount you staked on this validator.',
     category: CATEGORIES_ENUM.STAKING,
     categoryBgColor: COLORS_ENUM.ORANGE,
     categoryTextColor: COLORS_ENUM.DARK_BLUE
@@ -166,7 +156,7 @@ const data_sorted: FAQDataType[] = [
   {
     id: 17,
     question: 'How can I minimize the risk of slashing when delegating my tokens?',
-    answer: "To minimize the risk of slashing when delegating your tokens, consider the following:<br /> 1.Choose Reliable Validators: Delegate your tokens to well-established and reputable validators with a proven performance and reliability track record.<br /> 2. Diversify Delegations: Spread your tokens across multiple validators to reduce the impact of any single validator being slashed.<br /> 3. Monitor Validator Performance: Regularly check the performance and behavior of your chosen validators. Stay informed about their uptime, governance participation, and overall network contribution.<br /> 4. Stay Informed: Keep up with network updates and changes in slashing rules to make informed decisions about your delegations.",
+    answer: 'To minimize the risk of slashing when delegating your tokens, consider the following:<br /> 1.Choose Reliable Validators: Delegate your tokens to well-established and reputable validators with a proven performance and reliability track record.<br /> 2. Diversify Delegations: Spread your tokens across multiple validators to reduce the impact of any single validator being slashed.<br /> 3. Monitor Validator Performance: Regularly check the performance and behavior of your chosen validators. Stay informed about their uptime, governance participation, and overall network contribution.<br /> 4. Stay Informed: Keep up with network updates and changes in slashing rules to make informed decisions about your delegations.',
     category: CATEGORIES_ENUM.STAKING,
     categoryBgColor: COLORS_ENUM.ORANGE,
     categoryTextColor: COLORS_ENUM.DARK_BLUE
@@ -308,5 +298,3 @@ const data_sorted: FAQDataType[] = [
     categoryTextColor: COLORS_ENUM.DARK_BLUE
   },
 ];
-
-export const data = shuffleArray([...data_sorted]);

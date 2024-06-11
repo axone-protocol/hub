@@ -31,11 +31,11 @@ const config = {
         'mobile': '320px',
       },
       fontSize: {
-        '10': '10px',
-        '16': '16px',
-        '18': '18px',
-        '20': '20px',
-        '40': '40px',
+        '10': '0.625rem',
+        '16': '1rem',
+        '18': '1.125rem',
+        '20': '1.25rem',
+        '40': '2.5rem',
       },
       keyframes: {
         'accordion-down': {
