@@ -11,7 +11,7 @@ type CategoryFilterProps = {
 enum CategoriesEnum {
   All = 'All',
   General = 'General',
-  Walkthrough = 'Walkthrough',
+  Transfer = 'Transfer',
   Bridge = 'Bridge',
   Validator = 'Validator',
   Staking = 'Staking',

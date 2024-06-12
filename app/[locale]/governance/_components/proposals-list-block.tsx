@@ -27,31 +27,21 @@ const ProposalsListBlock = () => {
           <Input type='search' id='proposals' className='pl-10' placeholder='Search Proposal' />
         </div>
         <div className='flex flex-row justify-start lg:justify-center gap-2 lg:gap-6 w-full overflow-x-auto'>
-          <Text
-            className={cn('mb-0 mr-2 cursor-pointer', { 'text-axone-orange': true })}
-          >
-              All [2]
-          </Text>
-          <Text
-            className={cn('mb-0 mr-2 cursor-pointer', { 'text-axone-orange': false })}
-          >
-              Deposit [2]
-          </Text>
-          <Text
-            className={cn('mb-0 mr-2 cursor-pointer', { 'text-axone-orange': false })}
-          >
-              Voting [2]
-          </Text>
-          <Text
-            className={cn('mb-0 mr-2 cursor-pointer', { 'text-axone-orange': false })}
-          >
-              Passed [2]
-          </Text>
-          <Text
-            className={cn('mb-0 mr-2 cursor-pointer', { 'text-axone-orange': false })}
-          >
-              Rejected [2]
-          </Text>
+          <p className={cn('mb-0 mr-2 text-16 cursor-pointer text-axone-khaki', { 'text-axone-orange': true })}>
+            All [2]
+          </p>
+          <p className={cn('mb-0 mr-2 cursor-pointer text-16 text-axone-khaki', { 'text-axone-orange': false })}>
+            Deposit [2]
+          </p>
+          <p className={cn('mb-0 mr-2 cursor-pointer text-16 text-axone-khaki', { 'text-axone-orange': false })}>
+            Voting [2]
+          </p>
+          <p className={cn('mb-0 mr-2 cursor-pointer text-16 text-axone-khaki', { 'text-axone-orange': false })}>
+            Passed [2]
+          </p>
+          <p className={cn('mb-0 mr-2 cursor-pointer text-16 text-axone-khaki', { 'text-axone-orange': false })}>
+            Rejected [2]
+          </p>
         </div>
       </div>
       <div className='flex flex-col w-full overflow-auto'>
@@ -61,8 +51,8 @@ const ProposalsListBlock = () => {
             <Text className='mb-0 w-[80px]'>379</Text>
             <div className='flex flex-col items-start w-[300px]'>
               <div className='flex flex-row items-center gap-4 mb-4'>
-                <ColorBadge backgroundColor='axone-grey-2' textColor='white' text='Voting' className='px-2' />
-                <ColorBadge backgroundColor='axone-grey' textColor='axone-dark-blue' text='Wasm' className='px-2' />
+                <ColorBadge backgroundColor='#292929' textColor='#ffffff' text='Voting' className='px-2' />
+                <ColorBadge backgroundColor='#CCD3D6' textColor='#071622' text='Wasm' className='px-2' />
               </div>
               <Title>Disbursement of OLP rewards for epoch ended on 18 March </Title>
             </div>
@@ -78,8 +68,8 @@ const ProposalsListBlock = () => {
             <Text className='mb-0 w-[80px]'>379</Text>
             <div className='flex flex-col items-start w-[300px]'>
               <div className='flex flex-row items-center gap-4 mb-4'>
-                <ColorBadge backgroundColor='axone-orange' textColor='axone-dark-blue' text='Passed' className='px-2' />
-                <ColorBadge backgroundColor='axone-grey' textColor='axone-dark-blue' text='Wasm' className='px-2' />
+                <ColorBadge backgroundColor='#FB9501' textColor='#071622' text='Passed' className='px-2' />
+                <ColorBadge backgroundColor='#CCD3D6' textColor='#071622' text='Wasm' className='px-2' />
               </div>
               <Title>Upload Ninza Contract - Referral </Title>
             </div>

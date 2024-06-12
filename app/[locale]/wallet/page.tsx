@@ -23,7 +23,9 @@ export default function Wallet () {
         <BalancesBlock />
         <TransferBlock />
       </div>
-      <RewardsHistoryBlock />
+      <div className='flex w-full flex-col px-6 pb-6 lg:px-0'>
+        <RewardsHistoryBlock />
+      </div>
     </PageContainer>
   );
 }

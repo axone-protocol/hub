@@ -17,8 +17,6 @@ type RewardsCalculatorModalProps = {
 
 const MIN_STAKE = 5;
 const MAX_STAKE = 200000;
-// Mock values - will be replaced with real values later
-const AXONE_FIAT_PRICE_MOCK = 1.23;
 
 const RewardsCalculatorModal: FC<RewardsCalculatorModalProps> = ({ isOpen, setOpen }) => {
   const t  = useTranslations('Dashboard');
@@ -45,7 +43,8 @@ const RewardsCalculatorModal: FC<RewardsCalculatorModalProps> = ({ isOpen, setOp
     setDaily(yearlyCalc / 365);
   };
 
-  const calculateFiatValue = (tokens: number, price = AXONE_FIAT_PRICE_MOCK): string => {
+  const calculateFiatValue = (tokens: number): string => {
+    const price = tokenInfo?.price.value || 1;
     return (tokens * price).toFixed(2);
   };
 
