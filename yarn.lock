@@ -54,10 +54,10 @@
   resolved "https://registry.yarnpkg.com/@chain-registry/types/-/types-0.43.9.tgz#c26f5acd3d36e37f7d897f389a062b43e739f972"
   integrity sha512-6HVsXAC5CPEROBISdVAJBPwZh9y0/9z9X8f71D7uSpTAfqMOuRCBdV2Klt7CsSyty1BHvNv8O/0nzrYcvnl/Mw==
 
-"@chain-registry/types@^0.44.5":
-  version "0.44.5"
-  resolved "https://registry.yarnpkg.com/@chain-registry/types/-/types-0.44.5.tgz#a87081de7f9d9d4d6bf612ce5edc6246ceec6704"
-  integrity sha512-kUM3+mDp2Rg7k7pRatFExahdXQryQ6Qc+Pjs0tGW2xaYxtZ+YpQmwU91Cn7rkME6IuHCh4fTwv7CvZncdCEWpA==
+"@chain-registry/types@^0.44.6":
+  version "0.44.6"
+  resolved "https://registry.yarnpkg.com/@chain-registry/types/-/types-0.44.6.tgz#cf074199b3be30cf4eda9b2b87e665bfe9a8d0d6"
+  integrity sha512-3DgGDYDDjSbZWxPAeqiPtc9eIJiQdHfKMJw8EAMoDS8VvGU2Tr2xDrrE7UifgVrpmQ6RalLDOT33MZqjs8D84w==
 
 "@chain-registry/utils@^1.44.4":
   version "1.44.4"
@@ -3976,12 +3976,12 @@ caniuse-lite@^1.0.30001579, caniuse-lite@^1.0.30001587, caniuse-lite@^1.0.300015
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001623.tgz#e982099dcb229bb6ab35f5aebe2f8d79ccf6e8a8"
   integrity sha512-X/XhAVKlpIxWPpgRTnlgZssJrF0m6YtRA0QDWgsBNT12uZM6LPRydR7ip405Y3t1LamD8cP2TZFEDZFBf5ApcA==
 
-chain-registry@^1.62.7:
-  version "1.62.7"
-  resolved "https://registry.yarnpkg.com/chain-registry/-/chain-registry-1.62.7.tgz#b13c5a2b03ac31fd84ac1d1fa8b5bf70d780bc25"
-  integrity sha512-MDI14JUzxdVuf0YHr+1/S4l8oiqW+FMRAHv4RHv6lqag8B6bJIZfIpVvo/kpNz0lhQzMsv3ZwcosjqdIbyFGaw==
+chain-registry@^1.62.8:
+  version "1.62.8"
+  resolved "https://registry.yarnpkg.com/chain-registry/-/chain-registry-1.62.8.tgz#87ec49222e06d443fdfd3f66447e02a7c387cf07"
+  integrity sha512-FdDSO2nZExjmiO016rw/oEVy80eargpVdnPH8hSPq2B5yKh6GxaoZuYSktiHAYeJswoLWFoQFIzW5Sum/ZgBdg==
   dependencies:
-    "@chain-registry/types" "^0.44.5"
+    "@chain-registry/types" "^0.44.6"
 
 chalk@^4.0.0:
   version "4.1.2"
