@@ -13,16 +13,16 @@ const SEARCH_ICON_SIZE: number = 20;
 
 const FAQBlock = () => {
   const locale = useLocale();
-  const SORTED_DATA = locale === 'en' ? FAQ_EN : FAQ_FR;
+  const data = locale === 'en' ? FAQ_EN : FAQ_FR;
   const t = useTranslations('FAQ');
-  const [faqData, setFaqData] = useState<FAQDataType[]>(SORTED_DATA);
+  const [faqData, setFaqData] = useState<FAQDataType[]>(data);
   const [category, selectCategory] = useState<string>('All');
 
   const searchQuestion = useCallback((e: React.ChangeEvent<HTMLInputElement>): void => {
     if (e.target.value === '') {
-      setFaqData(SORTED_DATA);
+      setFaqData(data);
     } else {
-      const filteredData = SORTED_DATA.filter((item) => item.question.toLowerCase().includes(e.target.value.toLowerCase()));
+      const filteredData = data.filter((item) => item.question.toLowerCase().includes(e.target.value.toLowerCase()));
       setFaqData(filteredData);
     }
   }, []);
