@@ -361,10 +361,10 @@
     "@keplr-wallet/provider-extension" "^0.12.95"
     "@keplr-wallet/types" "^0.12.95"
 
-"@cosmos-kit/keplr-mobile@^2.10.1":
-  version "2.10.1"
-  resolved "https://registry.yarnpkg.com/@cosmos-kit/keplr-mobile/-/keplr-mobile-2.10.1.tgz#17ebec5fab2fba014bc1c00dc8c87a069e819c64"
-  integrity sha512-2lGXwhD684+hGH+PT2h6Fo9pVevmOf3Bia33irRsR7n8C2/LbuJ9R7SlsKjCJ2kQpWFj18LvqhhM9L0VmY5o5A==
+"@cosmos-kit/keplr-mobile@^2.11.0":
+  version "2.11.0"
+  resolved "https://registry.yarnpkg.com/@cosmos-kit/keplr-mobile/-/keplr-mobile-2.11.0.tgz#a1665273a2e1409fe5171435b69a69b401508236"
+  integrity sha512-oCVbNSb8v3L2lRpKuG26nLEvj24lCNI7F+IewvJIlLZASFycBYWnN5GHPxA5BJLq7P5jR7wetIjmVq3d/vrNrQ==
   dependencies:
     "@chain-registry/keplr" "1.64.4"
     "@cosmos-kit/core" "^2.12.0"
@@ -373,13 +373,13 @@
     "@keplr-wallet/provider-extension" "^0.12.95"
     "@keplr-wallet/wc-client" "^0.12.95"
 
-"@cosmos-kit/keplr@^2.10.1":
-  version "2.10.1"
-  resolved "https://registry.yarnpkg.com/@cosmos-kit/keplr/-/keplr-2.10.1.tgz#8cb7cd11b45a9b9dd4ce3e3fb3eef5f7aef16ecf"
-  integrity sha512-mS4Qwqbz1tDJRO354EnzBPobqZxnXFu7X97FVgMpEsgSJS95rIzTjZQynQEaw4qCwVW13MPh6+uGMx/oxpcjMg==
+"@cosmos-kit/keplr@^2.11.0":
+  version "2.11.0"
+  resolved "https://registry.yarnpkg.com/@cosmos-kit/keplr/-/keplr-2.11.0.tgz#c1d2e5317e44ea09727d8d5c4482a1eda4f58fbf"
+  integrity sha512-xD9hOE7EqGNa4fe+jkgKhYAnR+G6SWQlo7+ORR3gv91eVQfh10LvwIR7gu/+m70DYaeXMmHiBd4FqD/tNNMoEw==
   dependencies:
     "@cosmos-kit/keplr-extension" "^2.11.1"
-    "@cosmos-kit/keplr-mobile" "^2.10.1"
+    "@cosmos-kit/keplr-mobile" "^2.11.0"
 
 "@cosmos-kit/react-lite@^2.11.0":
   version "2.11.0"
