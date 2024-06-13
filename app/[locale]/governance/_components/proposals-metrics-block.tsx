@@ -1,4 +1,5 @@
 'use client';
+import { useTranslations } from 'next-intl';
 import { Text, Title } from '@/components/typography';
 import { BoxInner } from '@/components/ui/boxes';
 import { useGovernanceOverview } from '@/hooks/use-governance-overview';
@@ -6,6 +7,7 @@ import { ProposalsMetricsSkeleton } from './proposals-metrics-skeleton';
 
 const ProposalsMetricsBlock = () => {
   const { data: governanceOverview, isFetching } = useGovernanceOverview();
+  const t = useTranslations('Governance');
 
   if (!governanceOverview || isFetching) {
     return <ProposalsMetricsSkeleton />;
@@ -18,7 +20,7 @@ const ProposalsMetricsBlock = () => {
           {governanceOverview.totalProposals}
         </Title>
         <Text className='text-axone-khaki mb-0 uppercase'>
-          Total proposals
+          {t('TotalProposals')}
         </Text>
       </BoxInner>
 
@@ -27,16 +29,16 @@ const ProposalsMetricsBlock = () => {
           {governanceOverview.currentProposals}
         </Title>
         <Text className='text-axone-khaki mb-0 uppercase'>
-          Current proposals
+          {t('CurrentProposals')}
         </Text>
       </BoxInner>
 
       <BoxInner className='py-5 w-full lg:w-1/4 h-30 flex-col justify-center gap-6 items-center px-6'>
         <Title className='mb-0'>
-          {governanceOverview.votingPeriod} Days
+          {governanceOverview.votingPeriod}
         </Title>
         <Text className='text-axone-khaki mb-0 uppercase'>
-          Voting period
+          {t('VotingPeriod')}
         </Text>
       </BoxInner>
 
@@ -45,7 +47,7 @@ const ProposalsMetricsBlock = () => {
           {governanceOverview.depositRequired} AXONE
         </Title>
         <Text className='text-axone-khaki mb-0 uppercase'>
-          Deposit required
+          {t('DepositRequired')}
         </Text>
       </BoxInner>
     </div>

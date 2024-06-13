@@ -1,5 +1,5 @@
 import { type ClassValue, clsx } from 'clsx';
-import { differenceInSeconds, formatDistanceToNow } from 'date-fns';
+import { differenceInSeconds, format, formatDistanceToNow, parseISO } from 'date-fns';
 import { twMerge } from 'tailwind-merge';
 
 export function cn (...inputs: ClassValue[]) {
@@ -42,4 +42,15 @@ export function formatTimestamp (timestamp: string): string {
     return `${secondsAgo} seconds ago`;
   }
   return formatDistanceToNow(date, { addSuffix: true });
+};
+
+export const formatDate = (date: string | undefined): string => {
+  if (!date) {
+    return '';
+  }
+  const timestamp = date;
+  const parsedDate = parseISO(timestamp);
+  const formattedDate = format(parsedDate, 'MMM dd yyyy HH:mm:ss');
+
+  return formattedDate;
 };

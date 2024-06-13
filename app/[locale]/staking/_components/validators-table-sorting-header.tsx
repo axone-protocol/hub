@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FC, useCallback, useState } from 'react';
 import { Text } from '@/components/typography';
 import { ArrowDownLong } from '@/components/ui/arrow-down-long';
@@ -51,38 +52,39 @@ const FilterButton: FC<FilterButtonProps> = ({
 type ValidatorsTableSortingHeaderProps = {
   sortByParam: (param: ValidatorSortBy) => () => void;
   activeFilter: ValidatorSortBy | null;
+  t: any;
 };
 
-const ValidatorsTableSortingHeader: FC<ValidatorsTableSortingHeaderProps> = ({ sortByParam, activeFilter }) => {
+const ValidatorsTableSortingHeader: FC<ValidatorsTableSortingHeaderProps> = ({ sortByParam, activeFilter, t }) => {
   return (
     <Row className='w-[900px] lg:w-full justify-between px-4 mb-2'>
       <FilterButton
         selected={activeFilter === ValidatorSortBy.NAME}
         onClick={sortByParam(ValidatorSortBy.NAME)}
         width='w-1/4'
-        text='Validator'
+        text={t('Validator')}
       />
       <FilterButton
         selected={activeFilter === ValidatorSortBy.STAKED_AMOUNT}
         onClick={sortByParam(ValidatorSortBy.STAKED_AMOUNT)}
-        text='Staked Amount'
+        text={t('StakedAmount')}
       />
       <FilterButton
         selected={activeFilter === ValidatorSortBy.COMMISSION}
         onClick={sortByParam(ValidatorSortBy.COMMISSION)}
-        text='Commission'
+        text={t('Commission')}
       />
       <FilterButton
         selected={activeFilter === ValidatorSortBy.VOTING_POWER}
         onClick={sortByParam(ValidatorSortBy.VOTING_POWER)}
-        text='Voting Power'
+        text={t('VotingPower')}
       />
       <FilterButton
         selected={activeFilter === ValidatorSortBy.UPTIME}
         onClick={sortByParam(ValidatorSortBy.UPTIME)}
-        text='Uptime'
+        text={t('Uptime')}
         tooltip
-        tooltipText='Uptime percentage based on the latest 10K blocks'
+        tooltipText={t('UptimeTooltip')}
       />
       <Text className='w-[155px] opacity-0'>.</Text>
     </Row>

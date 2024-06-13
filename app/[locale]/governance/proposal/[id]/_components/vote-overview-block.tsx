@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl';
 import { Text, Title } from '@/components/typography';
 import { AxoneTooltip } from '@/components/ui/axone-tooltip';
 import { Box, BoxInner } from '@/components/ui/boxes';
@@ -25,9 +26,11 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ percentage, filledGradient, c
 };
 
 const VoteOverviewBlock = () => {
+  const t = useTranslations('Governance');
+
   return (
     <Box className='lg:mx-0'>
-      <Title className='mb-6'>Vote Overview</Title>
+      <Title className='mb-6'>{t('VoteOverview')}</Title>
       <div className='flex flex-col lg:flex-row gap-8'>
         <BoxInner className='flex-col w-full lg:w-1/3 h-40 justify-center items-center gap-4 px-6'>
           <Title>32.2%</Title>

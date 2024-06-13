@@ -31,6 +31,7 @@ const SingleValidatorItem: FC<SingleValidatorItemProps> = ({ data, openDelegateM
       validatorName: data.description.moniker,
       validatorAddress: data.address
     };
+    console.log(dataToPass);
     openDelegateModal(dataToPass)();
   }, [data.description.moniker, data.address, openDelegateModal]);
 

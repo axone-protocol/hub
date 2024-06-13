@@ -1,5 +1,6 @@
 'use client';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import Text from '@/components/typography/text';
@@ -20,16 +21,17 @@ type DelegateModalProps = {
   delegationData: DelegateModalOpenProps;
 };
 
-const formSchema = z.object({
-  amount: z.coerce.number()
-    .refine(value => value >= 5 && value <= 200000, {
-      message: 'Amount must be a valid number between 5 and 200000',
-    }),
-});
-
 const DelegateModal = ({ isOpen, setOpen, delegationData }: DelegateModalProps) => {
+  const t = useTranslations('Staking');
   const { balance, delegateToValidator, isTransactionPending } = useAxonePayments();
   const validatorData = useValidatorStore((state) => state.validatorData);
+
+  const formSchema = z.object({
+    amount: z.coerce.number()
+      .refine(value => !isNaN(value) && value >= 0 && value <= balance.toNumber(), {
+        message: `Amount must be a valid number between 0 and ${balance.toNumber()}`,
+      })
+  });
 
   const { register, formState: { errors }, handleSubmit, reset } = useForm({
     resolver: zodResolver(formSchema),
@@ -40,7 +42,7 @@ const DelegateModal = ({ isOpen, setOpen, delegationData }: DelegateModalProps) 
       alert('Insufficient funds');
       return;
     }
-    await delegateToValidator({ amount: values.amount, validatorAddress: `${validatorData?.address}`, memo: '' });
+    await delegateToValidator({ amount: values.amount, validatorAddress: `${delegationData.validatorAddress || validatorData?.address}`, memo: '' });
     reset({ amount: '' });
     setOpen(false);
   });
@@ -49,25 +51,25 @@ const DelegateModal = ({ isOpen, setOpen, delegationData }: DelegateModalProps) 
     <Dialog open={isOpen} onOpenChange={setOpen}>
       <DialogContent className='text-white w-[85%] lg:w-1/3 max-h-3/4 p-10'>
         <DialogHeader>
-          <DialogTitle className='text-left text-20'>Delegate to { delegationData.validatorName || validatorData?.description.moniker || '' }</DialogTitle>
+          <DialogTitle className='text-left text-20'>{t('DelegateTo')} { delegationData.validatorName || validatorData?.description.moniker || '' }</DialogTitle>
         </DialogHeader>
         <div className='overflow-y-auto scrollbar-none h-full'>
           <Column className='justify-center items-center'>
             <Row className='justify-center items-center mb-2 gap-4'>
-              <Text className='uppercase mb-0 text-axone-grey'>Available for delegation</Text>
+              <Text className='uppercase mb-0 text-axone-grey'>{t('AvailableForDelegation')}</Text>
               <AxoneTooltip content='Your available amount to transfer to a different address on Axone' />
             </Row>
             <Text className='uppercase'>{ balance.toNumber() } <span className='uppercase text-axone-khaki'>Axone</span></Text>
           </Column>
           <div className='grid w-full items-center gap-1.5 my-10'>
-            <Label className='text-white mb-2' htmlFor='amount'>Amount</Label>
+            <Label className='text-white mb-2' htmlFor='amount'>{t('Amount')}</Label>
             <div className='relative'>
               <Input
                 className='pr-16'
                 disabled={isTransactionPending}
                 type='number'
                 id='amount'
-                placeholder='Enter your amount to be delegated'
+                placeholder={t('EnterYourAmountToBeDelegated')}
                 {...register('amount')}
               />
               {errors.amount && <p className='text-[12px] text-axone-red'>{`${errors.amount.message}`}</p>}
@@ -75,7 +77,7 @@ const DelegateModal = ({ isOpen, setOpen, delegationData }: DelegateModalProps) 
             </div>
           </div>
           <Button disabled={isTransactionPending} onClick={onDelegate} className='w-full' variant={'rounded'}>
-            {isTransactionPending ? 'Delegating...' : 'Delegate'}
+            {isTransactionPending ? t('Delegating') : t('Delegate')}
           </Button>
         </div>
       </DialogContent>

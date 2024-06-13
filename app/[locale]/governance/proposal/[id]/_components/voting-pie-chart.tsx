@@ -2,13 +2,18 @@
 
 import { Cell, Pie, PieChart } from 'recharts';
 
-const data = [
-  { name: 'YES', value: 400 },
-  { name: 'NO', value: 100 },
-];
+type VoteItem = {
+  name: string;
+  value: number;
+};
+
+type VotingPieChartProps = {
+  data: VoteItem[];
+};
+
 const COLORS = ['#DC4E4E'];
 
-const VotingPieChart = () => {
+const VotingPieChart = ({ data }: VotingPieChartProps) => {
   const onPieEnter = () => {
     console.log('onPieEnter');
   };
