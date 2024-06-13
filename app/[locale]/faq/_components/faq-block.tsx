@@ -13,7 +13,7 @@ const SEARCH_ICON_SIZE: number = 20;
 
 const FAQBlock = () => {
   const locale = useLocale();
-  const SORTED_DATA = locale === 'en' ? FAQ_EN.sort(() => Math.random() - 0.5) : FAQ_FR.sort(() => Math.random() - 0.5);
+  const SORTED_DATA = locale === 'en' ? FAQ_EN : FAQ_FR;
   const t = useTranslations('FAQ');
   const [faqData, setFaqData] = useState<FAQDataType[]>(SORTED_DATA);
   const [category, selectCategory] = useState<string>('All');
