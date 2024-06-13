@@ -1,5 +1,6 @@
 'use client';
 import { useParams } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { Text, Title } from '@/components/typography';
 import { AxoneTooltip } from '@/components/ui/axone-tooltip';
 import { Box } from '@/components/ui/boxes';
@@ -9,6 +10,7 @@ import Row from '@/components/ui/row';
 import { useValidatorDelegations, ValidatorDelegation } from '@/hooks/use-validator-delegations';
 
 const ValidatorDelegationsBlock = () => {
+  const t = useTranslations('Staking');
   const { address } = useParams();
   const { data } = useValidatorDelegations(address);
 
@@ -16,16 +18,16 @@ const ValidatorDelegationsBlock = () => {
 
   return (
     <Box className='m-0'>
-      <Title className='mb-6'>Validator Delegations</Title>
+      <Title className='mb-6'>{t('ValidatorDelegations')}</Title>
 
       <div className='w-full overflow-auto'>
         <Row className='px-6 justify-between mb-3 w-[600px] lg:w-full overflow-auto'>
-          <Text className='w-1/3 text-white mb-0 text-left'>Delegator</Text>
+          <Text className='w-1/3 text-white mb-0 text-left'>{t('Delegator')}</Text>
           <div className='flex w-1/3 ml-4 gap-2 items-center justify-start'>
-            <Text className=' text-white mb-0'>Delegated Amount</Text>
-            <AxoneTooltip iconColor='text-axone-khaki' content='Delegated Amount' />
+            <Text className=' text-white mb-0'>{t('DelegatedAmount')}</Text>
+            <AxoneTooltip iconColor='text-axone-khaki' content={t('DelegatedAmount')} />
           </div>
-          <Text className='w-1/3 text-white mb-0 text-right'>Commission</Text>
+          <Text className='w-1/3 text-white mb-0 text-right'>{t('Commission')}</Text>
         </Row>
         <BoxInner className='flex flex-col w-[600px] lg:w-full h-[140px] overflow-y-auto scrollbar scrollbar-thin'>
           {
@@ -40,7 +42,7 @@ const ValidatorDelegationsBlock = () => {
         </BoxInner>
       </div>
 
-      <Button variant='rounded' className='px-8 mt-8'>Show More</Button>
+      <Button variant='rounded' className='px-8 mt-8'>{t('ShowMore')}</Button>
     </Box>
   );
 };

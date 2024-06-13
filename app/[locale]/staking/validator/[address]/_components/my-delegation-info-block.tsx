@@ -1,7 +1,7 @@
 'use client';
 import { useChain } from '@cosmos-kit/react';
 import { useParams, useRouter } from 'next/navigation';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { Text, Title } from '@/components/typography';
 import { AxoneTooltip } from '@/components/ui/axone-tooltip';
 import { Box } from '@/components/ui/boxes';
@@ -14,6 +14,7 @@ import { useMyDelegationsOverview } from '@/hooks/use-my-delegations-overview';
 import { useAxonePayments } from '@/hooks/wallet/use-axone-payments';
 
 const MyDelegationInfoBlock = () => {
+  const t = useTranslations('Staking');
   const { openDelegateModal } = useModal();
   const { address: validatorAddress } = useParams();
   const { isWalletConnected } = useChain(chainName);
@@ -26,31 +27,30 @@ const MyDelegationInfoBlock = () => {
     router.push(`/${locale}/wallet`);
   };
 
-  // TODO: change the amount to to be equal whole balance - now it's just for testing purpose set to 1 microknow (need to change displaying to proper format later)
-  const onUnbond = () => unbondFromValidator({ amount: Number(data?.delegation), validatorAddress: `${validatorAddress}`, memo: 'hey' });
+  const onUnbond = () => unbondFromValidator({ amount: Number(data?.delegation)/1000000, validatorAddress: `${validatorAddress}`, memo: 'hey' });
   const onClaimRewards = () => claimRewards(`${validatorAddress}`);
 
   return (
     <Box className='w-full lg:w-[380px] m-0 relative'>
-      <Title className='mb-6'>My Delegation Info</Title>
+      <Title className='mb-6'>{t('MyDelegationInfo')}</Title>
       {
         isWalletConnected
           ? (
             <>
               <Row className='gap-2'>
-                <Text>My Delegation</Text>
+                <Text>{t('MyDelegation')}</Text>
                 <AxoneTooltip iconColor='text-axone-khaki' content='My Delegation' />
               </Row>
               <Row className='gap-2 mb-4'>
-                <p className='text-40 text-white'>{data?.delegation || '0.00'}</p>
+                <p className='text-40 text-white'>{Number(data?.delegation)/1000000 || '0.00'}</p>
                 <p className='text-40 text-axone-khaki'>AXONE</p>
               </Row>
               <Row className='gap-4'>
-                <Button onClick={openDelegateModal({})} className='w-1/2' variant={'rounded'}>Delegate</Button>
+                <Button onClick={openDelegateModal({})} className='w-1/2' variant={'rounded'}>{t('Delegate')}</Button>
                 {
                   !!Number(data?.delegation) ? (
                     <Button disabled={isTransactionPending} onClick={onUnbond} className='w-1/2 border-axone-khaki text-axone-khaki' variant={'rounded'}>
-                      {isTransactionPending ? 'Unbonding...' : 'Unbond'}
+                      {isTransactionPending ? t('Unbonding') : t('Unbond')}
                     </Button>
                   ) : null
                 }
@@ -74,14 +74,14 @@ const MyDelegationInfoBlock = () => {
                     className='w-1/2 border-axone-khaki text-axone-khaki'
                     variant={'rounded'}
                   >
-                    {isTransactionPending ? 'Claiming...' : 'Claim'}
+                    {isTransactionPending ? t('Claiming') : t('Claim')}
                   </Button>
                 </Row>
               ) : null}
 
               <div className='w-full border-b-2 border-b-axone-box-border mt-8 mb-10'></div>
 
-              <ButtonWithIcon onClick={navigateToWallet} variant='rounded' className=' absolute bottom-8 left-6 right-6'>View My Wallet</ButtonWithIcon>
+              <ButtonWithIcon onClick={navigateToWallet} variant='rounded' className=' absolute bottom-8 left-6 right-6'>{t('ViewMyWallet')}</ButtonWithIcon>
             </>
           )
           : (

@@ -68,7 +68,7 @@ export const useAxonePayments = () => {
       amount: [
         {
           denom: coin.base,
-          amount: new BigNumber(amount).multipliedBy(1 ** 6).toString(),
+          amount: new BigNumber(amount).multipliedBy(10 ** 6).toString(),
         },
       ],
       toAddress: destination,
@@ -152,7 +152,7 @@ export const useAxonePayments = () => {
       validatorAddress: validatorAddress,
       amount: {
         denom: coin.base,
-        amount: new BigNumber(amount).multipliedBy(1 ** 6).toString(),
+        amount: new BigNumber(amount).multipliedBy(10 ** 6).toString(),
       }
     });
 
@@ -197,7 +197,7 @@ export const useAxonePayments = () => {
       validatorAddress: validatorAddress,
       amount: {
         denom: coin.base,
-        amount: new BigNumber(amount).multipliedBy(1 ** 6).toString(), // Correct exponent for atom
+        amount: new BigNumber(amount).multipliedBy(10 ** 6).toString(), // Correct exponent for atom
       }
     });
 

@@ -17,24 +17,22 @@ import Spinner from '@/components/ui/spinner';
 import { useAxonePayments } from '@/hooks/wallet/use-axone-payments';
 import { cn } from '@/lib/utils';
 
-const formSchema = z.object({
-  amount: z.string()
-    .transform(value => parseFloat(value))
-    .refine(value => !isNaN(value) && value >= 5 && value <= 200000, {
-      message: 'Amount must be a valid number between 5 and 200000',
-    }),
-  destination: z.string().min(40, 'Invalid address').refine(value => value.startsWith('okp4'), 'Invalid address'),
-  memo: z.string().optional(),
-});
-
 const TransferBlock = () => {
   const [open, setOpen] = useState<boolean>(false);
-  const { balance, isFetchingBalance, balanceDenom, makeTransaction, isTransactionPending } = useAxonePayments();
+  const { balance, isFetchingBalance, makeTransaction, isTransactionPending } = useAxonePayments();
+
+  const formSchema = z.object({
+    amount: z.coerce.number()
+      .refine(value => !isNaN(value) && value >= 0 && value <= balance.toNumber(), {
+        message: `Amount must be a valid number between 0 and ${balance.toNumber()}`,
+      }),
+    destination: z.string().min(40, 'Invalid address').refine(value => value.startsWith('okp4'), 'Invalid address'),
+    memo: z.string().optional(),
+  });
 
   const { register, formState: { errors }, handleSubmit, reset } = useForm({
     resolver: zodResolver(formSchema),
   });
-
 
   const onConfirm = handleSubmit(async (values) => {
     if (values.amount > balance.toNumber()) {
@@ -67,7 +65,7 @@ const TransferBlock = () => {
           <Text className='uppercase mb-0'>Available to transfer</Text>
           <AxoneTooltip content='Your available amount to transfer to a different address on Axone' />
         </Row>
-        <Text className='uppercase'>{isFetchingBalance ? '0.00' : balance.toNumber().toFixed(2)} {balanceDenom || 'Axone'}</Text>
+        <Text className='uppercase'>{isFetchingBalance ? '0.00' : balance.toNumber().toFixed(2)} KNOW</Text>
       </Column>
       <form onSubmit={onConfirm} className='flex flex-col gap-6'>
         <div className='flex flex-col'>

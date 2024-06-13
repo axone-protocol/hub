@@ -2,6 +2,7 @@
 import { CircleCheckBig, CircleX, Copy } from 'lucide-react';
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { useCallback } from 'react';
 import { Text, Title } from '@/components/typography';
 import { Box, BoxInner } from '@/components/ui/boxes';
@@ -14,6 +15,7 @@ import { ValidatorStatus } from '@/hooks/use-validators-list';
 
 
 const ValidatorDetailsBlock = () => {
+  const t = useTranslations('Staking');
   const { address } = useParams();
   const { data: validatorData } = useSingleValidatorInfo(address);
   const { openDelegateModal } = useModal();
@@ -43,7 +45,7 @@ const ValidatorDetailsBlock = () => {
   return (
     <Box>
       <Row>
-        <Title>Validator Details</Title>
+        <Title>{t('ValidatorDetails')}</Title>
       </Row>
       <div className='flex flex-col lg:flex-row lg:justify-between lg:items-center lg:mt-6 lg:mb-10'>
         <div className='flex flex-row items-center gap-4 w-full lg:w-1/4 my-4 lg:my-0'>
@@ -63,7 +65,7 @@ const ValidatorDetailsBlock = () => {
           </div>
         </div>
 
-        <Button variant={'rounded'} onClick={openDelegateModal({})}>Delegate Now</Button>
+        <Button variant={'rounded'} onClick={openDelegateModal({})}>{t('DelegateNow')}</Button>
       </div>
 
       <div className='w-full border-b-2 border-b-axone-box-border mt-6 mb-2 lg:my-0'></div>
@@ -73,28 +75,28 @@ const ValidatorDetailsBlock = () => {
         <BoxInner className='py-5 w-full lg:w-1/4 h-32 flex-col justify-between items-center px-6'>
           <Title className='mt-2 mb-0'>{Number(validatorData?.stakedAmount).toFixed(2) || 0.00}</Title>
           <Text className='text-axone-khaki mb-0 uppercase'>
-            Total Staked
+            {t('TotalStaked')}
           </Text>
         </BoxInner>
 
         <BoxInner className='py-5 w-full lg:w-1/4 h-32 flex-col justify-between items-center px-6'>
           <Title className='mt-2 mb-0'>{Number(validatorData?.commission.rate).toFixed(2)}%</Title>
           <Text className='text-axone-khaki mb-0 uppercase'>
-            Commission Rate
+            {t('CommissionRate')}
           </Text>
         </BoxInner>
 
         <BoxInner className='py-5 w-full lg:w-1/4 h-32 flex-col justify-between items-center px-6'>
           <Title className='mt-2 mb-0 uppercase'>{validatorData?.votingPower || 0}%</Title>
           <Text className='text-axone-khaki mb-0 uppercase'>
-            Voting Power
+            {t('VotingPower')}
           </Text>
         </BoxInner>
 
         <BoxInner className='py-5 w-full lg:w-1/4 h-32 flex-col justify-between items-center px-6'>
           <Title className='mt-2 mb-0'>{validatorData?.uptime || 0}%</Title>
           <Text className='text-axone-khaki mb-0 uppercase'>
-            Uptime
+            {t('Uptime')}
           </Text>
         </BoxInner>
       </div>
@@ -103,7 +105,7 @@ const ValidatorDetailsBlock = () => {
         <div className='flex flex-col gap-4 lg:flex-row lg:justify-between items-center mb-10'>
           <div className='w-1/2'>
             <div className='flex flex-row gap-2'>
-              <Title>Address</Title>
+              <Title>{t('Address')}</Title>
               <Copy
                 className='mx-2 cursor-pointer hover:bg-axone-bg-dark'
                 width={20}
@@ -116,19 +118,19 @@ const ValidatorDetailsBlock = () => {
             <Text className='text-axone-khaki'>{address}</Text>
           </div>
           <div className='w-1/2'>
-            <Title>Website</Title>
+            <Title>{t('Website')}</Title>
             <Text className='text-axone-khaki'>{validatorData?.description.website || ''}</Text>
           </div>
         </div>
         <div className='flex flex-col gap-4 lg:flex-row lg:justify-between items-start'>
           <div className='w-1/2'>
-            <Title>Details</Title>
+            <Title>{t('Details')}</Title>
             <Text className='text-axone-khaki'>
               {validatorData?.description.details || 'No details provided'}
             </Text>
           </div>
           <div className='w-1/2'>
-            <Title>Security Contact</Title>
+            <Title>{t('SecurityContact')}</Title>
             <Text className='text-axone-khaki'>{validatorData?.description.securityContact || ''}</Text>
           </div>
         </div>

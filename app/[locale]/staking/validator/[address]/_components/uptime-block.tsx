@@ -2,6 +2,7 @@
 import { motion } from 'framer-motion';
 import { X } from 'lucide-react';
 import { useParams } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { FC, useCallback, useEffect, useState } from 'react';
 import { Text, Title } from '@/components/typography';
 import { Box } from '@/components/ui/boxes';
@@ -32,6 +33,7 @@ const UptimeBlockItem: FC<UptimeBlockItemProps> = ({ size = 'large', type }) => 
 };
 
 const UptimeBlock = () => {
+  const t = useTranslations('Staking');
   const { address } = useParams();
   const { socket } = useEnvironment();
   const { data, isLoading } = useSingleValidatorUptime(address);
@@ -68,8 +70,8 @@ const UptimeBlock = () => {
   return (
     <Box className='flex-col p-6 mb-4'>
       <Row className='justify-between items-center mb-4'>
-        <Title>Uptime</Title>
-        <Title className='text-axone-grey font-normal tracking-tighter'>Last 60 Blocks</Title>
+        <Title>{t('Uptime')}</Title>
+        <Title className='text-axone-grey font-normal tracking-tighter'>{t('Last60Blocks')}</Title>
       </Row>
       <div className='flex flex-row flex-wrap gap-2 mb-6'>
         {
@@ -89,11 +91,11 @@ const UptimeBlock = () => {
       </div>
       <Row className='justify-between lg:items-center'>
         <div className='flex flex-col lg:flex-row justify-start gap-4 w-2/4'>
-          <Row className='items-center gap-2'><UptimeBlockItem size='small' type='proposed' /><Text className='mb-0'>Proposed: {proposedBlocks}</Text></Row>
-          <Row className='items-center gap-2'><UptimeBlockItem size='small' type='signed' /><Text className='mb-0'>Signed: {signedBlocks}</Text></Row>
-          <Row className='items-center gap-2'><UptimeBlockItem size='small' type='missed' /><Text className='mb-0'>Missed: {missedBlocks}</Text></Row>
+          <Row className='items-center gap-2'><UptimeBlockItem size='small' type='proposed' /><Text className='mb-0'>{t('Proposed')}: {proposedBlocks}</Text></Row>
+          <Row className='items-center gap-2'><UptimeBlockItem size='small' type='signed' /><Text className='mb-0'>{t('Signed')}: {signedBlocks}</Text></Row>
+          <Row className='items-center gap-2'><UptimeBlockItem size='small' type='missed' /><Text className='mb-0'>{t('Missed')}: {missedBlocks}</Text></Row>
         </div>
-        <Text className='mt-1 lg:mt-0'>Current: {data?.current || 0}</Text>
+        <Text className='mt-1 lg:mt-0'>{t('Current')}: {data?.current || 0}</Text>
       </Row>
     </Box>
   );

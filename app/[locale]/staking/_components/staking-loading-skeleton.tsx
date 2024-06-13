@@ -3,11 +3,11 @@ import { Box, BoxInner } from '@/components/ui/boxes';
 import Row from '@/components/ui/row';
 import Spinner from '@/components/ui/spinner';
 
-const StakingLoadingSkeleton = () => {
+const StakingLoadingSkeleton = ({ title }: { title: string }) => {
   return (
     <Box className='lg:mx-0 mb-0'>
       <Row className='mb-10 items-left lg:items-center mobile:flex-col'>
-        <Title className='mr-40'>Your Staking Overview</Title>
+        <Title className='mr-40'>{title}</Title>
       </Row>
       <div className='flex flex-col lg:flex-row gap-4 lg:gap-6'>
         {Array.from({ length: 4 }).map((_, index) => (

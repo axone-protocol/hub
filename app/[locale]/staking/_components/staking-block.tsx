@@ -1,4 +1,6 @@
 'use client';
+import { useTranslations } from 'next-intl';
+import { useMemo } from 'react';
 import { Text, Title } from '@/components/typography';
 import { Box, BoxInner } from '@/components/ui/boxes';
 import Row from '@/components/ui/row';
@@ -6,23 +8,25 @@ import { useStakingOverview } from '@/hooks/use-staking-overview';
 import { StakingLoadingSkeleton } from './staking-loading-skeleton';
 
 const StakingBlock = () => {
+  const t = useTranslations('Staking');
   const { data, isLoading, isFetching, isPending, isRefetching } = useStakingOverview();
+  const totalStaked = useMemo(() => data ? (Number(data.totalStaked)).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : 0, [data]);
   if (isLoading || isFetching || isPending || isRefetching) {
     return (
-      <StakingLoadingSkeleton />
+      <StakingLoadingSkeleton title={t('Staking')} />
     );
   };
   return (
     <Box className='lg:mx-0 mb-0'>
       <Row className='mb-10 items-left lg:items-center mobile:flex-col'>
-        <Title className='mr-40'>Staking</Title>
+        <Title className='mr-40'>{t('Staking')}</Title>
       </Row>
       <div className='flex flex-col lg:flex-row gap-4 lg:gap-6'>
 
         <BoxInner className='py-5 w-full lg:w-1/4 h-32 flex-col justify-between items-center px-6'>
           <Title className='mt-2 mb-0'>{data?.totalValidators}</Title>
           <Text className='text-axone-khaki mb-0 uppercase'>
-              Total Validators
+            {t('TotalValidators')}
           </Text>
         </BoxInner>
 
@@ -35,18 +39,18 @@ const StakingBlock = () => {
 
         <BoxInner className='py-5 w-full lg:w-1/4 h-32 flex-col justify-between items-center px-6'>
           <div className='flex flex-col items-end'>
-            <Title className='mt-2 mb-0 uppercase'>{data?.totalStaked}</Title>
-            <span className='text-axone-khaki uppercase'>uknow</span>
+            <Title className='mt-2 mb-0 uppercase'>{totalStaked}</Title>
+            <span className='text-axone-khaki uppercase'>know</span>
           </div>
           <Text className='text-axone-khaki mb-0 uppercase'>
-              Total Staked
+            {t('TotalStaked')}
           </Text>
         </BoxInner>
 
         <BoxInner className='py-5 w-full lg:w-1/4 h-32 flex-col justify-between items-center px-6'>
           <Title className='mt-2 mb-0'>{data?.bondedTokens}%</Title>
           <Text className='text-axone-khaki mb-0 uppercase'>
-              Bonded Tokens
+            {t('BondedTokens')}
           </Text>
         </BoxInner>
       </div>

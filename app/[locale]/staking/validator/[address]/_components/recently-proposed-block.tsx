@@ -1,6 +1,7 @@
 'use client';
 import { motion } from 'framer-motion';
 import { useParams } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { useCallback, useEffect, useState } from 'react';
 import { Text, Title } from '@/components/typography';
 import { Box, BoxInner } from '@/components/ui/boxes';
@@ -20,6 +21,7 @@ const shortenHash = (str: string, startLength: number = 6, endLength: number = 6
 };
 
 const RecentlyProposedBlock = () => {
+  const t = useTranslations('Staking');
   const { address } = useParams();
   const { socket } = useEnvironment();
   const { data, isLoading } = useSingleValidatorProposedBlocks(address);
@@ -51,13 +53,13 @@ const RecentlyProposedBlock = () => {
   return (
     <Box className='m-0'>
       <Row className='justify-between items-center mb-6'>
-        <Title>Recently Proposed Blocks</Title>
+        <Title>{t('RecentlyProposedBlocks')}</Title>
       </Row>
       <Row className='px-6 justify-between mb-3'>
-        <Text className='w-1/4 text-white mb-0 text-left'>Height</Text>
-        <Text className='w-1/4 text-white mb-0 text-left'>Block Hash</Text>
+        <Text className='w-1/4 text-white mb-0 text-left'>{t('Height')}</Text>
+        <Text className='w-1/4 text-white mb-0 text-left'>{t('BlockHash')}</Text>
         <Text className='w-1/4 text-white mb-0 text-left'>TXS</Text>
-        <Text className='w-1/4 text-white mb-0 text-left'>Time</Text>
+        <Text className='w-1/4 text-white mb-0 text-left'>{t('Time')}</Text>
       </Row>
       <BoxInner className='flex flex-col h-[140px] overflow-y-auto scrollbar scrollbar-thin'>
         {
