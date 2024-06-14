@@ -25,7 +25,7 @@ const FAQBlock = () => {
       const filteredData = data.filter((item) => item.question.toLowerCase().includes(e.target.value.toLowerCase()));
       setFaqData(filteredData);
     }
-  }, [SORTED_DATA]);
+  }, [data]);
 
   const onCategorySelect = useCallback((item: string): void => {
     selectCategory(item);

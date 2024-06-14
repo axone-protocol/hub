@@ -30,6 +30,12 @@ type AxoneWalletState = {
   isFetchingBalance: boolean;
   transactionResponse: string;
   isTransactionPending: boolean;
+  isUnboningPending: boolean;
+  isDelegatingPending: boolean;
+  isClaimingRewardsPending: boolean;
+  setIsClaimingRewardsPending: (isPending: boolean) => void;
+  setIsUnbondingPending: (isPending: boolean) => void;
+  setIsDelegatingPending: (isPending: boolean) => void;
   setIsTransactionPending: (isPending: boolean) => void;
   setTransactionResponse: (response: string) => void;
 };
@@ -42,13 +48,19 @@ const useAxoneWalletStore = create<AxoneWalletState>((set) => ({
   isFetchingBalance: false,
   transactionResponse: '',
   isTransactionPending: false,
+  isUnboningPending: false,
+  isDelegatingPending: false,
+  isClaimingRewardsPending: false,
+  setIsClaimingRewardsPending: (isPending: boolean) => set({ isClaimingRewardsPending: isPending }),
+  setIsUnbondingPending: (isPending: boolean) => set({ isUnboningPending: isPending }),
+  setIsDelegatingPending: (isPending: boolean) => set({ isDelegatingPending: isPending }),
   setIsTransactionPending: (isPending: boolean) => set({ isTransactionPending: isPending }),
   setTransactionResponse: (response: string) => set({ transactionResponse: response }),
 }));
 
 // TODO: change setting amount from micro (unknow) to base (know) eg. proper multiplying in funcs, now it's just for testing purposes using small amounts
 export const useAxonePayments = () => {
-  const { setIsTransactionPending, setBalance, setBalanceDenom } = useAxoneWalletStore();
+  const { setIsTransactionPending, setBalance, setBalanceDenom, setIsDelegatingPending, setIsUnbondingPending, setIsClaimingRewardsPending } = useAxoneWalletStore();
   const { address, getSigningStargateClient, getRpcEndpoint } =
     useChain(chainName);
   const { showSuccessToast, showErrorToast } = useAxoneToasts();
@@ -138,7 +150,7 @@ export const useAxonePayments = () => {
   }, [getRpcEndpoint, isDev, setBalance, setBalanceDenom]);
 
   const delegateToValidator = async ({ amount, validatorAddress, memo }: { amount: number, validatorAddress: string, memo: string}) => {
-    setIsTransactionPending(true);
+    setIsDelegatingPending(true);
     const stargateClient = await getSigningStargateClient();
     if (!stargateClient || !address) {
       console.error('stargateClient undefined or address undefined.');
@@ -177,13 +189,13 @@ export const useAxonePayments = () => {
     } catch (error) {
       showErrorToast(`Something went wrong: ${error}`);
     } finally {
-      setIsTransactionPending(false);
+      setIsDelegatingPending(false);
       getBalance(address);
     }
   };
 
   const unbondFromValidator = async ({ amount, validatorAddress, memo }: { amount: number, validatorAddress: string, memo: string}) => {
-    setIsTransactionPending(true);
+    setIsUnbondingPending(true);
     const stargateClient = await getSigningStargateClient();
     if (!stargateClient || !address) {
       console.error('stargateClient undefined or address undefined.');
@@ -222,13 +234,13 @@ export const useAxonePayments = () => {
     } catch (error) {
       showErrorToast(`Something went wrong: ${error}`);
     } finally {
-      setIsTransactionPending(false);
+      setIsUnbondingPending(false);
       getBalance(address);
     }
   };
 
   const claimRewards = async (validatorAddress: string) => {
-    setIsTransactionPending(true);
+    setIsClaimingRewardsPending(true);
     const stargateClient = await getSigningStargateClient();
     if (!stargateClient || !address) {
       console.error('stargateClient undefined or address undefined.');
@@ -262,13 +274,13 @@ export const useAxonePayments = () => {
     } catch (error) {
       showErrorToast(`Something went wrong: ${error}`);
     } finally {
-      setIsTransactionPending(false);
+      setIsClaimingRewardsPending(false);
       getBalance(address);
     }
   };
 
   const claimAllDelegatorsRewards = async () => {
-    setIsTransactionPending(true);
+    setIsClaimingRewardsPending(true);
     const stargateClient = await getSigningStargateClient();
     if (!stargateClient || !address) {
       console.error('stargateClient undefined or address undefined.');
@@ -301,7 +313,7 @@ export const useAxonePayments = () => {
     } catch (error) {
       showErrorToast(`Something went wrong: ${error}`);
     } finally {
-      setIsTransactionPending(false);
+      setIsClaimingRewardsPending(false);
       getBalance(address);
     }
   };
@@ -315,6 +327,9 @@ export const useAxonePayments = () => {
     balanceDenom: state.balanceDenom,
     isFetchingBalance: state.isFetchingBalance,
     isTransactionPending: state.isTransactionPending,
+    isUnboningPending: state.isUnboningPending,
+    isDelegatingPending: state.isDelegatingPending,
+    isClaimingRewardsPending: state.isClaimingRewardsPending,
     makeTransaction,
     delegateToValidator,
     unbondFromValidator,
