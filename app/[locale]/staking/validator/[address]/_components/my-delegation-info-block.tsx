@@ -21,7 +21,13 @@ const MyDelegationInfoBlock = () => {
   const locale = useLocale();
   const router = useRouter();
   const { data } = useMyDelegationsOverview(validatorAddress);
-  const { unbondFromValidator, claimRewards, isTransactionPending } = useAxonePayments();
+  const { 
+    unbondFromValidator,
+    claimRewards,
+    isClaimingRewardsPending,
+    isDelegatingPending,
+    isUnboningPending
+  } = useAxonePayments();
 
   const navigateToWallet = () => {
     router.push(`/${locale}/wallet`);
@@ -46,11 +52,11 @@ const MyDelegationInfoBlock = () => {
                 <p className='text-40 text-axone-khaki'>AXONE</p>
               </Row>
               <Row className='gap-4'>
-                <Button onClick={openDelegateModal({})} className='w-1/2' variant={'rounded'}>{t('Delegate')}</Button>
+                <Button disabled={isDelegatingPending} onClick={openDelegateModal({})} className='w-1/2' variant={'rounded'}>{t('Delegate')}</Button>
                 {
                   !!Number(data?.delegation) ? (
-                    <Button disabled={isTransactionPending} onClick={onUnbond} className='w-1/2 border-axone-khaki text-axone-khaki' variant={'rounded'}>
-                      {isTransactionPending ? t('Unbonding') : t('Unbond')}
+                    <Button disabled={isUnboningPending} onClick={onUnbond} className='w-1/2 border-axone-khaki text-axone-khaki' variant={'rounded'}>
+                      {isUnboningPending ? t('Unbonding') : t('Unbond')}
                     </Button>
                   ) : null
                 }
@@ -69,12 +75,12 @@ const MyDelegationInfoBlock = () => {
               { !!Number(data?.delegation) ? (
                 <Row className='gap-4'>
                   <Button
-                    disabled={isTransactionPending}
+                    disabled={isClaimingRewardsPending}
                     onClick={onClaimRewards}
                     className='w-1/2 border-axone-khaki text-axone-khaki'
                     variant={'rounded'}
                   >
-                    {isTransactionPending ? t('Claiming') : t('Claim')}
+                    {isClaimingRewardsPending ? t('Claiming') : t('Claim')}
                   </Button>
                 </Row>
               ) : null}

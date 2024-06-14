@@ -7,14 +7,14 @@ type AxoneTooltipProps = {
   content: string;
   iconColor?: string;
 };
-
+ 
 const AxoneTooltip: FC<AxoneTooltipProps> = ({ content, iconColor = 'text-axone-orange' }) => {
 
   return (
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>
-          <Info className={cn('cursor-pointer', iconColor)} size={18} />
+          <Info className={cn('cursor-pointer flex-none', iconColor)} size={18} />
         </TooltipTrigger>
         <TooltipContent className='bg-axone-dark-blue text-axone-grey border-axone-box-border'>
           <p>{content}</p>
