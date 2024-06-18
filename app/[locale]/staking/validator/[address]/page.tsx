@@ -10,7 +10,7 @@ export default function ValidatorDetails () {
     <PageContainer>
       <ValidatorDetailsBlock />
       <UptimeBlock />
-      <div className='flex flex-col lg:flex-row px-6 gap-6 mt-6 mb-6'>
+      <div className='flex flex-col lg:flex-row gap-6 mt-6 lg:mx-0 mb-0'>
         <MyDelegationInfoBlock />
         <div className='flex flex-col gap-6 flex-grow'>
           <ValidatorDelegationsBlock />

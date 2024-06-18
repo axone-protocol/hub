@@ -12,12 +12,14 @@ import { useModal } from '@/context';
 import { useSingleValidatorInfo } from '@/hooks/use-single-validator-info';
 import { toast } from '@/hooks/use-toast';
 import { ValidatorStatus } from '@/hooks/use-validators-list';
+import { formatNumberToLocale } from '@/lib/utils';
+import { StakingLoadingSkeleton } from '../../../_components/staking-loading-skeleton';
 
 
 const ValidatorDetailsBlock = () => {
   const t = useTranslations('Staking');
   const { address } = useParams();
-  const { data: validatorData } = useSingleValidatorInfo(address);
+  const { data: validatorData, isFetching, isLoading, isPending, isRefetching } = useSingleValidatorInfo(address);
   const { openDelegateModal } = useModal();
 
   const copyToClipboard = useCallback((address: string | string[]) => () => {
@@ -42,8 +44,14 @@ const ValidatorDetailsBlock = () => {
     });
   }, []);
 
+  if (isLoading || isFetching || isPending || isRefetching) {
+    return (
+      <StakingLoadingSkeleton title={t('ValidatorDetails')} />
+    );
+  };
+
   return (
-    <Box>
+    <Box className='lg:mx-0 mb-0'>
       <Row>
         <Title>{t('ValidatorDetails')}</Title>
       </Row>
@@ -73,7 +81,7 @@ const ValidatorDetailsBlock = () => {
       <div className='flex flex-col lg:flex-row gap-4 lg:gap-6 my-10'>
 
         <BoxInner className='py-5 w-full lg:w-1/4 h-32 flex-col justify-between items-center px-6'>
-          <Title className='mt-2 mb-0'>{Number(validatorData?.stakedAmount).toFixed(2) || 0.00}</Title>
+          <Title className='mt-2 mb-0'>{formatNumberToLocale(Number(validatorData?.stakedAmount)/1000000)}</Title>
           <Text className='text-axone-khaki mb-0 uppercase'>
             {t('TotalStaked')}
           </Text>

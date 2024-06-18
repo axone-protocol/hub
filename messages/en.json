@@ -57,7 +57,13 @@
         "Month": "Month",
         "Year": "Year"
       }
-    }
+    },
+    "SupplyRate": "Supply Rate",
+    "Issuance": "Issuance",
+    "SupplyBurn": "Supply Burn",
+    "SupplyGrowth": "Supply Growth",
+    "Currency": "Currency",
+    "Year": "Year"
   },
   "FAQ": {
     "Title": "Frequently Asked Questions",
@@ -129,7 +135,8 @@
     "Inactive": "Inactive",
     "UptimeTooltip": "Uptime percentage based on the latest 10K blocks",
     "Validator": "Validator",
-    "StakedAmount": "Staked Amount"
+    "StakedAmount": "Staked Amount",
+    "ConnectWalletToDelegate": "Connect your wallet to view your delegation info"
   },
   "Governance": {
     "VoteOverview": "Vote Overview",
@@ -167,7 +174,31 @@
     "Deposit": "Deposit",
     "Passed": "Passed",
     "Rejected": "Rejected",
-    "Voting": "Voting"
-
+    "Voting": "Voting",
+    "Back": "Back",
+    "TextProposal": "Text Proposal",
+    "TextProposalDesc": "Propose any action on Axone. Text Proposal defines a standard text proposal whose changes need to be manually updated in case of approval.",
+    "DepositInformation": "Deposit Information",
+    "DepositInformationDesc": "For every proposal you create, we require you to deposit 1,000 AXONE to confirm your active involvement within the Axone community, ensuring your eligibility to propose and contribute to the protocol&apos;s governance going forward. The vote is then open for 7 days.",
+    "ProposalTitle": "Proposal Title",
+    "Title": "Title",
+    "ProposalDescription": "Proposal Description",
+    "Propose": "Propose"
+  },
+  "Wallet": {
+    "Overview": "Overview",
+    "MyBalance": "My Balance",
+    "MyStakedAmount": "My Staked Amount",
+    "Balances": "Balances",
+    "Bridge": "Bridge",
+    "Asset": "Asset",
+    "Balance": "Balance",
+    "ShowMore": "Show More",
+    "Transfer": "Transfer",
+    "AvailableToTransfer": "Available to Transfer",
+    "Amount": "Amount",
+    "AxoneAddressDestination": "Axone Address Destination",
+    "DestinationTooltip": "The Axone address to which you are sending tokens",
+    "EnterAmount": "Enter Amount"
   }
 }

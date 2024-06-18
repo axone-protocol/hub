@@ -67,37 +67,47 @@ const UptimeBlock = () => {
   const missedBlocks = blocks?.blocks.filter((block) => block.status === 'Missed').length;
   const proposedBlocks = blocks?.blocks.filter((block) => block.status === 'Proposed').length;
   const signedBlocks = blocks?.blocks.filter((block) => block.status === 'Signed').length;
+
+  if (isLoading) {
+    return null;
+  }
   return (
-    <Box className='flex-col p-6 mb-4'>
-      <Row className='justify-between items-center mb-4'>
-        <Title>{t('Uptime')}</Title>
-        <Title className='text-axone-grey font-normal tracking-tighter'>{t('Last60Blocks')}</Title>
-      </Row>
-      <div className='flex flex-row flex-wrap gap-2 mb-6'>
-        {
-          blocks?.blocks.map((block, i) => {
-            return (
-              <motion.div
-                key={block.signature+i}
-                initial={{ opacity: 0, scale: 0.8, x: 50 }}
-                animate={{ opacity: 1, scale: 1, x: 0 }}
-                transition={{ duration: 0.5 }}
-              >
-                <UptimeBlockItem type={block.status?.toLowerCase() as 'signed' | 'proposed' | 'missed' || 'signed'} />
-              </motion.div>
-            );
-          })
-        }
-      </div>
-      <Row className='justify-between lg:items-center'>
-        <div className='flex flex-col lg:flex-row justify-start gap-4 w-2/4'>
-          <Row className='items-center gap-2'><UptimeBlockItem size='small' type='proposed' /><Text className='mb-0'>{t('Proposed')}: {proposedBlocks}</Text></Row>
-          <Row className='items-center gap-2'><UptimeBlockItem size='small' type='signed' /><Text className='mb-0'>{t('Signed')}: {signedBlocks}</Text></Row>
-          <Row className='items-center gap-2'><UptimeBlockItem size='small' type='missed' /><Text className='mb-0'>{t('Missed')}: {missedBlocks}</Text></Row>
+    <motion.div
+      initial={{ opacity: 0, scale: 0.8, y: 50 }}
+      animate={{ opacity: 1, scale: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <Box className='flex-col p-6 lg:mx-0 mb-0'>
+        <Row className='justify-between items-center mb-4'>
+          <Title>{t('Uptime')}</Title>
+          <Title className='text-axone-grey font-normal tracking-tighter'>{t('Last60Blocks')}</Title>
+        </Row>
+        <div className='flex flex-row flex-wrap gap-2 mb-6'>
+          {
+            blocks?.blocks.map((block, i) => {
+              return (
+                <motion.div
+                  key={block.signature+i}
+                  initial={{ opacity: 0, scale: 0.8, x: 50 }}
+                  animate={{ opacity: 1, scale: 1, x: 0 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <UptimeBlockItem type={block.status?.toLowerCase() as 'signed' | 'proposed' | 'missed' || 'signed'} />
+                </motion.div>
+              );
+            })
+          }
         </div>
-        <Text className='mt-1 lg:mt-0'>{t('Current')}: {data?.current || 0}</Text>
-      </Row>
-    </Box>
+        <Row className='justify-between lg:items-center'>
+          <div className='flex flex-col lg:flex-row justify-start gap-4 w-2/4'>
+            <Row className='items-center gap-2'><UptimeBlockItem size='small' type='proposed' /><Text className='mb-0'>{t('Proposed')}: {proposedBlocks}</Text></Row>
+            <Row className='items-center gap-2'><UptimeBlockItem size='small' type='signed' /><Text className='mb-0'>{t('Signed')}: {signedBlocks}</Text></Row>
+            <Row className='items-center gap-2'><UptimeBlockItem size='small' type='missed' /><Text className='mb-0'>{t('Missed')}: {missedBlocks}</Text></Row>
+          </div>
+          <Text className='mt-1 lg:mt-0'>{t('Current')}: {data?.current || 0}</Text>
+        </Row>
+      </Box>
+    </motion.div>
   );
 };
 

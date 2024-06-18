@@ -57,7 +57,13 @@
         "Month": "Mois",
         "Year": "Année"
       }
-    }
+    },
+    "SupplyRate": "Taux d'offre",
+    "Issuance": "Émission",
+    "SupplyBurn": "Offre brûlée",
+    "SupplyGrowth": "Croissance de l'offre",
+    "Currency": "Devise",
+    "Year": "Année"
   },
   "FAQ": {
     "Title": "Questions Fréquemment Posées",
@@ -85,7 +91,7 @@
     "Claiming": "Réclamation...",
     "ViewMyWallet": "Voir mon portefeuille",
     "ValidatorDetails": "Détails du validateur",
-    "DelegateNow": "Déléguer maintenant",
+    "DelegateNow": "Déléguer",
     "TotalStaked": "Total mis en jeu",
     "CommissionRate": "Taux de commission",
     "VotingPower": "Pouvoir de vote",
@@ -129,7 +135,8 @@
     "Inactive": "Inactif",
     "UptimeTooltip": "Pourcentage de temps que le validateur a été en ligne",
     "Validator": "Valideur",
-    "StakedAmount": "Montant mis en jeu"
+    "StakedAmount": "Montant mis en jeu",
+    "ConnectWalletToDelegate": "Connectez votre portefeuille pour déléguer"
   },
   "Governance": {
     "VoteOverview": "Aperçu du vote",
@@ -167,6 +174,31 @@
     "Deposit": "Dépôt",
     "Passed": "Accepté",
     "Rejected": "Rejeté",
-    "Voting": "Vote"
+    "Voting": "Vote",
+    "Back": "Retour",
+    "TextProposal": "Proposition de texte",
+    "TextProposalDesc": "Proposer une action sur Axone. La proposition de texte définit une proposition de texte standard dont les modifications doivent être mises à jour manuellement en cas d'approbation.",
+    "DepositInformation": "Informations sur le dépôt",
+    "DepositInformationDesc": "Pour chaque proposition que vous créez, nous vous demandons de déposer 1 000 AXONE pour confirmer votre implication active au sein de la communauté Axone, garantissant ainsi votre éligibilité à proposer et à contribuer à la gouvernance du protocole à l'avenir. Le vote est ensuite ouvert pendant 7 jours.",
+    "ProposalTitle": "Titre de la proposition",
+    "Title": "Titre",
+    "ProposalDescription": "Description de la proposition",
+    "Propose": "Proposer"
+  },
+  "Wallet": {
+    "Overview": "Aperçu",
+    "MyBalance": "Mon solde",
+    "MyStakedAmount": "Mon montant mis en jeu",
+    "Balances": "Soldes",
+    "Bridge": "Bridge",
+    "Asset": "Actif",
+    "Balance": "Solde",
+    "ShowMore": "Afficher plus",
+    "Transfer": "Transfert",
+    "AvailableToTransfer": "Disponible pour transfert",
+    "Amount": "Montant",
+    "AxoneAddressDestination": "Adresse de destination Axone",
+    "DestinationTooltip": "Entrez l'adresse de destination Axone",
+    "EnterAmount": "Entrez le montant"
   }
 }

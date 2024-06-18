@@ -1,7 +1,7 @@
 'use client';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import { FC, useMemo, useState } from 'react';
+import { FC, useState } from 'react';
 import { Text } from '@/components/typography';
 import { Box } from '@/components/ui/boxes';
 import Column from '@/components/ui/column';
@@ -9,7 +9,7 @@ import Row from '@/components/ui/row';
 import { Select, SelectContent, SelectGroup, SelectIcon, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import Spinner from '@/components/ui/spinner';
 import { ChangeSupplyRangeEnum, useSupplyChange } from '@/hooks/use-supply-change';
-import { cn } from '@/lib/utils';
+import { cn, formatNumberToLocale } from '@/lib/utils';
 
 type TimeFrameSelectProps = {
   selectRange: (value: ChangeSupplyRangeEnum) => void;
@@ -51,7 +51,7 @@ export default function SupplyChangeBlock () {
   const t  = useTranslations('Dashboard');
   const { query: { data, isLoading }, range, selectRange } = useSupplyChange();
 
-  const formattedNum = useMemo(() => data ? (Number(data)/1000000).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : 0, [data]);
+  const formattedNum = formatNumberToLocale(Number(data)/1000000);
 
   if (isLoading) {
     return (

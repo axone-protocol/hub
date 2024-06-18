@@ -1,14 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 import { useChain } from '@cosmos-kit/react';
-import React, { PropsWithChildren, useCallback, useState } from 'react';
-import { DelegateModal, RewardsCalculatorModal, TermsModal } from '@/components/ui/modals';
+import React, { PropsWithChildren, useCallback, useEffect, useState } from 'react';
+import { DelegateModal, RewardsCalculatorModal, TERMS_VERSION, TermsModal } from '@/components/ui/modals';
 import { ConfirmTransactionModal } from '@/components/ui/modals/confirm-transaction/confirm-transaction-modal';
 import { VoteProposalModal } from '@/components/ui/modals/vote-proposal/vote-proposal-modal';
 import { DelegateModalOpenProps, ModalContext } from '@/context';
 import { chainName } from '@/core/chain';
-
-const TERMS_ACCEPTED_KEY = 'termsAccepted';
 
 const ModalProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [openTerms, setOpenTerms] = useState<boolean>(false);
@@ -18,11 +16,19 @@ const ModalProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [isVoteProposalOpen, setVoteProposalOpen] = useState<boolean>(false);
   const [isConfirmTransactionOpen, setConfirmTransactionOpen] = useState<boolean>(false);
 
-  const { openView, isWalletConnected } = useChain(chainName);
+  const { openView, disconnect, isWalletConnected } = useChain(chainName);
+
+  useEffect(() => {
+    const termsAccepted = localStorage.getItem(TERMS_VERSION);
+    if (termsAccepted !== TERMS_VERSION) {
+      disconnect();
+      setOpenTerms(true);
+    }
+  }, [disconnect]);
 
   const openConnectWalletModal = useCallback(async () => {
-    const termsAccepted = localStorage.getItem(TERMS_ACCEPTED_KEY);
-    if (termsAccepted) {
+    const termsAccepted = localStorage.getItem(TERMS_VERSION);
+    if (termsAccepted === TERMS_VERSION) {
       openView();
     } else {
       setOpenTerms(true);
@@ -76,4 +82,4 @@ const ModalProvider: React.FC<PropsWithChildren> = ({ children }) => {
   );
 };
 
-export { ModalContext, ModalProvider, TERMS_ACCEPTED_KEY };
+export { ModalContext, ModalProvider, TERMS_VERSION };
