@@ -1,5 +1,6 @@
 'use client';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import { FC, memo } from 'react';
 import { useState } from 'react';
 import { Text } from '@/components/typography';
@@ -47,11 +48,12 @@ const TimeFrameSelect: FC<TimeFrameSelectProps> = ({ selectRange }) => {
 
 const SupplyRateBlock = () => {
   const { query, selectRange } = useSupplyRateChart();
+  const t = useTranslations('Dashboard');
 
   return (
     <Box className='w-full m-0 h-[50%] mobile:w-full'>
       <Row className='justify-between'>
-        <Text className='mb-5 uppercase'>Supply Rate</Text>
+        <Text className='mb-5 uppercase'>{t('SupplyRate')}</Text>
         <TimeFrameSelect selectRange={selectRange} />
       </Row>
 

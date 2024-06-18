@@ -54,3 +54,10 @@ export const formatDate = (date: string | undefined): string => {
 
   return formattedDate;
 };
+
+export const formatNumberToLocale = (num: number | undefined): string => {
+  if (num === undefined || isNaN(num)) {
+    return '0.00';
+  }
+  return num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+};

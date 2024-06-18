@@ -1,16 +1,17 @@
 'use client';
 import { useTranslations } from 'next-intl';
-import { useMemo } from 'react';
 import { Text, Title } from '@/components/typography';
 import { Box, BoxInner } from '@/components/ui/boxes';
 import Row from '@/components/ui/row';
 import { useStakingOverview } from '@/hooks/use-staking-overview';
+import { formatNumberToLocale } from '@/lib/utils';
 import { StakingLoadingSkeleton } from './staking-loading-skeleton';
 
 const StakingBlock = () => {
   const t = useTranslations('Staking');
   const { data, isLoading, isFetching, isPending, isRefetching } = useStakingOverview();
-  const totalStaked = useMemo(() => data ? (Number(data.totalStaked)).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : 0, [data]);
+  const totalStaked = formatNumberToLocale(Number(data?.totalStaked));
+
   if (isLoading || isFetching || isPending || isRefetching) {
     return (
       <StakingLoadingSkeleton title={t('Staking')} />

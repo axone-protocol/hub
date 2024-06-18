@@ -1,5 +1,6 @@
 'use client';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import { Text, Title } from '@/components/typography';
 import { Box, BoxInner } from '@/components/ui/boxes';
 import { Button } from '@/components/ui/button';
@@ -7,18 +8,22 @@ import { ButtonWithIcon } from '@/components/ui/button-with-icon';
 import Row from '@/components/ui/row';
 
 const BalancesBlock = () => {
+  const t = useTranslations('Wallet');
+
   return (
     <Box className='w-full lg:w-2/3 mb-0 mx-0 lg:mx-0'>
       <div className='flex flex-row justify-between mb-6 lg:items-center'>
-        <Title>Balances</Title>
+        <Title>
+          {t('Balances')}
+        </Title>
         <ButtonWithIcon variant={'link'} className=' text-axone-orange text-base font-bold z-8 pr-0 pt-0'>
-        Bridge
+          {t('Bridge')}
         </ButtonWithIcon>
       </div>
 
       <Row className='justify-between'>
-        <Text>Asset</Text>
-        <Text>Balance</Text>
+        <Text>{t('Asset')}</Text>
+        <Text>{t('Balance')}</Text>
       </Row>
 
       <BoxInner className='flex-col pb-4 mb-4'>
@@ -54,7 +59,7 @@ const BalancesBlock = () => {
 
       </BoxInner>
       <Button variant={'rounded'} className='px-12'>
-        Show More
+        {t('ShowMore')}
       </Button>
     </Box>
   );

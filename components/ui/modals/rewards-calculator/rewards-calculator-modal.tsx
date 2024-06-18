@@ -20,7 +20,7 @@ const MAX_STAKE = 200000;
 
 const RewardsCalculatorModal: FC<RewardsCalculatorModalProps> = ({ isOpen, setOpen }) => {
   const t  = useTranslations('Dashboard');
-  const [stake, setStake] = useState<number>(5);
+  const [stake, setStake] = useState<number | string>(5);
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [yearly, setYearly] = useState<number>(0);
   const [monthly, setMonthly] = useState<number>(0);
@@ -28,12 +28,12 @@ const RewardsCalculatorModal: FC<RewardsCalculatorModalProps> = ({ isOpen, setOp
   const { data: tokenInfo } = useTokenInfo();
 
   const handleApplyClick = () => {
-    let adjustedStake = stake;
-    if (stake  < MIN_STAKE) {
+    let adjustedStake = Number(stake);
+    if (Number(stake)  < MIN_STAKE) {
       adjustedStake = MIN_STAKE;
       setStake(MIN_STAKE);
     }
-    if (stake > MAX_STAKE) {
+    if (Number(stake) > MAX_STAKE) {
       adjustedStake = MAX_STAKE;
       setStake(MAX_STAKE);
     }
@@ -50,9 +50,14 @@ const RewardsCalculatorModal: FC<RewardsCalculatorModalProps> = ({ isOpen, setOp
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsFocused(true);
-    const value = Number(e.target.value);
-    if (!Number.isNaN(value)) {
-      setStake(value);
+    const value = e.target.value;
+    if (value === '') {
+      setStake('');
+    } else {
+      const numValue = Number(value);
+      if (!Number.isNaN(numValue)) {
+        setStake(numValue);
+      }
     }
   };
 

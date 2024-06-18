@@ -7,12 +7,13 @@ import { Box } from '@/components/ui/boxes';
 import Column from '@/components/ui/column';
 import Spinner from '@/components/ui/spinner';
 import { useCurrentSupply } from '@/hooks/use-current-supply';
+import { formatNumberToLocale } from '@/lib/utils';
 
 export default function CurrentSupplyBlock () {
   const t  = useTranslations('Dashboard');
   const { data, isLoading } = useCurrentSupply();
 
-  const formattedNum = useMemo(() => data?.supply.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }), [data?.supply]);
+  const formattedNum = formatNumberToLocale(Number(data?.supply));;
   const updatedDate = useMemo(() => new Date(data?.time ? data?.time : Date.now()), [data?.time]);
   const timeAgo = useMemo(() => formatDistanceToNow(updatedDate), [updatedDate]);
 

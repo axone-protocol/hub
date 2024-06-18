@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button';
 import Column from '@/components/ui/column';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import Row from '@/components/ui/row';
-import { TERMS_ACCEPTED_KEY } from '@/providers/modals-context-provider';
 
 type TermsModalProps = {
   open: boolean;
@@ -14,11 +13,14 @@ type TermsModalProps = {
   openWalletModal: () => void;
 };
 
+// !IMPORTANT: Increment the version number when the terms are updated
+export const TERMS_VERSION = '1.0.0';
+
 const TermsModal: FC<TermsModalProps> = ({ open, setOpen, openWalletModal }) => {
   const t  = useTranslations('Dashboard');
 
   const acceptTerms = async () => {
-    localStorage.setItem(TERMS_ACCEPTED_KEY, 'true');
+    localStorage.setItem(TERMS_VERSION, TERMS_VERSION);
     await cancel();
     openWalletModal();
   };

@@ -30,6 +30,12 @@ const StakingOverviewBlock = () => {
     }
     return Number(data.stakedAmount)/1000000;
   }, [data]);
+  const claimableRewards = useMemo(() => {
+    if (!data || Object.keys(data).length === 0 ||  isNaN(Number(data.stakedAmount))) {
+      return 0;
+    }
+    return Number(data.claimableReward);
+  }, [data]);
 
   const myBallanceInFiat = useMemo(() => {
     if (!tokenInfo) {
@@ -46,6 +52,14 @@ const StakingOverviewBlock = () => {
 
     return stakeAmount * tokenInfo.price.value;
   }, [stakeAmount, tokenInfo]);
+
+  const myClaimableRewardsInFiat = useMemo(() => {
+    if (!tokenInfo) {
+      return 0;
+    }
+
+    return (claimableRewards * tokenInfo.price.value).toFixed(2);
+  }, [claimableRewards, tokenInfo]);
 
   if (!isWalletConnected) {
     return (
@@ -98,10 +112,12 @@ const StakingOverviewBlock = () => {
           <Text className='text-axone-khaki mb-0'>
             {t('ClaimableRewards')}
           </Text>
-          <Title className='mb-0'>{data?.claimableReward} KNOW</Title>
+          <Title className='mb-0'>
+            {claimableRewards} KNOW
+          </Title>
           <Row className='justify-between items-center'>
             <Text className='text-axone-khaki mb-0'>
-              $0.00
+              ${myClaimableRewardsInFiat}
             </Text>
             <Button onClick={claimAllDelegatorsRewards} variant={'link'} className='mb-0 p-0 text-axone-orange h-auto'>
               {t('ClaimAll')}

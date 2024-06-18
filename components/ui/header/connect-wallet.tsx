@@ -52,7 +52,7 @@ const ConnectWallet: FC<ConnectWalletProps> = ({ openMobileMenu = () => null }) 
   useEffect(() => {
     let timeoutId: number;
     if (isWalletError) {
-      timeoutId = window.setTimeout(disconnect, 2500);
+      timeoutId = window.setTimeout(disconnect, 2000);
     }
 
     return () => {

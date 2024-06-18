@@ -1,17 +1,34 @@
 'use client';
-import { useTranslations } from 'next-intl';
+import { useChain } from '@cosmos-kit/react';
+import { useRouter } from 'next/navigation';
+import { useLocale, useTranslations } from 'next-intl';
 import { Title } from '@/components/typography';
 import { Box } from '@/components/ui/boxes';
 import { Button } from '@/components/ui/button';
 import { ButtonWithIcon } from '@/components/ui/button-with-icon';
 import { Line } from '@/components/ui/line';
 import PageContainer from '@/components/ui/page-container';
+import { useModal } from '@/context';
+import { chainName } from '@/core/chain';
 import { ProposalsListBlock } from './_components/proposals-list-block';
 import { ProposalsMetricsBlock } from './_components/proposals-metrics-block';
 
 
 export default function Governance () {
   const t = useTranslations('Governance');
+  const router = useRouter();
+  const locale = useLocale();
+  const { isWalletConnected } = useChain(chainName);
+  const { openConnectWalletModal } = useModal();
+
+  const navigateToNewProposal = () => {
+    if (!isWalletConnected) {
+      openConnectWalletModal();
+      return;
+    };
+    router.push(`/${locale}/governance/new-proposal`);
+  };
+
   return (
     <PageContainer>
       <Box className='lg:mx-0 mb-0'>
@@ -24,7 +41,10 @@ export default function Governance () {
               {t('DiscussionForum')}
             </ButtonWithIcon>
           </div>
-          <Button variant={'rounded'}>
+          <Button
+            variant={'rounded'}
+            onClick={navigateToNewProposal}
+          >
             {t('NewProposal')}
           </Button>
         </div>

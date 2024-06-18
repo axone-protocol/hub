@@ -21,7 +21,7 @@ const MyDelegationInfoBlock = () => {
   const locale = useLocale();
   const router = useRouter();
   const { data } = useMyDelegationsOverview(validatorAddress);
-  const { 
+  const {
     unbondFromValidator,
     claimRewards,
     isClaimingRewardsPending,
@@ -33,7 +33,7 @@ const MyDelegationInfoBlock = () => {
     router.push(`/${locale}/wallet`);
   };
 
-  const onUnbond = () => unbondFromValidator({ amount: Number(data?.delegation)/1000000, validatorAddress: `${validatorAddress}`, memo: 'hey' });
+  const onUnbond = () => unbondFromValidator({ amount: Number(data?.delegation)/1000000, validatorAddress: `${validatorAddress}`, memo: '' });
   const onClaimRewards = () => claimRewards(`${validatorAddress}`);
 
   return (
@@ -92,7 +92,7 @@ const MyDelegationInfoBlock = () => {
           )
           : (
             <div className='flex flex-col h-full gap-4 justify-center items-center pb-20'>
-              <p className='text-[14px] text-axone-grey text-center'>Connect your wallet to view your delegation info</p>
+              <p className='text-[14px] text-axone-grey text-center'>{t('ConnectWalletToDelegate')}</p>
               <svg width='234' height='158' viewBox='0 0 234 158' fill='none' xmlns='http://www.w3.org/2000/svg'>
                 <g clipPath='url(#clip0_674_4915)'>
                   <path d='M186.026 48.534C181.228 32.8741 139.758 12.6623 106.996 37.788C91.7591 49.4745 96.4888 57.8612 87.7155 74.4178C82.486 84.2859 73.2231 93.6951 73.842 105.024C74.3738 114.804 79.4909 123.649 86.4133 128.084C101.982 138.057 126.648 139.75 139.543 110.311C152.438 80.8712 198.395 88.9235 186.026 48.534Z' fill='#00243F'/>
