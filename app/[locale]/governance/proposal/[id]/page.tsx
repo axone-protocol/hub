@@ -7,9 +7,13 @@ import { VotersBlock } from './_components/voters-block';
 export default async function ValidatorDetails () {
   return (
     <PageContainer>
-      <ProposalOverviewBlock />
-      <VoteOverviewBlock />
-      <div className='flex flex-col lg:flex-row gap-6 px-6 lg:px-0'>
+      <div className='flex w-full lg:flex-row lg:w-full mobile:flex-col p-6'>
+        <ProposalOverviewBlock />
+      </div>
+      <div className='flex w-full lg:flex-row lg:w-full mobile:flex-col p-6 pt-0'>
+        <VoteOverviewBlock />
+      </div>
+      <div className='flex flex-col lg:flex-row gap-6 p-6 pt-0'>
         <VoteBlock />
         <VotersBlock />
       </div>

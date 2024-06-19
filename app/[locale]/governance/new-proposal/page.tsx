@@ -68,92 +68,102 @@ export default function NewProposal () {
   }
   return (
     <PageContainer>
-      <Box className='lg:mx-0 mb-0 relative'>
-        <div className={cn('hidden', {
-          'flex flex-row justify-center items-center absolute top-0 left-0 right-0 bottom-0 bg-black opacity-50 rounded-lg': isSubmittingProposalPending,
-        })}>
-          <Spinner />
-        </div>
-        <div className='flex flex-col lg:flex-row mb-10 items-left lg:items-center justify-between'>
-          <div className='flex flex-col justify-start lg:flex-row items-left lg:items-center'>
-            <Button onClick={back} variant={'link'} className='text-axone-khaki'>
-              <Image className='rotate-90 mr-2' src='/icons/arrow-down-long.svg' width={16} height={16} alt='AXONE' />
-              {t('Back')}
-            </Button>
-            <p className='ml-2 pl-4 border-l border-axone-box-border text-20'>
-              {t('NewProposal')}
-            </p>
+      <div className='flex w-full lg:flex-row lg:w-full mobile:flex-col p-6'>
+        <Box className='w-full m-0 relative'>
+          <div className={cn('hidden', {
+            'flex flex-row justify-center items-center absolute top-0 left-0 right-0 bottom-0 bg-black opacity-50 rounded-lg': isSubmittingProposalPending,
+          })}>
+            <Spinner />
           </div>
-        </div>
-
-        <div className='flex w-full'>
-          <div className='flex flex-col w-1/3 pr-6'>
-            <div>
-              <p className='text-16'>{t('TextProposal')}</p>
-              <Text>{t('TextProposalDesc')}</Text>
-            </div>
-            <div className='mt-32'>
-              <p className='text-16'>{t('DepositInformation')}</p>
-              <Text>{t('DepositInformationDesc')}</Text>
+          <div className='flex flex-col lg:flex-row mb-10 items-left lg:items-center justify-between'>
+            <div className='flex justify-start lg:flex-row items-left items-center'>
+              <Button onClick={back} variant={'link'} className='text-axone-khaki'>
+                <Image className='rotate-90 mr-2' src='/icons/arrow-down-long.svg' width={16} height={16} alt='AXONE' />
+                {t('Back')}
+              </Button>
+              <p className='ml-2 pl-4 border-l border-axone-box-border text-20'>
+                {t('NewProposal')}
+              </p>
             </div>
           </div>
 
+          <div className='flex w-full'>
+            <div className='hidden lg:flex flex-col w-1/3 pr-6'>
+              <div>
+                <p className='text-16'>{t('TextProposal')}</p>
+                <Text>{t('TextProposalDesc')}</Text>
+              </div>
+              <div className='mt-32'>
+                <p className='text-16'>{t('DepositInformation')}</p>
+                <Text>{t('DepositInformationDesc')}</Text>
+              </div>
+            </div>
 
-          <div className='flex flex-col w-2/3 pl-6 border-l border-axone-box-border'>
-            <div className='grid w-full items-center gap-1.5 mb-12'>
-              <Label className='text-white' htmlFor='title'>
-                {t('Title')}
-              </Label>
-              <Input
-                isRequired={true}
-                type='text'
-                id='title'
-                placeholder={t('ProposalTitle')}
-                {...register('title')}
-              />
-              {errors.title && <p className='text-[12px] text-axone-red'>{`${errors.title.message}`}</p>}
-            </div>
-            <div className='grid w-full items-center gap-1.5 mb-12'>
-              <Label className='text-white' htmlFor='description'>
-                {t('Description')}
-              </Label>
-              <Textarea
-                isRequired={true}
-                id='description'
-                placeholder={t('ProposalDescription')}
-                {...register('description')}
-              />
-              {errors.description && <p className='text-[12px] text-axone-red'>{`${errors.description.message}`}</p>}
-            </div>
-            <div className='grid w-full items-center gap-1.5 mb-10'>
-              <Row className='items-center gap-2'>
-                <Label className='text-white' htmlFor='amount'>
-                  {t('Deposit')}
+
+            <div className='flex flex-col w-full lg:w-2/3 lg:pl-6 lg:border-l lg:border-axone-box-border'>
+              <div className='lg:hidden flex flex-col mb-6'>
+                <p className='text-16'>{t('TextProposal')}</p>
+                <Text>{t('TextProposalDesc')}</Text>
+              </div>
+              <div className='grid w-full items-center gap-1.5 mb-12'>
+                <Label className='text-white' htmlFor='title'>
+                  {t('Title')}
                 </Label>
-                <AxoneTooltip
-                  iconColor='text-axone-khaki'
-                  content='The Axone address to which you are sending tokens'
+                <Input
+                  isRequired={true}
+                  type='text'
+                  id='title'
+                  placeholder={t('ProposalTitle')}
+                  {...register('title')}
                 />
-              </Row>
-              <Input
-                isRequired={true}
-                type='number'
-                id='amount'
-                placeholder={'Enter Amount in KNOW'}
-                {...register('amount')}
-              />
-              {errors.amount && <p className='text-[12px] text-axone-red'>{`${errors.amount.message}`}</p>}
+                {errors.title && <p className='text-[12px] text-axone-red'>{`${errors.title.message}`}</p>}
+              </div>
+              <div className='grid w-full items-center gap-1.5 mb-12'>
+                <Label className='text-white' htmlFor='description'>
+                  {t('Description')}
+                </Label>
+                <Textarea
+                  isRequired={true}
+                  id='description'
+                  placeholder={t('ProposalDescription')}
+                  {...register('description')}
+                />
+                {errors.description && <p className='text-[12px] text-axone-red'>{`${errors.description.message}`}</p>}
+              </div>
+              <div className='lg:hidden flex flex-col mb-6'>
+                <p className='text-16'>{t('DepositInformation')}</p>
+                <Text>{t('DepositInformationDesc')}</Text>
+              </div>
+              <div className='grid w-full items-center gap-1.5 mb-10'>
+                <Row className='items-center gap-2'>
+                  <Label className='text-white' htmlFor='amount'>
+                    {t('Deposit')}
+                  </Label>
+                  <AxoneTooltip
+                    iconColor='text-axone-khaki'
+                    content='The Axone address to which you are sending tokens'
+                  />
+                </Row>
+                <Input
+                  isRequired={true}
+                  type='number'
+                  id='amount'
+                  placeholder={'Enter Amount in KNOW'}
+                  {...register('amount')}
+                />
+                {errors.amount && <p className='text-[12px] text-axone-red'>{`${errors.amount.message}`}</p>}
+              </div>
+              <Button
+                variant={'rounded'}
+                className='w-4/12 mt-6'
+                onClick={onConfirm}
+              >
+                {t('Propose')}
+              </Button>
             </div>
-            <Button
-              variant={'rounded'}
-              className='w-4/12 mt-6'
-              onClick={onConfirm}
-            >
-              {t('Propose')}
-            </Button>
           </div>
-        </div>
-      </Box>
+        </Box>
+      </div>
     </PageContainer>
   );
 }

@@ -1,7 +1,6 @@
 'use client';
 import Image from 'next/image';
 import { useState } from 'react';
-import { Text } from '@/components/typography';
 import { Select, SelectContent, SelectGroup, SelectIcon, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { cn } from '@/lib/utils';
 
@@ -10,7 +9,7 @@ const TimeframeSelect = () => {
   return (
     <Select onOpenChange={() => setOpen(prev => !prev)}>
       <SelectTrigger className={cn('w-50 relative -top-[7px]', { 'bg-axone-bg-dark': open })}>
-        <Text className='uppercase mb-0 mr-2'>Time Frame</Text> <SelectValue className='mb-2' placeholder='5 Min' />
+        <SelectValue className='mb-2' placeholder='5 Min' />
         <SelectIcon asChild>
           <Image className={cn({ 'rotate-180': open })} src={'/icons/arrow-down.svg'}  width={20} height={20} alt={'arrow-down'} />
         </SelectIcon>

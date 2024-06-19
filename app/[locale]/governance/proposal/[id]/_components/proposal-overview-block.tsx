@@ -4,12 +4,10 @@ import { useTranslations } from 'next-intl';
 import { Text } from '@/components/typography';
 import { Box } from '@/components/ui/boxes';
 import { Button } from '@/components/ui/button';
-import { ButtonWithIcon } from '@/components/ui/button-with-icon';
 import { useModal } from '@/context';
 import { useSingleProposalInfo } from '@/hooks/use-single-proposal-info';
 import { formatDate } from '@/lib/utils';
 import { ProposalImage } from './proposal-image';
-import { ProposalParamsTable } from './proposal-params-table';
 
 const ProposalOverviewBlock = () => {
   const { id } = useParams();
@@ -18,7 +16,7 @@ const ProposalOverviewBlock = () => {
   const t = useTranslations('Governance');
 
   return (
-    <Box className='lg:mx-0'>
+    <Box className='w-full m-0'>
       <div className='flex flex-col lg:flex-row lg:justify-between lg:items-center lg:mt-6 lg:mb-10'>
         <div className='flex flex-row items-center gap-4 w-full lg:w-1/4 my-4 lg:my-0'>
           <div className='w-16 h-16'>
@@ -83,19 +81,19 @@ const ProposalOverviewBlock = () => {
         </div>
       </div>
 
-      <ProposalParamsTable />
+      {/* <ProposalParamsTable /> */}
 
       <div className='flex flex-col lg:flex-row gap-6'>
         <Button
           variant='rounded'
           className='w-full lg:w-auto px-12'
-          onClick={openVoteProposalModal}
+          onClick={() => openVoteProposalModal({ proposalTitle: data?.proposal.title || '' })}
         >
           {t('Vote')}
         </Button>
-        <ButtonWithIcon variant='noBorder' className='w-full lg:w-auto'>
+        {/* <ButtonWithIcon variant='noBorder' className='w-full lg:w-auto'>
           {t('ViewJson')}
-        </ButtonWithIcon>
+        </ButtonWithIcon> */}
       </div>
     </Box>
   );

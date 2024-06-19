@@ -5,12 +5,13 @@ import React, { PropsWithChildren, useCallback, useEffect, useState } from 'reac
 import { DelegateModal, RewardsCalculatorModal, TERMS_VERSION, TermsModal } from '@/components/ui/modals';
 import { ConfirmTransactionModal } from '@/components/ui/modals/confirm-transaction/confirm-transaction-modal';
 import { VoteProposalModal } from '@/components/ui/modals/vote-proposal/vote-proposal-modal';
-import { DelegateModalOpenProps, ModalContext } from '@/context';
+import { DelegateModalOpenProps, ModalContext, VoteModalData } from '@/context';
 import { chainName } from '@/core/chain';
 
 const ModalProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [openTerms, setOpenTerms] = useState<boolean>(false);
   const [delegationData, setDelegationData] = useState<DelegateModalOpenProps>({});
+  const [proposalData, setProposalData] = useState<VoteModalData>({ proposalTitle: '' });
   const [isDelegateOpen, setDelegateOpen] = useState<boolean>(false);
   const [isRewardsCalculatorOpen, setRewardsCalculatorOpen] = useState<boolean>(false);
   const [isVoteProposalOpen, setVoteProposalOpen] = useState<boolean>(false);
@@ -55,7 +56,8 @@ const ModalProvider: React.FC<PropsWithChildren> = ({ children }) => {
     setRewardsCalculatorOpen(true);
   }, []);
 
-  const openVoteProposalModal = useCallback(() => {
+  const openVoteProposalModal = useCallback((data: VoteModalData) => {
+    setProposalData(data);
     setVoteProposalOpen(true);
   }, []);
 
@@ -70,13 +72,14 @@ const ModalProvider: React.FC<PropsWithChildren> = ({ children }) => {
       openRewardsCalculatorModal,
       openVoteProposalModal,
       openConfirmTransactionModal,
-      delegationData
+      delegationData,
+      proposalData
     }}>
       {children}
       <TermsModal open={openTerms} setOpen={setOpenTerms} openWalletModal={openView} />
       <DelegateModal delegationData={delegationData} isOpen={isDelegateOpen} setOpen={onDelegateModalClose} />
       <RewardsCalculatorModal isOpen={isRewardsCalculatorOpen} setOpen={setRewardsCalculatorOpen} />
-      <VoteProposalModal isOpen={isVoteProposalOpen} setOpen={setVoteProposalOpen} />
+      <VoteProposalModal proposalData={proposalData} isOpen={isVoteProposalOpen} setOpen={setVoteProposalOpen} />
       <ConfirmTransactionModal isOpen={isConfirmTransactionOpen} setOpen={setConfirmTransactionOpen} />
     </ModalContext.Provider>
   );

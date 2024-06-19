@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Text from '@/components/typography/text';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { VoteModalData } from '@/context';
 import { cn } from '@/lib/utils';
 import { BoxInner } from '../../boxes';
 import { CheckMarkIcon } from '../../checkmark-icon';
@@ -10,9 +11,10 @@ import { CheckMarkIcon } from '../../checkmark-icon';
 type VoteProposalModalProps = {
   isOpen: boolean;
   setOpen: (open: boolean) => void;
+  proposalData: VoteModalData;
 };
 
-const VoteProposalModal = ({ isOpen, setOpen }: VoteProposalModalProps) => {
+const VoteProposalModal = ({ isOpen, setOpen, proposalData }: VoteProposalModalProps) => {
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
   const handleOptionClick = (option: string) => {
@@ -26,7 +28,9 @@ const VoteProposalModal = ({ isOpen, setOpen }: VoteProposalModalProps) => {
           <DialogTitle className='text-left text-20'>Vote</DialogTitle>
         </DialogHeader>
         <div className='overflow-y-auto scrollbar-none h-full'>
-          <Text className='mb-10'>prop 379: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore</Text>
+          <Text className='mb-10 font-bold'>
+            {proposalData.proposalTitle}
+          </Text>
           <div className='flex flex-col gap-4 my-8'>
             <BoxInner className='p-2 cursor-pointer gap-4' onClick={() => handleOptionClick('Yes')}>
               <CheckMarkIcon active={selectedOption === 'Yes'} />
@@ -45,7 +49,6 @@ const VoteProposalModal = ({ isOpen, setOpen }: VoteProposalModalProps) => {
               <Text className='mb-0'>Abstain</Text>
             </BoxInner>
           </div>
-          <Text className='mb-0'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore</Text>
           <Button
             className={cn('w-full mt-8',
               { 'border-axone-khaki text-axone-khaki cursor-not-allowed hover:border-axone-khaki hover:text-axone-khaki hover:bg-transparent': !selectedOption }

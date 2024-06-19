@@ -51,7 +51,7 @@ const ValidatorDetailsBlock = () => {
   };
 
   return (
-    <Box className='lg:mx-0 mb-0'>
+    <Box className='w-full m-0'>
       <Row>
         <Title>{t('ValidatorDetails')}</Title>
       </Row>
@@ -111,7 +111,7 @@ const ValidatorDetailsBlock = () => {
 
       <BoxInner className='flex-col p-6 mb-4'>
         <div className='flex flex-col gap-4 lg:flex-row lg:justify-between items-center mb-10'>
-          <div className='w-1/2'>
+          <div className='w-full lg:w-1/2'>
             <div className='flex flex-row gap-2'>
               <Title>{t('Address')}</Title>
               <Copy
@@ -123,21 +123,21 @@ const ValidatorDetailsBlock = () => {
                 absoluteStrokeWidth
               />
             </div>
-            <Text className='text-axone-khaki'>{address}</Text>
+            <Text className='flex text-axone-khaki break-all'>{address}</Text>
           </div>
-          <div className='w-1/2'>
+          <div className='w-full lg:w-1/2'>
             <Title>{t('Website')}</Title>
             <Text className='text-axone-khaki'>{validatorData?.description.website || ''}</Text>
           </div>
         </div>
         <div className='flex flex-col gap-4 lg:flex-row lg:justify-between items-start'>
-          <div className='w-1/2'>
+          <div className='w-full lg:w-1/2'>
             <Title>{t('Details')}</Title>
             <Text className='text-axone-khaki'>
               {validatorData?.description.details || 'No details provided'}
             </Text>
           </div>
-          <div className='w-1/2'>
+          <div className='w-full lg:w-1/2'>
             <Title>{t('SecurityContact')}</Title>
             <Text className='text-axone-khaki'>{validatorData?.description.securityContact || ''}</Text>
           </div>

@@ -30,7 +30,7 @@ const TimeFrameSelect: FC<TimeFrameSelectProps> = ({ selectRange, range }) => {
   return (
     <Select value={range} onOpenChange={onOpenChange} onValueChange={onValueChange}>
       <SelectTrigger className={cn('w-50 relative -top-[7px]', { 'bg-axone-bg-dark': open })}>
-        <Text className='uppercase mb-0 mr-2'>Time Frame</Text> <SelectValue className='mb-2' placeholder='5 Min' />
+        <SelectValue className='mb-2' placeholder='5 Min' />
         <SelectIcon asChild>
           <Image className={cn({ 'rotate-180': open })} src={'/icons/arrow-down.svg'}  width={20} height={20} alt={'arrow-down'} />
         </SelectIcon>

@@ -8,9 +8,13 @@ import { ValidatorDelegationsBlock } from './_components/validator-delegations-b
 export default function ValidatorDetails () {
   return (
     <PageContainer>
-      <ValidatorDetailsBlock />
-      <UptimeBlock />
-      <div className='flex flex-col lg:flex-row gap-6 mt-6 lg:mx-0 mb-0'>
+      <div className='flex w-full flex-col lg:flex-row lg:w-full p-6'>
+        <ValidatorDetailsBlock />
+      </div>
+      <div className='flex w-full flex-col lg:flex-row lg:w-full p-6 pt-0'>
+        <UptimeBlock />
+      </div>
+      <div className='flex flex-col p-6 lg:flex-row gap-6 pt-0'>
         <MyDelegationInfoBlock />
         <div className='flex flex-col gap-6 flex-grow'>
           <ValidatorDelegationsBlock />

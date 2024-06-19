@@ -50,7 +50,7 @@ const ValidatorsBlock = () => {
   const { openDelegateModal } = useModal();
 
   return (
-    <Box className='mb-0 lg:mx-0'>
+    <Box className='w-full m-0'>
       <div className='flex flex-col lg:flex-row justify-between mb-8 lg:items-center gap-2 lg:gap-4'>
         <Title>{t('Validators')}</Title>
         <div className='flex flex-col w-full lg:w-[650px] lg:flex-row relative mt-6 lg:mt-0'>

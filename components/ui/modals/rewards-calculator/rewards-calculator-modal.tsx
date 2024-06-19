@@ -78,7 +78,7 @@ const RewardsCalculatorModal: FC<RewardsCalculatorModalProps> = ({ isOpen, setOp
                   isRequired
                   onChange={handleInputChange}
                   value={isFocused ? stake : ''}
-                  className='pl-2 pr-20 placeholder:tracking-tighter placeholder:text-[14px] mb-4 lg:mb-0'
+                  className='pl-2 pr-24 placeholder:tracking-tighter placeholder:text-[14px] mb-4 lg:mb-0'
                   placeholder={'Enter Amount'}
                 />
                 <Button
@@ -90,7 +90,7 @@ const RewardsCalculatorModal: FC<RewardsCalculatorModalProps> = ({ isOpen, setOp
               </Row>
               <Row className='gap-4 items-end mt-6'>
                 <Info className='text-axone-khaki' size={18} />
-                <Text className='text-axone-khaki mb-0 relative top-[2px]'>Min 5 - Max 200,000,000</Text>
+                <Text className='text-axone-khaki mb-0 relative top-[2px]'>Min 5 - Max 200,000</Text>
               </Row>
             </Column>
 

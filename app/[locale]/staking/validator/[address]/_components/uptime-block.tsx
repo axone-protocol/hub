@@ -39,13 +39,13 @@ const UptimeBlock = () => {
   const { data, isLoading } = useSingleValidatorUptime(address);
   const [blocks, setBlocks] = useState<ValidatorUptimeData>({ blocks: [], current: '0' });
 
-  const newBlockHandler = useCallback((block: SingleBlockData[]) => {
-    setBlocks((prev: ValidatorUptimeData) => {
+  const newBlockHandler = useCallback((block: SingleBlockData) => {
+    setBlocks((prev) => {
       const newData = {
         ...prev,
         blocks: prev.blocks.length >= 60
-          ? [...prev.blocks.slice(0, -block.length), ...block]
-          : [...prev.blocks, ...block]
+          ? [...prev.blocks.slice(1), block]
+          : [...prev.blocks, block]
       };
       return newData;
     });
@@ -73,11 +73,12 @@ const UptimeBlock = () => {
   }
   return (
     <motion.div
+      className='w-full'
       initial={{ opacity: 0, scale: 0.8, y: 50 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <Box className='flex-col p-6 lg:mx-0 mb-0'>
+      <Box className='w-full flex-col m-0'>
         <Row className='justify-between items-center mb-4'>
           <Title>{t('Uptime')}</Title>
           <Title className='text-axone-grey font-normal tracking-tighter'>{t('Last60Blocks')}</Title>

@@ -39,7 +39,7 @@ const RecentlyProposedBlock = () => {
 
   useSocket({
     socket,
-    eventName: 'new_block',
+    eventName: `proposed_block.${address}`,
     eventHandler: newBlockHandler,
     isLoading
   });
