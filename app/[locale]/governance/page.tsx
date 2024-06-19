@@ -31,27 +31,29 @@ export default function Governance () {
 
   return (
     <PageContainer>
-      <Box className='lg:mx-0 mb-0'>
-        <div className='flex flex-col lg:flex-row mb-10 items-left lg:items-center justify-between'>
-          <div className='flex flex-col justify-start lg:flex-row items-left lg:items-center'>
-            <Title className='mr-10'>
-              {t('Governance')}
-            </Title>
-            <ButtonWithIcon variant={'noBorder'}>
-              {t('DiscussionForum')}
-            </ButtonWithIcon>
+      <div className='flex w-full lg:flex-row lg:w-full mobile:flex-col p-6'>
+        <Box className='w-full m-0'>
+          <div className='flex flex-col lg:flex-row mb-10 items-left lg:items-center justify-between'>
+            <div className='flex flex-col justify-start lg:flex-row items-left lg:items-center'>
+              <Title className='mr-10'>
+                {t('Governance')}
+              </Title>
+              <ButtonWithIcon variant={'noBorder'}>
+                {t('DiscussionForum')}
+              </ButtonWithIcon>
+            </div>
+            <Button
+              variant={'rounded'}
+              onClick={navigateToNewProposal}
+            >
+              {t('NewProposal')}
+            </Button>
           </div>
-          <Button
-            variant={'rounded'}
-            onClick={navigateToNewProposal}
-          >
-            {t('NewProposal')}
-          </Button>
-        </div>
-        <ProposalsMetricsBlock />
-        <Line className='my-10' />
-        <ProposalsListBlock />
-      </Box>
+          <ProposalsMetricsBlock />
+          <Line className='my-10' />
+          <ProposalsListBlock />
+        </Box>
+      </div>
     </PageContainer>
   );
 }

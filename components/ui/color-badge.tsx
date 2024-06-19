@@ -12,7 +12,7 @@ const ColorBadge: FC<ColorBadgeProps> = ({ backgroundColor, textColor, text, cla
   return (
     <div
       className={cn(
-        'flex uppercase max-w-20 justify-center items-center rounded-md pt-1 text-xs',
+        'flex uppercase max-w-24 justify-center items-center rounded-md pt-1 text-xs',
         className
       )}
       style={{

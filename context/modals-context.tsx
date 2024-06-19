@@ -5,13 +5,18 @@ export type DelegateModalOpenProps = {
   validatorAddress?: string;
 };
 
+export type VoteModalData = {
+  proposalTitle: string;
+}
+
 type ModalContextProps = {
   openConnectWalletModal: () => void;
   openDelegateModal: (data?: DelegateModalOpenProps) => () => void;
   openRewardsCalculatorModal: () => void;
-  openVoteProposalModal: () => void;
+  openVoteProposalModal: (data: VoteModalData) => void;
   openConfirmTransactionModal: () => void;
   delegationData?: DelegateModalOpenProps;
+  proposalData?: VoteModalData;
 }
 
 const defaultModalContext: ModalContextProps = {
@@ -21,6 +26,7 @@ const defaultModalContext: ModalContextProps = {
   openVoteProposalModal: () => {},
   openConfirmTransactionModal: () => {},
   delegationData: {},
+  proposalData: { proposalTitle: '' },
 };
 const useModal = () => {
   const context = useContext(ModalContext);

@@ -5,7 +5,6 @@ import { Text, Title } from '@/components/typography';
 import { AxoneTooltip } from '@/components/ui/axone-tooltip';
 import { Box } from '@/components/ui/boxes';
 import { BoxInner } from '@/components/ui/boxes';
-import { Button } from '@/components/ui/button';
 import Row from '@/components/ui/row';
 import Spinner from '@/components/ui/spinner';
 import { useValidatorDelegations, ValidatorDelegation } from '@/hooks/use-validator-delegations';
@@ -46,8 +45,6 @@ const ValidatorDelegationsBlock = () => {
           }
         </BoxInner>
       </div>
-
-      <Button variant='rounded' className='px-8 mt-8'>{t('ShowMore')}</Button>
     </Box>
   );
 };

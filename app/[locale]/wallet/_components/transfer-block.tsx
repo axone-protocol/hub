@@ -59,7 +59,7 @@ const TransferBlock = () => {
   });
 
   return (
-    <Box className='w-full lg:w-1/3 my-0 mx-0 mt-0 lg:mt-6 relative'>
+    <Box className='w-full lg:w-1/3 m-0 relative'>
       <div className={cn('absolute hidden', {
         'flex flex-row w-full h-full top-0 left-0 rounded-lg opacity-45 right-0 bottom-0 bg-axone-bg-dark text-red-800 items-center justify-center': isTransactionPending,
       })}>

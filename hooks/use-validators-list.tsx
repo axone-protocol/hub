@@ -52,7 +52,7 @@ export const useValidatorsListQueryKey = ['validators-list'];
 export const useValidatorsList = () => {
   const [validatorStatus, setValidatorStatus] = useState<ValidatorStatus>(ValidatorStatus.BONDED);
   const [searchTerm, setSearchTerm] = useState('');
-  const [sortBy, setSortBy] = useState<ValidatorSortBy | null>(ValidatorSortBy.VOTING_POWER);
+  const [sortBy, setSortBy] = useState<ValidatorSortBy | null>(ValidatorSortBy.STAKED_AMOUNT);
   const [order, setOrder] = useState<'asc' | 'desc'>('asc');
   const { baseUrl } = useEnvironment();
   const query = useQuery({

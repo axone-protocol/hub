@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { useTranslations } from 'next-intl';
 import { FC, memo } from 'react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { ColorBadge } from '@/components/ui/color-badge';
@@ -15,6 +16,7 @@ const ACCORDION_ANIMATION_CONFIG = {
 type QuestionsAccordionProps = { questions: FAQDataType[] };
 
 const QuestionsAccordion: FC<QuestionsAccordionProps> = memo(({ questions }) => {
+  const t = useTranslations('FAQ');
   return (
     <Accordion type='single' collapsible className='mt-5'>
       {
@@ -29,7 +31,7 @@ const QuestionsAccordion: FC<QuestionsAccordionProps> = memo(({ questions }) => 
                   <ColorBadge
                     backgroundColor={item.categoryBgColor}
                     textColor={item.categoryTextColor}
-                    text={item.category}
+                    text={t(`Category.${item.category}`)}
                   />
                   <AccordionTrigger className='w-full pt-2 pb-5 text-left'>{item.question}</AccordionTrigger>
                 </Column>

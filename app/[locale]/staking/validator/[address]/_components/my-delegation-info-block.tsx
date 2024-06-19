@@ -47,8 +47,8 @@ const MyDelegationInfoBlock = () => {
                 <Text>{t('MyDelegation')}</Text>
                 <AxoneTooltip iconColor='text-axone-khaki' content='My Delegation' />
               </Row>
-              <Row className='gap-2 mb-4'>
-                <p className='text-40 text-white'>{Number(data?.delegation)/1000000 || '0.00'}</p>
+              <Row className='gap-2 mb-4 flex-wrap'>
+                <p className='text-40 text-white break-all'>{Number(data?.delegation)/1000000 || '0.00'}</p>
                 <p className='text-40 text-axone-khaki'>AXONE</p>
               </Row>
               <Row className='gap-4'>
@@ -68,8 +68,8 @@ const MyDelegationInfoBlock = () => {
                 <Text>My Earnings</Text>
                 <AxoneTooltip iconColor='text-axone-khaki' content='My Earnings' />
               </Row>
-              <Row className='gap-2 mb-4'>
-                <p className='text-40 text-white'>{data?.earnings || '0.00'}</p>
+              <Row className='gap-2 mb-4 flex-wrap'>
+                <p className='text-40 text-white break-all'>{data?.earnings || '0.00'}</p>
                 <p className='text-40 text-axone-khaki'>AXONE</p>
               </Row>
               { !!Number(data?.delegation) ? (

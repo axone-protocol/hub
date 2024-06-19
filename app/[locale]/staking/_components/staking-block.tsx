@@ -18,7 +18,7 @@ const StakingBlock = () => {
     );
   };
   return (
-    <Box className='lg:mx-0 mb-0'>
+    <Box className='w-full m-0'>
       <Row className='mb-10 items-left lg:items-center mobile:flex-col'>
         <Title className='mr-40'>{t('Staking')}</Title>
       </Row>

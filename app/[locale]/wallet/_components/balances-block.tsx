@@ -4,21 +4,17 @@ import { useTranslations } from 'next-intl';
 import { Text, Title } from '@/components/typography';
 import { Box, BoxInner } from '@/components/ui/boxes';
 import { Button } from '@/components/ui/button';
-import { ButtonWithIcon } from '@/components/ui/button-with-icon';
 import Row from '@/components/ui/row';
 
 const BalancesBlock = () => {
   const t = useTranslations('Wallet');
 
   return (
-    <Box className='w-full lg:w-2/3 mb-0 mx-0 lg:mx-0'>
+    <Box className='w-full lg:w-2/3 m-0'>
       <div className='flex flex-row justify-between mb-6 lg:items-center'>
         <Title>
           {t('Balances')}
         </Title>
-        <ButtonWithIcon variant={'link'} className=' text-axone-orange text-base font-bold z-8 pr-0 pt-0'>
-          {t('Bridge')}
-        </ButtonWithIcon>
       </div>
 
       <Row className='justify-between'>
