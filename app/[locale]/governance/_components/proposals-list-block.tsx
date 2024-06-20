@@ -24,7 +24,8 @@ const ProposalsListBlock = () => {
     sortBy,
     setSortBy,
     order,
-    setOrder
+    setOrder,
+    allCount
   } = useProposalsList();
 
   const goToDetails = useCallback((id: string | number) => () => {
@@ -72,7 +73,7 @@ const ProposalsListBlock = () => {
             onClick={filterByStatus(ProposalStatus.ALL)}
             className={cn('mb-0 mr-2 text-16 cursor-pointer text-axone-khaki', { 'text-axone-orange': proposalStatus === ProposalStatus.ALL })}
           >
-            {t('All')} [{proposals?.length || 0}]
+            {t('All')} [{allCount || 0}]
           </p>
           <p className={cn('mb-0 mr-2 cursor-pointer text-16 text-axone-khaki', { 'text-axone-orange': false })}>
             {t('Deposit')} [2]

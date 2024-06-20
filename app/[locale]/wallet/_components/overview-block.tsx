@@ -40,7 +40,7 @@ const OverviewBlock = () => {
   return (
     <Box className='w-full m-0 lg:mx-0 lg:mt-0 lg:mb-0'>
       <Row className='mb-10 items-left lg:items-center mobile:flex-col'>
-        <Title className='mr-40'>
+        <Title className='mr-40 ant'>
           {t('Overview')}
         </Title>
       </Row>

@@ -35,7 +35,7 @@ const ProposalsMetricsBlock = () => {
 
       <BoxInner className='py-5 w-full lg:w-1/4 h-30 flex-col justify-center gap-6 items-center px-6'>
         <Title className='mb-0'>
-          {governanceOverview.votingPeriod}
+          {governanceOverview.votingPeriod} Day {governanceOverview.votingPeriod > 1 ? 's' : ''}
         </Title>
         <Text className='text-axone-khaki mb-0 uppercase'>
           {t('VotingPeriod')}

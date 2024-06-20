@@ -7,6 +7,7 @@ export type DelegateModalOpenProps = {
 
 export type VoteModalData = {
   proposalTitle: string;
+  proposalId: string;
 }
 
 type ModalContextProps = {
@@ -26,7 +27,7 @@ const defaultModalContext: ModalContextProps = {
   openVoteProposalModal: () => {},
   openConfirmTransactionModal: () => {},
   delegationData: {},
-  proposalData: { proposalTitle: '' },
+  proposalData: { proposalTitle: '', proposalId: '' },
 };
 const useModal = () => {
   const context = useContext(ModalContext);

@@ -53,7 +53,6 @@ const SupplyAreaChart: FC<SupplyAreaChartProps> = ({ data }) => {
     const unixTime = Math.floor(raw.getTime() / 1000);
     const dateTime = new Date(unixTime * MS_FACTOR);
     return format.dateTime(dateTime, {
-      year: 'numeric',
       month: 'short',
       day: 'numeric'
     });

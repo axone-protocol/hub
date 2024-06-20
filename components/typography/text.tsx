@@ -7,7 +7,7 @@ type TextProps = {
 
 const Text = ({ children, className, ...props }: TextProps) => {
   return (
-    <span className={cn('text-sm text-axone-grey leading-5 font-[400] mb-2.5', className)} {...props}>
+    <span className={cn('text-sm text-axone-grey leading-5 font-[400] mb-2.5 subpixel-antialiased', className)} {...props}>
       {children}
     </span>
   );

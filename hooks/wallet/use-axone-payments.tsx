@@ -4,7 +4,7 @@ import { StdFee } from '@cosmjs/amino';
 import { ExtendedHttpEndpoint } from '@cosmos-kit/core';
 import { useChain } from '@cosmos-kit/react';
 import BigNumber from 'bignumber.js';
-import { TextProposal } from 'cosmjs-types/cosmos/gov/v1beta1/gov';
+import { TextProposal, VoteOption } from 'cosmjs-types/cosmos/gov/v1beta1/gov';
 import { Any } from 'cosmjs-types/google/protobuf/any';
 import { cosmos } from 'juno-network';
 import { useCallback, useEffect } from 'react';
@@ -12,6 +12,7 @@ import { create } from 'zustand';
 import { useEnvironment } from '@/context/environment-context';
 import { assetList, chainName } from '@/core/chain';
 import { useAxoneToasts } from '../use-axone-toasts';
+import Long from 'long';
 
 
 const chainDenom = 'uknow';
@@ -37,12 +38,14 @@ type AxoneWalletState = {
   isDelegatingPending: boolean;
   isClaimingRewardsPending: boolean;
   isSubmittingProposalPending: boolean;
+  isVotingProposalPending: boolean;
   setIsClaimingRewardsPending: (isPending: boolean) => void;
   setIsUnbondingPending: (isPending: boolean) => void;
   setIsDelegatingPending: (isPending: boolean) => void;
   setIsTransactionPending: (isPending: boolean) => void;
   setTransactionResponse: (response: string) => void;
   setIsSubmittingProposalPending: (isPending: boolean) => void;
+  setIsVotingProposalPending: (isPending: boolean) => void;
 };
 
 const useAxoneWalletStore = create<AxoneWalletState>((set) => ({
@@ -57,12 +60,14 @@ const useAxoneWalletStore = create<AxoneWalletState>((set) => ({
   isDelegatingPending: false,
   isClaimingRewardsPending: false,
   isSubmittingProposalPending: false,
+  isVotingProposalPending: false,
   setIsClaimingRewardsPending: (isPending: boolean) => set({ isClaimingRewardsPending: isPending }),
   setIsUnbondingPending: (isPending: boolean) => set({ isUnboningPending: isPending }),
   setIsDelegatingPending: (isPending: boolean) => set({ isDelegatingPending: isPending }),
   setIsTransactionPending: (isPending: boolean) => set({ isTransactionPending: isPending }),
   setTransactionResponse: (response: string) => set({ transactionResponse: response }),
   setIsSubmittingProposalPending: (isPending: boolean) => set({ isSubmittingProposalPending: isPending }),
+  setIsVotingProposalPending: (isPending: boolean) => set({ isVotingProposalPending: isPending }),
 }));
 
 // TODO: change setting amount from micro (unknow) to base (know) eg. proper multiplying in funcs, now it's just for testing purposes using small amounts
@@ -74,7 +79,8 @@ export const useAxonePayments = () => {
     setIsDelegatingPending,
     setIsUnbondingPending,
     setIsClaimingRewardsPending,
-    setIsSubmittingProposalPending
+    setIsSubmittingProposalPending,
+    setIsVotingProposalPending
   } = useAxoneWalletStore();
 
   const { address, getSigningStargateClient, getRpcEndpoint } =
@@ -384,12 +390,55 @@ export const useAxonePayments = () => {
         fee,
       );
       console.log('Create proposal response ', resp);
-      showSuccessToast('Proposal submitted successfully!');
+      if (resp.code === 0) {
+        showSuccessToast('Proposal submitted successfully!');
+      } else {
+        showErrorToast(`Failed to submit proposal. Code: ${resp.code}`);
+      }
     } catch (error) {
       showErrorToast(`Something went wrong: ${error}`);
     } finally {
       setIsSubmittingProposalPending(false);
     }
+  };
+
+  const voteProposal = async ({ proposalId, option }: { proposalId: string, option: VoteOption }) => {
+    setIsVotingProposalPending(true);
+    const stargateClient = await getSigningStargateClient();
+    if (!stargateClient || !address) {
+      console.error('stargateClient undefined or address undefined.');
+      return;
+    }
+  
+    const { vote } = cosmos.gov.v1beta1.MessageComposer.withTypeUrl;
+  
+    const msg = vote({
+      proposalId: Long.fromString(proposalId),
+      voter: address,
+      option: option,
+    });
+  
+    const fee: StdFee = {
+      amount: [
+        {
+          denom: coin.base,
+          amount: '1000',
+        },
+      ],
+      gas: '200000',
+    };
+  
+    try {
+      const response = await stargateClient.signAndBroadcast(address, [msg], fee);
+      if (response.code === 0) {
+        showSuccessToast(`Proposal vote result: ${response.rawLog}`);
+      } else {
+        showErrorToast(`Failed to vote on proposal. Code: ${response.code}`);
+      }
+    } catch (error) {
+      showErrorToast(`Failed to vote on proposal. Error: ${error}`);
+    }
+    setIsVotingProposalPending(false);
   };
 
   useEffect(() => {
@@ -405,11 +454,13 @@ export const useAxonePayments = () => {
     isDelegatingPending: state.isDelegatingPending,
     isClaimingRewardsPending: state.isClaimingRewardsPending,
     isSubmittingProposalPending: state.isSubmittingProposalPending,
+    isVotingProposalPending: state.isVotingProposalPending,
     makeTransaction,
     delegateToValidator,
     unbondFromValidator,
     claimRewards,
     claimAllDelegatorsRewards,
     submitProposal,
+    voteProposal
   }));
 };

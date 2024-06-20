@@ -87,7 +87,7 @@ const ProposalOverviewBlock = () => {
         <Button
           variant='rounded'
           className='w-full lg:w-auto px-12'
-          onClick={() => openVoteProposalModal({ proposalTitle: data?.proposal.title || '' })}
+          onClick={() => openVoteProposalModal({ proposalTitle: data?.proposal.title || '', proposalId: data?.proposal.id || '' })}
         >
           {t('Vote')}
         </Button>
