@@ -11,7 +11,7 @@ import { chainName } from '@/core/chain';
 const ModalProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [openTerms, setOpenTerms] = useState<boolean>(false);
   const [delegationData, setDelegationData] = useState<DelegateModalOpenProps>({});
-  const [proposalData, setProposalData] = useState<VoteModalData>({ proposalTitle: '' });
+  const [proposalData, setProposalData] = useState<VoteModalData>({ proposalTitle: '', proposalId: '' });
   const [isDelegateOpen, setDelegateOpen] = useState<boolean>(false);
   const [isRewardsCalculatorOpen, setRewardsCalculatorOpen] = useState<boolean>(false);
   const [isVoteProposalOpen, setVoteProposalOpen] = useState<boolean>(false);

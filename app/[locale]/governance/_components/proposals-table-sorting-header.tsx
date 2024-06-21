@@ -47,7 +47,7 @@ const FilterButton: FC<FilterButtonProps> = ({
       {tooltip ? <AxoneTooltip iconColor='text-axone-khaki' content={tooltipText} /> : null}
       <ArrowDownLong
         className={cn('relative bottom-[0px]', { 'rotate-180': active && selected })}
-        fill={ selected ? '#ffffff' : '#66777E'}
+        fill={ selected ? '#FB9501' : '#66777E'}
       />
     </div>
   );

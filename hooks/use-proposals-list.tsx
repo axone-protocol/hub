@@ -89,10 +89,11 @@ export const useProposalsList = () => {
     queryFn: () => getProposalsListFn(baseUrl),
   });
 
+  const allCount: CountType = query.data?.proposals.length;
+
   const passedCount: CountType = query.data?.proposals.filter(proposal => proposal.status === ProposalStatus.PASSED).length;
 
   const rejectedCount: CountType = query.data?.proposals.filter(proposal => proposal.status === ProposalStatus.REJECTED).length;
-
 
   let filteredData;
   if (proposalStatus === ProposalStatus.ALL) {
@@ -134,6 +135,7 @@ export const useProposalsList = () => {
     sortBy,
     setSortBy,
     order,
-    setOrder
+    setOrder,
+    allCount
   };
 };
