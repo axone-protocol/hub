@@ -14,13 +14,13 @@ type TermsModalProps = {
 };
 
 // !IMPORTANT: Increment the version number when the terms are updated
-export const TERMS_VERSION = '1.0.0';
+export const TERMS_VERSION = '1.0.1';
 
 const TermsModal: FC<TermsModalProps> = ({ open, setOpen, openWalletModal }) => {
   const t  = useTranslations('Dashboard');
 
   const acceptTerms = async () => {
-    localStorage.setItem(TERMS_VERSION, TERMS_VERSION);
+    localStorage.setItem('termsVersion', TERMS_VERSION);
     await cancel();
     openWalletModal();
   };

@@ -119,4 +119,4 @@ const chain: Chain = {
   },
 };
 
-export { chain, chainName, chainRPC, chanREST, assetList };
+export { chain, chainName, chainRPC, chanREST, assetList, okp4Chain };

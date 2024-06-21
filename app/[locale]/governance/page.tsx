@@ -29,6 +29,8 @@ export default function Governance () {
     router.push(`/${locale}/governance/new-proposal`);
   };
 
+  const goToDiscussionForum = () => window.open('https://github.com/axone-protocol/community/discussions/categories/governance-proposals', '_blank');
+
   return (
     <PageContainer>
       <div className='flex w-full lg:flex-row lg:w-full mobile:flex-col p-6'>
@@ -38,7 +40,10 @@ export default function Governance () {
               <Title className='mr-10'>
                 {t('Governance')}
               </Title>
-              <ButtonWithIcon variant={'noBorder'}>
+              <ButtonWithIcon
+                onClick={goToDiscussionForum}
+                variant={'noBorder'}
+              >
                 {t('DiscussionForum')}
               </ButtonWithIcon>
             </div>

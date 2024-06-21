@@ -7,6 +7,7 @@ import { ConfirmTransactionModal } from '@/components/ui/modals/confirm-transact
 import { VoteProposalModal } from '@/components/ui/modals/vote-proposal/vote-proposal-modal';
 import { DelegateModalOpenProps, ModalContext, VoteModalData } from '@/context';
 import { chainName } from '@/core/chain';
+import { suggestTestNetToKeplr } from '@/lib/utils';
 
 const ModalProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [openTerms, setOpenTerms] = useState<boolean>(false);
@@ -20,7 +21,7 @@ const ModalProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const { openView, disconnect, isWalletConnected } = useChain(chainName);
 
   useEffect(() => {
-    const termsAccepted = localStorage.getItem(TERMS_VERSION);
+    const termsAccepted = localStorage.getItem('termsVersion');
     if (termsAccepted !== TERMS_VERSION) {
       disconnect();
       setOpenTerms(true);
@@ -28,8 +29,9 @@ const ModalProvider: React.FC<PropsWithChildren> = ({ children }) => {
   }, [disconnect]);
 
   const openConnectWalletModal = useCallback(async () => {
-    const termsAccepted = localStorage.getItem(TERMS_VERSION);
+    const termsAccepted = localStorage.getItem('termsVersion');
     if (termsAccepted === TERMS_VERSION) {
+      suggestTestNetToKeplr();
       openView();
     } else {
       setOpenTerms(true);
@@ -76,7 +78,7 @@ const ModalProvider: React.FC<PropsWithChildren> = ({ children }) => {
       proposalData
     }}>
       {children}
-      <TermsModal open={openTerms} setOpen={setOpenTerms} openWalletModal={openView} />
+      <TermsModal open={openTerms} setOpen={setOpenTerms} openWalletModal={openConnectWalletModal} />
       <DelegateModal delegationData={delegationData} isOpen={isDelegateOpen} setOpen={onDelegateModalClose} />
       <RewardsCalculatorModal isOpen={isRewardsCalculatorOpen} setOpen={setRewardsCalculatorOpen} />
       <VoteProposalModal proposalData={proposalData} isOpen={isVoteProposalOpen} setOpen={setVoteProposalOpen} />

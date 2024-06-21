@@ -18,7 +18,7 @@ import Spinner from '@/components/ui/spinner';
 import { Textarea } from '@/components/ui/textarea';
 import { chainName } from '@/core/chain';
 import { useAxonePayments } from '@/hooks/wallet/use-axone-payments';
-import { cn } from '@/lib/utils';
+import { cn, DEFAULT_TOKEN_DENOM } from '@/lib/utils';
 
 
 export default function NewProposal () {
@@ -33,7 +33,7 @@ export default function NewProposal () {
     description: z.string().min(10, 'Description is required'),
     amount: z.coerce.number()
       .refine(value => !isNaN(value) && value >= 1 && value <= balance.toNumber(), {
-        message: `Amount must be a valid number between 1 and ${balance.toNumber()} KNOW`,
+        message: `Amount must be a valid number between 1 and ${balance.toNumber()} ${DEFAULT_TOKEN_DENOM}`,
       }),
   });
 
@@ -148,7 +148,7 @@ export default function NewProposal () {
                   isRequired={true}
                   type='number'
                   id='amount'
-                  placeholder={'Enter Amount in KNOW'}
+                  placeholder={'Enter Amount in ' + DEFAULT_TOKEN_DENOM}
                   {...register('amount')}
                 />
                 {errors.amount && <p className='text-[12px] text-axone-red'>{`${errors.amount.message}`}</p>}

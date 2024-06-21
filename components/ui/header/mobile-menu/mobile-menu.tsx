@@ -1,5 +1,5 @@
 'use client';
-import { Languages, Moon, PanelsTopLeft, Wallet, X } from 'lucide-react';
+import { Languages, PanelsTopLeft, Wallet, X } from 'lucide-react';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
@@ -7,7 +7,9 @@ import { useLocale, useTranslations } from 'next-intl';
 import { FC, ReactNode } from 'react';
 import { Text } from '@/components/typography';
 import LogoDarkMobile from '@/components/ui/logo-dark-mobile';
-import { cn } from '@/lib/utils';
+import { cn, EXPLORE_URL, GET_STARTED_URL, openInNewTab } from '@/lib/utils';
+import { Button } from '../../button';
+import { SidebarWelcomeAxoneBox } from '../../sidebar-welcome-box';
 
 type MobileMenuModalProps = {
   isOpen: boolean;
@@ -123,7 +125,21 @@ const MobileMenuModal: FC<MobileMenuModalProps> = ({ isOpen,close }) => {
           </div>
         </div>
 
-        <div className='py-6 border-b-2 border-axone-box-border'>
+        <div className='px-5'>
+          <SidebarWelcomeAxoneBox handleClick={openInNewTab(GET_STARTED_URL)} />
+        </div>
+
+        <div className='px-5'>
+          <Button
+            className='w-full font-bold'
+            variant={'rounded'}
+            onClick={openInNewTab(EXPLORE_URL)}
+          >
+            {t('Explore')}
+          </Button>
+        </div>
+
+        {/* <div className='py-6 border-b-2 border-axone-box-border'>
           <div className='flex items-center text-axone-khaki'>
             <Moon width={20} height={20} className='mr-4' />
             <Text className='mb-0 text-axone-khaki'>{t('Modes')}</Text>
@@ -132,7 +148,7 @@ const MobileMenuModal: FC<MobileMenuModalProps> = ({ isOpen,close }) => {
             <MobileMenuItem className={'text-white'}  close={closeAfterNav}>{t('Dark')}</MobileMenuItem>
             <MobileMenuItem  close={closeAfterNav}>{t('Light')}</MobileMenuItem>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

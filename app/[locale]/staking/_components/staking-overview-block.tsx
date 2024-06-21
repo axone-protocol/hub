@@ -13,6 +13,7 @@ import { chainName } from '@/core/chain';
 import { useMyStakingOverview } from '@/hooks/use-my-staking-overview';
 import { useTokenInfo } from '@/hooks/use-token-info';
 import { useAxonePayments } from '@/hooks/wallet/use-axone-payments';
+import { DEFAULT_TOKEN_DENOM } from '@/lib/utils';
 import { StakingLoadingSkeleton } from './staking-loading-skeleton';
 
 const StakingOverviewBlock = () => {
@@ -101,7 +102,7 @@ const StakingOverviewBlock = () => {
             {t('YourStakedAmount')}
           </Text>
           <Title className='mb-0'>
-            {stakeAmount.toFixed(3) || '0.00'} KNOW
+            {stakeAmount.toFixed(3) || '0.00'} {DEFAULT_TOKEN_DENOM}
           </Title>
           <Text className='text-axone-khaki mb-0'>
               ${myStakedAmountInFiat.toFixed(3)}
@@ -113,7 +114,7 @@ const StakingOverviewBlock = () => {
             {t('ClaimableRewards')}
           </Text>
           <Title className='mb-0'>
-            {claimableRewards} KNOW
+            {claimableRewards} {DEFAULT_TOKEN_DENOM}
           </Title>
           <Row className='justify-between items-center'>
             <Text className='text-axone-khaki mb-0'>
@@ -129,7 +130,7 @@ const StakingOverviewBlock = () => {
           <Text className='text-axone-khaki mb-0'>
             {t('AvailableAXONEinWallet')}
           </Text>
-          <Title className='mb-0'>{balance.toNumber().toFixed(3)} KNOW</Title>
+          <Title className='mb-0'>{balance.toNumber().toFixed(3)} {DEFAULT_TOKEN_DENOM}</Title>
           <Text className='text-axone-khaki mb-0'>
               ${myBallanceInFiat.toFixed(2)}
           </Text>

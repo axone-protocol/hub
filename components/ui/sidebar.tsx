@@ -3,12 +3,12 @@ import { useChain } from '@cosmos-kit/react-lite';
 import { useLocale, useTranslations } from 'next-intl';
 import { useModal } from '@/context';
 import { chainName } from '@/core/chain';
-import { cn } from '@/lib/utils';
+import { cn, EXPLORE_URL, GET_STARTED_URL, openInNewTab } from '@/lib/utils';
 import { Button } from './button';
 import Column from './column';
 import LogoDark from './logo-dark';
 import SidebarNavItem from './sidebar-nav-item';
-import SidebarWelcomeAxoneBox from './sidebar-welcome-box';
+import { SidebarWelcomeAxoneBox } from './sidebar-welcome-box';
 
 const WIDTH = 'w-64';
 
@@ -34,10 +34,14 @@ const Sidebar = () => {
         <SidebarNavItem title={t('FAQ')} href={`/${locale}/faq`} />
 
         {/* Welcome block */}
-        <SidebarWelcomeAxoneBox />
+        <SidebarWelcomeAxoneBox handleClick={openInNewTab(GET_STARTED_URL)} />
 
         <div className='px-5'>
-          <Button className='w-full font-bold' variant={'rounded'}>
+          <Button
+            className='w-full font-bold'
+            variant={'rounded'}
+            onClick={openInNewTab(EXPLORE_URL)}
+          >
             {t('Explore')}
           </Button>
         </div>
