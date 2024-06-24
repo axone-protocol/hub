@@ -14,6 +14,8 @@ import Row from '@/components/ui/row';
 import { DelegateModalOpenProps } from '@/context';
 import { useValidatorStore } from '@/hooks/use-single-validator-info';
 import { useAxonePayments } from '@/hooks/wallet/use-axone-payments';
+import { cn } from '@/lib/utils';
+import Spinner from '../../spinner';
 
 type DelegateModalProps = {
   isOpen: boolean;
@@ -23,7 +25,7 @@ type DelegateModalProps = {
 
 const DelegateModal = ({ isOpen, setOpen, delegationData }: DelegateModalProps) => {
   const t = useTranslations('Staking');
-  const { balance, delegateToValidator, isTransactionPending } = useAxonePayments();
+  const { balance, delegateToValidator, isDelegatingPending } = useAxonePayments();
   const validatorData = useValidatorStore((state) => state.validatorData);
 
   const formSchema = z.object({
@@ -50,6 +52,11 @@ const DelegateModal = ({ isOpen, setOpen, delegationData }: DelegateModalProps) 
   return (
     <Dialog open={isOpen} onOpenChange={setOpen}>
       <DialogContent className='text-white w-[85%] lg:w-1/3 max-h-3/4 p-10'>
+        <div className={cn('hidden', {
+          'flex absolute top-0 bottom-0 left-0 right-0 justify-center items-center bg-axone-bg-dark opacity-75 ': isDelegatingPending
+        })}>
+          <Spinner />
+        </div>
         <DialogHeader>
           <DialogTitle className='text-left text-20'>{t('DelegateTo')} { delegationData.validatorName || validatorData?.description.moniker || '' }</DialogTitle>
         </DialogHeader>
@@ -66,7 +73,7 @@ const DelegateModal = ({ isOpen, setOpen, delegationData }: DelegateModalProps) 
             <div className='relative'>
               <Input
                 className='pr-16'
-                disabled={isTransactionPending}
+                disabled={isDelegatingPending}
                 type='number'
                 id='amount'
                 placeholder={t('EnterYourAmountToBeDelegated')}
@@ -76,8 +83,8 @@ const DelegateModal = ({ isOpen, setOpen, delegationData }: DelegateModalProps) 
               <Text className='uppercase absolute right-2.5 top-2.5 bottom-0'>Axone</Text>
             </div>
           </div>
-          <Button disabled={isTransactionPending} onClick={onDelegate} className='w-full' variant={'rounded'}>
-            {isTransactionPending ? t('Delegating') : t('Delegate')}
+          <Button disabled={isDelegatingPending} onClick={onDelegate} className='w-full' variant={'rounded'}>
+            {isDelegatingPending ? t('Delegating') : t('Delegate')}
           </Button>
         </div>
       </DialogContent>

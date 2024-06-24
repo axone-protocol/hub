@@ -1,5 +1,5 @@
 import { useTranslations } from 'next-intl';
-import { memo } from 'react';
+import { FC } from 'react';
 import { Title } from '@/components/typography';
 import { ButtonWithIcon } from './button-with-icon';
 import Column from './column';
@@ -7,22 +7,27 @@ import Column from './column';
 const WIDTH = 206;
 const HEIGHT = 140;
 
-const SidebarWelcomeAxoneBox = () => {
+type SidebarWelcomeAxoneBoxProps = {
+  handleClick: () => void;
+};
+
+const SidebarWelcomeAxoneBox: FC<SidebarWelcomeAxoneBoxProps> = ({ handleClick }) => {
   const t = useTranslations('Index');
 
   return (
-    <Column className={`w-[${WIDTH}px] relative rounded-lg bg-axone-light-blue p-5 m-5 mt-8`}>
-      <Title className='mb-0 z-10'>{t('JoinThe')}</Title>
-      <Title className='mb-0 z-10'>{t('Axone')}</Title>
-      <Title className='mb-0 z-10'>{t('Ecosystem')}!</Title>
+    <Column className={'w-full lg:w-52 relative rounded-lg bg-axone-light-blue p-5 my-8 lg:ml-5'}>
+      <Title className='mb-0 z-10 cursor-pointer'>{t('JoinThe')}</Title>
+      <Title className='mb-0 z-10 cursor-pointer'>{t('Axone')}</Title>
+      <Title className='mb-0 z-10 cursor-pointer'>{t('Ecosystem')}!</Title>
       <ButtonWithIcon
         variant={'link'}
         className='uppercase font-bold px-0 pb-0 justify-start z-10 text-axone-dark-blue-2'
         iconClassName='text-axone-dark-blue-2 w-5 h-5'
+        onClick={handleClick}
       >
         {t('GetStarted')}
       </ButtonWithIcon>
-      <svg className='absolute top-0 left-0' width={WIDTH} height={HEIGHT} viewBox={`0 0 ${WIDTH} ${HEIGHT}`} fill='none' xmlns='http://www.w3.org/2000/svg'>
+      <svg className='absolute top-0 right-0 lg:left-0' width={WIDTH} height={HEIGHT} viewBox={`0 0 ${WIDTH} ${HEIGHT}`} fill='none' xmlns='http://www.w3.org/2000/svg'>
         <g clipPath='url(#clip0_317_1974)'>
           <rect width={WIDTH} height={HEIGHT} rx='20' fill='#D8FAFF'/>
           <g opacity='0.1'>
@@ -66,4 +71,4 @@ const SidebarWelcomeAxoneBox = () => {
   );
 };
 
-export default memo<typeof SidebarWelcomeAxoneBox>(SidebarWelcomeAxoneBox);
+export  { SidebarWelcomeAxoneBox };

@@ -48,7 +48,6 @@ const ConnectWallet: FC<ConnectWalletProps> = ({ openMobileMenu = () => null }) 
   const { openConnectWalletModal } = useModal();
 
   const logo: string = getWalletLogo(mainWallet);
-
   useEffect(() => {
     let timeoutId: number;
     if (isWalletError) {

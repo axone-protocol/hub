@@ -4,7 +4,7 @@ import { Text, Title } from '@/components/typography';
 import { Box, BoxInner } from '@/components/ui/boxes';
 import Row from '@/components/ui/row';
 import { useStakingOverview } from '@/hooks/use-staking-overview';
-import { formatNumberToLocale } from '@/lib/utils';
+import { DEFAULT_TOKEN_DENOM, formatNumberToLocale } from '@/lib/utils';
 import { StakingLoadingSkeleton } from './staking-loading-skeleton';
 
 const StakingBlock = () => {
@@ -41,7 +41,7 @@ const StakingBlock = () => {
         <BoxInner className='py-5 w-full lg:w-1/4 h-32 flex-col justify-between items-center px-6'>
           <div className='flex flex-col items-end'>
             <Title className='mt-2 mb-0 uppercase'>{totalStaked}</Title>
-            <span className='text-axone-khaki uppercase'>know</span>
+            <span className='text-axone-khaki uppercase'>{DEFAULT_TOKEN_DENOM}</span>
           </div>
           <Text className='text-axone-khaki mb-0 uppercase'>
             {t('TotalStaked')}

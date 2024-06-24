@@ -16,7 +16,7 @@ import Row from '@/components/ui/row';
 import { Select, SelectContent, SelectGroup, SelectIcon, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import Spinner from '@/components/ui/spinner';
 import { useAxonePayments } from '@/hooks/wallet/use-axone-payments';
-import { cn } from '@/lib/utils';
+import { cn, DEFAULT_TOKEN_DENOM } from '@/lib/utils';
 
 const TransferBlock = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -75,7 +75,7 @@ const TransferBlock = () => {
           </Text>
           <AxoneTooltip content='Your available amount to transfer to a different address on Axone' />
         </Row>
-        <Text className='uppercase'>{isFetchingBalance ? '0.00' : balance.toNumber().toFixed(2)} KNOW</Text>
+        <Text className='uppercase'>{isFetchingBalance ? '0.00' : balance.toNumber().toFixed(2)} {DEFAULT_TOKEN_DENOM}</Text>
       </Column>
       <form onSubmit={onConfirm} className='flex flex-col gap-6'>
         <div className='flex flex-col'>
@@ -91,7 +91,7 @@ const TransferBlock = () => {
             </SelectTrigger>
             <SelectContent className='shadow-lg'>
               <SelectGroup>
-                <SelectItem value='axone'>AXONE</SelectItem>
+                <SelectItem value='axone'>{DEFAULT_TOKEN_DENOM}</SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>

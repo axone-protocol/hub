@@ -1,10 +1,33 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { type ClassValue, clsx } from 'clsx';
 import { differenceInSeconds, format, formatDistanceToNow, parseISO } from 'date-fns';
 import { twMerge } from 'tailwind-merge';
+import { okp4Chain } from '@/core/chain';
+
+export const EXPLORE_URL = 'https://docs.axone.xyz';
+export const GET_STARTED_URL = 'https://axone.xyz';
+
+export const DEFAULT_TOKEN_DENOM = 'AXONE';
 
 export function cn (...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
+
+export const suggestTestNetToKeplr = () => {
+  // @ts-expect-error
+  if (window.keplr) {
+    // @ts-expect-error
+    window.keplr.experimentalSuggestChain(okp4Chain)
+      .then(() => {
+        console.log('Chain suggested successfully');
+      })
+      .catch(() => {
+        console.error('Failed to suggest the chain');
+      });
+  } else {
+    console.error('Keplr is not installed');
+  }
+};
 
 export function formatChartDate (unixTime: number) {
   const date = new Date(unixTime * 1000);
@@ -31,7 +54,7 @@ export function formatNumber (num: number | undefined): string {
 
   const integerPart: number = Math.floor(value);
   const decimalPart: string = (value - integerPart).toFixed(2).slice(2);
-  return `${integerPart.toLocaleString('de-DE')}.${decimalPart}${suffix}`;
+  return `${integerPart.toLocaleString('en-US')}.${decimalPart}${suffix}`;
 }
 
 export function formatTimestamp (timestamp: string): string {
@@ -61,3 +84,5 @@ export const formatNumberToLocale = (num: number | undefined): string => {
   }
   return num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 };
+
+export const openInNewTab = (url: string) => () => window.open(url, '_blank');
