@@ -1,4 +1,6 @@
+'use client';
 import { NameType, Payload, ValueType } from 'recharts/types/component/DefaultTooltipContent';
+import { useCurrencyStore } from '@/hooks/use-currencies';
 import Row from '../row';
 
 type TooltipProps = {
@@ -14,14 +16,16 @@ type TooltipProps = {
  * Represents the tooltip in the chart
  */
 const ChartTooltip = ({ active, payload, formattedDate, type = 'overview' }: TooltipProps) => {
-  const value = payload?.[0]?.value;
+  const exchangeRate = useCurrencyStore((state) => state.exchangeRate);
+  const currencySign = useCurrencyStore((state) => state.currencySign);
+  const value = payload?.[0]?.value || 0;
   if (active && payload && payload.length && type === 'overview') {
     return (
       <div className='bg-axone-dark-blue rounded-md p-1 custom-tooltip'>
         <p className='rounded-t-md p-2 bg-axone-bg-dark mb-2'>{formattedDate}</p>
         <Row className='px-4'>
           <div className='w-5 h-5 bg-axone-orange rounded-full' />
-          <p className='text-axone-white ml-2'><span className='text-axone-khaki'>Price:</span> ${value}</p>
+          <p className='text-axone-white ml-2'><span className='text-axone-khaki'>Price:</span> {currencySign}{Number(value) * exchangeRate}</p>
         </Row>
         <Row className='px-4 mb-4'>
           <div className='w-5 h-5 bg-axone-dark-blue rounded-full' />
