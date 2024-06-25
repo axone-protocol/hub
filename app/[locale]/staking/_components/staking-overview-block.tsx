@@ -10,6 +10,7 @@ import LogoDarkMobile from '@/components/ui/logo-dark-mobile';
 import Row from '@/components/ui/row';
 import { useModal } from '@/context';
 import { chainName } from '@/core/chain';
+import { useCurrencyStore } from '@/hooks/use-currencies';
 import { useMyStakingOverview } from '@/hooks/use-my-staking-overview';
 import { useTokenInfo } from '@/hooks/use-token-info';
 import { useAxonePayments } from '@/hooks/wallet/use-axone-payments';
@@ -18,6 +19,8 @@ import { StakingLoadingSkeleton } from './staking-loading-skeleton';
 
 const StakingOverviewBlock = () => {
   const t = useTranslations('Staking');
+  const exchangeRate = useCurrencyStore((state) => state.exchangeRate);
+  const currencySign = useCurrencyStore((state) => state.currencySign);
   const { data, isLoading, isFetching, isPending, isRefetching } = useMyStakingOverview();
   const { isWalletConnected } = useChain(chainName);
   const { openConnectWalletModal } = useModal();
@@ -31,6 +34,7 @@ const StakingOverviewBlock = () => {
     }
     return Number(data.stakedAmount)/1000000;
   }, [data]);
+
   const claimableRewards = useMemo(() => {
     if (!data || Object.keys(data).length === 0 ||  isNaN(Number(data.stakedAmount))) {
       return 0;
@@ -43,24 +47,28 @@ const StakingOverviewBlock = () => {
       return 0;
     }
 
-    return balance.toNumber() * tokenInfo.price.value;
-  }, [balance, tokenInfo]);
+    const tokenPrice = tokenInfo.price.value * exchangeRate;
+
+    return (balance.toNumber() * tokenPrice).toFixed(2);
+  }, [balance, exchangeRate, tokenInfo]);
 
   const myStakedAmountInFiat = useMemo(() => {
     if (!tokenInfo) {
       return 0;
     }
+    const tokenPrice = tokenInfo.price.value * exchangeRate;
 
-    return stakeAmount * tokenInfo.price.value;
-  }, [stakeAmount, tokenInfo]);
+    return (stakeAmount * tokenPrice).toFixed(2);
+  }, [exchangeRate, stakeAmount, tokenInfo]);
 
   const myClaimableRewardsInFiat = useMemo(() => {
     if (!tokenInfo) {
       return 0;
     }
+    const tokenPrice = tokenInfo.price.value * exchangeRate;
 
-    return (claimableRewards * tokenInfo.price.value).toFixed(2);
-  }, [claimableRewards, tokenInfo]);
+    return (claimableRewards * tokenPrice).toFixed(2);
+  }, [claimableRewards, exchangeRate, tokenInfo]);
 
   if (!isWalletConnected) {
     return (
@@ -105,7 +113,7 @@ const StakingOverviewBlock = () => {
             {stakeAmount.toFixed(3) || '0.00'} {DEFAULT_TOKEN_DENOM}
           </Title>
           <Text className='text-axone-khaki mb-0'>
-              ${myStakedAmountInFiat.toFixed(3)}
+            {currencySign}{myStakedAmountInFiat}
           </Text>
         </BoxInner>
 
@@ -118,7 +126,7 @@ const StakingOverviewBlock = () => {
           </Title>
           <Row className='justify-between items-center'>
             <Text className='text-axone-khaki mb-0'>
-              ${myClaimableRewardsInFiat}
+              {currencySign}{myClaimableRewardsInFiat}
             </Text>
             <Button onClick={claimAllDelegatorsRewards} variant={'link'} className='mb-0 p-0 text-axone-orange h-auto'>
               {t('ClaimAll')}
@@ -132,7 +140,7 @@ const StakingOverviewBlock = () => {
           </Text>
           <Title className='mb-0'>{balance.toNumber().toFixed(3)} {DEFAULT_TOKEN_DENOM}</Title>
           <Text className='text-axone-khaki mb-0'>
-              ${myBallanceInFiat.toFixed(2)}
+            {currencySign}{myBallanceInFiat}
           </Text>
         </BoxInner>
 

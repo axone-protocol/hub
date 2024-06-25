@@ -93,6 +93,10 @@ export const useProposalsList = () => {
 
   const passedCount: CountType = query.data?.proposals.filter(proposal => proposal.status === ProposalStatus.PASSED).length;
 
+  const votingCount: CountType = query.data?.proposals.filter(proposal => proposal.status === ProposalStatus.VOTING_PERIOD).length;
+
+  const depositCount: CountType = query.data?.proposals.filter(proposal => proposal.status === ProposalStatus.DEPOSIT_PERIOD).length;
+
   const rejectedCount: CountType = query.data?.proposals.filter(proposal => proposal.status === ProposalStatus.REJECTED).length;
 
   let filteredData;
@@ -136,6 +140,8 @@ export const useProposalsList = () => {
     setSortBy,
     order,
     setOrder,
-    allCount
+    allCount,
+    votingCount,
+    depositCount,
   };
 };

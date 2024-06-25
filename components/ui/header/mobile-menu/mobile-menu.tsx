@@ -7,6 +7,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { FC, ReactNode } from 'react';
 import { Text } from '@/components/typography';
 import LogoDarkMobile from '@/components/ui/logo-dark-mobile';
+import { CurrencyEnum, useCurrency, useCurrencyStore } from '@/hooks/use-currencies';
 import { cn, EXPLORE_URL, GET_STARTED_URL, openInNewTab } from '@/lib/utils';
 import { Button } from '../../button';
 import { SidebarWelcomeAxoneBox } from '../../sidebar-welcome-box';
@@ -20,7 +21,7 @@ type MobileMenuItemProps = {
   navItem?: boolean;
   href?: string;
   onPress?: () => void;
-  close: () => void;
+  close?: () => void;
   className?: string;
   children: ReactNode;
 };
@@ -56,6 +57,9 @@ const MobileMenuModal: FC<MobileMenuModalProps> = ({ isOpen,close }) => {
   const localeActive: string = useLocale();
   const path: string = usePathname();
   const t = useTranslations('Index');
+  useCurrency();
+  const currencySelected = useCurrencyStore((state) => state.currencySelected);
+  const setCurrencySelected = useCurrencyStore((state) => state.setCurrencySelected);
 
 
   const onLanguageChange = (value: string) => () => router.replace(`/${value}${path.replace(`/${localeActive}`, '/')}`);
@@ -63,7 +67,12 @@ const MobileMenuModal: FC<MobileMenuModalProps> = ({ isOpen,close }) => {
   const closeAfterNav = (): void => {
     setTimeout(() => {
       close();
-    }, 800);
+    }, 700);
+  };
+
+  const setCurrency = (value: CurrencyEnum) => () => {
+    setCurrencySelected(value);
+    closeAfterNav();
   };
 
   return(
@@ -105,8 +114,18 @@ const MobileMenuModal: FC<MobileMenuModalProps> = ({ isOpen,close }) => {
             <Text className='mb-0 text-axone-khaki uppercase'>{t('Funds')}</Text>
           </div>
           <div className='flex flex-col pl-10 mt-3'>
-            <MobileMenuItem className={'text-white'}  close={closeAfterNav}>USD</MobileMenuItem>
-            <MobileMenuItem  close={closeAfterNav}>EUR</MobileMenuItem>
+            <MobileMenuItem
+              className={cn({ 'text-white': currencySelected === CurrencyEnum.USD })}
+              onPress={setCurrency(CurrencyEnum.USD)}
+            >
+              USD
+            </MobileMenuItem>
+            <MobileMenuItem
+              className={cn({ 'text-white': currencySelected === CurrencyEnum.EUR })}
+              onPress={setCurrency(CurrencyEnum.EUR)}
+            >
+              EUR
+            </MobileMenuItem>
           </div>
         </div>
 

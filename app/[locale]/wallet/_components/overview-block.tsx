@@ -4,12 +4,15 @@ import { useMemo } from 'react';
 import { Text, Title } from '@/components/typography';
 import { Box, BoxInner } from '@/components/ui/boxes';
 import Row from '@/components/ui/row';
+import { useCurrencyStore } from '@/hooks/use-currencies';
 import { useMyStakingOverview } from '@/hooks/use-my-staking-overview';
 import { useTokenInfo } from '@/hooks/use-token-info';
 import { useAxonePayments } from '@/hooks/wallet/use-axone-payments';
 import { DEFAULT_TOKEN_DENOM } from '@/lib/utils';
 
 const OverviewBlock = () => {
+  const exchangeRate = useCurrencyStore((state) => state.exchangeRate);
+  const currencySign = useCurrencyStore((state) => state.currencySign);
   const { balance, isFetchingBalance } = useAxonePayments();
   const { data: tokenInfo } = useTokenInfo();
   const { data: stakingOverview } = useMyStakingOverview();
@@ -26,17 +29,19 @@ const OverviewBlock = () => {
     if (!tokenInfo) {
       return 0;
     }
+    const tokenPrice = tokenInfo.price.value * exchangeRate;
 
-    return balance.toNumber() * tokenInfo.price.value;
-  }, [balance, tokenInfo]);
+    return balance.toNumber() * tokenPrice;
+  }, [balance, exchangeRate, tokenInfo]);
 
   const myStakedAmountInFiat = useMemo(() => {
     if (!tokenInfo) {
       return 0;
     }
+    const tokenPrice = tokenInfo.price.value * exchangeRate;
 
-    return stakeAmount * tokenInfo.price.value;
-  }, [stakeAmount, tokenInfo]);
+    return stakeAmount * tokenPrice;
+  }, [exchangeRate, stakeAmount, tokenInfo]);
 
   return (
     <Box className='w-full m-0 lg:mx-0 lg:mt-0 lg:mb-0'>
@@ -51,7 +56,7 @@ const OverviewBlock = () => {
             {isFetchingBalance ? '0.00' : balance.toNumber().toFixed(3)} {DEFAULT_TOKEN_DENOM}
           </Title>
           <Text className='uppercase text-axone-orange'>
-              ${myBallanceInFiat.toFixed(2)}
+            {currencySign}{myBallanceInFiat.toFixed(2)}
           </Text>
           <Text className='uppercase text-axone-khaki'>
             {t('MyBalance')}
@@ -62,7 +67,7 @@ const OverviewBlock = () => {
             {stakeAmount.toFixed(3)} {DEFAULT_TOKEN_DENOM}
           </Title>
           <Text className='uppercase text-axone-orange'>
-              ${myStakedAmountInFiat.toFixed(2)}
+            {currencySign}{myStakedAmountInFiat.toFixed(2)}
           </Text>
           <Text className='uppercase text-axone-khaki'>
             {t('MyStakedAmount')}

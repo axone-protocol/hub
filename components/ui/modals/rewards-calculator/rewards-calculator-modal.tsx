@@ -8,6 +8,7 @@ import Column from '@/components/ui/column';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import Row from '@/components/ui/row';
+import { useCurrencyStore } from '@/hooks/use-currencies';
 import { useTokenInfo } from '@/hooks/use-token-info';
 
 type RewardsCalculatorModalProps = {
@@ -26,6 +27,8 @@ const RewardsCalculatorModal: FC<RewardsCalculatorModalProps> = ({ isOpen, setOp
   const [monthly, setMonthly] = useState<number>(0);
   const [daily, setDaily] = useState<number>(0);
   const { data: tokenInfo } = useTokenInfo();
+  const exchangeRate = useCurrencyStore((state) => state.exchangeRate);
+  const currencySign = useCurrencyStore((state) => state.currencySign);
 
   const handleApplyClick = () => {
     let adjustedStake = Number(stake);
@@ -45,7 +48,7 @@ const RewardsCalculatorModal: FC<RewardsCalculatorModalProps> = ({ isOpen, setOp
 
   const calculateFiatValue = (tokens: number): string => {
     const price = tokenInfo?.price.value || 1;
-    return (tokens * price).toFixed(2);
+    return (tokens * exchangeRate * price).toFixed(2);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -107,7 +110,9 @@ const RewardsCalculatorModal: FC<RewardsCalculatorModalProps> = ({ isOpen, setOp
             <Title className='font-normal text-white'>{t('DailyReturns')}</Title>
             <div className='text-right flex flex-col'>
               <Text className='font-normal text-axone-khaki mb-1'>{daily.toFixed(10)} Axone</Text>
-              <Text className='font-normal text-axone-khaki mb-0'>${calculateFiatValue(daily)}</Text>
+              <Text className='font-normal text-axone-khaki mb-0'>
+                {currencySign}{calculateFiatValue(daily)}
+              </Text>
             </div>
           </Row>
 
@@ -115,7 +120,9 @@ const RewardsCalculatorModal: FC<RewardsCalculatorModalProps> = ({ isOpen, setOp
             <Title className='font-normal text-white'>{t('MonthlyReturns')}</Title>
             <div className='text-right  flex flex-col'>
               <Text className='font-normal text-axone-khaki mb-1'>{monthly.toFixed(10)} Axone</Text>
-              <Text className='font-normal text-axone-khaki mb-0'>${calculateFiatValue(monthly)}</Text>
+              <Text className='font-normal text-axone-khaki mb-0'>
+                {currencySign}{calculateFiatValue(monthly)}
+              </Text>
             </div>
           </Row>
 
@@ -123,7 +130,9 @@ const RewardsCalculatorModal: FC<RewardsCalculatorModalProps> = ({ isOpen, setOp
             <Title className='font-normal text-white'>{t('YearlyReturns')}</Title>
             <div className='text-right flex flex-col'>
               <Text className='font-normal text-axone-khaki mb-1'>{yearly.toFixed(10)} Axone</Text>
-              <Text className='font-normal text-axone-khaki mb-0'>${calculateFiatValue(yearly)}</Text>
+              <Text className='font-normal text-axone-khaki mb-0'>
+                {currencySign}{calculateFiatValue(yearly)}
+              </Text>
             </div>
           </Row>
 

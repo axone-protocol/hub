@@ -25,7 +25,9 @@ const ProposalsListBlock = () => {
     setSortBy,
     order,
     setOrder,
-    allCount
+    allCount,
+    depositCount,
+    votingCount
   } = useProposalsList();
 
   const goToDetails = useCallback((id: string | number) => () => {
@@ -75,22 +77,28 @@ const ProposalsListBlock = () => {
           >
             {t('All')} [{allCount || 0}]
           </p>
-          <p className={cn('mb-0 mr-2 cursor-pointer text-16 text-axone-khaki', { 'text-axone-orange': false })}>
-            {t('Deposit')} [2]
+          <p
+            onClick={filterByStatus(ProposalStatus.DEPOSIT_PERIOD)}
+            className={cn('mb-0 mr-2 cursor-pointer text-16 text-axone-khaki', { 'text-axone-orange': proposalStatus === ProposalStatus.DEPOSIT_PERIOD })}
+          >
+            {t('Deposit')} [{depositCount || 0}]
           </p>
-          <p className={cn('mb-0 mr-2 cursor-pointer text-16 text-axone-khaki', { 'text-axone-orange': false })}>
-            {t('Voting')} [2]
+          <p
+            onClick={filterByStatus(ProposalStatus.VOTING_PERIOD)}
+            className={cn('mb-0 mr-2 cursor-pointer text-16 text-axone-khaki', { 'text-axone-orange': proposalStatus === ProposalStatus.VOTING_PERIOD })}
+          >
+            {t('Voting')} [{votingCount || 0}]
           </p>
           <p
             onClick={filterByStatus(ProposalStatus.PASSED)}
             className={cn('mb-0 mr-2 cursor-pointer text-16 text-axone-khaki', { 'text-axone-orange': proposalStatus === ProposalStatus.PASSED })}>
-            {t('Passed')} [{passedCount}]
+            {t('Passed')} [{passedCount || 0}]
           </p>
           <p
             onClick={filterByStatus(ProposalStatus.REJECTED)}
             className={cn('mb-0 mr-2 cursor-pointer text-16 text-axone-khaki', { 'text-axone-orange':  proposalStatus === ProposalStatus.REJECTED })}
           >
-            {t('Rejected')} [{rejectedCount}]
+            {t('Rejected')} [{rejectedCount || 0}]
           </p>
         </div>
       </div>
