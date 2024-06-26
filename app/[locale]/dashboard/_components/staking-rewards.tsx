@@ -29,7 +29,7 @@ export default function StakingRewardsBlock () {
         </div>
 
         <div className='relative flex items-center justify-center'>
-          <Image src={'/images/blueBg.svg'} className='hidden lg:visible absolute -top-8 -right-8 rounded-lg' alt='bg' width={160} height={160} />
+          <Image src={'/images/blueBg.svg'} className='hidden lg:flex absolute -top-8 -right-8 rounded-lg' alt='bg' width={160} height={160} />
           <Image src={'/images/staking.svg'} alt='Staking Rewards' width={166} height={166} />
           <div className='absolute flex flex-col justify-center items-center'>
             <Text className='text-xl mb-0 text-axone-grey'>APR</Text>

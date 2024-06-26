@@ -8,7 +8,7 @@ type TitleProps = {
 
 const Title = ({ children, className, ...props }: TitleProps) => {
   return (
-    <h1 className={cn('text-lg leading-7 font-semibold subpixel-antialiased', className)} {...props}>
+    <h1 className={cn('text-lg leading-7 subpixel-antialiased', className)} {...props}>
       {children}
     </h1>
   );
