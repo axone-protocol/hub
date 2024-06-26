@@ -16,8 +16,9 @@ const SidebarWelcomeAxoneBox: FC<SidebarWelcomeAxoneBoxProps> = ({ handleClick }
 
   return (
     <Column className={'w-full lg:w-52 relative rounded-lg bg-axone-light-blue p-5 my-8 lg:ml-5'}>
-      <Title className='mb-0 z-10 cursor-pointer'>{t('JoinThe')}</Title>
-      <Title className='mb-0 z-10 cursor-pointer'>{t('Axone')}</Title>
+      <Title className='lg:hidden flex mb-0 z-10 cursor-pointer'>{t('JoinThe')}&nbsp;{t('Axone')}</Title>
+      <Title className='hidden lg:flex mb-0 z-10 cursor-pointer'>{t('JoinThe')}</Title>
+      <Title className='hidden lg:flex mb-0 z-10 cursor-pointer'>{t('Axone')}</Title>
       <Title className='mb-0 z-10 cursor-pointer'>{t('Ecosystem')}!</Title>
       <ButtonWithIcon
         variant={'link'}

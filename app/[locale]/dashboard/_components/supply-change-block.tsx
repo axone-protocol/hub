@@ -1,7 +1,8 @@
 'use client';
+import { formatDistanceToNow } from 'date-fns';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import { FC, useState } from 'react';
+import { FC, useMemo, useState } from 'react';
 import { Text } from '@/components/typography';
 import { Box } from '@/components/ui/boxes';
 import Column from '@/components/ui/column';
@@ -49,11 +50,15 @@ const TimeFrameSelect: FC<TimeFrameSelectProps> = ({ selectRange, range }) => {
 
 export default function SupplyChangeBlock () {
   const t  = useTranslations('Dashboard');
-  const { query: { data, isLoading }, range, selectRange } = useSupplyChange();
+  const { query: { data, isLoading, isFetching, isRefetching }, range, selectRange } = useSupplyChange();
 
-  const formattedNum = formatNumberToLocale(Number(data)/1000000);
+  const formattedChange = formatNumberToLocale(Number(data?.change || 0)/1000000);
+  const formattedBurnt = formatNumberToLocale(Number(data?.burnt || 0)/1000000);
+  const formattedIssued = formatNumberToLocale(Number(data?.issuance || 0)/1000000);
+  const updatedDate = useMemo(() => new Date(data?.time ? data?.time : Date.now()), [data?.time]);
+  const timeAgo = useMemo(() => formatDistanceToNow(updatedDate), [updatedDate]);
 
-  if (isLoading) {
+  if (isLoading || isFetching || isRefetching) {
     return (
       <Box className='m-0 flex flex-col justify-center items-center lg:w-1/2 xl:w-full xl:h-1/2'>
         <Spinner />
@@ -68,19 +73,18 @@ export default function SupplyChangeBlock () {
         <TimeFrameSelect selectRange={selectRange} range={range} />
       </Row>
       <div className='flex flex-col items-end lg:flex-col lg:justify-between'>
-        <p className='text-3xl tracking-tighter text-axone-orange mb-0'>{formattedNum}</p>
+        <p className='text-3xl tracking-tighter text-axone-orange mb-0'>{formattedChange}</p>
         <p className='text-4xl tracking-tighter text-axone-khaki mb-0'>AXONE</p>
       </div>
-      <Row className='justify-between mt-10'>
-        <Column className='justify-end w-auto'>
-          <Text className='text-axone-grey tracking-tighter uppercase mb-0'>Updated 34 seconds ago</Text>
-        </Column>
-
+      <Row className='justify-between mt-4'>
+        <div className='w-0 h-0' />
         <Column className='w-auto'>
           <Row className='justify-between items-start mb-3'>
             <Image className='mr-2' src={'/icons/fire.svg'} alt='Refresh' width={20} height={20} />
             <div className='flex flex-col lg:flex-row'>
-              <Text className='text-axone-grey mb-0'>19.547.04</Text>
+              <Text className='text-axone-grey mb-0'>
+                {formattedBurnt}
+              </Text>
               <Text className='text-axone-grey mb-0  lg:flex lg:justify-between'><Text className='text-axone-khaki mb-0 lg:px-1'>AXONE</Text> Burned</Text>
             </div>
           </Row>
@@ -88,13 +92,18 @@ export default function SupplyChangeBlock () {
           <Row className='justify-between items-start'>
             <Image className='mr-2' src={'/icons/water-drop.svg'} alt='Refresh' width={20} height={20} />
             <div className='flex flex-col lg:flex-row'>
-              <Text className='text-axone-grey mb-0'>19.547.04</Text>
+              <Text className='text-axone-grey mb-0'>
+                {formattedIssued}
+              </Text>
               <Text className='text-axone-grey mb-0 lg:flex lg:justify-between'><Text className='text-axone-khaki mb-0 lg:px-1'>AXONE</Text> Issued</Text>
             </div>
           </Row>
         </Column>
 
       </Row>
+      <Column className='justify-end w-auto'>
+        <Text className='text-axone-grey tracking-tighter uppercase mb-0'>{`Updated ${timeAgo} ago`}</Text>
+      </Column>
     </Box>
   );
 }

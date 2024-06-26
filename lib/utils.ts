@@ -41,20 +41,33 @@ export function formatNumber (num: number | undefined): string {
   if (num === undefined) {
     return '0';
   }
-  let value = num;
+
+  // Handle negative numbers by working with their absolute value and adding the sign back at the end.
+  const sign = num < 0 ? '-' : '';
+  let value = Math.abs(num);
   let suffix = '';
 
-  if (num >= 1e6) {
-    value = num / 1e6;
-    suffix = 'M';
-  } else if (num >= 1e3) {
-    value = num / 1e3;
-    suffix = 'K';
+  if (value >= 1e12) {
+    const trillions = value / 1e12;
+    const roundedTrillions = Math.round(trillions * 100) / 100; // Rounds to two decimal places
+    suffix = 'T'; // Trillions
+    value = roundedTrillions;
+  } else if (value >= 1e9) {
+    value /= 1e9;
+    suffix = 'B'; // Billions
+  } else if (value >= 1e6) {
+    value /= 1e6;
+    suffix = 'M'; // Millions
+  } else if (value >= 1e3) {
+    value /= 1e3;
+    suffix = 'K'; // Thousands
   }
 
-  const integerPart: number = Math.floor(value);
-  const decimalPart: string = (value - integerPart).toFixed(2).slice(2);
-  return `${integerPart.toLocaleString('en-US')}.${decimalPart}${suffix}`;
+  // Improved rounding and formatting
+  const roundedValue = Math.round(value * 100) / 100; // Rounds to two decimal places
+  const formattedValue = roundedValue.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+  return `${sign}${formattedValue}${suffix}`;
 }
 
 export function formatTimestamp (timestamp: string): string {
