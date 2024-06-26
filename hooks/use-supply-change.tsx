@@ -11,12 +11,15 @@ export enum ChangeSupplyRangeEnum {
   MONTH = 'month',
 }
 
-/**
- * Getting data for the supply change
- */
+type SupplyChangeData = {
+  time: string;
+  change: number;
+  burnt: number;
+  issuance: number;
+}
 
 const getSupplyChangeDataFn = async (range: ChangeSupplyRangeEnum = ChangeSupplyRangeEnum.DAY, baseUrl: string | undefined) => {
-  const { data } = await axios.get<string>(baseUrl + '/supply/change', { params: { range } });
+  const { data } = await axios.get<SupplyChangeData>(baseUrl + '/supply/change', { params: { range } });
 
   return data;
 };
