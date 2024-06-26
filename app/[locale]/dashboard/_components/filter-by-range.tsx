@@ -19,7 +19,7 @@ const FilterByRange: FC<FilterByRangeProps> = ({ range, selectRange }) => {
   }, [selectRange]);
 
   return (
-    <Row className='w-full justify-left mt-4  md:mt-0 md:w-2/4 md:justify-between'>
+    <Row className='gap-6 w-[500px] lg:w-full overflow-x-auto justify-left mt-4  md:mt-0 md:w-2/4 md:justify-between'>
       <Text
         onClick={handleRangeChange(OverviewChartFilterRangeEnum.ALL)}
         className={

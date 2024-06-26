@@ -25,7 +25,7 @@ const ChartTooltip = ({ active, payload, formattedDate, type = 'overview' }: Too
         <p className='rounded-t-md p-2 bg-axone-bg-dark mb-2'>{formattedDate}</p>
         <Row className='px-4'>
           <div className='w-5 h-5 bg-axone-orange rounded-full' />
-          <p className='text-axone-white ml-2'><span className='text-axone-khaki'>Price:</span> {currencySign}{Number(value) * exchangeRate}</p>
+          <p className='text-axone-white ml-2'><span className='text-axone-khaki'>Price:</span> {currencySign}{(Number(value) * exchangeRate).toFixed(2)}</p>
         </Row>
         <Row className='px-4 mb-4'>
           <div className='w-5 h-5 bg-axone-dark-blue rounded-full' />

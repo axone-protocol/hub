@@ -7,7 +7,7 @@ import Row from '@/components/ui/row';
 import { useCurrencyStore } from '@/hooks/use-currencies';
 import { useOverviewChart } from '@/hooks/use-overview-chart';
 import { useTokenInfo } from '@/hooks/use-token-info';
-import { formatNumber } from '@/lib/utils';
+import { cn, formatNumber } from '@/lib/utils';
 import { FilterByRange } from './filter-by-range';
 
 export default function OverviewBlock () {
@@ -18,13 +18,15 @@ export default function OverviewBlock () {
   const { data: tokenInfo } = useTokenInfo();
 
   const tokenPrice = tokenInfo?.price ? tokenInfo?.price?.value : 0;
+  const tokenChange = tokenInfo?.price ? tokenInfo?.price?.change : 0;
   const marketCap = tokenInfo?.marketCap ? tokenInfo?.marketCap?.value : 0;
+  const marketCapChange = tokenInfo?.marketCap ? tokenInfo?.marketCap?.change : 0;
   const volume = tokenInfo?.volume || 0;
   return (
     <Box className='w-2/3 m-0 mr-6 h-[50%] mobile:w-full'>
       <Row className='mb-10 items-left lg:items-center mobile:flex-col'>
         <Title className='mr-40'>{t('Chart.Overview')}</Title>
-        <FilterByRange range={range} selectRange={selectRange} />
+        <div className='w-full overflow-x-auto'><FilterByRange range={range} selectRange={selectRange} /></div>
       </Row>
 
       <BoxInner className='h-[384px] py-5'>
@@ -37,8 +39,8 @@ export default function OverviewBlock () {
           <Title className='mt-2 mb-0'>
             {currencySign}{(tokenPrice * exchangeRate).toFixed(2)}
           </Title>
-          <Text className='uppercase text-axone-red'>
-            {tokenInfo?.price?.change.toFixed(2) || 0}%
+          <Text className={cn('uppercase', { 'text-axone-red': tokenChange < 0, 'text-axone-green': tokenChange > 0 })}>
+            {tokenChange.toFixed(2) || 0}%
           </Text>
           <Text className='uppercase text-axone-khaki'>
             {t('Price')}
@@ -49,8 +51,8 @@ export default function OverviewBlock () {
           <Title className='mt-2 mb-0'>
             {currencySign}{formatNumber(marketCap * exchangeRate)}
           </Title>
-          <Text className='uppercase text-axone-red'>
-            {tokenInfo?.marketCap?.change.toFixed(3) ||  0}%
+          <Text className={cn('uppercase', { 'text-axone-red': marketCapChange < 0, 'text-axone-green': marketCapChange > 0 })}>
+            {marketCapChange.toFixed(3) ||  0}%
           </Text>
           <Text className='uppercase text-axone-khaki text-center'>
             {t('MarketCap')}
