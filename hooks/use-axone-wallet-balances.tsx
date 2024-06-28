@@ -15,7 +15,7 @@ type AxoneWalletBalances = {
   };
 };
 
-const getAxoneWalletBalancesDataFn = async (address: string | string[], baseUrl: string | undefined) => {
+const getAxoneWalletBalancesDataFn = async (address: string | string[], offset: number, baseUrl: string | undefined) => {
   const { data } = await axios.get<AxoneWalletBalances>(`${baseUrl}/wallet/balances`, { params: { address } });
 
   return data;
@@ -34,7 +34,7 @@ export const useAxoneWalletBalances = (address: string | string[]) => {
     enabled: true,
     refetchOnMount: true,
     queryKey: [...useAxoneWalletBalancesQueryKey, address, offset],
-    queryFn: () => getAxoneWalletBalancesDataFn(address, baseUrl),
+    queryFn: () => getAxoneWalletBalancesDataFn(address, offset, baseUrl),
   });
 
   useEffect(() => {

@@ -29,7 +29,7 @@ const ProposalsListItem: FC<ProposalsListItemProps> = ({ item, goToDetails }) =>
         </div>
         <Title>{item.title}</Title>
       </div>
-      <GaugeChart val={14} />
+      <GaugeChart val={Number(item.turnout)} />
       <Text className='w-1/6 mb-0 break-words'>{item.messages['0']['@type']}</Text>
       <Text className='w-1/6 mb-0'>{formatDate(item.voting_end_time)}</Text>
       <div className='w-[200px] flex flex-row items-center gap-6'>

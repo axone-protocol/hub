@@ -9,27 +9,17 @@ import { VotingPieChart } from './voting-pie-chart';
 
 const VoteBlock = () => {
   const t = useTranslations('Governance');
-  const proposalData = useProposalStore((state) => state.proposalData);
+  const proposalData = useProposalStore((state) => state.proposalData?.proposal);
+  const totalDeposit = useProposalStore((state) => state.proposalData?.proposal.total_deposit);
+  const voteData = useProposalStore((state) => state.proposalData?.proposal.vote);
 
-  if (!proposalData) {
+  if (!totalDeposit || !voteData || !proposalData) {
     return <Box className='w-full lg:w-1/2 m-0 lg:m-0 flex justify-center items-center'><Spinner /></Box>;
   }
 
-  const yesVotes = Number(proposalData.proposal.final_tally_result.yes_count);
-  const abstain = Number(proposalData.proposal.final_tally_result.abstain_count);
-  const noVotes = Number(proposalData.proposal.final_tally_result.no_count);
-  const noWithVeto = Number(proposalData.proposal.final_tally_result.no_with_veto_count);
-
-  const totalVotes = yesVotes + noVotes;
-
-  const yesPercentage = (yesVotes / totalVotes) * 100;
-  const abstainPercentage = (abstain / totalVotes) * 100;
-  const noPercentage = (noVotes / totalVotes) * 100;
-  const noWithVetoPercentage = (noWithVeto / totalVotes) * 100;
-
   const chartData = [
-    { name: 'YES', value: yesVotes },
-    { name: 'NO', value: noVotes },
+    { name: 'YES', value: Number(voteData.tallyInPercents.yes) },
+    { name: 'NO', value: Number(voteData.tallyInPercents.no) },
   ];
 
   return (
@@ -43,38 +33,38 @@ const VoteBlock = () => {
           <Text className='mb-0'>{t('Total')}</Text>
           <div className='flex flex-col lg:flex-row items-end gap-0 lg:gap-4 mb-3'>
             <p className='text-[32px] text-axone-grey'>
-              {Number(proposalData.proposal.total_deposit[0].amount) / 1000000}
+              {Number(totalDeposit[0].amount) / 1000000}
             </p>
             <span className='text-[32px] text-axone-khaki uppercase'>axone</span>
           </div>
           <Text className='mb-0'>{t('VotingEnds')}</Text>
           <p className='text-20 text-axone-grey'>
-            {formatDate(proposalData.proposal.voting_end_time)}
+            {formatDate(proposalData.voting_end_time)}
           </p>
         </div>
       </div>
       <div className='grid grid-cols-1 lg:grid-cols-2 gap-8'>
         <BoxInner className='flex-col justify-center items-center gap-6 w-full h-32'>
           <Title>
-            {yesPercentage}%
+            {Number(voteData.tallyInPercents.yes)}%
           </Title>
           <Text className='mb-0 text-axone-light-blue-2 uppercase'>{t('Yes')}</Text>
         </BoxInner>
         <BoxInner className='flex-col justify-center items-center gap-6 w-full h-32'>
           <Title>
-            {noPercentage}%
+            {Number(voteData.tallyInPercents.no)}%
           </Title>
           <Text className='mb-0 text-axone-red uppercase'>{t('No')}</Text>
         </BoxInner>
         <BoxInner className='flex-col justify-center items-center gap-6 w-full h-32'>
           <Title>
-            {abstainPercentage}%
+            {Number(voteData.tallyInPercents.abstain)}%
           </Title>
           <Text className='mb-0 text-axone-khaki uppercase'>{t('Abstain')}</Text>
         </BoxInner>
         <BoxInner className='flex-col justify-center items-center gap-6 w-full h-32'>
           <Title>
-            {noWithVetoPercentage}%
+            {Number(voteData.tallyInPercents.noWithVeto)}%
           </Title>
           <Text className='mb-0 text-axone-khaki uppercase'>{t('NoWithVeto')}</Text>
         </BoxInner>

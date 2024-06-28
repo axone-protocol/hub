@@ -39,6 +39,7 @@ export type Proposal = {
   proposer: string;
   expedited: boolean;
   failed_reason: string;
+  turnout: string;
 };
 
 type Pagination = {
