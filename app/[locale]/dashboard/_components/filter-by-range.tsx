@@ -3,68 +3,60 @@ import { useTranslations } from 'next-intl';
 import { FC, useCallback } from 'react';
 import { Text } from '@/components/typography';
 import Row from '@/components/ui/row';
-import { OverviewChartFilterRangeEnum } from '@/hooks/use-overview-chart';
+import { TimeFrameEnum } from '@/hooks/timeframe/use-timeframe-store';
 import { cn } from '@/lib/utils';
 
 type FilterByRangeProps = {
-  range: OverviewChartFilterRangeEnum;
-  selectRange: (range: OverviewChartFilterRangeEnum) => void;
+  range: TimeFrameEnum;
+  selectRange: (range: TimeFrameEnum) => void;
 };
 
 const FilterByRange: FC<FilterByRangeProps> = ({ range, selectRange }) => {
   const t  = useTranslations('Dashboard');
 
-  const handleRangeChange = useCallback((range: OverviewChartFilterRangeEnum) => () => {
+  const handleRangeChange = useCallback((range: TimeFrameEnum) => () => {
     selectRange(range);
   }, [selectRange]);
 
   return (
     <Row className='gap-6 w-[500px] lg:w-full overflow-x-auto justify-left mt-4  md:mt-0 md:w-2/4 md:justify-between'>
       <Text
-        onClick={handleRangeChange(OverviewChartFilterRangeEnum.ALL)}
+        onClick={handleRangeChange(TimeFrameEnum.ALL)}
         className={
           cn('cursor-pointer  hover:text-white mb-0 mx-2 text-axone-khaki',
-            { 'text-axone-orange font-bold': range === OverviewChartFilterRangeEnum.ALL })}
+            { 'text-axone-orange font-bold': range === TimeFrameEnum.ALL })}
       >
         {t('Chart.Filter.All')}
       </Text>
       <Text
-        onClick={handleRangeChange(OverviewChartFilterRangeEnum.DAY)}
+        onClick={handleRangeChange(TimeFrameEnum.DAY)}
         className={
           cn('cursor-pointer  hover:text-white mb-0 mx-2 text-axone-khaki',
-            { 'text-axone-orange font-bold': range === OverviewChartFilterRangeEnum.DAY })}
+            { 'text-axone-orange font-bold': range === TimeFrameEnum.DAY })}
       >
         {t('Chart.Filter.Day')}
       </Text>
       <Text
-        onClick={handleRangeChange(OverviewChartFilterRangeEnum.WEEK)}
+        onClick={handleRangeChange(TimeFrameEnum.WEEK)}
         className={
           cn('cursor-pointer  hover:text-white mb-0 mx-2 text-axone-khaki',
-            { 'text-axone-orange font-bold': range === OverviewChartFilterRangeEnum.WEEK })}
+            { 'text-axone-orange font-bold': range === TimeFrameEnum.WEEK })}
       >
         {t('Chart.Filter.Week')}
       </Text>
       <Text
-        onClick={handleRangeChange(OverviewChartFilterRangeEnum.MONTH)}
+        onClick={handleRangeChange(TimeFrameEnum.MONTH)}
         className={
           cn('cursor-pointer  hover:text-white mb-0 mx-2 text-axone-khaki',
-            { 'text-axone-orange font-bold': range === OverviewChartFilterRangeEnum.MONTH })}
+            { 'text-axone-orange font-bold': range === TimeFrameEnum.MONTH })}
       >
         {t('Chart.Filter.Month')}
       </Text>
       <Text
-        onClick={handleRangeChange(OverviewChartFilterRangeEnum.THREE_MONTH)}
+        onClick={handleRangeChange(TimeFrameEnum.YEAR)}
         className={
           cn('cursor-pointer  hover:text-white mb-0 mx-2 text-axone-khaki',
-            { 'text-axone-orange font-bold': range === OverviewChartFilterRangeEnum.THREE_MONTH })}
-      >
-        3 {t('Chart.Filter.Month')}
-      </Text>
-      <Text
-        onClick={handleRangeChange(OverviewChartFilterRangeEnum.YEAR)}
-        className={
-          cn('cursor-pointer  hover:text-white mb-0 mx-2 text-axone-khaki',
-            { 'text-axone-orange font-bold': range === OverviewChartFilterRangeEnum.YEAR })}
+            { 'text-axone-orange font-bold': range === TimeFrameEnum.YEAR })}
       >
         {t('Chart.Filter.Year')}
       </Text>

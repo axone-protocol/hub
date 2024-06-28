@@ -2,55 +2,19 @@
 import { formatDistanceToNow } from 'date-fns';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import { FC, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { Text } from '@/components/typography';
 import { Box } from '@/components/ui/boxes';
 import Column from '@/components/ui/column';
 import Row from '@/components/ui/row';
-import { Select, SelectContent, SelectGroup, SelectIcon, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { TimeFrameSelect } from '@/components/ui/selects';
 import Spinner from '@/components/ui/spinner';
-import { ChangeSupplyRangeEnum, useSupplyChange } from '@/hooks/use-supply-change';
-import { cn, formatNumberToLocale } from '@/lib/utils';
-
-type TimeFrameSelectProps = {
-  selectRange: (value: ChangeSupplyRangeEnum) => void;
-  range: ChangeSupplyRangeEnum;
-};
-
-const TimeFrameSelect: FC<TimeFrameSelectProps> = ({ selectRange, range }) => {
-  const [open, setOpen] = useState<boolean>(false);
-
-  const onOpenChange = (): void => {
-    setOpen(prev => !prev);
-  };
-
-  const onValueChange = (value: ChangeSupplyRangeEnum): void => {
-    selectRange(value);
-  };
-
-  return (
-    <Select value={range} onOpenChange={onOpenChange} onValueChange={onValueChange}>
-      <SelectTrigger className={cn('w-50 relative -top-[7px]', { 'bg-axone-bg-dark': open })}>
-        <SelectValue className='mb-2' placeholder='5 Min' />
-        <SelectIcon asChild>
-          <Image className={cn({ 'rotate-180': open })} src={'/icons/arrow-down.svg'}  width={20} height={20} alt={'arrow-down'} />
-        </SelectIcon>
-      </SelectTrigger>
-      <SelectContent className='shadow-lg'>
-        <SelectGroup>
-          <SelectItem value={ChangeSupplyRangeEnum.FIVE_MIN}>5 min</SelectItem>
-          <SelectItem value={ChangeSupplyRangeEnum.HOUR}>Hour</SelectItem>
-          <SelectItem value={ChangeSupplyRangeEnum.DAY}>Day</SelectItem>
-          <SelectItem value={ChangeSupplyRangeEnum.WEEK}>Week</SelectItem>
-          <SelectItem value={ChangeSupplyRangeEnum.MONTH}>Month</SelectItem>
-        </SelectGroup>
-      </SelectContent>
-    </Select>
-  );};
+import { useSupplyChange } from '@/hooks/use-supply-change';
+import { formatNumberToLocale } from '@/lib/utils';
 
 export default function SupplyChangeBlock () {
   const t  = useTranslations('Dashboard');
-  const { query: { data, isLoading, isFetching, isRefetching }, range, selectRange } = useSupplyChange();
+  const { query: { data, isLoading, isFetching, isRefetching } } = useSupplyChange();
 
   const formattedChange = formatNumberToLocale(Number(data?.change || 0)/1000000);
   const formattedBurnt = formatNumberToLocale(Number(data?.burnt || 0)/1000000);
@@ -70,7 +34,7 @@ export default function SupplyChangeBlock () {
     <Box className='m-0 flex flex-col justify-between mb-6 lg:mb-0 lg:w-1/2 xl:w-full xl:h-1/2'>
       <Row className='justify-between'>
         <Text className='mb-5 uppercase'>{t('SupplyChange')}</Text>
-        <TimeFrameSelect selectRange={selectRange} range={range} />
+        <TimeFrameSelect />
       </Row>
       <div className='flex flex-col items-end lg:flex-col lg:justify-between'>
         <p className='text-3xl tracking-tighter text-axone-orange mb-0'>{formattedChange}</p>

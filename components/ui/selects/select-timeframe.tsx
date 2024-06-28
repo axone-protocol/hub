@@ -2,12 +2,16 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import { Select, SelectContent, SelectGroup, SelectIcon, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { useTimeFrameStore } from '@/hooks/timeframe/use-timeframe-store';
 import { cn } from '@/lib/utils';
 
-const TimeframeSelect = () => {
+const TimeFrameSelect = () => {
   const [open, setOpen] = useState<boolean>(false);
+  const { timeFrame, setTimeFrame } = useTimeFrameStore();
+
+  const onOpenChange = () => setOpen(prev => !prev);
   return (
-    <Select onOpenChange={() => setOpen(prev => !prev)}>
+    <Select onOpenChange={onOpenChange} value={timeFrame} onValueChange={setTimeFrame}>
       <SelectTrigger className={cn('w-50 relative -top-[7px]', { 'bg-axone-bg-dark': open })}>
         <SelectValue className='mb-2' placeholder='5 Min' />
         <SelectIcon asChild>
@@ -16,13 +20,14 @@ const TimeframeSelect = () => {
       </SelectTrigger>
       <SelectContent className='shadow-lg'>
         <SelectGroup>
-          <SelectItem value='5min'>5 Min</SelectItem>
-          <SelectItem value='hour'>1 Hour</SelectItem>
-          <SelectItem value='week'>1 Week</SelectItem>
-          <SelectItem value='month'>1 Month</SelectItem>
+          <SelectItem value='all'>All</SelectItem>
+          <SelectItem value='day'>Day</SelectItem>
+          <SelectItem value='week'>Week</SelectItem>
+          <SelectItem value='month'>Month</SelectItem>
+          <SelectItem value='year'>Year</SelectItem>
         </SelectGroup>
       </SelectContent>
     </Select>
   );};
 
-export { TimeframeSelect };
+export { TimeFrameSelect };

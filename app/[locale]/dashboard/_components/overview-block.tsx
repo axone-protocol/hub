@@ -4,6 +4,7 @@ import { Text, Title } from '@/components/typography';
 import { Box, BoxInner } from '@/components/ui/boxes';
 import AxoneAreaChart from '@/components/ui/charts/axone-area-chart';
 import Row from '@/components/ui/row';
+import { useTimeFrameStore } from '@/hooks/timeframe/use-timeframe-store';
 import { useCurrencyStore } from '@/hooks/use-currencies';
 import { useOverviewChart } from '@/hooks/use-overview-chart';
 import { useTokenInfo } from '@/hooks/use-token-info';
@@ -14,7 +15,8 @@ export default function OverviewBlock () {
   const t  = useTranslations('Dashboard');
   const exchangeRate = useCurrencyStore((state) => state.exchangeRate);
   const currencySign = useCurrencyStore((state) => state.currencySign);
-  const { query, range, selectRange } = useOverviewChart();
+  const { query } = useOverviewChart();
+  const { timeFrame, setTimeFrame } = useTimeFrameStore();
   const { data: tokenInfo } = useTokenInfo();
 
   const tokenPrice = tokenInfo?.price ? tokenInfo?.price?.value : 0;
@@ -26,7 +28,9 @@ export default function OverviewBlock () {
     <Box className='w-2/3 m-0 mr-6 h-[50%] mobile:w-full'>
       <Row className='mb-10 items-left lg:items-center mobile:flex-col'>
         <Title className='mr-40'>{t('Chart.Overview')}</Title>
-        <div className='w-full overflow-x-auto'><FilterByRange range={range} selectRange={selectRange} /></div>
+        <div className='w-full overflow-x-auto'>
+          <FilterByRange range={timeFrame} selectRange={setTimeFrame} />
+        </div>
       </Row>
 
       <BoxInner className='h-[384px] py-5'>
