@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { create } from 'zustand';
+import { useEnvironment } from '@/context/environment-context';
 
 /**
  * Currency store and hooks to manage the currency selected by the user.
@@ -48,17 +49,17 @@ const useCurrencyStore = create<State>((set) => ({
 }));
 
 const useCurrency = () => {
+  const { baseUrl } = useEnvironment();
   const currencySelected = useCurrencyStore((state) => state.currencySelected);
   const setExchangeRate = useCurrencyStore((state) => state.setExchangeRate);
   const setCurrencySign = useCurrencyStore((state) => state.setCurrencySign);
 
   useEffect(() => {
     if (currencySelected === CurrencyEnum.EUR) {
-      // TODO: replace with backend endpoint
-      fetch('https://api.exchangerate-api.com/v4/latest/USD')
+      fetch(`${baseUrl}/general/exchange-rate`)
         .then(response => response.json())
         .then(data => {
-          setExchangeRate(data.rates.EUR);
+          setExchangeRate(data.EUR);
           setCurrencySign('\u20AC'); // Euro sign
         })
         .catch(error => console.error('Error:', error));
@@ -66,7 +67,7 @@ const useCurrency = () => {
       setExchangeRate(1);
       setCurrencySign('$'); // Dollar sign
     }
-  }, [currencySelected, setExchangeRate, setCurrencySign]);
+  }, [currencySelected, setExchangeRate, setCurrencySign, baseUrl]);
 };
 
 export { useCurrency, useCurrencyStore, CurrencyEnum };

@@ -21,6 +21,26 @@ type Deposit = {
   amount: string;
 };
 
+type Vote = {
+  total: string;
+  votingEnds: string;
+  tallyInPercents: {
+    yes: string;
+    no: string;
+    abstain: string;
+    noWithVeto: string;
+  };
+};
+
+type VoteOverview = {
+  quorum: string;
+  threshold: string;
+  votingPeriod: {
+    start: string;
+    end: string;
+  };
+};
+
 type Proposal = {
   id: string;
   messages: Message[];
@@ -42,6 +62,8 @@ type Proposal = {
   proposer: string;
   expedited: boolean;
   failed_reason: string;
+  vote: Vote;
+  voteOverview: VoteOverview;
 };
 
 type SingleProposalData = {

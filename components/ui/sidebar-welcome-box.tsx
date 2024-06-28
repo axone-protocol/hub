@@ -5,7 +5,7 @@ import { ButtonWithIcon } from './button-with-icon';
 import Column from './column';
 
 const WIDTH = 206;
-const HEIGHT = 140;
+const HEIGHT = 130;
 
 type SidebarWelcomeAxoneBoxProps = {
   handleClick: () => void;
@@ -28,7 +28,13 @@ const SidebarWelcomeAxoneBox: FC<SidebarWelcomeAxoneBoxProps> = ({ handleClick }
       >
         {t('GetStarted')}
       </ButtonWithIcon>
-      <svg className='absolute top-0 right-0 lg:left-0' width={WIDTH} height={HEIGHT} viewBox={`0 0 ${WIDTH} ${HEIGHT}`} fill='none' xmlns='http://www.w3.org/2000/svg'>
+      <svg
+        className='absolute top-0 right-0 lg:left-0'
+        width={WIDTH} height={HEIGHT}
+        viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
+        fill='none'
+        xmlns='http://www.w3.org/2000/svg'
+      >
         <g clipPath='url(#clip0_317_1974)'>
           <rect width={WIDTH} height={HEIGHT} rx='20' fill='#D8FAFF'/>
           <g opacity='0.1'>
