@@ -1,21 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useEnvironment } from '@/context/environment-context';
-
-export type SingleProposedBlock = {
-  height: string,
-  blockHash: string,
-  txs: number,
-  time: string
-}
-
-export type ValidatorProposedBlocksData = {
-  recentlyProposedBlocks: SingleProposedBlock[],
-  total: string
-}
+import { ValidatorProposedBlocksDTO } from './dto/validator-proposed-blocks.dto';
 
 const getSingleValidatorProposedBlocksDataFn = async (address: string | string[], baseUrl: string | undefined) => {
-  const { data } = await axios.get<ValidatorProposedBlocksData>(`${baseUrl}/staking/validators/${address}/recently-proposed-blocks`);
+  const { data } = await axios.get<ValidatorProposedBlocksDTO>(`${baseUrl}/staking/validators/${address}/recently-proposed-blocks`);
 
   const formattedData = {
     ...data,

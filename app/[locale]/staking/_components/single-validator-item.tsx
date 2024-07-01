@@ -7,12 +7,12 @@ import { AxoneTooltip } from '@/components/ui/axone-tooltip';
 import { Button } from '@/components/ui/button';
 import Row from '@/components/ui/row';
 import { DelegateModalOpenProps } from '@/context';
-import { ValidatorsListData } from '@/hooks/use-validators-list';
+import { ValidatorsListDTO } from '@/hooks/dto/validators-list.dto';
 import { cn, formatNumberToLocale } from '@/lib/utils';
 
 
 type SingleValidatorItemProps = {
-  data: ValidatorsListData;
+  data: ValidatorsListDTO;
   openDelegateModal(data?: DelegateModalOpenProps): () => void;
 };
 

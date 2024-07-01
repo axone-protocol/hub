@@ -2,18 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useEnvironment } from '@/context/environment-context';
-
-type AxoneWalletBalances = {
-  balances: {
-    denom: string;
-    amount: string;
-  }[];
-  pagination: {
-    total: string;
-    limit: number;
-    offset: number;
-  };
-};
+import { AxoneWalletBalances } from './dto/axone-wallet-balances.dto';
 
 const getAxoneWalletBalancesDataFn = async (address: string | string[], offset: number, baseUrl: string | undefined) => {
   const { data } = await axios.get<AxoneWalletBalances>(`${baseUrl}/wallet/balances`, { params: { address } });

@@ -3,16 +3,10 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useEnvironment } from '@/context/environment-context';
 import { chainName } from '@/core/chain';
-
-type MyStakingOverviewData = {
-  stakedAmount: string;
-  delegations: string;
-  claimableReward: string;
-  availableBalance: string;
-};
+import { MyStakingOverviewDTO } from './dto/my-staking-overview.dto';
 
 const getMyStakingOverviewDataFn = async (address: string = '', baseUrl: string | undefined) => {
-  const { data } = await axios.get<MyStakingOverviewData>(baseUrl + '/staking/my/overview', { params: { address } });
+  const { data } = await axios.get<MyStakingOverviewDTO>(baseUrl + '/staking/my/overview', { params: { address } });
 
   const convertedData = {
     stakedAmount: Number(data.stakedAmount).toFixed(2),
