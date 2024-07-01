@@ -2,25 +2,10 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useEnvironment } from '@/context/environment-context';
-
-type Voter = {
-  voter: string;
-  option: string;
-};
-
-type Pagination = {
-  total: number;
-  limit: number | null;
-  offset: number | null;
-};
-
-type VotersData = {
-  voters: Voter[];
-  pagination: Pagination;
-};
+import { ProposalVotersDTO } from './dto/proposal-voters.dto';
 
 const getSingleProposalVotersDataFn = async (id: string | string[], offset: number, baseUrl: string | undefined) => {
-  const { data } = await axios.get<VotersData>(`${baseUrl}/staking/proposals/${id}/voters`, { params: { offset } });
+  const { data } = await axios.get<ProposalVotersDTO>(`${baseUrl}/staking/proposals/${id}/voters`, { params: { offset } });
 
   return data;
 };
@@ -32,7 +17,7 @@ const defaultState = { voters: [], pagination: { total: 0, limit: 10, offset: 0 
 export const useSingleProposalVotersInfo = (id: string | string[]) => {
   const { baseUrl } = useEnvironment();
   const [offset, setOffset] = useState(0);
-  const [voters, setBalances] = useState<VotersData>(defaultState);
+  const [voters, setBalances] = useState<ProposalVotersDTO>(defaultState);
 
   const { data, ...queryInfo } = useQuery({
     enabled: true,
@@ -61,5 +46,4 @@ export const useSingleProposalVotersInfo = (id: string | string[]) => {
   };
 
   return { ...queryInfo, data: voters, showMore };
-
 };

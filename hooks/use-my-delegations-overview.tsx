@@ -3,14 +3,10 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useEnvironment } from '@/context/environment-context';
 import { chainName } from '@/core/chain';
-
-type MyDelegationsOverviewData = {
-  earnings: string | number;
-  delegation: string | number;
-};
+import { MyDelegationsOverviewDTO } from './dto/my-delegations-overview.dto';
 
 const getMyDelegationsOverviewDataFn = async (address: string = '', validatorAddress: string | string[] | undefined, baseUrl: string | undefined) => {
-  const { data } = await axios.get<MyDelegationsOverviewData>(baseUrl + '/staking/my/validator-delegation', { params: { address, validatorAddress } });
+  const { data } = await axios.get<MyDelegationsOverviewDTO>(baseUrl + '/staking/my/validator-delegation', { params: { address, validatorAddress } });
 
   const convertedData = {
     earnings: Number(data.earnings).toFixed(2),

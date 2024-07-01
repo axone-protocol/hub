@@ -1,21 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useEnvironment } from '@/context/environment-context';
-
-export type SingleBlockData = {
-  address: string,
-  timestamp: string,
-  signature: string
-  status: 'Signed' | 'Proposed' | 'Missed'
-}
-
-export type ValidatorUptimeData = {
-  blocks: SingleBlockData[],
-  current: string | number
-}
+import { ValidatorUptimeDTO } from './dto/validator-uptime.dto';
 
 const getSingleValidatorUptimeDataFn = async (address: string | string[], baseUrl: string | undefined) => {
-  const { data } = await axios.get<ValidatorUptimeData>(`${baseUrl}/staking/validators/${address}/uptime`);
+  const { data } = await axios.get<ValidatorUptimeDTO>(`${baseUrl}/staking/validators/${address}/uptime`);
 
   const formattedData = {
     ...data,

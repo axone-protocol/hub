@@ -1,20 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useEnvironment } from '@/context/environment-context';
-
-/**
- * Getting data for the current supply
- */
-
-type GovernanceOverviewData = {
-  totalProposals: number;
-  currentProposals: number;
-  votingPeriod: number;
-  depositRequired: string;
-}
+import { GovernanceOverviewDTO } from './dto/governance-overview.dto';
 
 const getGovernanceOverviewFn = async (baseUrl: string | undefined) => {
-  const { data } = await axios.get<GovernanceOverviewData>(baseUrl + '/governance/overview');
+  const { data } = await axios.get<GovernanceOverviewDTO>(baseUrl + '/governance/overview');
 
   return data;
 };

@@ -1,15 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useEnvironment } from '@/context/environment-context';
+import { SupplyRateChartDTO } from './dto/supply-rate.dto';
 import { TimeFrameEnum, useTimeFrameStore } from './timeframe/use-timeframe-store';
 
-export type SupplyChartData = {
-  time: string;
-  change: number;
-}
-
 const getSupplyRateChartDataFn = async (range: TimeFrameEnum = TimeFrameEnum.DAY, baseUrl: string | undefined) => {
-  const { data } = await axios.get<SupplyChartData[]>(baseUrl + '/supply/historical', { params: { range } });
+  const { data } = await axios.get<SupplyRateChartDTO[]>(baseUrl + '/supply/historical', { params: { range } });
 
   return data.reverse();
 };

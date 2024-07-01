@@ -13,7 +13,7 @@ const SupplyRateBlock = () => {
   const t = useTranslations('Dashboard');
 
   return (
-    <Box className='w-full m-0 h-[50%] mobile:w-full'>
+    <Box className='w-full lg:w-2/3 m-0 h-[50%]'>
       <Row className='justify-between'>
         <Text className='mb-5 uppercase'>{t('SupplyRate')}</Text>
         <TimeFrameSelect />

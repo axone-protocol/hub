@@ -7,7 +7,8 @@ import { Box } from '@/components/ui/boxes';
 import { BoxInner } from '@/components/ui/boxes';
 import Row from '@/components/ui/row';
 import Spinner from '@/components/ui/spinner';
-import { useValidatorDelegations, ValidatorDelegation } from '@/hooks/use-validator-delegations';
+import { ValidatorDelegation } from '@/hooks/dto/validator-delegations.dto';
+import { useValidatorDelegations } from '@/hooks/use-validator-delegations';
 import { cn, formatNumberToLocale } from '@/lib/utils';
 
 const ValidatorDelegationsBlock = () => {

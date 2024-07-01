@@ -3,15 +3,16 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { create } from 'zustand';
 import { useEnvironment } from '@/context/environment-context';
+import { SingleValidatorDTO } from './dto/single-validator.dto';
 
 type ValidatorState = {
-  validatorData: SingleValidatorData | null;
-  setValidatorData: (data: SingleValidatorData) => void;
+  validatorData: SingleValidatorDTO | null;
+  setValidatorData: (data: SingleValidatorDTO) => void;
 };
 
 export const useValidatorStore = create<ValidatorState>((set, get) => ({
   validatorData: null,
-  setValidatorData: (data: SingleValidatorData) => {
+  setValidatorData: (data: SingleValidatorDTO) => {
     const currentData = get().validatorData;
     if (JSON.stringify(currentData) !== JSON.stringify(data)) {
       set({ validatorData: data });
@@ -19,32 +20,8 @@ export const useValidatorStore = create<ValidatorState>((set, get) => ({
   },
 }));
 
-
-type SingleValidatorData = {
-  address: string;
-  commission: {
-    updateTime: string,
-    rate: string,
-    maxChangeRate: string,
-    maxRate: string
-  };
-  description: {
-    moniker: string,
-    details: string,
-    securityContact: string,
-    identity: string,
-    website: string
-  };
-  jailed: boolean;
-  logo: string;
-  stakedAmount: string;
-  status: string;
-  uptime: number;
-  votingPower: number;
-}
-
 const getSingleValidatorDataFn = async (address: string | string[], baseUrl: string | undefined) => {
-  const { data } = await axios.get<SingleValidatorData>(`${baseUrl}/staking/validators/${address}`);
+  const { data } = await axios.get<SingleValidatorDTO>(`${baseUrl}/staking/validators/${address}`);
 
   return data;
 };

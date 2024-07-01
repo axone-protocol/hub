@@ -38,7 +38,7 @@ const ProposalsListBlock = () => {
     setSearchTerm(e.target.value);
   };
 
-  const [activeFilter, setActiveFilter] = useState<ProposalSortBy | null>(null);
+  const [activeFilter, setActiveFilter] = useState<ProposalSortBy | null>(sortBy);
 
   const sortByParam = useCallback((param: ProposalSortBy | null, defaultOrder: 'asc' | 'desc' = 'asc') => () => {
     let newOrder: 'asc' | 'desc' = defaultOrder;

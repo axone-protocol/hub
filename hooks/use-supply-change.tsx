@@ -1,17 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useEnvironment } from '@/context/environment-context';
+import { SupplyChangeDTO } from './dto/supply-change.dto';
 import { TimeFrameEnum, useTimeFrameStore } from './timeframe/use-timeframe-store';
 
-type SupplyChangeData = {
-  time: string;
-  change: number;
-  burnt: number;
-  issuance: number;
-}
-
 const getSupplyChangeDataFn = async (range: TimeFrameEnum = TimeFrameEnum.DAY, baseUrl: string | undefined) => {
-  const { data } = await axios.get<SupplyChangeData>(baseUrl + '/supply/change', { params: { range } });
+  const { data } = await axios.get<SupplyChangeDTO>(baseUrl + '/supply/change', { params: { range } });
 
   return data;
 };

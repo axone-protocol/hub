@@ -1,19 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useEnvironment } from '@/context/environment-context';
-
-/**
- * Getting data for the current supply
- */
-
-type CurrentSupplyData = {
-  time: string;
-  supply: string;
-  change: number;
-}
+import { CurrentSupplyDTO } from './dto/current-supply.dto';
 
 const getCurrentSupplyFn = async (baseUrl: string | undefined) => {
-  const { data } = await axios.get<CurrentSupplyData>(baseUrl + '/supply');
+  const { data } = await axios.get<CurrentSupplyDTO>(baseUrl + '/supply');
 
   const formattedData = {
     ...data,
