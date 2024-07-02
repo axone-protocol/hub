@@ -1,16 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useEnvironment } from '@/context/environment-context';
-
-type StakingOverviewData = {
-  totalValidators: string;
-  apr: string;
-  totalStaked: string;
-  bondedTokens: string;
-};
+import { StakingOverviewDTO } from './dto/staking-overview.dto';
 
 const getStakingOverviewDataFn = async (baseUrl: string | undefined) => {
-  const { data } = await axios.get<StakingOverviewData>(baseUrl + '/staking/overview');
+  const { data } = await axios.get<StakingOverviewDTO>(baseUrl + '/staking/overview');
 
   const convertedData = {
     totalValidators: Number(data.totalValidators),

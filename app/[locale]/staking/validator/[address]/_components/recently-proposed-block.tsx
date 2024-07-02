@@ -8,7 +8,8 @@ import { Box, BoxInner } from '@/components/ui/boxes';
 import Row from '@/components/ui/row';
 import Spinner from '@/components/ui/spinner';
 import { useEnvironment } from '@/context/environment-context';
-import { SingleProposedBlock, useSingleValidatorProposedBlocks, ValidatorProposedBlocksData } from '@/hooks/use-single-validator-proposed-blocks';
+import { SingleProposedBlock, ValidatorProposedBlocksDTO } from '@/hooks/dto/validator-proposed-blocks.dto';
+import { useSingleValidatorProposedBlocks } from '@/hooks/use-single-validator-proposed-blocks';
 import { useSocket } from '@/hooks/use-socket';
 import { formatTimestamp } from '@/lib/utils';
 
@@ -25,10 +26,10 @@ const RecentlyProposedBlock = () => {
   const { address } = useParams();
   const { socket } = useEnvironment();
   const { data, isLoading } = useSingleValidatorProposedBlocks(address);
-  const [blocks, setBlocks] = useState<ValidatorProposedBlocksData>({ recentlyProposedBlocks: [], total: '0' });
+  const [blocks, setBlocks] = useState<ValidatorProposedBlocksDTO>({ recentlyProposedBlocks: [], total: '0' });
 
   const newBlockHandler = useCallback((block: SingleProposedBlock) => {
-    setBlocks((prev: ValidatorProposedBlocksData) => {
+    setBlocks((prev: ValidatorProposedBlocksDTO) => {
       const newData = {
         ...prev,
         recentlyProposedBlocks: [block, ...prev.recentlyProposedBlocks]

@@ -25,7 +25,7 @@ export default function OverviewBlock () {
   const marketCapChange = tokenInfo?.marketCap ? tokenInfo?.marketCap?.change : 0;
   const volume = tokenInfo?.volume || 0;
   return (
-    <Box className='w-2/3 m-0 mr-6 h-[50%] mobile:w-full'>
+    <Box className='w-full lg:w-2/3 m-0 h-[50%]'>
       <Row className='mb-10 items-left lg:items-center mobile:flex-col'>
         <Title className='mr-40'>{t('Chart.Overview')}</Title>
         <div className='w-full overflow-x-auto'>

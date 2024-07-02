@@ -8,7 +8,8 @@ import { Text, Title } from '@/components/typography';
 import { Box } from '@/components/ui/boxes';
 import Row from '@/components/ui/row';
 import { useEnvironment } from '@/context/environment-context';
-import { SingleBlockData, useSingleValidatorUptime, ValidatorUptimeData } from '@/hooks/use-single-validator-uptime';
+import { SingleBlockData, ValidatorUptimeDTO } from '@/hooks/dto/validator-uptime.dto';
+import { useSingleValidatorUptime } from '@/hooks/use-single-validator-uptime';
 import { useSocket } from '@/hooks/use-socket';
 import { cn } from '@/lib/utils';
 
@@ -37,7 +38,7 @@ const UptimeBlock = () => {
   const { address } = useParams();
   const { socket } = useEnvironment();
   const { data, isLoading } = useSingleValidatorUptime(address);
-  const [blocks, setBlocks] = useState<ValidatorUptimeData>({ blocks: [], current: '0' });
+  const [blocks, setBlocks] = useState<ValidatorUptimeDTO>({ blocks: [], current: '0' });
 
   const newBlockHandler = useCallback((block: SingleBlockData) => {
     setBlocks((prev) => {

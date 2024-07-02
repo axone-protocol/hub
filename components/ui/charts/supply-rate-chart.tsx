@@ -1,7 +1,7 @@
 import { useFormatter } from 'next-intl';
 import { FC, memo } from 'react';
 import { Area, AreaChart, Brush, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
-import { SupplyChartData } from '@/hooks/use-supply-rate-chart';
+import { SupplyRateChartDTO } from '@/hooks/dto/supply-rate.dto';
 import ChartTooltip from './chart-tooltip';
 import ChartTraveler from './chart-traveller';
 import Column from '../column';
@@ -16,7 +16,12 @@ console.error = (...args: any) => {
   error(...args);
 };
 
-const CHART_COLOR = '#FB9501';
+enum ChartColorsEnum {
+  ORANGE = '#FB9501',
+  RED = '#DC4E4E',
+  GRAY = '#CCD3D6'
+}
+
 const CHART_MARGIN = {
   top: 10,
   right: 30,
@@ -25,7 +30,7 @@ const CHART_MARGIN = {
 };
 const MS_FACTOR = 1000;
 
-const gradientOffset = (data: SupplyChartData[]) => {
+const gradientOffset = (data: SupplyRateChartDTO[]) => {
   const dataMax = Math.max(...data.map((i) => i.change));
   const dataMin = Math.min(...data.map((i) => i.change));
 
@@ -39,13 +44,14 @@ const gradientOffset = (data: SupplyChartData[]) => {
   return dataMax / (dataMax - dataMin);
 };
 
+const yAxisTickFormatter = (tick: string | number) => `${tick}%`;
+
 type SupplyAreaChartProps = {
-  data: SupplyChartData[];
+  data: SupplyRateChartDTO[];
 };
 
 const SupplyAreaChart: FC<SupplyAreaChartProps> = ({ data }) => {
   const format = useFormatter();
-
   const off = gradientOffset(data || []);
 
   const formatChartDate = (date: string): string => {
@@ -79,7 +85,7 @@ const SupplyAreaChart: FC<SupplyAreaChartProps> = ({ data }) => {
             className='select-none'
             tick={{ fontSize: 14 }}
             tickMargin={5}
-            tickFormatter={(tick) => `${tick}%`}
+            tickFormatter={yAxisTickFormatter}
           />
           <Tooltip
             content={({ active, payload }) => {
@@ -89,8 +95,8 @@ const SupplyAreaChart: FC<SupplyAreaChartProps> = ({ data }) => {
           />
           <defs>
             <linearGradient id='splitColor' x1='0' y1='0' x2='0' y2='1'>
-              <stop offset={off} stopColor={CHART_COLOR} stopOpacity={1} />
-              <stop offset={off} stopColor='#DC4E4E' stopOpacity={1} />
+              <stop offset={off} stopColor={ChartColorsEnum.ORANGE} stopOpacity={1} />
+              <stop offset={off} stopColor={ChartColorsEnum.RED} stopOpacity={1} />
             </linearGradient>
           </defs>
           <Area
@@ -101,8 +107,14 @@ const SupplyAreaChart: FC<SupplyAreaChartProps> = ({ data }) => {
             isAnimationActive={true}
           />
 
-          <ReferenceLine y={0} stroke='#CCD3D6' strokeDasharray='3 3' />
-          <Brush dataKey='change' stroke='transparent' traveller={ChartTraveler} height={36} fill='transparent' >
+          <ReferenceLine y={0} stroke={ChartColorsEnum.GRAY} strokeDasharray='3 3' />
+          <Brush
+            dataKey='change'
+            stroke='transparent'
+            traveller={ChartTraveler}
+            height={36}
+            fill='transparent'
+          >
             <AreaChart
               data={data}
             >

@@ -4,7 +4,7 @@ import { FC } from 'react';
 import { Text,Title } from '@/components/typography';
 import { ColorBadge } from '@/components/ui/color-badge';
 import Row from '@/components/ui/row';
-import { Proposal } from '@/hooks/use-proposals-list';
+import { Proposal } from '@/hooks/dto/proposals-list.dto';
 import { formatDate } from '@/lib/utils';
 import { GaugeChart } from './gauge-chart';
 

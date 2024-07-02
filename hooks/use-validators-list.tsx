@@ -2,29 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useState } from 'react';
 import { useEnvironment } from '@/context/environment-context';
-
-export type ValidatorsListData = {
-  logo: string | null;
-  description: {
-    moniker: string;
-    details: string;
-    securityContact: string;
-    identity: string;
-    website: string;
-  };
-  address: string;
-  status: string;
-  jailed: boolean;
-  stakedAmount: string;
-  votingPower: string;
-  commission: {
-    updateTime: string;
-    rate: string;
-    maxChangeRate: string;
-    maxRate: string;
-  };
-  uptime: string;
-}
+import { ValidatorsListDTO } from './dto/validators-list.dto';
 
 export enum ValidatorStatus {
   BONDED = 'Bonded',
@@ -40,10 +18,10 @@ export enum ValidatorSortBy {
   UPTIME = 'Uptime'
 }
 
-type CountType = number | undefined;
+export type CountType = number | undefined;
 
 const getValidatorsListFn = async (baseUrl: string | undefined) => {
-  const { data } = await axios.get<ValidatorsListData[]>(baseUrl + '/staking/validators');
+  const { data } = await axios.get<ValidatorsListDTO[]>(baseUrl + '/staking/validators');
   return data;
 };
 
@@ -55,8 +33,10 @@ export const useValidatorsList = () => {
   const [sortBy, setSortBy] = useState<ValidatorSortBy | null>(ValidatorSortBy.STAKED_AMOUNT);
   const [order, setOrder] = useState<'asc' | 'desc'>('asc');
   const { baseUrl } = useEnvironment();
+
   const query = useQuery({
     refetchOnMount: true,
+    refetchOnWindowFocus: false,
     queryKey: useValidatorsListQueryKey,
     queryFn: () => getValidatorsListFn(baseUrl),
   });

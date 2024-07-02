@@ -1,24 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useEnvironment } from '@/context/environment-context';
-
-export type ValidatorDelegation = {
-  delegator: string;
-  delegatedAmount: string;
-  commission: string;
-}
-
-type ValidatorDelegationsData = {
-  validatorDelegations: ValidatorDelegation[];
-  pagination: {
-    total: number;
-    limit: number | string | null;
-    offset: number | string | null;
-  }
-}
+import { ValidatorDelegationsDTO } from './dto/validator-delegations.dto';
 
 const getValidatorDelegationsDataFn = async (address: string | string[], baseUrl: string | undefined) => {
-  const { data } = await axios.get<ValidatorDelegationsData>(baseUrl + '/staking/validator-delegations', { params: { address } });
+  const { data } = await axios.get<ValidatorDelegationsDTO>(baseUrl + '/staking/validator-delegations', { params: { address } });
 
   return data;
 };

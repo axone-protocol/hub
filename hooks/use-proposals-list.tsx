@@ -3,54 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useState } from 'react';
 import { useEnvironment } from '@/context/environment-context';
-
-type Message = {
-  '@type': string;
-  authority: string;
-  params?: any;
-  plan?: any;
-};
-
-type Deposit = {
-  denom: string;
-  amount: string;
-};
-
-type TallyResult = {
-  yes_count: string;
-  abstain_count: string;
-  no_count: string;
-  no_with_veto_count: string;
-};
-
-export type Proposal = {
-  id: string;
-  messages: Message[];
-  status: string;
-  final_tally_result: TallyResult;
-  submit_time: string;
-  deposit_end_time: string;
-  total_deposit: Deposit[];
-  voting_start_time: string;
-  voting_end_time: string;
-  metadata: string;
-  title: string;
-  summary: string;
-  proposer: string;
-  expedited: boolean;
-  failed_reason: string;
-  turnout: string;
-};
-
-type Pagination = {
-  next_key: null | string;
-  total: string;
-};
-
-type ProposalsData = {
-  proposals: Proposal[];
-  pagination: Pagination;
-};
+import { ProposalsListDTO } from './dto/proposals-list.dto';
 
 export enum ProposalStatus {
   ALL = 'ALL',
@@ -71,7 +24,7 @@ export enum ProposalSortBy {
 type CountType = number | undefined;
 
 const getProposalsListFn = async (baseUrl: string | undefined) => {
-  const { data } = await axios.get<ProposalsData>(baseUrl + '/staking/proposals');
+  const { data } = await axios.get<ProposalsListDTO>(baseUrl + '/staking/proposals');
   return data;
 };
 
@@ -80,7 +33,7 @@ export const useProposalsListQueryKey = ['proposals-list'];
 export const useProposalsList = () => {
   const [proposalStatus, setProposalStatus] = useState<ProposalStatus>(ProposalStatus.ALL);
   const [searchTerm, setSearchTerm] = useState('');
-  const [sortBy, setSortBy] = useState<ProposalSortBy | null>(null);
+  const [sortBy, setSortBy] = useState<ProposalSortBy | null>(ProposalSortBy.VOTING_ENDS);
   const [order, setOrder] = useState<'asc' | 'desc'>('asc');
   const { baseUrl } = useEnvironment();
 

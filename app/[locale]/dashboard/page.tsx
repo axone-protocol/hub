@@ -1,5 +1,6 @@
 import PageContainer from '@/components/ui/page-container';
 import Row from '@/components/ui/row';
+import { BlocksBlock } from './_components/blocks-block';
 import CurrentSupplyBlock from './_components/current-sypply-block';
 import GovernanceBlock from './_components/governance-block';
 import OverviewBlock from './_components/overview-block';
@@ -17,18 +18,21 @@ export default function Dashboard () {
         <GovernanceBlock />
       </Row>
 
-      <div className='flex flex-col xl:flex-row p-6 pt-0 '>
+      <div className='flex flex-col xl:flex-row lg:gap-6 p-6 py-0 '>
         <OverviewBlock />
-
-        <div className='flex flex-col w-full lg:flex-row lg:gap-6 lg:items-stretch xl:flex-col xl:w-1/3 desktop:w-[500px] mt-6 xl:mt-0'>
-          <SupplyChangeBlock />
-          <CurrentSupplyBlock />
+        <div className='flex flex-col w-full lg:flex-row lg:gap-6 lg:items-stretch xl:flex-col xl:w-1/3 desktop:w-[450px] mt-6 xl:mt-0'>
+          <BlocksBlock />
         </div>
       </div>
 
-      <Row className='mobile:flex-col p-6 pt-0 '>
+      <div className='flex flex-col xl:flex-row lg:gap-6 p-6 pt-0 lg:pt-6 '>
+        <div className='flex flex-col w-full lg:flex-row lg:gap-6 lg:items-stretch xl:flex-col xl:w-1/3 desktop:w-[450px] my-6 lg:mb-0 xl:mt-0'>
+          <SupplyChangeBlock />
+          <CurrentSupplyBlock />
+        </div>
         <SupplyRateBlock />
-      </Row>
+      </div>
+
       <Row className='mobile:flex-col p-6 pt-0 '>
         <ThreeBarsBlock />
       </Row>

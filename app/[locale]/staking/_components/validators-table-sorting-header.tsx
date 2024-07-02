@@ -56,6 +56,7 @@ type ValidatorsTableSortingHeaderProps = {
 };
 
 const ValidatorsTableSortingHeader: FC<ValidatorsTableSortingHeaderProps> = ({ sortByParam, activeFilter, t }) => {
+  console.log('activeFilter', activeFilter);
   return (
     <Row className='w-[900px] lg:w-full justify-between px-4 mb-2'>
       <FilterButton
