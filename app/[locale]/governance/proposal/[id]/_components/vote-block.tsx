@@ -27,9 +27,22 @@ const VoteBlock = () => {
       <Title className='mb-6'>{t('Vote')}</Title>
       <div className='flex flex-col lg:flex-row items-center lg:items-start gap-8 mb-12'>
 
+        <div className='lg:hidden flex w-full flex-col'>
+          <Text className='mb-0'>{t('Total')}</Text>
+          <div className='flex items-center gap-4 mb-3'>
+            <p className='text-[32px] text-axone-grey'>
+              {Number(totalDeposit[0].amount) / 1000000}
+            </p>
+            <span className='text-[32px] text-axone-khaki uppercase'>axone</span>
+          </div>
+          <Text className='mb-0'>{t('VotingEnds')}</Text>
+          <p className='text-20 text-axone-grey'>
+            {formatDate(proposalData.voting_end_time)}
+          </p>
+        </div>
         <VotingPieChart data={chartData} />
 
-        <div className='flex w-full lg:w-3/4 flex-col'>
+        <div className='hidden lg:flex w-full lg:w-3/4 flex-col'>
           <Text className='mb-0'>{t('Total')}</Text>
           <div className='flex flex-col lg:flex-row items-end gap-0 lg:gap-4 mb-3'>
             <p className='text-[32px] text-axone-grey'>
@@ -44,25 +57,25 @@ const VoteBlock = () => {
         </div>
       </div>
       <div className='grid grid-cols-1 lg:grid-cols-2 gap-8'>
-        <BoxInner className='flex-col justify-center items-center gap-6 w-full h-32'>
+        <BoxInner className='flex-col justify-center items-start gap-2 lg:items-center lg:gap-6 w-full h-24 pl-4 lg:pl-0 lg:h-32'>
           <Title>
             {Number(voteData.tallyInPercents.yes)}%
           </Title>
           <Text className='mb-0 text-axone-light-blue-2 uppercase'>{t('Yes')}</Text>
         </BoxInner>
-        <BoxInner className='flex-col justify-center items-center gap-6 w-full h-32'>
+        <BoxInner className='flex-col justify-center items-start gap-2 lg:items-center lg:gap-6 w-full h-24 pl-4 lg:pl-0 lg:h-32'>
           <Title>
             {Number(voteData.tallyInPercents.no)}%
           </Title>
           <Text className='mb-0 text-axone-red uppercase'>{t('No')}</Text>
         </BoxInner>
-        <BoxInner className='flex-col justify-center items-center gap-6 w-full h-32'>
+        <BoxInner className='flex-col justify-center items-start gap-2 lg:items-center lg:gap-6 w-full h-24 pl-4 lg:pl-0 lg:h-32'>
           <Title>
             {Number(voteData.tallyInPercents.abstain)}%
           </Title>
           <Text className='mb-0 text-axone-khaki uppercase'>{t('Abstain')}</Text>
         </BoxInner>
-        <BoxInner className='flex-col justify-center items-center gap-6 w-full h-32'>
+        <BoxInner className='flex-col justify-center items-start gap-2 lg:items-center lg:gap-6 w-full h-24 pl-4 lg:pl-0 lg:h-32'>
           <Title>
             {Number(voteData.tallyInPercents.noWithVeto)}%
           </Title>

@@ -73,30 +73,30 @@ const ProposalsListBlock = () => {
         <div className='flex flex-row justify-start lg:justify-center gap-2 lg:gap-6 w-full overflow-x-auto'>
           <p
             onClick={filterByStatus(ProposalStatus.ALL)}
-            className={cn('mb-0 mr-2 text-16 cursor-pointer text-axone-khaki', { 'text-axone-orange': proposalStatus === ProposalStatus.ALL })}
+            className={cn('mb-0 mr-2 text-16 cursor-pointer text-axone-khaki whitespace-nowrap', { 'text-axone-orange': proposalStatus === ProposalStatus.ALL })}
           >
             {t('All')} [{allCount || 0}]
           </p>
           <p
             onClick={filterByStatus(ProposalStatus.DEPOSIT_PERIOD)}
-            className={cn('mb-0 mr-2 cursor-pointer text-16 text-axone-khaki', { 'text-axone-orange': proposalStatus === ProposalStatus.DEPOSIT_PERIOD })}
+            className={cn('mb-0 mr-2 cursor-pointer text-16 text-axone-khaki whitespace-nowrap', { 'text-axone-orange': proposalStatus === ProposalStatus.DEPOSIT_PERIOD })}
           >
             {t('Deposit')} [{depositCount || 0}]
           </p>
           <p
             onClick={filterByStatus(ProposalStatus.VOTING_PERIOD)}
-            className={cn('mb-0 mr-2 cursor-pointer text-16 text-axone-khaki', { 'text-axone-orange': proposalStatus === ProposalStatus.VOTING_PERIOD })}
+            className={cn('mb-0 mr-2 cursor-pointer text-16 text-axone-khaki whitespace-nowrap', { 'text-axone-orange': proposalStatus === ProposalStatus.VOTING_PERIOD })}
           >
             {t('Voting')} [{votingCount || 0}]
           </p>
           <p
             onClick={filterByStatus(ProposalStatus.PASSED)}
-            className={cn('mb-0 mr-2 cursor-pointer text-16 text-axone-khaki', { 'text-axone-orange': proposalStatus === ProposalStatus.PASSED })}>
+            className={cn('mb-0 mr-2 cursor-pointer text-16 text-axone-khaki whitespace-nowrap', { 'text-axone-orange': proposalStatus === ProposalStatus.PASSED })}>
             {t('Passed')} [{passedCount || 0}]
           </p>
           <p
             onClick={filterByStatus(ProposalStatus.REJECTED)}
-            className={cn('mb-0 mr-2 cursor-pointer text-16 text-axone-khaki', { 'text-axone-orange':  proposalStatus === ProposalStatus.REJECTED })}
+            className={cn('mb-0 mr-2 cursor-pointer text-16 text-axone-khaki whitespace-nowrap', { 'text-axone-orange':  proposalStatus === ProposalStatus.REJECTED })}
           >
             {t('Rejected')} [{rejectedCount || 0}]
           </p>

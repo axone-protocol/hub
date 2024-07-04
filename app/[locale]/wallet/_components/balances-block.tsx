@@ -32,16 +32,16 @@ const BalancesBlock = () => {
           data.balances.map((balance, index) => (
             <Row key={index} className='justify-between p-4  group'>
               <div className='flex flex-row gap-4 w-1/4'>
-                <LogoDarkMobile className='w-8 h-8' />
+                <LogoDarkMobile className='w-8 h-8 min-w-8 min-h-8' />
                 <div className='flex flex-col'>
                   <Text className='mb-0'>Axone</Text>
                   <Text className='mb-0 text-axone-khaki'>AXONE</Text>
                 </div>
               </div>
-              <div className='flex flex-row gap-4 w-1/4 justify-end items-center'>
+              <div className='flex flex-col lg:flex-row lg:gap-4 w-1/4 justify-end items-center'>
                 {/* <Button variant={'link'} className='mb-0 mr-4 text-axone-orange hidden group-hover:flex'>Convert</Button> */}
-                <Text className='mb-0'>{(Number(balance.amount)/1000000).toFixed(3)}</Text>
-                <Text className='mb-0 text-axone-khaki'>AXONE</Text>
+                <p className='text-white text-16 mb-0'>{(Number(balance.amount)/1000000).toFixed(3)}</p>
+                <p className='mb-0 text-16 text-axone-khaki'>AXONE</p>
               </div>
             </Row>
           ))

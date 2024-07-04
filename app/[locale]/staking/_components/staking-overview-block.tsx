@@ -74,7 +74,7 @@ const StakingOverviewBlock = () => {
     return (
       <Box className='w-full m-0 relative'>
         <Row className='mb-10 items-left lg:items-center mobile:flex-col'>
-          <Title className='mr-40'>{t('YourStakingOverview')}</Title>
+          <Title className='mr-0 lg:mr-40'>{t('YourStakingOverview')}</Title>
         </Row>
         <div className='flex flex-col w-full justify-start items-start'>
           <div className='flex flex-row items-center mb-4'>
@@ -101,7 +101,7 @@ const StakingOverviewBlock = () => {
   return (
     <Box className='w-full m-0'>
       <Row className='mb-10 items-left lg:items-center mobile:flex-col'>
-        <Title className='mr-40'>{t('YourStakingOverview')}</Title>
+        <Title className='lg:mr-40'>{t('YourStakingOverview')}</Title>
       </Row>
       <div className='flex flex-col lg:flex-row gap-4 lg:gap-6'>
 
@@ -124,7 +124,7 @@ const StakingOverviewBlock = () => {
           <Title className='mb-0'>
             {claimableRewards} {DEFAULT_TOKEN_DENOM}
           </Title>
-          <Row className='justify-between items-center'>
+          <Row className='w-full justify-between items-center'>
             <Text className='text-axone-khaki mb-0'>
               {currencySign}{myClaimableRewardsInFiat}
             </Text>

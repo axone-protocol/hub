@@ -5,7 +5,7 @@ import { useEnvironment } from '@/context/environment-context';
 import { ProposalVotersDTO } from './dto/proposal-voters.dto';
 
 const getSingleProposalVotersDataFn = async (id: string | string[], offset: number, baseUrl: string | undefined) => {
-  const { data } = await axios.get<ProposalVotersDTO>(`${baseUrl}/staking/proposals/${id}/voters`, { params: { offset } });
+  const { data } = await axios.get<ProposalVotersDTO>(`${baseUrl}/governance/proposals/${id}/voters`, { params: { offset, limit: 10 } });
 
   return data;
 };

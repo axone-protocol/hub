@@ -21,7 +21,7 @@ export const useProposalStore = create<ProposalState>((set, get) => ({
 }));
 
 const getSingleProposalDataFn = async (id: string | string[], baseUrl: string | undefined) => {
-  const { data } = await axios.get<SingleProposalDTO>(`${baseUrl}/staking/proposals/${id}`);
+  const { data } = await axios.get<SingleProposalDTO>(`${baseUrl}/governance/proposals/${id}`);
 
   return data;
 };
