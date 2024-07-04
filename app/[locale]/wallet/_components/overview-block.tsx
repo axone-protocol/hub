@@ -52,9 +52,9 @@ const OverviewBlock = () => {
       </Row>
       <div className='flex flex-col lg:flex-row gap-4 lg:gap-6'>
         <BoxInner className='pt-5 pb-3 w-full lg:w-1/4 h-32 flex-col justify-between items-center'>
-          <Title className='mt-2 mb-0 uppercase'>
+          <p className='mt-2 mb-0 uppercase text-20'>
             {isFetchingBalance ? '0.00' : balance.toNumber().toFixed(3)} {DEFAULT_TOKEN_DENOM}
-          </Title>
+          </p>
           <Text className='uppercase text-axone-orange'>
             {currencySign}{myBallanceInFiat.toFixed(2)}
           </Text>
@@ -63,9 +63,9 @@ const OverviewBlock = () => {
           </Text>
         </BoxInner>
         <BoxInner className='pt-5 pb-3 w-full lg:w-1/4 h-32 flex-col justify-between items-center'>
-          <Title className='mt-2 mb-0 uppercase'>
+          <p className='mt-2 mb-0 uppercase text-20'>
             {stakeAmount.toFixed(3)} {DEFAULT_TOKEN_DENOM}
-          </Title>
+          </p>
           <Text className='uppercase text-axone-orange'>
             {currencySign}{myStakedAmountInFiat.toFixed(2)}
           </Text>

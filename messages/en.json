@@ -22,7 +22,8 @@
     "Modes": "Modes",
     "Copy": "Copy",
     "MakeACopy": "Make a Copy",
-    "Logout": "Logout"
+    "Logout": "Logout",
+    "Blocks": "Blocks"
   },
   "Dashboard": {
     "Title": "Dashboard",
@@ -63,7 +64,9 @@
     "SupplyBurn": "Supply Burn",
     "SupplyGrowth": "Supply Growth",
     "Currency": "Currency",
-    "Year": "Year"
+    "Year": "Year",
+    "Burned": "Burned",
+    "Issued": "Issued"
   },
   "FAQ": {
     "Title": "Frequently Asked Questions",
@@ -136,7 +139,10 @@
     "UptimeTooltip": "Uptime percentage based on the latest 10K blocks",
     "Validator": "Validator",
     "StakedAmount": "Staked Amount",
-    "ConnectWalletToDelegate": "Connect your wallet to view your delegation info"
+    "ConnectWalletToDelegate": "Connect your wallet to view your delegation info",
+    "MyDelegationTooltip": "The amount of AXONE you have staked to this validator",
+    "MyEarningsTooltip": "The rewards you have earned from staking your AXONE with this validator",
+    "DelegatedAmountTooltip": "The total amount of AXONE delegated to this validator"
   },
   "Governance": {
     "VoteOverview": "Vote Overview",
@@ -183,7 +189,13 @@
     "ProposalTitle": "Proposal Title",
     "Title": "Title",
     "ProposalDescription": "Proposal Description",
-    "Propose": "Propose"
+    "Propose": "Propose",
+    "QuorumTooltip": "The minimum percentage of total staked tokens that must participate in the vote for the proposal to be valid",
+    "ThresholdTooltip": "The minimum percentage of ‘Yes’ votes required for the proposal to pass.",
+    "VotingPeriodTooltip": "The duration of time during which AXONE holders can cast their votes on the proposal",
+    "Threshold": "Threshold",
+    "QuorumReached": "Quorum has been reached",
+    "NewProposalTooltip": "The amount of AXONE required to submit a new proposal"
   },
   "Wallet": {
     "Overview": "Overview",

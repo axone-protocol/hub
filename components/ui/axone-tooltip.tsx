@@ -1,5 +1,5 @@
 import { Info } from 'lucide-react';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { cn } from '@/lib/utils';
 
@@ -9,14 +9,14 @@ type AxoneTooltipProps = {
 };
  
 const AxoneTooltip: FC<AxoneTooltipProps> = ({ content, iconColor = 'text-axone-orange' }) => {
-
+  const [open, setOpen] = useState<boolean>(false);
   return (
     <TooltipProvider>
-      <Tooltip>
+      <Tooltip open={open} onOpenChange={setOpen}>
         <TooltipTrigger asChild>
-          <Info className={cn('cursor-pointer flex-none', iconColor)} size={18} />
+          <Info onClick={() => setOpen(true)} className={cn('cursor-pointer flex-none', iconColor)} size={18} />
         </TooltipTrigger>
-        <TooltipContent className='bg-axone-dark-blue text-axone-grey border-axone-box-border'>
+        <TooltipContent className='bg-axone-dark-blue text-axone-grey border-axone-box-border max-w-sm break-words'>
           <p>{content}</p>
         </TooltipContent>
       </Tooltip>

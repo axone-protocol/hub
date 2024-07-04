@@ -1,5 +1,6 @@
 'use client';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { Select, SelectContent, SelectGroup, SelectIcon, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useTimeFrameStore } from '@/hooks/timeframe/use-timeframe-store';
@@ -8,6 +9,7 @@ import { cn } from '@/lib/utils';
 const TimeFrameSelect = () => {
   const [open, setOpen] = useState<boolean>(false);
   const { timeFrame, setTimeFrame } = useTimeFrameStore();
+  const t = useTranslations('Dashboard');
 
   const onOpenChange = () => setOpen(prev => !prev);
   return (
@@ -20,11 +22,11 @@ const TimeFrameSelect = () => {
       </SelectTrigger>
       <SelectContent className='shadow-lg'>
         <SelectGroup>
-          <SelectItem value='all'>All</SelectItem>
-          <SelectItem value='day'>Day</SelectItem>
-          <SelectItem value='week'>Week</SelectItem>
-          <SelectItem value='month'>Month</SelectItem>
-          <SelectItem value='year'>Year</SelectItem>
+          <SelectItem value='all'>{t('Chart.Filter.All')}</SelectItem>
+          <SelectItem value='day'>{t('Chart.Filter.Day')}</SelectItem>
+          <SelectItem value='week'>{t('Chart.Filter.Week')}</SelectItem>
+          <SelectItem value='month'>{t('Chart.Filter.Month')}</SelectItem>
+          <SelectItem value='year'>{t('Chart.Filter.Year')}</SelectItem>
         </SelectGroup>
       </SelectContent>
     </Select>

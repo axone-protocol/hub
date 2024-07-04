@@ -56,7 +56,7 @@ const VoteOverviewBlock = () => {
         <BoxInner className='flex-col w-full lg:w-1/3 h-40 justify-center items-center gap-4 px-6'>
           <Title>{Number(voteOverview.quorum)}%</Title>
           <div className='flex flex-row w-full justify-end items-center'>
-            <Text className='text-axone-khaki mb-0'>Quorum has been reached</Text>
+            <Text className='text-axone-khaki mb-0'>{t('QuorumReached')}</Text>
           </div>
           <ProgressBar
             percentage={Number(voteOverview.quorum)}
@@ -69,7 +69,7 @@ const VoteOverviewBlock = () => {
             >
               Quorum
             </Text>
-            <AxoneTooltip iconColor='text-axone-grey' content='Some content'  />
+            <AxoneTooltip iconColor='text-axone-grey' content={t('QuorumTooltip')}  />
           </div>
         </BoxInner>
 
@@ -92,8 +92,8 @@ const VoteOverviewBlock = () => {
             color='#DC4E4E'
           />
           <div className='flex flex-row justify-center items-center gap-2'>
-            <Text className='text-axone-khaki mb-0 uppercase'>Threshold</Text>
-            <AxoneTooltip iconColor='text-axone-grey' content='Some content'  />
+            <Text className='text-axone-khaki mb-0 uppercase'>{t('Threshold')}</Text>
+            <AxoneTooltip iconColor='text-axone-grey' content={t('ThresholdTooltip')}  />
           </div>
         </BoxInner>
 
@@ -114,8 +114,8 @@ const VoteOverviewBlock = () => {
             filledGradient={{ end: '#35C2C3', start: '#3598C2' }}
           />
           <div className='flex flex-row justify-center items-center gap-2'>
-            <Text className='text-axone-khaki mb-0 uppercase'>Voting period</Text>
-            <AxoneTooltip iconColor='text-axone-grey' content='Some content'  />
+            <Text className='text-axone-khaki mb-0 uppercase'>{t('VotingPeriod')}</Text>
+            <AxoneTooltip iconColor='text-axone-grey' content={t('VotingPeriodTooltip')}  />
           </div>
         </BoxInner>
       </div>

@@ -24,23 +24,23 @@ const StakingBlock = () => {
       </Row>
       <div className='flex flex-col lg:flex-row gap-4 lg:gap-6'>
 
-        <BoxInner className='py-5 w-full lg:w-1/4 h-32 flex-col justify-between items-center px-6'>
-          <Title className='mt-2 mb-0'>{data?.totalValidators}</Title>
+        <BoxInner className='py-5 w-full lg:w-1/4 h-24 lg:h-32 flex-col justify-between items-start lg:items-center px-6'>
+          <Title className='lg:mt-2 mb-0'>{data?.totalValidators}</Title>
           <Text className='text-axone-khaki mb-0 uppercase'>
             {t('TotalValidators')}
           </Text>
         </BoxInner>
 
-        <BoxInner className='py-5 w-full lg:w-1/4 h-32 flex-col justify-between items-center px-6'>
-          <Title className='mt-2 mb-0'>{data?.apr}%</Title>
+        <BoxInner className='py-5 w-full lg:w-1/4 h-24 lg:h-32 flex-col justify-between items-start lg:items-center px-6'>
+          <Title className='lg:mt-2 mb-0'>{data?.apr}%</Title>
           <Text className='text-axone-khaki mb-0 uppercase'>
               APR
           </Text>
         </BoxInner>
 
-        <BoxInner className='py-5 w-full lg:w-1/4 h-32 flex-col justify-between items-center px-6'>
-          <div className='flex flex-col items-end'>
-            <Title className='mt-2 mb-0 uppercase'>{totalStaked}</Title>
+        <BoxInner className='py-5 w-full lg:w-1/4 h-24 lg:h-32 flex-col justify-between items-start lg:items-center px-6'>
+          <div className='flex items-center gap-2 lg:gap-0 lg:flex-col lg:items-end'>
+            <Title className='lg:mt-2 mb-0 uppercase'>{totalStaked}</Title>
             <span className='text-axone-khaki uppercase'>{DEFAULT_TOKEN_DENOM}</span>
           </div>
           <Text className='text-axone-khaki mb-0 uppercase'>
@@ -48,8 +48,8 @@ const StakingBlock = () => {
           </Text>
         </BoxInner>
 
-        <BoxInner className='py-5 w-full lg:w-1/4 h-32 flex-col justify-between items-center px-6'>
-          <Title className='mt-2 mb-0'>{data?.bondedTokens}%</Title>
+        <BoxInner className='py-5 w-full lg:w-1/4 h-24 lg:h-32 flex-col justify-between items-start lg:items-center px-6'>
+          <Title className='lg:mt-2 mb-0'>{data?.bondedTokens}%</Title>
           <Text className='text-axone-khaki mb-0 uppercase'>
             {t('BondedTokens')}
           </Text>

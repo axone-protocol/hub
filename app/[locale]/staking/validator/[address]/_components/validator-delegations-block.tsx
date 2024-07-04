@@ -27,7 +27,7 @@ const ValidatorDelegationsBlock = () => {
           <Text className='w-1/3 text-white mb-0 text-left'>{t('Delegator')}</Text>
           <div className='flex w-1/3 ml-4 gap-2 items-center justify-start'>
             <Text className=' text-white mb-0'>{t('DelegatedAmount')}</Text>
-            <AxoneTooltip iconColor='text-axone-khaki' content={t('DelegatedAmount')} />
+            <AxoneTooltip iconColor='text-axone-khaki' content={t('DelegatedAmountTooltip')} />
           </div>
           <Text className='w-1/3 text-white mb-0 text-right'>{t('Commission')}</Text>
         </Row>

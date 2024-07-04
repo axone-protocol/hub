@@ -14,7 +14,7 @@ type FilterButtonProps = {
   tooltip?: boolean;
   tooltipText?: string;
   selected?: boolean;
-};
+}; 
 
 const FilterButton: FC<FilterButtonProps> = ({
   onClick,
@@ -38,7 +38,7 @@ const FilterButton: FC<FilterButtonProps> = ({
   }, [active, onClick, selected]);
 
   return (
-    <div className={cn('flex flex-row items-center gap-2 pl-4 cursor-pointer', width)} onClick={handleClick}>
+    <div className={cn('flex flex-row items-center gap-2 pl-4 cursor-pointer whitespace-nowrap', width)} onClick={handleClick}>
       <Text className='mb-0'>{text}</Text>
       {tooltip ? <AxoneTooltip iconColor='text-axone-khaki' content={tooltipText} /> : null}
       <ArrowDownLong
@@ -56,7 +56,6 @@ type ValidatorsTableSortingHeaderProps = {
 };
 
 const ValidatorsTableSortingHeader: FC<ValidatorsTableSortingHeaderProps> = ({ sortByParam, activeFilter, t }) => {
-  console.log('activeFilter', activeFilter);
   return (
     <Row className='w-[900px] lg:w-full justify-between px-4 mb-2'>
       <FilterButton

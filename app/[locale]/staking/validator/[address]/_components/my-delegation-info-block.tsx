@@ -45,7 +45,7 @@ const MyDelegationInfoBlock = () => {
             <>
               <Row className='gap-2'>
                 <Text>{t('MyDelegation')}</Text>
-                <AxoneTooltip iconColor='text-axone-khaki' content='My Delegation' />
+                <AxoneTooltip iconColor='text-axone-khaki' content={t('MyDelegationTooltip')} />
               </Row>
               <Row className='gap-2 mb-4 flex-wrap'>
                 <p className='text-40 text-white break-all'>{Number(data?.delegation)/1000000 || '0.00'}</p>
@@ -55,7 +55,7 @@ const MyDelegationInfoBlock = () => {
                 <Button disabled={isDelegatingPending} onClick={openDelegateModal({})} className='w-1/2' variant={'rounded'}>{t('Delegate')}</Button>
                 {
                   !!Number(data?.delegation) ? (
-                    <Button disabled={isUnboningPending} onClick={onUnbond} className='w-1/2 border-axone-khaki text-axone-khaki' variant={'rounded'}>
+                    <Button disabled={isUnboningPending} onClick={onUnbond} className='w-1/2 border-axone-khaki text-axone-grey' variant={'rounded'}>
                       {isUnboningPending ? t('Unbonding') : t('Unbond')}
                     </Button>
                   ) : null
@@ -66,7 +66,7 @@ const MyDelegationInfoBlock = () => {
 
               <Row className='gap-2'>
                 <Text>My Earnings</Text>
-                <AxoneTooltip iconColor='text-axone-khaki' content='My Earnings' />
+                <AxoneTooltip iconColor='text-axone-khaki' content='MyEarningsTooltip' />
               </Row>
               <Row className='gap-2 mb-4 flex-wrap'>
                 <p className='text-40 text-white break-all'>{data?.earnings || '0.00'}</p>
@@ -77,7 +77,7 @@ const MyDelegationInfoBlock = () => {
                   <Button
                     disabled={isClaimingRewardsPending}
                     onClick={onClaimRewards}
-                    className='w-1/2 border-axone-khaki text-axone-khaki'
+                    className='w-1/2 border-axone-khaki text-axone-grey'
                     variant={'rounded'}
                   >
                     {isClaimingRewardsPending ? t('Claiming') : t('Claim')}

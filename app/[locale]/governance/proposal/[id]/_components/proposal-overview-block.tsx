@@ -41,7 +41,7 @@ const ProposalOverviewBlock = () => {
         </div>
         <div className='w-full lg:w-1/3 flex flex-col'>
           <p className='font-base font-bold text-white mb-2'>{t('Type')}</p>
-          <Text>{ data?.proposal.messages[0]['@type'] || '...' }</Text>
+          <Text className='break-all'>{ data?.proposal.messages[0]['@type'] || '...' }</Text>
         </div>
         <div className='w-full lg:w-1/3 flex flex-col'>
           <p className='font-base font-bold text-white mb-2'>{t('Deposits')}</p>
@@ -57,7 +57,7 @@ const ProposalOverviewBlock = () => {
         </div>
         <div className='w-full lg:w-1/3 flex flex-col'>
           <p className='font-base font-bold text-white mb-2'>{t('ProposerAddress')}</p>
-          <Text>{ data?.proposal.proposer || '...' }</Text>
+          <Text className='break-all'>{ data?.proposal.proposer || '...' }</Text>
         </div>
       </div>
       <div className='flex flex-col lg:flex-row mb-6 gap-6'>

@@ -22,7 +22,8 @@
     "Modes": "Modes",
     "Copy": "Copier",
     "MakeACopy": "Faire une copie",
-    "Logout": "Déconnexion"
+    "Logout": "Déconnexion",
+    "Blocks": "Blocs"
   },
   "Dashboard": {
     "Title": "Tableau de bord",
@@ -63,7 +64,9 @@
     "SupplyBurn": "Offre brûlée",
     "SupplyGrowth": "Croissance de l'offre",
     "Currency": "Devise",
-    "Year": "Année"
+    "Year": "Année",
+    "Burned": "Brûlé",
+    "Issued": "Émis"
   },
   "FAQ": {
     "Title": "Questions Fréquemment Posées",
@@ -136,7 +139,10 @@
     "UptimeTooltip": "Pourcentage de temps que le validateur a été en ligne",
     "Validator": "Valideur",
     "StakedAmount": "Montant mis en jeu",
-    "ConnectWalletToDelegate": "Connectez votre portefeuille pour déléguer"
+    "ConnectWalletToDelegate": "Connectez votre portefeuille pour déléguer",
+    "MyDelegationTooltip": "Le montant d'AXONE que vous avez misé sur ce validateur",
+    "MyEarningsTooltip": "Les récompenses que vous avez gagnées en jalonnant votre AXONE avec ce validateur",
+    "DelegatedAmountTooltip": "Le montant total d'AXONE délégué à ce validateur"
   },
   "Governance": {
     "VoteOverview": "Aperçu du vote",
@@ -183,7 +189,13 @@
     "ProposalTitle": "Titre de la proposition",
     "Title": "Titre",
     "ProposalDescription": "Description de la proposition",
-    "Propose": "Proposer"
+    "Propose": "Proposer",
+    "QuorumTooltip": "Le pourcentage minimum QuorumReacheddu total des jetons mis en jeu qui doivent participer au vote pour que la proposition soit valide",
+    "ThresholdTooltip": "Le pourcentage minimum de votes «Oui» requis pour que la proposition soit adoptée.",
+    "VotingPeriodTooltip": "La durée pendant laquelle les détenteurs d'AXONE peuvent voter sur la proposition",
+    "Threshold": "Seuil",
+    "QuorumReached": "Le quorum a été atteint",
+    "NewProposalTooltip": "Le montant d'AXONE requis pour soumettre une nouvelle proposition"
   },
   "Wallet": {
     "Overview": "Aperçu",

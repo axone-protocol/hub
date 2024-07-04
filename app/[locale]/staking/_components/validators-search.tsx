@@ -3,7 +3,7 @@
 import { SearchIcon } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { FC } from 'react';
-import { Text, Title } from '@/components/typography';
+import { Title } from '@/components/typography';
 import { Input } from '@/components/ui/input';
 import { CountType, ValidatorStatus } from '@/hooks/use-validators-list';
 import { cn } from '@/lib/utils';
@@ -27,6 +27,8 @@ const ValidatorsSearch: FC<ValidatorsSearchProps> = ({
 }) => {
   const t = useTranslations('Staking');
 
+  const activeSelected = validatorStatus === ValidatorStatus.BONDED;
+  const inactiveSelected = validatorStatus === ValidatorStatus.UNBONDED;
   return (
     <div className='flex flex-col lg:flex-row justify-between mb-8 lg:items-center gap-2 lg:gap-4'>
       <Title>{t('Validators')}</Title>
@@ -41,23 +43,23 @@ const ValidatorsSearch: FC<ValidatorsSearchProps> = ({
           placeholder={t('SearchValidators')}
         />
       </div>
-      <div className='flex flex-row justify-center gap-2'>
-        <Text
-          className={cn('mb-0 mr-2 cursor-pointer',
-            { 'text-axone-orange': validatorStatus === ValidatorStatus.BONDED })
+      <div className='flex flex-row justify-start gap-2 mt-2'>
+        <p
+          className={cn('mb-0 mr-2 cursor-pointer text-16',
+            { 'text-axone-orange': activeSelected, 'text-axone-grey': !activeSelected })
           }
           onClick={filterByStatus(ValidatorStatus.BONDED)}
         >
           {t('Active')} [{activeCount}]
-        </Text>
-        <Text
-          className={cn('mb-0 mr-2 cursor-pointer',
-            { 'text-axone-orange': validatorStatus === ValidatorStatus.UNBONDED })
+        </p>
+        <p
+          className={cn('mb-0 mr-2 cursor-pointer text-16',
+            { 'text-axone-orange': inactiveSelected, 'text-axone-grey': !inactiveSelected })
           }
           onClick={filterByStatus(ValidatorStatus.UNBONDED)}
         >
           {t('Inactive')} [{inactiveCount}]
-        </Text>
+        </p>
       </div>
     </div>
   );

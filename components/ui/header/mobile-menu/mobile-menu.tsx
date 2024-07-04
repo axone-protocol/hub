@@ -137,7 +137,7 @@ const MobileMenuModal: FC<MobileMenuModalProps> = ({ isOpen,close }) => {
           <div className='flex flex-col pl-10 mt-3'>
             <MobileMenuItem navItem href={`/${locale}/dashboard`} close={closeAfterNav}>{t('Dashboard')}</MobileMenuItem>
             <MobileMenuItem navItem href={`/${locale}/wallet`} close={closeAfterNav}>{t('Wallet')}</MobileMenuItem>
-            <MobileMenuItem navItem href={`/${locale}/bridge`} close={closeAfterNav}>{t('Bridge')}</MobileMenuItem>
+            {/* <MobileMenuItem navItem href={`/${locale}/bridge`} close={closeAfterNav}>{t('Bridge')}</MobileMenuItem> */}
             <MobileMenuItem navItem href={`/${locale}/staking`} close={closeAfterNav}>{t('Staking')}</MobileMenuItem>
             <MobileMenuItem navItem href={`/${locale}/governance`} close={closeAfterNav}>{t('Governance')}</MobileMenuItem>
             <MobileMenuItem navItem href={`/${locale}/faq`} close={closeAfterNav}>{t('FAQ')}</MobileMenuItem>
