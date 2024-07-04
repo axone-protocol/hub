@@ -48,13 +48,14 @@ export default function Governance () {
               </ButtonWithIcon>
             </div>
             <Button
+              className='hidden lg:flex'
               variant={'rounded'}
               onClick={navigateToNewProposal}
             >
               {t('NewProposal')}
             </Button>
           </div>
-          <ProposalsMetricsBlock />
+          <ProposalsMetricsBlock goToNewProposal={navigateToNewProposal} />
           <Line className='my-10' />
           <ProposalsListBlock />
         </Box>

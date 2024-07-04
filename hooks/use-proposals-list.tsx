@@ -24,7 +24,7 @@ export enum ProposalSortBy {
 type CountType = number | undefined;
 
 const getProposalsListFn = async (baseUrl: string | undefined) => {
-  const { data } = await axios.get<ProposalsListDTO>(baseUrl + '/staking/proposals');
+  const { data } = await axios.get<ProposalsListDTO>(baseUrl + '/governance/proposals');
   return data;
 };
 

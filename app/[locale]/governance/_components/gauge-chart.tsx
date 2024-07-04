@@ -8,7 +8,7 @@ const GaugeChart = ({ val = 0 }) => {
   return (
     <div className='flex flex-row items-center relative w-[100px] h-full'>
       <GaugeComponent
-        className='w-[80px] h-[60px] absolute top-0 left-0'
+        className='w-[80px] h-[60px] absolute top-0 left-0 text-red-600'
         value={val}
         type='radial'
         arc={{
@@ -30,7 +30,7 @@ const GaugeChart = ({ val = 0 }) => {
         labels={{
           valueLabel: {
             matchColorWithArc: true,
-            style: { fontSize: 70 }
+            style: { fontSize: 70, color: '#FB9501' }
           },
           tickLabels: {
             type: 'inner',

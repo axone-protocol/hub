@@ -80,29 +80,29 @@ const ValidatorDetailsBlock = () => {
 
       <div className='flex flex-col lg:flex-row gap-4 lg:gap-6 my-10'>
 
-        <BoxInner className='py-5 w-full lg:w-1/4 h-32 flex-col justify-between items-center px-6'>
-          <Title className='mt-2 mb-0'>{formatNumberToLocale(Number(validatorData?.stakedAmount)/1000000)}</Title>
+        <BoxInner className='py-5 w-full h-24 items-start lg:w-1/4 lg:h-32 flex-col justify-between lg:items-center px-6'>
+          <Title className='lg:mt-2 mb-0'>{formatNumberToLocale(Number(validatorData?.stakedAmount)/1000000)}</Title>
           <Text className='text-axone-khaki mb-0 uppercase'>
             {t('TotalStaked')}
           </Text>
         </BoxInner>
 
-        <BoxInner className='py-5 w-full lg:w-1/4 h-32 flex-col justify-between items-center px-6'>
-          <Title className='mt-2 mb-0'>{Number(validatorData?.commission.rate).toFixed(2)}%</Title>
+        <BoxInner className='py-5 w-full h-24 items-start lg:w-1/4 lg:h-32 flex-col justify-between lg:items-center px-6'>
+          <Title className='lg:mt-2 mb-0'>{Number(validatorData?.commission.rate).toFixed(2)}%</Title>
           <Text className='text-axone-khaki mb-0 uppercase'>
             {t('CommissionRate')}
           </Text>
         </BoxInner>
 
-        <BoxInner className='py-5 w-full lg:w-1/4 h-32 flex-col justify-between items-center px-6'>
-          <Title className='mt-2 mb-0 uppercase'>{validatorData?.votingPower || 0}%</Title>
+        <BoxInner className='py-5 w-full h-24 items-start lg:w-1/4 lg:h-32 flex-col justify-between lg:items-center px-6'>
+          <Title className='lg:mt-2 mb-0 uppercase'>{validatorData?.votingPower || 0}%</Title>
           <Text className='text-axone-khaki mb-0 uppercase'>
             {t('VotingPower')}
           </Text>
         </BoxInner>
 
-        <BoxInner className='py-5 w-full lg:w-1/4 h-32 flex-col justify-between items-center px-6'>
-          <Title className='mt-2 mb-0'>{validatorData?.uptime || 0}%</Title>
+        <BoxInner className='py-5 w-full h-24 items-start lg:w-1/4 lg:h-32 flex-col justify-between lg:items-center px-6'>
+          <Title className='lg:mt-2 mb-0'>{validatorData?.uptime || 0}%</Title>
           <Text className='text-axone-khaki mb-0 uppercase'>
             {t('Uptime')}
           </Text>

@@ -2,10 +2,11 @@
 import { useTranslations } from 'next-intl';
 import { Text, Title } from '@/components/typography';
 import { BoxInner } from '@/components/ui/boxes';
+import { Button } from '@/components/ui/button';
 import { useGovernanceOverview } from '@/hooks/use-governance-overview';
 import { ProposalsMetricsSkeleton } from './proposals-metrics-skeleton';
 
-const ProposalsMetricsBlock = () => {
+const ProposalsMetricsBlock = ({ goToNewProposal }: { goToNewProposal(): void }) => {
   const { data: governanceOverview, isFetching } = useGovernanceOverview();
   const t = useTranslations('Governance');
 
@@ -15,7 +16,7 @@ const ProposalsMetricsBlock = () => {
   return (
     <div className='flex flex-col lg:flex-row gap-4 lg:gap-6'>
 
-      <BoxInner className='py-5 w-full lg:w-1/4 h-30 flex-col justify-center gap-6 items-center px-6'>
+      <BoxInner className='py-5 w-full lg:w-1/4 h-24 items-start lg:h-30 flex-col justify-center gap-2 lg:gap-6 lg:items-center px-6'>
         <Title className='mb-0'>
           {governanceOverview.totalProposals}
         </Title>
@@ -24,7 +25,7 @@ const ProposalsMetricsBlock = () => {
         </Text>
       </BoxInner>
 
-      <BoxInner className='py-5 w-full lg:w-1/4 h-30 flex-col justify-center gap-6 items-center px-6'>
+      <BoxInner className='py-5 w-full lg:w-1/4 h-24 items-start lg:h-30 flex-col justify-center gap-2 lg:gap-6 lg:items-center px-6'>
         <Title className='mb-0'>
           {governanceOverview.currentProposals}
         </Title>
@@ -33,7 +34,7 @@ const ProposalsMetricsBlock = () => {
         </Text>
       </BoxInner>
 
-      <BoxInner className='py-5 w-full lg:w-1/4 h-30 flex-col justify-center gap-6 items-center px-6'>
+      <BoxInner className='ppy-5 w-full lg:w-1/4 h-24 items-start lg:h-30 flex-col justify-center gap-2 lg:gap-6 lg:items-center px-6'>
         <Title className='mb-0'>
           {governanceOverview.votingPeriod} Day {governanceOverview.votingPeriod > 1 ? 's' : ''}
         </Title>
@@ -42,7 +43,7 @@ const ProposalsMetricsBlock = () => {
         </Text>
       </BoxInner>
 
-      <BoxInner className='py-5 w-full lg:w-1/4 h-30 flex-col justify-center gap-6 items-center px-6'>
+      <BoxInner className='py-5 w-full lg:w-1/4 h-24 items-start lg:h-30 flex-col justify-center gap-2 lg:gap-6 lg:items-center px-6'>
         <Title className='mb-0'>
           {governanceOverview.depositRequired} AXONE
         </Title>
@@ -50,6 +51,13 @@ const ProposalsMetricsBlock = () => {
           {t('DepositRequired')}
         </Text>
       </BoxInner>
+      <Button
+        className='lg:hidden flex'
+        variant={'rounded'}
+        onClick={goToNewProposal}
+      >
+        {t('NewProposal')}
+      </Button>
     </div>
   );
 };

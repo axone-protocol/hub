@@ -75,7 +75,7 @@ const TransferBlock = () => {
           </Text>
           <AxoneTooltip content='Your available amount to transfer to a different address on Axone' />
         </Row>
-        <Text className='uppercase'>{isFetchingBalance ? '0.00' : balance.toNumber().toFixed(2)} {DEFAULT_TOKEN_DENOM}</Text>
+        <p className='uppercase text-20 text-white'>{isFetchingBalance ? '0.00' : balance.toNumber().toFixed(2)}</p>
       </Column>
       <form onSubmit={onConfirm} className='flex flex-col gap-6'>
         <div className='flex flex-col'>

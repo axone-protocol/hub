@@ -7,7 +7,7 @@ const StakingLoadingSkeleton = ({ title }: { title: string }) => {
   return (
     <Box className='w-full m-0'>
       <Row className='mb-10 items-left lg:items-center mobile:flex-col'>
-        <Title className='mr-40'>{title}</Title>
+        <Title className='lg:mr-40 mr-0'>{title}</Title>
       </Row>
       <div className='flex flex-col lg:flex-row gap-4 lg:gap-6'>
         {Array.from({ length: 4 }).map((_, index) => (

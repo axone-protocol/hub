@@ -105,6 +105,10 @@ export default function NewProposal () {
                 <p className='text-16'>{t('TextProposal')}</p>
                 <Text>{t('TextProposalDesc')}</Text>
               </div>
+              <div className='lg:hidden flex flex-col mb-6'>
+                <p className='text-16'>{t('DepositInformation')}</p>
+                <Text>{t('DepositInformationDesc')}</Text>
+              </div>
               <div className='grid w-full items-center gap-1.5 mb-12'>
                 <Label className='text-white' htmlFor='title'>
                   {t('Title')}
@@ -130,10 +134,6 @@ export default function NewProposal () {
                 />
                 {errors.description && <p className='text-[12px] text-axone-red'>{`${errors.description.message}`}</p>}
               </div>
-              <div className='lg:hidden flex flex-col mb-6'>
-                <p className='text-16'>{t('DepositInformation')}</p>
-                <Text>{t('DepositInformationDesc')}</Text>
-              </div>
               <div className='grid w-full items-center gap-1.5 mb-10'>
                 <Row className='items-center gap-2'>
                   <Label className='text-white' htmlFor='amount'>
@@ -141,7 +141,7 @@ export default function NewProposal () {
                   </Label>
                   <AxoneTooltip
                     iconColor='text-axone-khaki'
-                    content='The Axone address to which you are sending tokens'
+                    content={t('NewProposalTooltip')}
                   />
                 </Row>
                 <Input
@@ -155,7 +155,7 @@ export default function NewProposal () {
               </div>
               <Button
                 variant={'rounded'}
-                className='w-4/12 mt-6'
+                className='w-full lg:w-4/12 lg:mt-6'
                 onClick={onConfirm}
               >
                 {t('Propose')}

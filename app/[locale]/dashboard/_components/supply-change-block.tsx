@@ -49,7 +49,7 @@ export default function SupplyChangeBlock () {
               <Text className='text-axone-grey mb-0'>
                 {formattedBurnt}
               </Text>
-              <Text className='text-axone-grey mb-0  lg:flex lg:justify-between'><Text className='text-axone-khaki mb-0 lg:px-1'>AXONE</Text> Burned</Text>
+              <Text className='text-axone-grey mb-0  lg:flex lg:justify-between'><Text className='text-axone-khaki mb-0 lg:px-1'>AXONE</Text> {t('Burned')}</Text>
             </div>
           </Row>
 
@@ -59,7 +59,7 @@ export default function SupplyChangeBlock () {
               <Text className='text-axone-grey mb-0'>
                 {formattedIssued}
               </Text>
-              <Text className='text-axone-grey mb-0 lg:flex lg:justify-between'><Text className='text-axone-khaki mb-0 lg:px-1'>AXONE</Text> Issued</Text>
+              <Text className='text-axone-grey mb-0 lg:flex lg:justify-between'><Text className='text-axone-khaki mb-0 lg:px-1'>AXONE</Text> {t('Issued')}</Text>
             </div>
           </Row>
         </Column>
