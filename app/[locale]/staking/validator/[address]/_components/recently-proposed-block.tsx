@@ -11,15 +11,7 @@ import { useEnvironment } from '@/context/environment-context';
 import { SingleProposedBlock, ValidatorProposedBlocksDTO } from '@/hooks/dto/validator-proposed-blocks.dto';
 import { useSingleValidatorProposedBlocks } from '@/hooks/use-single-validator-proposed-blocks';
 import { useSocket } from '@/hooks/use-socket';
-import { formatTimestamp } from '@/lib/utils';
-
-// TODO: Move this to a shared utility file in case if it will be used in other places
-const shortenHash = (str: string, startLength: number = 6, endLength: number = 6): string => {
-  if (str.length <= startLength + endLength) {
-    return str;
-  }
-  return str.slice(0, startLength) + '...' + str.slice(-endLength);
-};
+import { formatTimestamp, shortenHash } from '@/lib/utils';
 
 const RecentlyProposedBlock = () => {
   const t = useTranslations('Staking');

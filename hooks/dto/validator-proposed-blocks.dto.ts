@@ -1,8 +1,10 @@
 type SingleProposedBlock = {
-  height: string,
-  blockHash: string,
-  txs: number,
-  time: string
+  height: string;
+  blockHash: string;
+  txs: string;
+  time: string;
+  img: string;
+  name: string;
 }
 
 type ValidatorProposedBlocksDTO = {

@@ -4,16 +4,16 @@ import { differenceInSeconds, format, formatDistanceToNow, parseISO } from 'date
 import { twMerge } from 'tailwind-merge';
 import { okp4Chain } from '@/core/chain';
 
-export const EXPLORE_URL = 'https://docs.axone.xyz';
-export const GET_STARTED_URL = 'https://axone.xyz';
+const EXPLORE_URL = 'https://docs.axone.xyz';
+const GET_STARTED_URL = 'https://axone.xyz';
 
-export const DEFAULT_TOKEN_DENOM = 'AXONE';
+const DEFAULT_TOKEN_DENOM = 'AXONE';
 
-export function cn (...inputs: ClassValue[]) {
+function cn (...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const suggestTestNetToKeplr = () => {
+const suggestTestNetToKeplr = () => {
   // @ts-expect-error
   if (window.keplr) {
     // @ts-expect-error
@@ -29,7 +29,7 @@ export const suggestTestNetToKeplr = () => {
   }
 };
 
-export function formatChartDate (unixTime: number) {
+function formatChartDate (unixTime: number) {
   const date = new Date(unixTime * 1000);
   const day = date.getDate();
   const month = date.toLocaleString('default', { month: 'short' });
@@ -37,7 +37,7 @@ export function formatChartDate (unixTime: number) {
   return `${month} ${day}${'/'}${year}`;
 }
 
-export function formatNumber (num: number | undefined): string {
+function formatNumber (num: number | undefined): string {
   if (num === undefined) {
     return '0';
   }
@@ -70,7 +70,7 @@ export function formatNumber (num: number | undefined): string {
   return `${sign}${formattedValue}${suffix}`;
 }
 
-export function formatTimestamp (timestamp: string): string {
+function formatTimestamp (timestamp: string): string {
   const date = new Date(timestamp);
   const secondsAgo = differenceInSeconds(new Date(), date);
 
@@ -80,7 +80,7 @@ export function formatTimestamp (timestamp: string): string {
   return formatDistanceToNow(date, { addSuffix: true });
 };
 
-export const formatDate = (date: string | undefined): string => {
+const formatDate = (date: string | undefined): string => {
   if (!date) {
     return '';
   }
@@ -91,11 +91,33 @@ export const formatDate = (date: string | undefined): string => {
   return formattedDate;
 };
 
-export const formatNumberToLocale = (num: number | undefined): string => {
+const formatNumberToLocale = (num: number | undefined): string => {
   if (num === undefined || isNaN(num)) {
     return '0.00';
   }
   return num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 };
 
-export const openInNewTab = (url: string) => () => window.open(url, '_blank');
+const openInNewTab = (url: string) => () => window.open(url, '_blank');
+
+const shortenHash = (str: string, startLength: number = 6, endLength: number = 6): string => {
+  if (str.length <= startLength + endLength) {
+    return str;
+  }
+  return str.slice(0, startLength) + '...' + str.slice(-endLength);
+};
+
+export {
+  shortenHash,
+  openInNewTab,
+  formatNumberToLocale,
+  formatDate,
+  formatTimestamp,
+  formatNumber,
+  formatChartDate,
+  suggestTestNetToKeplr,
+  cn,
+  DEFAULT_TOKEN_DENOM,
+  EXPLORE_URL,
+  GET_STARTED_URL
+};

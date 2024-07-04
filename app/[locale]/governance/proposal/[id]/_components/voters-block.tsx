@@ -1,18 +1,18 @@
 'use client';
+import { useParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { Text, Title } from '@/components/typography';
 import { Box, BoxInner } from '@/components/ui/boxes';
 import { Button } from '@/components/ui/button';
 import Row from '@/components/ui/row';
 import Spinner from '@/components/ui/spinner';
-import { useProposalStore } from '@/hooks/use-single-proposal-info';
 import { useSingleProposalVotersInfo } from '@/hooks/use-single-proposal-voters';
 import { NoVotersFound } from './no-voters-found';
 
 const VotersBlock = () => {
   const t = useTranslations('Governance');
-  const id = useProposalStore((state) => state.proposalData?.proposal.id);
-  const { data, showMore, isLoading, isFetching, isRefetching } = useSingleProposalVotersInfo(id || '1');
+  const { id } = useParams();
+  const { data, showMore, isLoading, isFetching, isRefetching } = useSingleProposalVotersInfo(id);
 
   if (isLoading || isFetching || isRefetching) {
     return (
