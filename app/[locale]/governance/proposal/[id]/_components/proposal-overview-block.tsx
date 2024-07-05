@@ -25,7 +25,7 @@ const ProposalOverviewBlock = () => {
 
           <div className='flex flex-col h-16 justify-between cursor-pointer'>
             <span className='w-[70px] text-center text-[12px] text-axone-khaki bg-axone-bg-dark p-1 rounded-md uppercase'>
-              {'Active'}
+              {data?.proposal.status.replace('PROPOSAL_STATUS_', '') || 'Status'}
             </span>
             <span className='text-20 text-white'>
               { data?.proposal.title || 'Proposal Title' }
