@@ -17,7 +17,7 @@ const defaultState = { voters: [], pagination: { total: 0, limit: 10, offset: 0 
 export const useSingleProposalVotersInfo = (id: string | string[]) => {
   const { baseUrl } = useEnvironment();
   const [offset, setOffset] = useState(0);
-  const [voters, setBalances] = useState<ProposalVotersDTO>(defaultState);
+  const [voters, setVoters] = useState<ProposalVotersDTO>(defaultState);
 
   const { data, ...queryInfo } = useQuery({
     enabled: true,
@@ -26,16 +26,16 @@ export const useSingleProposalVotersInfo = (id: string | string[]) => {
   });
 
   useEffect(() => {
-    if (data) {
-      setBalances((prevData) => ({
-        ...data,
+    if (data && !Array.isArray(data)) {
+      setVoters((prevData) => ({
+        ...prevData,
         voters: [...prevData.voters, ...data.voters],
         pagination: data.pagination,
       }));
     }
 
     return () => {
-      setBalances(defaultState);
+      setVoters(defaultState);
       setOffset(0);
     };
   }, [data]);
