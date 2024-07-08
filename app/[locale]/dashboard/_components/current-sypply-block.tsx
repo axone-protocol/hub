@@ -1,21 +1,23 @@
 'use client';
 import { formatDistanceToNow } from 'date-fns';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 import { Text } from '@/components/typography';
 import { Box } from '@/components/ui/boxes';
 import Column from '@/components/ui/column';
 import Spinner from '@/components/ui/spinner';
 import { useCurrentSupply } from '@/hooks/use-current-supply';
-import { formatNumberToLocale } from '@/lib/utils';
+import { formatNumberToLocale, getLocaleForTime } from '@/lib/utils';
 
 export default function CurrentSupplyBlock () {
   const t  = useTranslations('Dashboard');
   const { data, isLoading } = useCurrentSupply();
+  const lang = useLocale();
+  const locale = getLocaleForTime(lang);
 
   const formattedNum = formatNumberToLocale(Number(data?.supply));;
   const updatedDate = useMemo(() => new Date(data?.time ? data?.time : Date.now()), [data?.time]);
-  const timeAgo = useMemo(() => formatDistanceToNow(updatedDate), [updatedDate]);
+  const timeAgo = useMemo(() => formatDistanceToNow(updatedDate, { addSuffix: true, locale }), [locale, updatedDate]);
 
   if (isLoading) {
     return (
@@ -33,7 +35,7 @@ export default function CurrentSupplyBlock () {
         <p className='text-4xl tracking-tighter text-axone-khaki mb-0'>AXONE</p>
       </div>
       <Column className='justify-end'>
-        <Text className='text-axone-grey tracking-tighter uppercase mb-0'>{`Updated ${timeAgo} ago`}</Text>
+        <Text className='text-axone-grey tracking-tighter uppercase mb-0'>{t('Updated') + ' ' + timeAgo}</Text>
       </Column>
     </Box>
   );

@@ -39,7 +39,7 @@ const SingleValidatorItem: FC<SingleValidatorItemProps> = ({ data, openDelegateM
 
   return (
     <Row className={cn('justify-between items-center p-4 group even:bg-axone-dark-blue-3')}>
-      <div className='flex flex-row items-center gap-4 w-[300px] lg:w-1/4'>
+      <div className='flex flex-row items-center gap-4 w-[230px] lg:w-1/4'>
         <Image src={data.logo || '/icons/wallets/ninji.svg'} className='rounded-full' width={38} height={38} alt='AXONE' />
         <div className='flex flex-col cursor-pointer' onClick={goToDetails}>
           <Text className='w-[150px] mb-0 truncate ...'>{data.description.moniker}</Text>

@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { type ClassValue, clsx } from 'clsx';
 import { differenceInSeconds, format, formatDistanceToNow, parseISO } from 'date-fns';
+import { enUS, fr } from 'date-fns/locale';
 import { twMerge } from 'tailwind-merge';
 import { okp4Chain } from '@/core/chain';
 
@@ -11,6 +12,13 @@ const DEFAULT_TOKEN_DENOM = 'AXONE';
 
 function cn (...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
+}
+
+function getLocaleForTime (language: string) {
+  switch(language) {
+  case 'fr': return fr;
+  default: return enUS;
+  }
 }
 
 const suggestTestNetToKeplr = () => {
@@ -117,6 +125,7 @@ export {
   formatChartDate,
   suggestTestNetToKeplr,
   cn,
+  getLocaleForTime,
   DEFAULT_TOKEN_DENOM,
   EXPLORE_URL,
   GET_STARTED_URL

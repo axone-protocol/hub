@@ -24,7 +24,7 @@ const SupplyRateBlock = () => {
       </BoxInner>
 
       <Row className='justify-between w-full mt-6'>
-        <Text className='text-axone-grey tracking-tighter uppercase mb-0'>Updated 34 seconds ago</Text>
+        <Text className='text-axone-grey tracking-tighter uppercase mb-0'>{t('Updated')} 34 seconds ago</Text>
         <div className='flex'>
           <div className='w-4 h-4 rounded-full bg-axone-orange'></div>
           <Text className='text-axone-grey tracking-tighter uppercase mb-0 ml-2'>AXONE</Text>
