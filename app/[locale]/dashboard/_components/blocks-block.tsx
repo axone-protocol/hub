@@ -52,7 +52,7 @@ const BlocksBlock = () => {
         <Text className='mb-5 uppercase'>{t('Blocks')}</Text>
       </Row>
 
-      <div className='flex flex-col justify-start gap-6 h-full overflow-y-auto'>
+      <div className='flex flex-col justify-start gap-6 h-full overflow-y-hidden scrollbar scrollbar-none'>
         {isLoading
           ? <div className='flex w-full h-full items-center justify-center'><Spinner /></div>
           : <AnimatePresence>

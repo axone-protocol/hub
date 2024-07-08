@@ -16,7 +16,7 @@ const AxoneTooltip: FC<AxoneTooltipProps> = ({ content, iconColor = 'text-axone-
         <TooltipTrigger asChild>
           <Info onClick={() => setOpen(true)} className={cn('cursor-pointer flex-none', iconColor)} size={18} />
         </TooltipTrigger>
-        <TooltipContent className='bg-axone-dark-blue text-axone-grey border-axone-box-border max-w-sm break-words'>
+        <TooltipContent className='bg-axone-dark-blue text-axone-grey border-axone-box-border max-w-sm lg:max-w-full break-all'>
           <p>{content}</p>
         </TooltipContent>
       </Tooltip>

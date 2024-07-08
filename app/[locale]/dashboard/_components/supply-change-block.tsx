@@ -1,7 +1,7 @@
 'use client';
 import { formatDistanceToNow } from 'date-fns';
 import Image from 'next/image';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 import { Text } from '@/components/typography';
 import { Box } from '@/components/ui/boxes';
@@ -10,17 +10,19 @@ import Row from '@/components/ui/row';
 import { TimeFrameSelect } from '@/components/ui/selects';
 import Spinner from '@/components/ui/spinner';
 import { useSupplyChange } from '@/hooks/use-supply-change';
-import { formatNumberToLocale } from '@/lib/utils';
+import { formatNumberToLocale, getLocaleForTime } from '@/lib/utils';
 
 export default function SupplyChangeBlock () {
   const t  = useTranslations('Dashboard');
   const { query: { data, isLoading, isFetching, isRefetching } } = useSupplyChange();
+  const lang = useLocale();
+  const locale = getLocaleForTime(lang);
 
   const formattedChange = formatNumberToLocale(Number(data?.change || 0)/1000000);
   const formattedBurnt = formatNumberToLocale(Number(data?.burnt || 0)/1000000);
   const formattedIssued = formatNumberToLocale(Number(data?.issuance || 0)/1000000);
   const updatedDate = useMemo(() => new Date(data?.time ? data?.time : Date.now()), [data?.time]);
-  const timeAgo = useMemo(() => formatDistanceToNow(updatedDate), [updatedDate]);
+  const timeAgo = useMemo(() => formatDistanceToNow(updatedDate, { addSuffix: true, locale: locale }), [locale, updatedDate]);
 
   if (isLoading || isFetching || isRefetching) {
     return (
@@ -66,7 +68,7 @@ export default function SupplyChangeBlock () {
 
       </Row>
       <Column className='justify-end w-auto'>
-        <Text className='text-axone-grey tracking-tighter uppercase mb-0'>{`Updated ${timeAgo} ago`}</Text>
+        <Text className='text-axone-grey tracking-tighter uppercase mb-0'>{t('Updated') + timeAgo}</Text>
       </Column>
     </Box>
   );

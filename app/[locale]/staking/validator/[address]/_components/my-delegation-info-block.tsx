@@ -66,7 +66,7 @@ const MyDelegationInfoBlock = () => {
 
               <Row className='gap-2'>
                 <Text>My Earnings</Text>
-                <AxoneTooltip iconColor='text-axone-khaki' content='MyEarningsTooltip' />
+                <AxoneTooltip iconColor='text-axone-khaki' content={t('MyEarningsTooltip')} />
               </Row>
               <Row className='gap-2 mb-4 flex-wrap'>
                 <p className='text-40 text-white break-all'>{data?.earnings || '0.00'}</p>
