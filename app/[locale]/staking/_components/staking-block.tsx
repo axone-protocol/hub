@@ -1,18 +1,28 @@
 'use client';
 import { useTranslations } from 'next-intl';
+import { useEffect } from 'react';
 import { Text, Title } from '@/components/typography';
 import { Box, BoxInner } from '@/components/ui/boxes';
 import Row from '@/components/ui/row';
+import { useAxoneToasts } from '@/hooks/use-axone-toasts';
 import { useStakingOverview } from '@/hooks/use-staking-overview';
 import { DEFAULT_TOKEN_DENOM, formatNumberToLocale } from '@/lib/utils';
 import { StakingLoadingSkeleton } from './staking-loading-skeleton';
 
 const StakingBlock = () => {
   const t = useTranslations('Staking');
-  const { data, isLoading, isFetching, isPending, isRefetching } = useStakingOverview();
+  const { data, isLoading, isFetching, isPending, isRefetching, isError, isLoadingError } = useStakingOverview();
   const totalStaked = formatNumberToLocale(Number(data?.totalStaked));
+  const { showErrorToast } = useAxoneToasts();
 
-  if (isLoading || isFetching || isPending || isRefetching) {
+  useEffect(() => {
+    if (isLoadingError || isError) {
+      showErrorToast('Something went wrong. Please try again later.');
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoadingError, isError]);
+
+  if (isLoading || isFetching || isPending || isRefetching || isError || isLoadingError) {
     return (
       <StakingLoadingSkeleton title={t('Staking')} />
     );

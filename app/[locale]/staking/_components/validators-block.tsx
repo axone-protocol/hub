@@ -25,7 +25,9 @@ const ValidatorsBlock = () => {
     setOrder,
     isLoading,
     isFetching,
-    isRefetching
+    isRefetching,
+    isError,
+    isLoadingError
   } = useValidatorsList();
   const [activeFilter, setActiveFilter] = useState<ValidatorSortBy | null>(sortBy);
 
@@ -69,7 +71,7 @@ const ValidatorsBlock = () => {
 
         <BoxInner className='w-[900px] lg:w-full flex-col mb-4'>
           {
-            isLoading || isFetching || isRefetching
+            isLoading || isFetching || isRefetching || isError || isLoadingError
               ? (<div className='flex w-full h-full items-center justify-center p-10'><Spinner /></div>)
               : (
                 validators?.map((item, index) => (

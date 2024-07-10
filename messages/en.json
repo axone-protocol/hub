@@ -212,6 +212,20 @@
     "Amount": "Amount",
     "AxoneAddressDestination": "Axone Address Destination",
     "DestinationTooltip": "The Axone address to which you are sending tokens",
-    "EnterAmount": "Enter Amount"
+    "EnterAmount": "Enter Amount",
+    "MyRewardsHistory": "My Rewards History",
+    "TxHash": "Tx Hash",
+    "Result": "Result",
+    "Message": "Message",
+    "Time": "Time",
+    "All": "All",
+    "Send": "Send",
+    "Delegate": "Delegate",
+    "Redelegate": "Redelegate",
+    "Undelegate": "Undelegate",
+    "ClaimRewards": "Claim Rewards",
+    "IbcTransfer": "IBC Transfer",
+    "Apply": "Apply",
+    "Cancel": "Cancel"
   }
 }

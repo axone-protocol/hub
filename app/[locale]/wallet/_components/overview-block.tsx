@@ -1,9 +1,10 @@
 'use client';
 import { useTranslations } from 'next-intl';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { Text, Title } from '@/components/typography';
 import { Box, BoxInner } from '@/components/ui/boxes';
 import Row from '@/components/ui/row';
+import { useAxoneToasts } from '@/hooks/use-axone-toasts';
 import { useCurrencyStore } from '@/hooks/use-currencies';
 import { useMyStakingOverview } from '@/hooks/use-my-staking-overview';
 import { useTokenInfo } from '@/hooks/use-token-info';
@@ -14,9 +15,10 @@ const OverviewBlock = () => {
   const exchangeRate = useCurrencyStore((state) => state.exchangeRate);
   const currencySign = useCurrencyStore((state) => state.currencySign);
   const { balance, isFetchingBalance } = useAxonePayments();
-  const { data: tokenInfo } = useTokenInfo();
+  const { data: tokenInfo, isError, isLoadingError } = useTokenInfo();
   const { data: stakingOverview } = useMyStakingOverview();
   const t = useTranslations('Wallet');
+  const { showErrorToast } = useAxoneToasts();
 
   const stakeAmount = useMemo(() => {
     if (!stakingOverview || Object.keys(stakingOverview).length === 0 ||  isNaN(Number(stakingOverview.stakedAmount))) {
@@ -42,6 +44,13 @@ const OverviewBlock = () => {
 
     return stakeAmount * tokenPrice;
   }, [exchangeRate, stakeAmount, tokenInfo]);
+
+  useEffect(() => {
+    if (isLoadingError || isError) {
+      showErrorToast('Something went wrong. Please try again later.');
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoadingError, isError]);
 
   return (
     <Box className='w-full m-0 lg:mx-0 lg:mt-0 lg:mb-0'>

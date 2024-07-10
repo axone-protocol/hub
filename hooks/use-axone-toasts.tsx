@@ -12,6 +12,7 @@ const useAxoneToasts = () => {
 
   const showErrorToast = (message: string) => {
     toast({
+      variant: 'destructive',
       action: (<ErrorToast message={message} />),
     });
   };
