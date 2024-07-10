@@ -3,16 +3,15 @@ import { useTranslations } from 'next-intl';
 import { Text, Title } from '@/components/typography';
 import { BoxInner } from '@/components/ui/boxes';
 import Row from '@/components/ui/row';
+import { TokenInfoDTO } from '@/hooks/dto/token-info.dto';
 import { useCurrencyStore } from '@/hooks/use-currencies';
-import { useTokenInfo } from '@/hooks/use-token-info';
 import { cn, formatNumber } from '@/lib/utils';
 
 
-const OverviewMetrics = () => {
+const OverviewMetrics = ({ tokenInfo }: { tokenInfo: TokenInfoDTO}) => {
   const t  = useTranslations('Dashboard');
   const exchangeRate = useCurrencyStore((state) => state.exchangeRate);
   const currencySign = useCurrencyStore((state) => state.currencySign);
-  const { data: tokenInfo } = useTokenInfo();
 
   const tokenPrice = tokenInfo?.price ? tokenInfo?.price?.value : 0;
   const tokenChange = tokenInfo?.price ? tokenInfo?.price?.change : 0;

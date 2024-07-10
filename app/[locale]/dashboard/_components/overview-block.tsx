@@ -17,7 +17,7 @@ export default function OverviewBlock () {
   const t = useTranslations('Dashboard');
   const { query } = useOverviewChart();
   const { timeFrame, setTimeFrame } = useTimeFrameStore();
-  const { isLoading, isLoadingError, isFetching, isError } = useTokenInfo();
+  const { isLoading, isLoadingError, isFetching, isError, data } = useTokenInfo();
   const { showErrorToast } = useAxoneToasts();
 
   useEffect(() => {
@@ -44,7 +44,7 @@ export default function OverviewBlock () {
         {
           isLoading || isFetching || isError || isLoadingError
             ? <MetricsLoadingSkeleton />
-            : <OverviewMetrics />
+            : <OverviewMetrics tokenInfo={data} />
         }
       </div>
     </Box>
