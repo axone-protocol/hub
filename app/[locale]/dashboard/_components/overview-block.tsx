@@ -42,7 +42,7 @@ export default function OverviewBlock () {
 
       <div className='gap-4 columns-2 lg:columns-4 lg:flex-row lg:w-full mt-10 desktop:mt-8'>
         {
-          isLoading || isFetching || isError || isLoadingError
+          isLoading || isFetching || isError || isLoadingError || !data
             ? <MetricsLoadingSkeleton />
             : <OverviewMetrics tokenInfo={data} />
         }
