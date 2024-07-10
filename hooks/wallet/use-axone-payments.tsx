@@ -13,6 +13,7 @@ import { useEnvironment } from '@/context/environment-context';
 import { assetList, chainName } from '@/core/chain';
 import { useAxoneToasts } from '../use-axone-toasts';
 import Long from 'long';
+import { useTransactionStore } from '../use-transaction-store';
 
 
 const chainDenom = 'uknow';
@@ -82,7 +83,7 @@ export const useAxonePayments = () => {
     setIsSubmittingProposalPending,
     setIsVotingProposalPending
   } = useAxoneWalletStore();
-
+  const { setTransactionCompleted } = useTransactionStore();
   const { address, getSigningStargateClient, getRpcEndpoint } =
     useChain(chainName);
   const { showSuccessToast, showErrorToast } = useAxoneToasts();
@@ -132,6 +133,7 @@ export const useAxonePayments = () => {
     } finally {
       setIsTransactionPending(false);
       getBalance(address);
+      setTransactionCompleted(true);
     }
   };
 

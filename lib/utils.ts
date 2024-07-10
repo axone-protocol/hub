@@ -88,13 +88,19 @@ function formatTimestamp (timestamp: string): string {
   return formatDistanceToNow(date, { addSuffix: true });
 };
 
-const formatDate = (date: string | undefined): string => {
+const formatDate = (date: string | undefined, onlyTime = false, onlyDate = false): string => {
   if (!date) {
     return '';
   }
   const timestamp = date;
   const parsedDate = parseISO(timestamp);
-  const formattedDate = format(parsedDate, 'MMM dd yyyy HH:mm:ss');
+  let formattedDate = format(parsedDate, 'MMM dd yyyy HH:mm:ss');
+  if (onlyDate && !onlyTime) {
+    formattedDate = format(parsedDate, 'MMM dd yyyy');
+  }
+  if (onlyTime && !onlyDate) {
+    formattedDate = format(parsedDate, 'HH:mm:ss');
+  }
 
   return formattedDate;
 };

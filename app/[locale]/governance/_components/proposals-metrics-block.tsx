@@ -1,16 +1,26 @@
 'use client';
 import { useTranslations } from 'next-intl';
+import { useEffect } from 'react';
 import { Text, Title } from '@/components/typography';
 import { BoxInner } from '@/components/ui/boxes';
 import { Button } from '@/components/ui/button';
+import { useAxoneToasts } from '@/hooks/use-axone-toasts';
 import { useGovernanceOverview } from '@/hooks/use-governance-overview';
 import { ProposalsMetricsSkeleton } from './proposals-metrics-skeleton';
 
 const ProposalsMetricsBlock = ({ goToNewProposal }: { goToNewProposal(): void }) => {
-  const { data: governanceOverview, isFetching } = useGovernanceOverview();
+  const { data: governanceOverview, isFetching, isLoading, isLoadingError, isError } = useGovernanceOverview();
   const t = useTranslations('Governance');
+  const { showErrorToast } = useAxoneToasts();
 
-  if (!governanceOverview || isFetching) {
+  useEffect(() => {
+    if (isLoadingError || isError) {
+      showErrorToast('Something went wrong. Please try again later.');
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoadingError, isError]);
+
+  if (!governanceOverview || isFetching || isLoading || isLoadingError || isError) {
     return <ProposalsMetricsSkeleton />;
   }
   return (

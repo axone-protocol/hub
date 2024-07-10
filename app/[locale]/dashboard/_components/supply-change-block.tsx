@@ -14,7 +14,7 @@ import { formatNumberToLocale, getLocaleForTime } from '@/lib/utils';
 
 export default function SupplyChangeBlock () {
   const t  = useTranslations('Dashboard');
-  const { query: { data, isLoading, isFetching, isRefetching } } = useSupplyChange();
+  const { query: { data, isLoading, isFetching, isRefetching, isError, isLoadingError } } = useSupplyChange();
   const lang = useLocale();
   const locale = getLocaleForTime(lang);
 
@@ -24,7 +24,7 @@ export default function SupplyChangeBlock () {
   const updatedDate = useMemo(() => new Date(data?.time ? data?.time : Date.now()), [data?.time]);
   const timeAgo = useMemo(() => formatDistanceToNow(updatedDate, { addSuffix: true, locale: locale }), [locale, updatedDate]);
 
-  if (isLoading || isFetching || isRefetching) {
+  if (isLoading || isFetching || isRefetching || isError || isLoadingError) {
     return (
       <Box className='m-0 flex flex-col justify-center items-center lg:w-1/2 xl:w-full xl:h-1/2'>
         <Spinner />

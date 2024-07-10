@@ -16,7 +16,7 @@ import { formatTimestamp, shortenHash } from '@/lib/utils';
 const BlocksBlock = () => {
   const t = useTranslations('Index');
   const { socket } = useEnvironment();
-  const { data, isLoading } = useProposedBlocks();
+  const { data, isLoading, isFetching, isError, isLoadingError } = useProposedBlocks();
   const [blocks, setBlocks] = useState<ProposedBlockDTO[]>([]);
   const [, setRemovingLast] = useState(false); // New state to track removal
 
@@ -53,32 +53,33 @@ const BlocksBlock = () => {
       </Row>
 
       <div className='flex flex-col justify-start gap-6 h-full overflow-y-hidden scrollbar scrollbar-none'>
-        {isLoading
-          ? <div className='flex w-full h-full items-center justify-center'><Spinner /></div>
-          : <AnimatePresence>
-            {
-              blocks?.map((block) => (
-                <motion.div
-                  key={block.blockHash}
-                  initial={{ opacity: 0, scale: 1, y: 100 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 1, y: -100 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <BoxInner className='flex flex-col gap-6 p-6'>
-                    <div className='flex justify-between items-center'>
-                      <Text className='text-axone-khaki'>{shortenHash(block.blockHash)}</Text>
-                      <Text className='text-axone-khaki'>{formatTimestamp(block.time)}</Text>
-                    </div>
-                    <div className='flex justify-start items-center gap-4'>
-                      <Image className='rounded-full' src={block.img} width={20} height={20} alt='eth' />
-                      <Text className='text-axone-grey mb-0 text-16'>{block.name}</Text>
-                    </div>
-                  </BoxInner>
-                </motion.div>
-              ))
-            }
-          </AnimatePresence>}
+        {
+          isLoading || isFetching || isError || isLoadingError
+            ? <div className='flex w-full h-full items-center justify-center'><Spinner /></div>
+            : <AnimatePresence>
+              {
+                blocks?.map((block) => (
+                  <motion.div
+                    key={block.blockHash}
+                    initial={{ opacity: 0, scale: 1, y: 100 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 1, y: -100 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <BoxInner className='flex flex-col gap-6 p-6'>
+                      <div className='flex justify-between items-center'>
+                        <Text className='text-axone-khaki'>{shortenHash(block.blockHash)}</Text>
+                        <Text className='text-axone-khaki'>{formatTimestamp(block.time)}</Text>
+                      </div>
+                      <div className='flex justify-start items-center gap-4'>
+                        <Image className='rounded-full' src={block.img} width={20} height={20} alt='eth' />
+                        <Text className='text-axone-grey mb-0 text-16'>{block.name}</Text>
+                      </div>
+                    </BoxInner>
+                  </motion.div>
+                ))
+              }
+            </AnimatePresence>}
       </div>
     </Box>
   );

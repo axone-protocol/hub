@@ -212,6 +212,20 @@
     "Amount": "Montant",
     "AxoneAddressDestination": "Adresse de destination Axone",
     "DestinationTooltip": "Entrez l'adresse de destination Axone",
-    "EnterAmount": "Entrez le montant"
+    "EnterAmount": "Entrez le montant",
+    "MyRewardsHistory": "Mon historique des récompenses",
+    "TxHash": "Tx Hash",
+    "Result": "Résultat",
+    "Message": "Message",
+    "Time": "Temps",
+    "All": "Tout",
+    "Send": "Envoyer",
+    "Delegate": "Déléguer",
+    "Redelegate": "Redéléguer",
+    "Undelegate": "Annuler la délégation",
+    "ClaimRewards": "Réclamer les récompenses",
+    "IbcTransfer": "Transfert IBC",
+    "Apply": "Appliquer",
+    "Cancel": "Annuler"
   }
 }

@@ -111,7 +111,6 @@ const ProposalsListBlock = () => {
           {
             proposals?.map((proposal) => <ProposalsListItem key={proposal.id} item={proposal} goToDetails={goToDetails(proposal.id)} />)
           }
-
         </BoxInner>
       </div>
     </>

@@ -6,10 +6,11 @@ import { Box, BoxInner } from '@/components/ui/boxes';
 import SupplyRateChart from '@/components/ui/charts/supply-rate-chart';
 import Row from '@/components/ui/row';
 import { TimeFrameSelect } from '@/components/ui/selects';
+import Spinner from '@/components/ui/spinner';
 import { useSupplyRateChart } from '@/hooks/use-supply-rate-chart';
 
 const SupplyRateBlock = () => {
-  const { query } = useSupplyRateChart();
+  const { data, isError, isLoadingError, isLoading, isFetching } = useSupplyRateChart();
   const t = useTranslations('Dashboard');
 
   return (
@@ -20,7 +21,11 @@ const SupplyRateBlock = () => {
       </Row>
 
       <BoxInner className='h-[384px] py-5'>
-        <SupplyRateChart data={query.data || []} />
+        {
+          isLoading || isFetching || isError || isLoadingError
+            ? <div className='flex w-full h-full items-center justify-center'><Spinner /></div>
+            : <SupplyRateChart data={data || []} />
+        }
       </BoxInner>
 
       <Row className='justify-between w-full mt-6'>

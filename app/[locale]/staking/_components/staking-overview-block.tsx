@@ -21,7 +21,7 @@ const StakingOverviewBlock = () => {
   const t = useTranslations('Staking');
   const exchangeRate = useCurrencyStore((state) => state.exchangeRate);
   const currencySign = useCurrencyStore((state) => state.currencySign);
-  const { data, isLoading, isFetching, isPending, isRefetching } = useMyStakingOverview();
+  const { data, isLoading, isFetching, isPending, isRefetching, isError, isLoadingError } = useMyStakingOverview();
   const { isWalletConnected } = useChain(chainName);
   const { openConnectWalletModal } = useModal();
   const { balance, claimAllDelegatorsRewards } = useAxonePayments();
@@ -93,7 +93,7 @@ const StakingOverviewBlock = () => {
       </Box>
     );
   }
-  if (isLoading || isFetching || isPending || isRefetching) {
+  if (isLoading || isFetching || isPending || isRefetching || isError || isLoadingError) {
     return (
       <StakingLoadingSkeleton title={t('YourStakingOverview')} />
     );
@@ -128,9 +128,13 @@ const StakingOverviewBlock = () => {
             <Text className='text-axone-khaki mb-0'>
               {currencySign}{myClaimableRewardsInFiat}
             </Text>
-            <Button onClick={claimAllDelegatorsRewards} variant={'link'} className='mb-0 p-0 text-axone-orange h-auto'>
-              {t('ClaimAll')}
-            </Button>
+            {
+              claimableRewards > 0 && (
+                <Button onClick={claimAllDelegatorsRewards} variant={'link'} className='mb-0 p-0 text-axone-orange h-auto'>
+                  {t('ClaimAll')}
+                </Button>
+              )
+            }
           </Row>
         </BoxInner>
 
