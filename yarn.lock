@@ -6203,14 +6203,14 @@ negotiator@^0.6.3:
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.3.tgz#58e323a72fedc0d6f9cd4d31fe49f51479590ccd"
   integrity sha512-+EUsqGPLsM+j/zdChZjsnX51g4XrHFOIXwfnCVPGlQk/k5giakcKsuxCObBRu6DSm9opw/O6slWbJdghQM4bBg==
 
-next-intl@^3.15.4:
-  version "3.15.4"
-  resolved "https://registry.yarnpkg.com/next-intl/-/next-intl-3.15.4.tgz#958dc1c9fb62da299e8a7bef19339d0a58520662"
-  integrity sha512-9Vwvcwb7I/+W8FwI5glJCjvqtMv6UZmAFLO1oKwks3MRavp2iv4Kw2ZKgGWiNnp6RGvAEjUZyGGIhSg5xRnfRQ==
+next-intl@^3.15.5:
+  version "3.15.5"
+  resolved "https://registry.yarnpkg.com/next-intl/-/next-intl-3.15.5.tgz#d8227b8ea645ecca09439d40bd24c5cabdbfa8e8"
+  integrity sha512-QnUFjKRLKC7dbb40RKqINTNkvvgTHUEv66Q9X+s/6hxQu/XRKKY4JtcZ5ajMW2Ed8H2eyOY7+WXxAY2GbXq6jA==
   dependencies:
     "@formatjs/intl-localematcher" "^0.2.32"
     negotiator "^0.6.3"
-    use-intl "^3.15.4"
+    use-intl "^3.15.5"
 
 next@14.2.5:
   version "14.2.5"
@@ -7672,10 +7672,10 @@ use-callback-ref@^1.3.0:
   dependencies:
     tslib "^2.0.0"
 
-use-intl@^3.15.4:
-  version "3.15.4"
-  resolved "https://registry.yarnpkg.com/use-intl/-/use-intl-3.15.4.tgz#a8d309dfc0b73c1a4f0c076b4cd7cfdd8783df09"
-  integrity sha512-GGMXhRFi7STK4OwwU/JKTLZmC07opb+tLeodxjGMFwExvxfBd3ekXxa4byJ0PBRPEqgzFtPRcHrKac2DFiAU9g==
+use-intl@^3.15.5:
+  version "3.15.5"
+  resolved "https://registry.yarnpkg.com/use-intl/-/use-intl-3.15.5.tgz#aaba4558610d5c90e847c2101a4eaf7faf03b77b"
+  integrity sha512-6EBi5TA0xyVcqrmfOO+kp0srxAqUft2fHjrLy+UImTVObaFrZFiXq/TLl2XxiKwIy6WqMdJ1zNvxNXOnqXEOvg==
   dependencies:
     intl-messageformat "^10.5.14"
 
