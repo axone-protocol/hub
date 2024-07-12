@@ -1,18 +1,21 @@
 'use client';
 import { Asset } from '@chain-registry/types';
 import { StdFee } from '@cosmjs/amino';
+import { fromBase64 } from '@cosmjs/encoding';
+import { DirectSecp256k1Wallet } from '@cosmjs/proto-signing';
+import { AminoTypes, SigningStargateClient, StargateClient } from '@cosmjs/stargate';
 import { ExtendedHttpEndpoint } from '@cosmos-kit/core';
 import { useChain } from '@cosmos-kit/react';
 import BigNumber from 'bignumber.js';
 import { TextProposal, VoteOption } from 'cosmjs-types/cosmos/gov/v1beta1/gov';
 import { Any } from 'cosmjs-types/google/protobuf/any';
 import { cosmos } from 'juno-network';
+import Long from 'long';
 import { useCallback, useEffect } from 'react';
 import { create } from 'zustand';
 import { useEnvironment } from '@/context/environment-context';
 import { assetList, chainName } from '@/core/chain';
 import { useAxoneToasts } from '../use-axone-toasts';
-import Long from 'long';
 import { useTransactionStore } from '../use-transaction-store';
 
 
@@ -83,11 +86,12 @@ export const useAxonePayments = () => {
     setIsSubmittingProposalPending,
     setIsVotingProposalPending
   } = useAxoneWalletStore();
-  const { setTransactionCompleted } = useTransactionStore();
-  const { address, getSigningStargateClient, getRpcEndpoint } =
+
+  const { address, getSigningStargateClient, getRpcEndpoint, getOfflineSigner } =
     useChain(chainName);
   const { showSuccessToast, showErrorToast } = useAxoneToasts();
   const { isDev } = useEnvironment();
+  const { setTransactionCompleted } = useTransactionStore();
 
   const makeTransaction = async ({ amount, destination, memo }: { amount: number, destination: string, memo: string}) => {
     setIsTransactionPending(true);
@@ -342,9 +346,33 @@ export const useAxonePayments = () => {
     }
   };
 
+  const customAminoTypes = new AminoTypes({
+    '/cosmos.gov.v1.MsgSubmitProposal': {
+      aminoType: 'cosmos-sdk/MsgSubmitProposal',
+      toAmino: ({ proposer, content, initialDeposit }) => {
+        return {
+          proposer,
+          content,
+          initial_deposit: initialDeposit,
+        };
+      },
+      fromAmino: ({ proposer, content, initial_deposit }) => {
+        return {
+          proposer,
+          content,
+          initialDeposit: initial_deposit,
+        };
+      },
+    },
+  });
+
   const submitProposal = async ({ title, description, amount, depositDenom }: { title: string, description: string, amount: number, depositDenom: string }) => {
     setIsSubmittingProposalPending(true);
-    const stargateClient = await getSigningStargateClient();
+    const rpcEndpoint = isDev ? 'https://api.drunemeton.okp4.network:443/rpc' : await getRpcEndpoint();
+    const signer = getOfflineSigner();
+    const stargateClient = await SigningStargateClient.connectWithSigner(rpcEndpoint, signer, {
+      aminoTypes: customAminoTypes,
+    });
     if (!stargateClient || !address) {
       console.error('stargateClient undefined or address undefined.');
       return;
@@ -362,10 +390,10 @@ export const useAxonePayments = () => {
       value: TextProposal.encode(proposalContent).finish(),
     };
 
-    const { submitProposal } = cosmos.gov.v1beta1.MessageComposer.withTypeUrl;
+    const { submitProposal } = cosmos.gov.v1.MessageComposer.withTypeUrl;
 
     const msg = submitProposal({
-      content: proposalContentAny,
+      messages: [proposalContentAny],
       initialDeposit: [
         {
           denom: depositDenom,
@@ -373,6 +401,7 @@ export const useAxonePayments = () => {
         },
       ],
       proposer: address,
+      metadata: ''
     });
 
     const fee: StdFee = {
@@ -384,21 +413,17 @@ export const useAxonePayments = () => {
       ],
       gas: '200000',
     };
-
+    const [firstAccount] = await signer.getAccounts();
+    const address2 = firstAccount.address;
     try {
-      const resp = await stargateClient.signAndBroadcast(
-        address,
+      const resp = await stargateClient.signAndBroadcastSync(
+        `${address2}`,
         [msg],
         fee,
       );
-      console.log('Create proposal response ', resp);
-      if (resp.code === 0) {
-        showSuccessToast('Proposal submitted successfully!');
-      } else {
-        showErrorToast(`Failed to submit proposal. Code: ${resp.code}`);
-      }
     } catch (error) {
       showErrorToast(`Something went wrong: ${error}`);
+      console.error('Error submitting proposal: ', error);
     } finally {
       setIsSubmittingProposalPending(false);
     }
