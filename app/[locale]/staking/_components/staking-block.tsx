@@ -49,7 +49,7 @@ const StakingBlock = () => {
         </BoxInner>
 
         <BoxInner className='py-5 w-full lg:w-1/4 h-24 lg:h-32 flex-col justify-between items-start lg:items-center px-6'>
-          <div className='flex items-center gap-2 lg:gap-0 lg:flex-col lg:items-end'>
+          <div className='flex items-center gap-2 lg:gap-0 lg:flex-col'>
             <Title className='lg:mt-2 mb-0 uppercase'>{totalStaked}</Title>
             <span className='text-axone-khaki uppercase'>{DEFAULT_TOKEN_DENOM}</span>
           </div>

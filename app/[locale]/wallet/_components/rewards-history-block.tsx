@@ -5,13 +5,13 @@ import React, { useCallback, useState } from 'react';
 import { Text, Title } from '@/components/typography';
 import { AxoneTooltip } from '@/components/ui/axone-tooltip';
 import { Box, BoxInner } from '@/components/ui/boxes';
+import { Pagination } from '@/components/ui/pagination';
 import Row from '@/components/ui/row';
 import { chainName } from '@/core/chain';
 import { CheckedItems, useWalletHistory } from '@/hooks/use-wallet-history';
 import { formatDate, formatTimestamp, shortenHash } from '@/lib/utils';
 import { MessageFilter } from './message-filter';
 import { RewardsHistoryLoadingBlock } from './rewards-history-loading-block';
-
 
 const defaultCheckedItems: CheckedItems = {
   all: true,
@@ -28,6 +28,7 @@ const RewardsHistoryBlock = () => {
   const { address } = useChain(chainName);
   const [checkedItems, setCheckedItems] = useState<CheckedItems>(defaultCheckedItems);
   const [appliedFilters, setAppliedFilters] = useState<CheckedItems>(checkedItems);
+  const [page, setPage] = useState(1);
 
   const handleCheckboxChange = useCallback((item: string) => () => {
     setCheckedItems(prevState => {
@@ -55,9 +56,17 @@ const RewardsHistoryBlock = () => {
     setAppliedFilters(checkedItems);
   }, [checkedItems]);
 
-  const { data, isLoading, isFetching, isRefetching, isError, isLoadingError } = useWalletHistory(address || '', appliedFilters);
+  const { data, isLoading, isFetching, isRefetching, isError, isLoadingError } = useWalletHistory(address || '', appliedFilters, page);
 
-  if (!data || isLoading || isFetching || isRefetching || isError || isLoadingError) {
+  const handleNextPage = () => {
+    setPage(prev => prev + 1);
+  };
+
+  const handlePreviousPage = () => {
+    setPage(prev => Math.max(prev - 1, 1));
+  };
+
+  if (!data || !data.history || !data.pagination || isLoading || isFetching || isRefetching || isError || isLoadingError) {
     return <RewardsHistoryLoadingBlock />;
   }
   return (
@@ -81,7 +90,7 @@ const RewardsHistoryBlock = () => {
 
         <BoxInner className='flex-col w-[900px] h-64 lg:h-[600px] overflow-y-auto scrollbar scrollbar-thin lg:w-full  pb-4 mb-4'>
           {
-            data.map(transaction => (
+            data.history.map(transaction => (
               <Row key={transaction.txHash} className='justify-between p-4 items-center even:bg-axone-dark-blue-3'>
                 <div className='flex flex-row gap-4 w-1/8'>
                   <Text className='mb-0'>ex: {shortenHash(transaction.txHash)}</Text>
@@ -109,16 +118,28 @@ const RewardsHistoryBlock = () => {
                 </div>
                 <Text className='w-1/6 mb-0'>{transaction.amount}</Text>
                 <div className='w-1/6 flex flex-col'>
-                  <Text className='mb-0'>{formatDate(transaction.time, false, true)}</Text>
-                  <Text className='mb-0 text-axone-khaki'>{formatDate(transaction.time, true, false)}</Text>
-                  <Text className='mb-0 text-axone-khaki'>({formatTimestamp(transaction.time)})</Text>
+                  <Text className='mb-0'>{
+                    formatDate(transaction.time, false, true)}
+                  </Text>
+                  <Text className='mb-0 text-axone-khaki'>{
+                    formatDate(transaction.time, true, false)}
+                  </Text>
+                  <Text className='mb-0 text-axone-khaki'>
+                    ({formatTimestamp(transaction.time)})
+                  </Text>
                 </div>
               </Row>
             ))
           }
         </BoxInner>
       </div>
-      {/* <Pagination currentPage={1} totalPages={10} onPageChange={() => {}} /> */}
+      <Pagination
+        currentPage={page}
+        totalPages={Math.ceil(data.pagination?.total / data.pagination?.limit)}
+        onPageChange={setPage}
+        onPrev={handlePreviousPage}
+        onNext={handleNextPage}
+      />
     </Box>
   );
 };

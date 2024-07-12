@@ -30,8 +30,8 @@ const DelegateModal = ({ isOpen, setOpen, delegationData }: DelegateModalProps) 
 
   const formSchema = z.object({
     amount: z.coerce.number()
-      .refine(value => !isNaN(value) && value >= 0 && value <= balance.toNumber(), {
-        message: `Amount must be a valid number between 0 and ${balance.toNumber()}`,
+      .refine(value => !isNaN(value) && value >= 0.005 && value <= balance.toNumber(), {
+        message: `Amount must be a valid number between 0.005 and ${balance.toNumber()}`,
       })
   });
 
@@ -44,7 +44,7 @@ const DelegateModal = ({ isOpen, setOpen, delegationData }: DelegateModalProps) 
       alert('Insufficient funds');
       return;
     }
-    await delegateToValidator({ amount: values.amount, validatorAddress: `${delegationData.validatorAddress || validatorData?.address}`, memo: '' });
+    await delegateToValidator({ amount: values.amount, validatorAddress: `${delegationData.validatorAddress || validatorData?.address}`, commission: `${validatorData?.commission.rate || delegationData.commission}` , memo: '' });
     reset({ amount: '' });
     setOpen(false);
   });

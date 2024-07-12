@@ -15,25 +15,25 @@ export type CheckedItems = {
   [key: string]: boolean; // Add index signature
 };
 
-const getWalletHistoryDataFn = async (address: string | string[], baseUrl: string | undefined) => {
-  const { data } = await axios.get<WalletHistoryDTO[]>(`${baseUrl}/wallet/reward-history`, { params: { address } });
+const getWalletHistoryDataFn = async (address: string | string[], offset = 1, baseUrl: string | undefined) => {
+  const { data } = await axios.get<WalletHistoryDTO>(`${baseUrl}/wallet/reward-history`, { params: { address, limit: 10, offset } });
 
-  return data.reverse();
+  return data;
 };
 
 export const useSingleValidatorQueryKey = ['wallet-history'];
 
-export const useWalletHistory = (address: string, filters: CheckedItems) => {
+export const useWalletHistory = (address: string, filters: CheckedItems,  offset = 1) => {
   const { baseUrl } = useEnvironment();
   const { transactionCompleted } = useTransactionStore();
 
   const query = useQuery({
     enabled: true,
-    queryKey: [...useSingleValidatorQueryKey, address, !!transactionCompleted],
-    queryFn: () => getWalletHistoryDataFn(address, baseUrl),
+    queryKey: [...useSingleValidatorQueryKey, address, !!transactionCompleted, offset],
+    queryFn: () => getWalletHistoryDataFn(address, offset, baseUrl),
   });
 
-  const filteredData = filters.all ? query.data : query.data?.filter(item => {
+  const filteredData = filters.all ? query.data?.history : query.data?.history.filter(item => {
     const filterConditions = [
       filters.send && item.messages.includes('MsgSend'),
       filters.delegate && item.messages.includes('MsgDelegate'),
@@ -47,7 +47,7 @@ export const useWalletHistory = (address: string, filters: CheckedItems) => {
     return filterConditions.some(condition => condition);
   });
 
-  return { ...query, data: filteredData };
+  return { ...query, data: { history: filteredData, pagination: query.data?.pagination } };
 
   return query;
 };

@@ -68,7 +68,7 @@ export default function SupplyChangeBlock () {
 
       </Row>
       <Column className='justify-end w-auto'>
-        <Text className='text-axone-grey tracking-tighter uppercase mb-0'>{t('Updated') + timeAgo}</Text>
+        <Text className='text-axone-grey tracking-tighter uppercase mb-0'>{t('Updated') + ' ' + timeAgo}</Text>
       </Column>
     </Box>
   );

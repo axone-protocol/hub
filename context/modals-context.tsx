@@ -3,6 +3,7 @@ import { createContext, useContext } from 'react';
 export type DelegateModalOpenProps = {
   validatorName?: string;
   validatorAddress?: string;
+  commission?: string;
 };
 
 export type VoteModalData = {

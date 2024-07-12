@@ -16,7 +16,7 @@ const useSocket = ({ socket, eventName, eventHandler, isLoading }: SocketParams)
       socket.connect();
       socket.on('connect', () => console.log('connected from hook to', eventName, socket.id));
       socket.on(eventName, (data) => {
-        console.log('received', eventName, data);
+        // console.log('received', eventName, data);
         eventHandler(data);
       });
       socket.on('disconnect', () => console.log('disconnected'));

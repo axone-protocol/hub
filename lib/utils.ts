@@ -83,7 +83,7 @@ function formatTimestamp (timestamp: string): string {
   const secondsAgo = differenceInSeconds(new Date(), date);
 
   if (secondsAgo < 60) {
-    return `${secondsAgo} seconds ago`;
+    return `${secondsAgo < 0 ? 0 : secondsAgo} seconds ago`;
   }
   return formatDistanceToNow(date, { addSuffix: true });
 };

@@ -43,7 +43,7 @@ const ModalProvider: React.FC<PropsWithChildren> = ({ children }) => {
       openConnectWalletModal();
     } else {
       if (data && data.validatorName && data.validatorAddress) {
-        setDelegationData({ validatorName: data.validatorName, validatorAddress: data.validatorAddress });
+        setDelegationData({ validatorName: data.validatorName, validatorAddress: data.validatorAddress, commission: data.commission });
       }
       setDelegateOpen(true);
     }

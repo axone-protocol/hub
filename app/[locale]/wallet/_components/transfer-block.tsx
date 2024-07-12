@@ -31,8 +31,8 @@ const TransferBlock = () => {
 
   const formSchema = z.object({
     amount: z.coerce.number()
-      .refine(value => !isNaN(value) && value >= 0 && value <= balance.toNumber(), {
-        message: `Amount must be a valid number between 0 and ${balance.toNumber()}`,
+      .refine(value => !isNaN(value) && value >= 0.005 && value <= balance.toNumber(), {
+        message: `Amount must be a valid number between 0.005 and ${balance.toNumber()}`,
       }),
     destination: z.string().min(40, 'Invalid address').refine(value => value.startsWith('okp4'), 'Invalid address'),
     memo: z.string().optional(),

@@ -1,18 +1,19 @@
 'use client';
 import { Asset } from '@chain-registry/types';
 import { StdFee } from '@cosmjs/amino';
+import { GasPrice, SigningStargateClient } from '@cosmjs/stargate';
 import { ExtendedHttpEndpoint } from '@cosmos-kit/core';
 import { useChain } from '@cosmos-kit/react';
 import BigNumber from 'bignumber.js';
 import { TextProposal, VoteOption } from 'cosmjs-types/cosmos/gov/v1beta1/gov';
 import { Any } from 'cosmjs-types/google/protobuf/any';
 import { cosmos } from 'juno-network';
+import Long from 'long';
 import { useCallback, useEffect } from 'react';
 import { create } from 'zustand';
 import { useEnvironment } from '@/context/environment-context';
 import { assetList, chainName } from '@/core/chain';
 import { useAxoneToasts } from '../use-axone-toasts';
-import Long from 'long';
 import { useTransactionStore } from '../use-transaction-store';
 
 
@@ -84,14 +85,36 @@ export const useAxonePayments = () => {
     setIsVotingProposalPending
   } = useAxoneWalletStore();
   const { setTransactionCompleted } = useTransactionStore();
-  const { address, getSigningStargateClient, getRpcEndpoint } =
+  const { address, getSigningStargateClient, getRpcEndpoint, getOfflineSigner } =
     useChain(chainName);
   const { showSuccessToast, showErrorToast } = useAxoneToasts();
   const { isDev } = useEnvironment();
 
+  const GAS_PRICE = GasPrice.fromString('0.025uknow');
+
+  const returnRpcEndpoint = useCallback(async () => {
+    let rpcEndpoint = isDev ? 'https://api.drunemeton.okp4.network:443/rpc' : await getRpcEndpoint();
+
+    if (!rpcEndpoint) {
+      console.info('no rpc endpoint — using a fallback');
+      rpcEndpoint = `https://rpc.cosmos.directory/${chainName}`;
+    }
+
+    return rpcEndpoint;
+  }, [getRpcEndpoint, isDev]);
+
   const makeTransaction = async ({ amount, destination, memo }: { amount: number, destination: string, memo: string}) => {
     setIsTransactionPending(true);
-    const stargateClient = await getSigningStargateClient();
+
+    const rpcEndpoint = await returnRpcEndpoint();
+    const signer = await getOfflineSigner();
+
+    const stargateClient = await SigningStargateClient.connectWithSigner(
+      rpcEndpoint,
+      signer,
+      { gasPrice: GAS_PRICE }
+    );
+
     if (!stargateClient || !address) {
       console.error('stargateClient undefined or address undefined.');
       return;
@@ -109,27 +132,38 @@ export const useAxonePayments = () => {
       toAddress: destination,
       fromAddress: address,
     });
-  
+
+    const estimatedFee = await stargateClient.simulate(address ,[msg], memo);
+    console.log('estimated transaction fee', estimatedFee);
+
+    const gasFee = estimatedFee * 2;
+
+    const feeAmount = Number(GAS_PRICE.amount.toString()) * gasFee;
+
     const fee: StdFee = {
       amount: [
         {
           denom: coin.base,
-          amount: '1000',
+          amount: feeAmount.toString(),
         },
       ],
-      gas: '86364',
+      gas: gasFee.toString(),
     };
     try {
-      await stargateClient.signAndBroadcast(
+      const response = await stargateClient.signAndBroadcast(
         address,
         [msg],
         fee,
         memo
       );
-      showSuccessToast('Transaction successful!');
+      if (response.code !== 0) {
+        handleError({ error: response, showToast: showErrorToast });
+      } else {
+        showSuccessToast('Transaction successful!');
+      }
       // setTransactionResponse(JSON.stringify(response));
     } catch (error) {
-      showErrorToast(`Something went wrong: ${error}`);
+      handleError({ error, showToast: showErrorToast });
     } finally {
       setIsTransactionPending(false);
       getBalance(address);
@@ -144,13 +178,7 @@ export const useAxonePayments = () => {
       setBalance(new BigNumber(0), false);
       return;
     }
-
-    let rpcEndpoint = isDev ? 'https://api.drunemeton.okp4.network:443/rpc' : await getRpcEndpoint();
-
-    if (!rpcEndpoint) {
-      console.info('no rpc endpoint — using a fallback');
-      rpcEndpoint = `https://rpc.cosmos.directory/${chainName}`; // production endpoint
-    }
+    const rpcEndpoint = await returnRpcEndpoint();
 
     const client = await cosmos.ClientFactory.createRPCQueryClient({
       rpcEndpoint:
@@ -171,11 +199,20 @@ export const useAxonePayments = () => {
 
     setBalanceDenom(balance.balance?.denom || 'know');
     setBalance(amount, false);
-  }, [getRpcEndpoint, isDev, setBalance, setBalanceDenom]);
+  }, [returnRpcEndpoint, setBalance, setBalanceDenom]);
 
-  const delegateToValidator = async ({ amount, validatorAddress, memo }: { amount: number, validatorAddress: string, memo: string}) => {
+  const delegateToValidator = async ({ amount, validatorAddress, commission, memo }: { amount: number, validatorAddress: string, commission: string, memo: string}) => {
     setIsDelegatingPending(true);
-    const stargateClient = await getSigningStargateClient();
+
+    const feeValue = (amount * 1000000 * parseFloat(commission))/100;
+    const rpcEndpoint = await returnRpcEndpoint();
+    const signer = await getOfflineSigner();
+
+    const stargateClient = await SigningStargateClient.connectWithSigner(
+      rpcEndpoint,
+      signer,
+      { gasPrice: GAS_PRICE }
+    );
     if (!stargateClient || !address) {
       console.error('stargateClient undefined or address undefined.');
       return;
@@ -192,26 +229,36 @@ export const useAxonePayments = () => {
       }
     });
 
+    const estimatedFee = await stargateClient.simulate(address ,[msg], memo);
+    console.log('estimated fee', estimatedFee);
+
+    const gasFee = estimatedFee * 2;
+
     const fee: StdFee = {
       amount: [
         {
           denom: coin.base,
-          amount: '1000',
+          amount: feeValue.toString(),
         },
       ],
-      gas: '200000',
+      gas: gasFee.toString(),
     };
 
+    console.log('delegate fee', fee);
     try {
-      await stargateClient.signAndBroadcast(
+      const response = await stargateClient.signAndBroadcast(
         address,
         [msg],
         fee,
         memo
       );
-      showSuccessToast('Delegation successful!');
+      if (response.code !== 0) {
+        handleError({ error: response, showToast: showErrorToast });
+      } else {
+        showSuccessToast('Delegation successful!');
+      }
     } catch (error) {
-      showErrorToast(`Something went wrong: ${error}`);
+      handleError({ error, showToast: showErrorToast });
     } finally {
       setIsDelegatingPending(false);
       getBalance(address);
@@ -220,7 +267,16 @@ export const useAxonePayments = () => {
 
   const unbondFromValidator = async ({ amount, validatorAddress, memo }: { amount: number, validatorAddress: string, memo: string}) => {
     setIsUnbondingPending(true);
-    const stargateClient = await getSigningStargateClient();
+
+    const rpcEndpoint = await returnRpcEndpoint();
+    const signer = await getOfflineSigner();
+
+    const stargateClient = await SigningStargateClient.connectWithSigner(
+      rpcEndpoint,
+      signer,
+      { gasPrice: GAS_PRICE }
+    );
+
     if (!stargateClient || !address) {
       console.error('stargateClient undefined or address undefined.');
       return;
@@ -233,30 +289,42 @@ export const useAxonePayments = () => {
       validatorAddress: validatorAddress,
       amount: {
         denom: coin.base,
-        amount: new BigNumber(amount).multipliedBy(10 ** 6).toString(), // Correct exponent for atom
+        amount: new BigNumber(amount).multipliedBy(10 ** 6).toString(),
       }
     });
+
+    const estimatedFee = await stargateClient.simulate(address ,[msg], memo);
+    console.log('estimated unbond fee', estimatedFee);
+
+    const gasFee = estimatedFee * 2;
+    const feeAmount = Number(GAS_PRICE.amount.toString()) * gasFee;
 
     const fee: StdFee = {
       amount: [
         {
           denom: coin.base,
-          amount: '1000',
+          amount: feeAmount.toString(),
         },
       ],
-      gas: '200000',
+      gas: gasFee.toString(),
     };
 
+    console.log('unbond fee', fee);
+
     try {
-      await stargateClient.signAndBroadcast(
+      const response = await stargateClient.signAndBroadcast(
         address,
         [msg],
         fee,
         memo
       );
-      showSuccessToast('Unbonding successful!');
+      if (response.code !== 0) {
+        handleError({ error: response, showToast: showErrorToast });
+      } else {
+        showSuccessToast('Unbonding in Progress: Tokens will be available in your wallet after approximately 21 days.');
+      }
     } catch (error) {
-      showErrorToast(`Something went wrong: ${error}`);
+      handleError({ error, showToast: showErrorToast });
     } finally {
       setIsUnbondingPending(false);
       getBalance(address);
@@ -265,7 +333,16 @@ export const useAxonePayments = () => {
 
   const claimRewards = async (validatorAddress: string) => {
     setIsClaimingRewardsPending(true);
-    const stargateClient = await getSigningStargateClient();
+    // const stargateClient = await getSigningStargateClient();
+    const rpcEndpoint = await returnRpcEndpoint();
+    const signer = await getOfflineSigner();
+
+    const stargateClient = await SigningStargateClient.connectWithSigner(
+      rpcEndpoint,
+      signer,
+      { gasPrice: GAS_PRICE }
+    );
+
     if (!stargateClient || !address) {
       console.error('stargateClient undefined or address undefined.');
       return;
@@ -278,25 +355,35 @@ export const useAxonePayments = () => {
       validatorAddress: validatorAddress,
     });
 
+    const estimatedFee = await stargateClient.simulate(address ,[msg], '');
+    console.log('estimated claim fee', estimatedFee);
+
+    const gasFee = estimatedFee * 2;
+    const feeAmount = Number(GAS_PRICE.amount.toString()) * gasFee;
+
     const fee: StdFee = {
       amount: [
         {
           denom: coin.base,
-          amount: '1000',
+          amount: feeAmount.toString(),
         },
       ],
-      gas: '200000',
+      gas: gasFee.toString(),
     };
 
     try {
-      await stargateClient.signAndBroadcast(
+      const response = await stargateClient.signAndBroadcast(
         address,
         [msg],
         fee,
       );
-      showSuccessToast('Rewards claimed successfully!');
+      if (response.code !== 0) {
+        handleError({ error: response, showToast: showErrorToast });
+      } else {
+        showSuccessToast('Rewards claimed successfully!');
+      }
     } catch (error) {
-      showErrorToast(`Something went wrong: ${error}`);
+      handleError({ error, showToast: showErrorToast });
     } finally {
       setIsClaimingRewardsPending(false);
       getBalance(address);
@@ -305,15 +392,20 @@ export const useAxonePayments = () => {
 
   const claimAllDelegatorsRewards = async () => {
     setIsClaimingRewardsPending(true);
-    const stargateClient = await getSigningStargateClient();
+    const rpcEndpoint = await returnRpcEndpoint();
+    const signer = await getOfflineSigner();
+
+    const stargateClient = await SigningStargateClient.connectWithSigner(
+      rpcEndpoint,
+      signer,
+      { gasPrice: GAS_PRICE }
+    );
     if (!stargateClient || !address) {
       console.error('stargateClient undefined or address undefined.');
       return;
     }
 
     try {
-      // Fetch delegations
-      const rpcEndpoint = isDev ? 'https://api.drunemeton.okp4.network:443/rpc' : await getRpcEndpoint();
 
       const client = await cosmos.ClientFactory.createRPCQueryClient({ rpcEndpoint  });
       const delegations = await client.cosmos.staking.v1beta1.delegatorDelegations({ delegatorAddr: address });
@@ -326,16 +418,25 @@ export const useAxonePayments = () => {
         });
       });
 
+      const estimatedFee = await stargateClient.simulate(address, messages, '');
+      console.log('estimated claim fee', estimatedFee);
+
+      const gasFee = estimatedFee * 2;
+      const feeAmount = Number(GAS_PRICE.amount.toString()) * gasFee;
+
       const fee: StdFee = {
-        amount: [{ denom: coin.base, amount: '1000' }],
-        gas: '200000',
+        amount: [{ denom: coin.base, amount: feeAmount.toString() }],
+        gas: gasFee.toString(),
       };
 
-      await stargateClient.signAndBroadcast(address, messages, fee);
-      showSuccessToast('All rewards claimed successfully!');
-
+      const response = await stargateClient.signAndBroadcast(address, messages, fee);
+      if (response.code !== 0) {
+        handleError({ error: response, showToast: showErrorToast });
+      } else {
+        showSuccessToast('All rewards claimed successfully!');
+      }
     } catch (error) {
-      showErrorToast(`Something went wrong: ${error}`);
+      handleError({ error, showToast: showErrorToast });
     } finally {
       setIsClaimingRewardsPending(false);
       getBalance(address);
@@ -395,10 +496,10 @@ export const useAxonePayments = () => {
       if (resp.code === 0) {
         showSuccessToast('Proposal submitted successfully!');
       } else {
-        showErrorToast(`Failed to submit proposal. Code: ${resp.code}`);
+        handleError({ error: resp, showToast: showErrorToast });
       }
     } catch (error) {
-      showErrorToast(`Something went wrong: ${error}`);
+      handleError({ error, showToast: showErrorToast });
     } finally {
       setIsSubmittingProposalPending(false);
     }
@@ -435,10 +536,10 @@ export const useAxonePayments = () => {
       if (response.code === 0) {
         showSuccessToast(`Proposal vote result: ${response.rawLog}`);
       } else {
-        showErrorToast(`Failed to vote on proposal. Code: ${response.code}`);
+        handleError({ error: response, showToast: showErrorToast });
       }
     } catch (error) {
-      showErrorToast(`Failed to vote on proposal. Error: ${error}`);
+      handleError({ error, showToast: showErrorToast });
     }
     setIsVotingProposalPending(false);
   };

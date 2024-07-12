@@ -29,11 +29,12 @@ const SingleValidatorItem: FC<SingleValidatorItemProps> = ({ data, openDelegateM
   const onDelegate = useCallback(() => {
     const dataToPass = {
       validatorName: data.description.moniker,
-      validatorAddress: data.address
+      validatorAddress: data.address,
+      commission: data.commission.rate,
     };
     console.log(dataToPass);
     openDelegateModal(dataToPass)();
-  }, [data.description.moniker, data.address, openDelegateModal]);
+  }, [data.description.moniker, data.address, data.commission.rate, openDelegateModal]);
 
   const stakedAmount = formatNumberToLocale(Number(data.stakedAmount)/1000000);
 
