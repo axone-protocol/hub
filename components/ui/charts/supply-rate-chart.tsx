@@ -30,18 +30,16 @@ const CHART_MARGIN = {
 };
 const MS_FACTOR = 1000;
 
-const gradientOffset = (data: SupplyRateChartDTO[]) => {
-  const dataMax = Math.max(...data.map((i) => i.change));
-  const dataMin = Math.min(...data.map((i) => i.change));
+const isAllZero = (data: SupplyRateChartDTO[]) => data.every(item => item.percentChange === '0.00' || item.percentChange === '-0.00');
 
-  if (dataMax <= 0) {
-    return 0;
+const calculateDomain = (data: SupplyRateChartDTO[]) => {
+  const allZero = isAllZero(data);
+  if (allZero) {
+    return [-0.5, 0.5];
   }
-  if (dataMin >= 0) {
-    return 1;
-  }
-
-  return dataMax / (dataMax - dataMin);
+  const min = Math.min(...data.map(item => Number(item.percentChange)));
+  const max = Math.max(...data.map(item => Number(item.percentChange)));
+  return [min, max];
 };
 
 const yAxisTickFormatter = (tick: string | number) => `${tick}%`;
@@ -52,7 +50,6 @@ type SupplyAreaChartProps = {
 
 const SupplyAreaChart: FC<SupplyAreaChartProps> = ({ data }) => {
   const format = useFormatter();
-  const off = gradientOffset(data || []);
 
   const formatChartDate = (date: string): string => {
     const raw = new Date(date);
@@ -63,7 +60,8 @@ const SupplyAreaChart: FC<SupplyAreaChartProps> = ({ data }) => {
       day: 'numeric'
     });
   };
-
+  const domain = calculateDomain(data);
+  const allZero = isAllZero(data);
   return (
     <Column>
       <ResponsiveContainer width='100%' height='100%'>
@@ -81,11 +79,12 @@ const SupplyAreaChart: FC<SupplyAreaChartProps> = ({ data }) => {
           />
           <YAxis
             axisLine={true}
-            dataKey={'change'}
+            dataKey={'percentChange'}
             className='select-none'
-            tick={{ fontSize: 14 }}
+            tick={{ fontSize: 12 }}
             tickMargin={5}
             tickFormatter={yAxisTickFormatter}
+            domain={domain}
           />
           <Tooltip
             content={({ active, payload }) => {
@@ -95,19 +94,19 @@ const SupplyAreaChart: FC<SupplyAreaChartProps> = ({ data }) => {
           />
           <defs>
             <linearGradient id='splitColor' x1='0' y1='0' x2='0' y2='1'>
-              <stop offset={off} stopColor={ChartColorsEnum.ORANGE} stopOpacity={1} />
-              <stop offset={off} stopColor={ChartColorsEnum.RED} stopOpacity={1} />
+              <stop offset='5%' stopColor={ChartColorsEnum.ORANGE} stopOpacity={1} />
+              <stop offset='95%' stopColor={ChartColorsEnum.RED} stopOpacity={1} />
             </linearGradient>
           </defs>
           <Area
             type='monotone'
-            stroke='url(#splitColor)'
-            dataKey='change'
+            dataKey='percentChange'
+            stroke={allZero ? ChartColorsEnum.ORANGE : 'url(#splitColor)'}
             fill='transparent'
             isAnimationActive={true}
           />
 
-          <ReferenceLine y={0} stroke={ChartColorsEnum.GRAY} strokeDasharray='3 3' />
+          <ReferenceLine y={0} stroke={ChartColorsEnum.GRAY} strokeOpacity={.1} strokeDasharray='3 3' />
           <Brush
             dataKey='change'
             stroke='transparent'

@@ -7,7 +7,12 @@ import { TimeFrameEnum, useTimeFrameStore } from './timeframe/use-timeframe-stor
 const getSupplyRateChartDataFn = async (range: TimeFrameEnum = TimeFrameEnum.DAY, baseUrl: string | undefined) => {
   const { data } = await axios.get<SupplyRateChartDTO[]>(baseUrl + '/supply/historical', { params: { range } });
 
-  return data.reverse();
+  const formatted = data.map((item) => ({
+    ...item,
+    percentChange: item.percentChange === '0' ? '0.00' : item.percentChange,
+  }));
+
+  return formatted.reverse();
 };
 
 export const useSupplyRateChartQueryKey = ['supply-rate-chart'];
