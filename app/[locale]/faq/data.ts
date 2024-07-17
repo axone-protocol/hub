@@ -133,7 +133,7 @@ export const FAQ_EN: FAQDataType[] = [
   {
     id: 14,
     question: 'What is the unbonding process, and how long does it take?',
-    answer: 'A7: The unbonding process involves the transition period after you initiate the unstaking of your Axone tokens. During this period, your tokens are locked and not eligible for rewards or transactions. The unbonding period can vary in length, so please check the Axone Hub for specific details on the duration.',
+    answer: 'The unbonding process involves the transition period after you initiate the unstaking of your Axone tokens. During this period, your tokens are locked and not eligible for rewards or transactions. The unbonding period can vary in length, so please check the Axone Hub for specific details on the duration.',
     category: EN_CATEGORIES_ENUM.STAKING,
     categoryBgColor: COLORS_ENUM.ORANGE,
     categoryTextColor: COLORS_ENUM.DARK_BLUE

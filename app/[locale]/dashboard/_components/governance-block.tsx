@@ -29,7 +29,7 @@ export default function GovernanceBlock () {
       <Button
         onClick={navigateToGovernance}
         variant={'rounded'}
-        className='mt-5 mr-2 text-base font-bold w-full lg:w-64'
+        className='mt-5 mr-2 text-base w-full lg:w-64'
       >
         {t('OpenGovernance')}
       </Button>

@@ -43,12 +43,12 @@ export default function StakingRewardsBlock () {
       <div className='flex flex-col lg:flex-row lg:w-full'>
         <Button
           variant={'rounded'}
-          className='mt-5 mr-2 text-base font-bold'
+          className='mt-5 mr-2 text-base'
           onClick={navigateToStaking}
         >
           {t('DelegateNow')}
         </Button>
-        <ButtonWithIcon onClick={openRewardsCalculatorModal} variant={'link'} className='mt-5 text-axone-orange text-base font-bold z-8'>
+        <ButtonWithIcon onClick={openRewardsCalculatorModal} variant={'link'} className='mt-5 text-axone-orange text-base z-8'>
           {t('CalculateRewards')}
         </ButtonWithIcon>
       </div>

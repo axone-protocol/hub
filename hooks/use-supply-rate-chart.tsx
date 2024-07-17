@@ -12,7 +12,7 @@ const getSupplyRateChartDataFn = async (range: TimeFrameEnum = TimeFrameEnum.DAY
     percentChange: item.percentChange === '0' ? '0.00' : item.percentChange,
   }));
 
-  return formatted.reverse();
+  return formatted;
 };
 
 export const useSupplyRateChartQueryKey = ['supply-rate-chart'];

@@ -57,7 +57,7 @@ const ValidatorDetailsBlock = () => {
       </Row>
       <div className='flex flex-col lg:flex-row lg:justify-between lg:items-center lg:mt-6 lg:mb-10'>
         <div className='flex flex-row items-center gap-4 w-full lg:w-1/4 my-4 lg:my-0'>
-          <div className='relative border rounded-full w-[60px] h-[60px] p-2'>
+          <div className='relative border rounded-full w-[60px] h-[60px] p-2' style={{ width: 60 }}>
             <div className='relative w-full h-full p-[5px]'>
               <Image src={validatorData?.logo || '/icons/wallets/ninji.svg'} className='rounded-full' fill={true} alt='AXONE' />
             </div>
