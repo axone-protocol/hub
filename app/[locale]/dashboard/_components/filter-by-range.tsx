@@ -24,7 +24,7 @@ const FilterByRange: FC<FilterByRangeProps> = ({ range, selectRange }) => {
         onClick={handleRangeChange(TimeFrameEnum.ALL)}
         className={
           cn('cursor-pointer  hover:text-white mb-0 mx-2 text-axone-khaki',
-            { 'text-axone-orange font-bold': range === TimeFrameEnum.ALL })}
+            { 'text-axone-orange': range === TimeFrameEnum.ALL })}
       >
         {t('Chart.Filter.All')}
       </Text>
@@ -32,7 +32,7 @@ const FilterByRange: FC<FilterByRangeProps> = ({ range, selectRange }) => {
         onClick={handleRangeChange(TimeFrameEnum.DAY)}
         className={
           cn('cursor-pointer  hover:text-white mb-0 mx-2 text-axone-khaki',
-            { 'text-axone-orange font-bold': range === TimeFrameEnum.DAY })}
+            { 'text-axone-orange': range === TimeFrameEnum.DAY })}
       >
         {t('Chart.Filter.Day')}
       </Text>
@@ -40,7 +40,7 @@ const FilterByRange: FC<FilterByRangeProps> = ({ range, selectRange }) => {
         onClick={handleRangeChange(TimeFrameEnum.WEEK)}
         className={
           cn('cursor-pointer  hover:text-white mb-0 mx-2 text-axone-khaki',
-            { 'text-axone-orange font-bold': range === TimeFrameEnum.WEEK })}
+            { 'text-axone-orange': range === TimeFrameEnum.WEEK })}
       >
         {t('Chart.Filter.Week')}
       </Text>
@@ -48,7 +48,7 @@ const FilterByRange: FC<FilterByRangeProps> = ({ range, selectRange }) => {
         onClick={handleRangeChange(TimeFrameEnum.MONTH)}
         className={
           cn('cursor-pointer  hover:text-white mb-0 mx-2 text-axone-khaki',
-            { 'text-axone-orange font-bold': range === TimeFrameEnum.MONTH })}
+            { 'text-axone-orange': range === TimeFrameEnum.MONTH })}
       >
         {t('Chart.Filter.Month')}
       </Text>
@@ -56,7 +56,7 @@ const FilterByRange: FC<FilterByRangeProps> = ({ range, selectRange }) => {
         onClick={handleRangeChange(TimeFrameEnum.YEAR)}
         className={
           cn('cursor-pointer  hover:text-white mb-0 mx-2 text-axone-khaki',
-            { 'text-axone-orange font-bold': range === TimeFrameEnum.YEAR })}
+            { 'text-axone-orange': range === TimeFrameEnum.YEAR })}
       >
         {t('Chart.Filter.Year')}
       </Text>

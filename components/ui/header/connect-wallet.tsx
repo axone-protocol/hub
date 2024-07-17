@@ -99,7 +99,7 @@ const ConnectWallet: FC<ConnectWalletProps> = ({ openMobileMenu = () => null }) 
   if (isWalletDisconnected || isWalletRejected) {
     return (
       <>
-        <Button onClick={openConnectWalletModal} variant='rounded' className='hidden lg:flex px-10 font-bold'>
+        <Button onClick={openConnectWalletModal} variant='rounded' className='hidden lg:flex px-10'>
           {t('Connect')}
         </Button>
         <div className='lg:hidden flex'>

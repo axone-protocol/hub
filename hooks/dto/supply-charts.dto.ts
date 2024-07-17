@@ -1,10 +1,5 @@
 type SupplyChartsDTO = {
-  issuance: {
-    time: string;
-    change: number;
-    burnt: number;
-    issuance: number;
-  };
+  issuance: number;
   burnt: number;
   growth: number;
 }

@@ -22,7 +22,7 @@ const SidebarWelcomeAxoneBox: FC<SidebarWelcomeAxoneBoxProps> = ({ handleClick }
       <Title className='mb-0 z-10 cursor-pointer'>{t('Ecosystem')}!</Title>
       <ButtonWithIcon
         variant={'link'}
-        className='uppercase font-bold px-0 pb-0 justify-start z-10 text-axone-dark-blue-2'
+        className='uppercase px-0 pb-0 justify-start z-10 text-axone-dark-blue-2'
         iconClassName='text-axone-dark-blue-2 w-5 h-5'
         onClick={handleClick}
       >

@@ -38,7 +38,7 @@ const Sidebar = () => {
 
         <div className='px-5'>
           <Button
-            className='w-full font-bold'
+            className='w-full'
             variant={'rounded'}
             onClick={openInNewTab(EXPLORE_URL)}
           >
