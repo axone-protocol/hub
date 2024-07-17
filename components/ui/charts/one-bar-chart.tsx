@@ -18,9 +18,10 @@ type OneBarChartProps = {
 };
 
 type ChartLineProps = {
-  value?: string;
+  value?: string | number;
   position?: 'top' | 'middle' | 'bottom';
   postFix?: string;
+  customRight?: string;
 };
 
 const ChartLine: FC<ChartLineProps> = ({ value = '0', position = 'top', postFix = '', customRight = '' }) => {
@@ -36,7 +37,7 @@ const ChartLine: FC<ChartLineProps> = ({ value = '0', position = 'top', postFix 
   return (
     <div
       className={`flex absolute ${getClassByPosition()} items-center justify-between`}
-      style={{ right: `${customRight ? customRight : value.length <= 4 ? '-60%' : '-90%'}` }}
+      style={{ right: `${customRight ? customRight : value.toString().length <= 4 ? '-60%' : '-90%'}` }}
     >
       <Text className='mb-0 text-axone-khaki'>{value}{postFix}</Text>
       <div className='w-[140px] border-t border-dashed border-axone-khaki my-4 mx-2'></div>
