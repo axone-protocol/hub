@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "@cosmos-kit/keplr": "^2.12.2",
-    "@cosmos-kit/react": "^2.17.2",
+    "@cosmos-kit/react": "^2.18.0",
     "@cosmos-kit/types": "^0.11.0",
     "@hookform/resolvers": "^3.9.0",
     "@interchain-ui/react": "^1.23.25",
