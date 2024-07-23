@@ -44,10 +44,10 @@
     "@keplr-wallet/crypto" "0.12.28"
     semver "^7.5.0"
 
-"@chain-registry/types@^0.45.1", "@chain-registry/types@^0.45.29", "@chain-registry/types@^0.45.8":
-  version "0.45.29"
-  resolved "https://registry.yarnpkg.com/@chain-registry/types/-/types-0.45.29.tgz#d44fd4a501f71b1b8c61fb0d52e57750c0448bcd"
-  integrity sha512-McnyKqm7IpxQTaErwe52CWb0LT3pADBoKdlbN50yEX4eIRdp/oY7wK2Zuqc0Sv4PzpEUp9PAhZ4y78dLeZ2xdw==
+"@chain-registry/types@^0.45.1", "@chain-registry/types@^0.45.30", "@chain-registry/types@^0.45.8":
+  version "0.45.30"
+  resolved "https://registry.yarnpkg.com/@chain-registry/types/-/types-0.45.30.tgz#dd32a626943019305fbd1b562b7d56db152480f0"
+  integrity sha512-0SHra1tdYpHAzLBfkrTlzdkGlcr+Kh8/Q3F//LximZZApX8dfTKMPSeqRTTcRyQVPSmY4WqIEZSypJd1qRWSbA==
 
 "@chain-registry/utils@^1.46.8":
   version "1.46.8"
@@ -3982,12 +3982,12 @@ caniuse-lite@^1.0.30001579, caniuse-lite@^1.0.30001587, caniuse-lite@^1.0.300015
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001623.tgz#e982099dcb229bb6ab35f5aebe2f8d79ccf6e8a8"
   integrity sha512-X/XhAVKlpIxWPpgRTnlgZssJrF0m6YtRA0QDWgsBNT12uZM6LPRydR7ip405Y3t1LamD8cP2TZFEDZFBf5ApcA==
 
-chain-registry@^1.63.36:
-  version "1.63.36"
-  resolved "https://registry.yarnpkg.com/chain-registry/-/chain-registry-1.63.36.tgz#7134d9bc6fba2672f5489913d864325535cb344d"
-  integrity sha512-NpSv5TLoozcvITK2y7Vodryx0V7q3wttfRPskN02LG8NZN4oZ4aWTvXX3vTW0wc4nMGO9PNcdIgKZsEDWm25Ow==
+chain-registry@^1.63.37:
+  version "1.63.37"
+  resolved "https://registry.yarnpkg.com/chain-registry/-/chain-registry-1.63.37.tgz#a2019d79171ef6d31c9b272618ab895b32efaf3a"
+  integrity sha512-Iz8gkhO0sFzlMWIN3KCMUd8NVWifq4Xb92+BR9OFe4xucrchsmY0nbqsqDuIJfmENeo4NPVoOEkCulM1dWqfbg==
   dependencies:
-    "@chain-registry/types" "^0.45.29"
+    "@chain-registry/types" "^0.45.30"
 
 chalk@^4.0.0:
   version "4.1.2"
