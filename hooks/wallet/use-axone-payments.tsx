@@ -1,14 +1,12 @@
 'use client';
 import { Asset } from '@chain-registry/types';
 import { StdFee } from '@cosmjs/amino';
-import { fromBase64 } from '@cosmjs/encoding';
-import { DirectSecp256k1Wallet } from '@cosmjs/proto-signing';
-import { AminoTypes, SigningStargateClient, StargateClient } from '@cosmjs/stargate';
+import { AminoTypes, SigningStargateClient } from '@cosmjs/stargate';
 import { ExtendedHttpEndpoint } from '@cosmos-kit/core';
 import { useChain } from '@cosmos-kit/react';
 import BigNumber from 'bignumber.js';
-import { TextProposal, VoteOption } from 'cosmjs-types/cosmos/gov/v1beta1/gov';
-import { Any } from 'cosmjs-types/google/protobuf/any';
+import { MsgSubmitProposal } from 'cosmjs-types/cosmos/gov/v1/tx';
+import { VoteOption } from 'cosmjs-types/cosmos/gov/v1beta1/gov';
 import { cosmos } from 'juno-network';
 import Long from 'long';
 import { useCallback, useEffect } from 'react';
@@ -378,31 +376,23 @@ export const useAxonePayments = () => {
       return;
     }
 
-    // Create the TextProposal message
-    const proposalContent = TextProposal.fromPartial({
-      title: title,
-      description: description,
-    });
-
-    // Serialize the proposal content
-    const proposalContentAny: Any = {
-      typeUrl: '/cosmos.gov.v1beta1.TextProposal',
-      value: TextProposal.encode(proposalContent).finish(),
-    };
-
-    const { submitProposal } = cosmos.gov.v1.MessageComposer.withTypeUrl;
-
-    const msg = submitProposal({
-      messages: [proposalContentAny],
+    // Create the MsgSubmitProposal message
+    const proposalContent = MsgSubmitProposal.fromPartial({
+      title,
+      proposer: address,
+      summary: description,
       initialDeposit: [
         {
           denom: depositDenom,
           amount: new BigNumber(amount).multipliedBy(10 ** 6).toString(),
-        },
+        }
       ],
-      proposer: address,
-      metadata: ''
+      messages: []
     });
+
+    const { submitProposal } = cosmos.gov.v1.MessageComposer.withTypeUrl;
+
+    const msg = submitProposal(proposalContent);
 
     const fee: StdFee = {
       amount: [
@@ -413,14 +403,13 @@ export const useAxonePayments = () => {
       ],
       gas: '200000',
     };
-    const [firstAccount] = await signer.getAccounts();
-    const address2 = firstAccount.address;
     try {
-      const resp = await stargateClient.signAndBroadcastSync(
-        `${address2}`,
+      await stargateClient.signAndBroadcastSync(
+        `${address}`,
         [msg],
         fee,
       );
+
     } catch (error) {
       showErrorToast(`Something went wrong: ${error}`);
       console.error('Error submitting proposal: ', error);
