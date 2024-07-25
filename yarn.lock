@@ -613,10 +613,10 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-2.0.3.tgz#4a2868d75d6d6963e423bcf90b7fd1be343409d3"
   integrity sha512-93zYdMES/c1D69yZiKDBj0V24vqNzB/koF26KPaagAfd3P/4gUlh3Dys5ogAK+Exi9QyzlD8x/08Zt7wIKcDcA==
 
-"@interchain-ui/react@^1.23.26":
-  version "1.23.26"
-  resolved "https://registry.yarnpkg.com/@interchain-ui/react/-/react-1.23.26.tgz#02ba551455d7e06405154258e98edeef70706076"
-  integrity sha512-lvDPk8IB+88VP2R4A5a64tpGeC4vX6BgMsLlC0FWr+oNTht/St5bGO6Sr+qAQwBgXCuVHkI0P+LnKy6PGo+9vQ==
+"@interchain-ui/react@^1.23.28":
+  version "1.23.28"
+  resolved "https://registry.yarnpkg.com/@interchain-ui/react/-/react-1.23.28.tgz#a8930ef3d6253a6262d0b71a8771d51fcc29eec4"
+  integrity sha512-xLKZQA9x45DB0QOk/fkKZAqDGnaW+s4aDQ5A6gOGAuiH/KxmgBIZZJtWEQ8+ZirLUzSj2TEZbs/1qbcqd8QqlA==
   dependencies:
     "@floating-ui/core" "^1.6.4"
     "@floating-ui/dom" "^1.6.7"
