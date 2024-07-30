@@ -30,8 +30,11 @@ const ProposalsListItem: FC<ProposalsListItemProps> = ({ item, goToDetails }) =>
         <Title>{item.title}</Title>
       </div>
       <GaugeChart val={Number(item.turnout) % 1 === 0 ? Number(item.turnout) + 0.01 : Number(item.turnout)} />
-      <Text className='w-1/6 mb-0 break-words mr-3 lg:mr-0'>{item.messages['0']['@type']}</Text>
-      <Text className='w-1/6 mb-0'>{formatDate(item.voting_end_time)}</Text>
+      <Text className='w-1/6 mb-0 break-words mr-3 pr-5 lg:mr-0'>{item.messages['0']['@type']}</Text>
+      <div className='flex w-1/6 flex-col'>
+        <Text className='mb-0'>{formatDate(item.voting_end_time, false, true)}</Text>
+        <Text className='mb-0'>{formatDate(item.voting_end_time, true, false)}</Text>
+      </div>
       <div className='w-[200px] flex flex-row items-center gap-6'>
         <Text className='mb-0'>{t('Proposed')} {formatDate(item.submit_time)}</Text>
         <ArrowUpRight className='h-12 w-12 text-axone-khaki group-hover:text-axone-orange' />
