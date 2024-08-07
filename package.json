@@ -55,7 +55,7 @@
     "framer-motion": "^11.3.21",
     "interchain": "^1.10.4",
     "juno-network": "^0.18.1",
-    "lucide-react": "^0.416.0",
+    "lucide-react": "^0.424.0",
     "next": "14.2.5",
     "next-intl": "^3.17.2",
     "osmojs": "^16.14.0",
