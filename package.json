@@ -45,7 +45,7 @@
     "@radix-ui/react-tooltip": "^1.1.2",
     "@tanstack/react-query": "^5.51.23",
     "@tanstack/react-query-devtools": "^5.51.16",
-    "axios": "^1.7.3",
+    "axios": "^1.7.4",
     "bignumber.js": "^9.1.2",
     "chain-registry": "^1.63.59",
     "class-variance-authority": "^0.7.0",
