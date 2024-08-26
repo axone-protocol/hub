@@ -56,7 +56,7 @@
     "interchain": "^1.10.4",
     "juno-network": "^0.18.1",
     "lucide-react": "^0.427.0",
-    "next": "14.2.5",
+    "next": "14.2.6",
     "next-intl": "^3.17.2",
     "osmojs": "^16.14.0",
     "react": "^18",
